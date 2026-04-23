@@ -13,8 +13,8 @@
     {
       "name": "통합 가이드",
       "files": [
-        { "path": "integrations/philosophy.md",        "title": "Philosophy",      "desc": "설계 철학 — 앱 공장 전략, 결정의 이유" },
         { "path": "integrations/README.md",             "title": "Overview",        "desc": "통합 가이드 전체 개요" },
+        { "path": "integrations/philosophy.md",        "title": "Philosophy",      "desc": "설계 철학 — 앱 공장 전략, 결정의 이유" },
         { "path": "integrations/sentry.md",             "title": "Sentry",          "desc": "크래시 리포팅 설정" },
         { "path": "integrations/posthog.md",            "title": "PostHog",         "desc": "사용자 행동 분석 설정" },
         { "path": "integrations/analytics.md",          "title": "Analytics",       "desc": "이벤트 트래킹 가이드" },
