@@ -40,10 +40,52 @@ abstract class AppKit {
   int get redirectPriority;                     // 낮을수록 먼저 실행
   List<Override> get providerOverrides;         // Riverpod override
   List<RouteBase> get routes;                   // go_router 라우트
+  List<NavigatorObserver> get navigatorObservers; // 라우터 observer 기여
   List<BootStep> get bootSteps;                 // 스플래시 부트 단계
   RedirectRule? buildRedirect();                // 리다이렉트 규칙
   Listenable? get refreshListenable;            // 라우터 리빌드 트리거
   Future<void> onInit();                        // install 시점 초기화
+  Future<void> onDispose();                     // 해제 시점 (롤백/테스트 reset)
+}
+```
+
+### `navigatorObservers`
+
+go_router의 `observers`에 전달될 `NavigatorObserver` 목록. 여러 Kit이 동시에 기여하면 install 순서대로 병합된다.
+
+```dart
+// ObservabilityKit 예시 — 화면 전환을 PostHog에 자동 트래킹
+class ObservabilityKit extends AppKit {
+  @override
+  List<NavigatorObserver> get navigatorObservers => [
+    AnalyticsNavigatorObserver(),
+  ];
+}
+```
+
+### `onDispose()`
+
+Kit이 점유한 리소스(스트림 구독, 네이티브 채널 등)를 해제하는 메서드. 두 가지 시점에 호출된다:
+
+1. **install 롤백**: `onInit()`이 중간에 실패하면, 이미 성공한 kit들이 역순으로 `onDispose()` 호출된 뒤 레지스트리에서 제거된다.
+2. **테스트 reset**: `AppKits.resetForTest()` 호출 시 전체 kit이 역순으로 `onDispose()` 호출된다.
+
+기본 구현은 no-op(`async {}`). 리소스를 관리하는 kit만 오버라이드하면 된다.
+
+```dart
+class NotificationsKit extends AppKit {
+  StreamSubscription? _sub;
+
+  @override
+  Future<void> onInit() async {
+    _sub = notificationStream.listen(_handleNotification);
+  }
+
+  @override
+  Future<void> onDispose() async {
+    await _sub?.cancel();
+    _sub = null;
+  }
 }
 ```
 
@@ -63,6 +105,39 @@ await AppKits.install([
 - `AppRouter`는 `AppKits.allRoutes` + `redirectRules` + `compositeRefreshListenable` 자동 합성
 - `SplashController`는 `AppKits.allBootSteps` 순차 실행
 - `ProviderScope`는 `AppKits.allProviderOverrides`로 초기화
+
+### `attachContainer()` — 왜 필요한가
+
+`ProviderContainer`는 `install` 이후에 생성된다. Kit의 `bootSteps`와 `refreshListenable`은 provider를 읽어야 하므로, 컨테이너가 생긴 직후 레지스트리에 바인딩해야 한다.
+
+```dart
+// main.dart의 정확한 순서
+await AppKits.install([...]);               // 1. Kit 등록 + onInit()
+
+final container = ProviderContainer(        // 2. 컨테이너 생성
+  overrides: AppKits.allProviderOverrides,
+);
+
+AppKits.attachContainer(container);         // 3. 바인딩 — 이후 bootSteps가 provider 읽기 가능
+```
+
+순서가 바뀌면 `bootSteps` 안에서 `AppKits.container`에 접근할 때 `StateError`가 발생한다.
+
+### install 실패 시 롤백
+
+`onInit()` 실행 도중 예외가 발생하면 **이 호출에서 추가된 kit만 롤백**된다. 이미 성공한 kit들은 역순으로 `onDispose()`가 호출된 뒤 레지스트리에서 제거된다.
+
+```
+install([A, B, C])
+  A.onInit() ✅
+  B.onInit() ✅
+  C.onInit() ❌ 예외 발생
+    → C는 onInit 미완료이므로 onDispose 호출 안 함
+    → B.onDispose() 호출
+    → A.onDispose() 호출
+    → A, B, C 레지스트리에서 제거
+    → 원 예외 rethrow
+```
 
 ## Kit 의존 관계도
 
@@ -202,6 +277,89 @@ CI에서는 `dart run tool/configure_app.dart --audit`로 yaml 정합성 가드.
 | `local-only-tracker.yaml` | sumtally류 가계부/로그 앱 |
 | `local-notifier-app.yaml` | rny류 알림 중심 로컬 앱 |
 | `backend-auth-app.yaml`   | 백엔드+JWT 앱 (기본 샘플) |
+
+## 테스트에서 Kit 사용
+
+### `AppKits.resetForTest()`
+
+각 테스트가 끝나면 레지스트리를 초기화해야 다음 테스트와 상태가 섞이지 않는다. `resetForTest()`는 전체 kit을 역순으로 `onDispose()` 호출한 뒤 레지스트리와 컨테이너를 초기화한다.
+
+```dart
+tearDown(() async {
+  await AppKits.resetForTest();
+});
+```
+
+### Provider 오버라이드 패턴
+
+테스트에서 특정 서비스를 mock으로 교체할 때는 kit install 시 `providerOverrides`로 주입한다.
+
+```dart
+setUp(() async {
+  await AppKits.install([
+    BackendApiKit(baseUrl: 'http://localhost:8080'),
+    AuthKit(),
+  ]);
+
+  final container = ProviderContainer(
+    overrides: [
+      ...AppKits.allProviderOverrides,
+      crashServiceProvider.overrideWithValue(FakeCrashService()),  // mock 주입
+    ],
+  );
+  AppKits.attachContainer(container);
+});
+
+tearDown(() async {
+  await AppKits.resetForTest();
+});
+```
+
+### Kit 없이 단위 테스트
+
+ViewModel/Service 단위 테스트는 kit install 없이 `ProviderContainer`를 직접 생성해 사용한다.
+
+```dart
+test('로그인 성공 시 상태가 authenticated로 변경', () async {
+  final container = ProviderContainer(
+    overrides: [
+      authServiceProvider.overrideWithValue(FakeAuthService()),
+    ],
+  );
+  addTearDown(container.dispose);
+
+  final vm = container.read(loginViewModelProvider.notifier);
+  await vm.login(email: 'test@example.com', password: '1234');
+
+  expect(container.read(loginViewModelProvider).isAuthenticated, isTrue);
+});
+```
+
+---
+
+## Kit 내부 폴더 구조
+
+Kit이 여러 파일로 구성될 때의 표준 레이아웃:
+
+```
+lib/kits/my_kit/
+├── my_kit.dart              # AppKit 구현체 (진입점)
+├── my_service.dart          # 핵심 비즈니스 로직 (인터페이스)
+├── my_service_impl.dart     # 실제 구현 (프로덕션)
+├── my_service_debug.dart    # Debug 폴백 구현 (DSN/키 없을 때)
+├── interceptors/            # Dio interceptor (backend_api_kit 패턴)
+│   └── my_interceptor.dart
+├── ui/                      # Kit이 제공하는 화면 (선택)
+│   ├── my_screen.dart
+│   └── my_view_model.dart
+└── README.md                # Kit 온보딩 문서
+```
+
+**규칙:**
+- `my_kit.dart`가 진입점. 외부는 이 파일만 import.
+- 인터페이스(`my_service.dart`)와 구현체(`my_service_impl.dart`)를 분리해 테스트에서 mock 교체가 가능하게 한다.
+- private helper는 파일명 앞에 `_` 없이, class에만 `_` 적용.
+- `ui/` 하위 파일은 kit 외부에서 직접 사용 가능 (라우트 등록 시 필요).
 
 ## 새 Kit 작성
 
