@@ -55,7 +55,7 @@ lib/
 │   ├── {모듈명}/     # analytics, cache, config, i18n, kits, storage, theme, utils, widgets
 │   └── kits/         # AppKit 계약, AppKits 컨테이너
 │
-├── kits/             # 선택형 FeatureKit (12개)
+├── kits/             # 선택형 FeatureKit (13개)
 │   └── {kit_name}/   # 예: auth_kit, backend_api_kit, nav_shell_kit
 │       ├── {kit_name}.dart   # AppKit 구현
 │       └── kit_manifest.yaml # 의존성 선언

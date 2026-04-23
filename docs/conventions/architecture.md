@@ -34,7 +34,7 @@ await AppKits.install([
 
 **디렉토리 구조**:
 - `lib/core/` — 모든 앱이 항상 쓰는 것 (theme/widgets/utils/i18n/storage 등)
-- `lib/kits/` — 선택적 FeatureKit (12개)
+- `lib/kits/` — 선택적 FeatureKit (13개)
 - `lib/features/` — 앱 고유 화면
 
 ---

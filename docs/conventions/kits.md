@@ -22,6 +22,7 @@ lib/
 │   ├── nav_shell_kit/     # 하단 탭 + FAB
 │   ├── onboarding_kit/    # 다단계 위자드
 │   ├── notifications_kit/ # 로컬 예약 알림
+│   ├── observability_kit/ # Sentry + PostHog
 │   ├── background_kit/    # workmanager
 │   ├── charts_kit/        # fl_chart
 │   ├── update_kit/        # 강제 업데이트
