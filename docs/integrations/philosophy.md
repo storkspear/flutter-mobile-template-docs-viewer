@@ -71,9 +71,9 @@ features/{domain}/
 └── models/                    # 도메인 모델 (fromJson/toJson)
 ```
 
-- Screen에 비즈니스 로직을 직접 작성하지 않는다
-- ViewModel에 UI 코드(BuildContext, Widget)를 넣지 않는다
-- ViewModel은 `autoDispose`로 화면 이탈 시 자동 정리
+- Screen에 비즈니스 로직을 직접 작성하지 않습니다
+- ViewModel에 UI 코드(BuildContext, Widget)를 넣지 않습니다
+- ViewModel은 `autoDispose`로 화면 이탈 시 자동 정리됩니다
 
 ---
 
@@ -150,7 +150,7 @@ Flutter의 네트워크 레이어는 백엔드의 응답 규격(`{data, error}`,
 
 ### 이유
 
-**나중에 하면 비용이 10배입니다.** 50개 화면에 흩어진 한국어 리터럴을 ARB로 옮기는 작업은 고통입니다. 처음부터 `S.of(context).xxx`로 작성하면 추가 비용이 0입니다.
+**나중에 하면 비용이 10배입니다.** 50개 화면에 흩어진 한국어 리터럴을 ARB로 옮기는 작업은 고통입니다. 처음부터 `S.of(context).xxx`로 작성하면 추가 비용이 없습니다.
 
 **영어 시장을 열 수 있습니다.** 한국어 앱이 잘 되면 영어 버전을 내고 싶어집니다. i18n이 이미 잡혀있으면 `app_en.arb` 번역만 하면 됩니다.
 

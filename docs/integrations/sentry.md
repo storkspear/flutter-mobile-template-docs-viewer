@@ -1,6 +1,6 @@
 # Sentry 통합
 
-`observability_kit`을 통해 템플릿에 기본 내장되어 있다. 파생 레포 생성 후 DSN만 주입하면 자동으로 크래시/에러가 Sentry 대시보드로 전송된다.
+`observability_kit`을 통해 템플릿에 기본 내장되어 있습니다. 파생 레포 생성 후 DSN만 주입하면 자동으로 크래시/에러가 Sentry 대시보드로 전송됩니다.
 
 ## 구조
 
@@ -18,7 +18,7 @@
 
 ### 2) Spike Protection 켜기 (필수)
 
-Settings → Subscription → **Spike Protection: ON**. 버그 폭주로 무료 한도(5천/월)가 하루 만에 소진되는 사고 방지.
+Settings → Subscription → **Spike Protection: ON**. 버그 폭주로 무료 한도(5천/월)가 하루 만에 소진되는 사고를 방지합니다.
 
 ### 3) DSN 주입
 
@@ -32,7 +32,7 @@ SENTRY_DSN=https://abc123@o123456.ingest.us.sentry.io/789
 flutter run --dart-define=SENTRY_DSN=$(grep SENTRY_DSN .env | cut -d= -f2)
 ```
 
-**CI/배포:** Phase 2(배포 자동화) 단계에서 GitHub Actions Secrets로 주입. 현재 관측 단계에서는 로컬 `.env`로 충분.
+**CI/배포:** Phase 2(배포 자동화) 단계에서 GitHub Actions Secrets로 주입합니다. 현재 관측 단계에서는 로컬 `.env`로 충분합니다.
 
 ### 4) 검증
 
@@ -40,7 +40,7 @@ flutter run --dart-define=SENTRY_DSN=$(grep SENTRY_DSN .env | cut -d= -f2)
 flutter run --dart-define=SENTRY_DSN=<your_dsn>
 ```
 
-앱 실행 후 임시로 `throw Exception('sentry test')` 한 번 넣고 실행 → 1~2분 내 Sentry 대시보드에 이슈 출현.
+앱 실행 후 임시로 `throw Exception('sentry test')` 한 번 넣고 실행하면 1~2분 내 Sentry 대시보드에 이슈가 출현합니다.
 
 ## 설정 튜닝
 
@@ -72,7 +72,7 @@ options.sendDefaultPii = false;   // IP 등 자동 수집 차단 (GDPR)
 
 ## 로그인/로그아웃 자동 연동
 
-`lib/app.dart`의 `authStreamProvider` 리스너가 자동으로 호출:
+`lib/app.dart`의 `authStreamProvider` 리스너가 자동으로 호출합니다:
 - 로그인 시: `crashService.setUser(userId, email: ...)` — 이후 크래시에 유저 컨텍스트 첨부
 - 로그아웃 시: `crashService.clearUser()`
 
@@ -97,13 +97,13 @@ ref.read(crashServiceProvider).addBreadcrumb(
 
 ## 심볼 업로드 — 자동 (Android)
 
-Android 릴리스 빌드는 `android/fastlane/Fastfile`의 `upload_sentry_mapping` lane이 자동 처리한다. 3가지를 Sentry로 전송:
+Android 릴리스 빌드는 `android/fastlane/Fastfile`의 `upload_sentry_mapping` lane이 자동 처리합니다. 3가지를 Sentry로 전송합니다:
 
 1. **ProGuard mapping** (`mapping.txt`) — R8이 난독화한 Kotlin/Java 심볼 복원용
 2. **Dart debug symbols** (`build/symbols/`) — `--obfuscate`로 난독화된 Dart 프레임 복원용
 3. **Release 마커** — Sentry 대시보드의 릴리스별 크래시 집계
 
-이 모든 동작은 `.github/workflows/release-android.yml`이 태그 push 시 자동 실행. 수동 실행이 필요하면:
+이 모든 동작은 `.github/workflows/release-android.yml`이 태그 push 시 자동 실행됩니다. 수동 실행이 필요하면:
 ```bash
 cd android
 SENTRY_ORG=<org> SENTRY_PROJECT=<project> SENTRY_AUTH_TOKEN=<token> \
@@ -114,11 +114,11 @@ SENTRY_ORG=<org> SENTRY_PROJECT=<project> SENTRY_AUTH_TOKEN=<token> \
 
 ## dSYM 업로드 (iOS, Phase 2b 예정)
 
-iOS는 Phase 2b에서 `ios/fastlane/Fastfile`에 동일 패턴으로 추가 예정.
+iOS는 Phase 2b에서 `ios/fastlane/Fastfile`에 동일 패턴으로 추가 예정입니다.
 
 ## DSN이 없을 때
 
-`ObservabilityEnv.isSentryEnabled`가 false면 `DebugCrashService`로 폴백 — 콘솔에 에러가 출력될 뿐 Sentry로 전송되지 않는다. 로컬 개발/CI에서 무해.
+`ObservabilityEnv.isSentryEnabled`가 false면 `DebugCrashService`로 폴백됩니다 — 콘솔에 에러가 출력될 뿐 Sentry로 전송되지 않습니다. 로컬 개발/CI에서 무해합니다.
 
 ## 옵트아웃 (kit 제거)
 
@@ -128,4 +128,4 @@ Sentry/PostHog가 불필요한 앱:
 2. `lib/main.dart`의 `AppKits.install([...])`에서 `ObservabilityKit()` 제거
 3. (선택) `pubspec.yaml`에서 `sentry_flutter`, `posthog_flutter` 제거
 
-kit만 제거해도 SDK 코드는 호출되지 않는다. pubspec dep 제거는 바이너리 사이즈 줄이는 용도.
+kit만 제거해도 SDK 코드는 호출되지 않습니다. pubspec dep 제거는 바이너리 사이즈를 줄이는 용도입니다.

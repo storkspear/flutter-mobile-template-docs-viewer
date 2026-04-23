@@ -14,16 +14,16 @@
 
 ### 사용하지 않는 패턴
 
-- **풀스크린 블로킹 오버레이**: 촌스럽고 UX를 저해한다. 버튼 스피너 + `IgnorePointer`로 대체한다.
-- **되돌릴 수 없는 중요 액션 (결제/송금)**: 오버레이 대신 전용 처리 화면으로 이동한다. 파생 레포 생성 후 도메인별로 구현한다.
+- **풀스크린 블로킹 오버레이**: 촌스럽고 UX를 저해합니다. 버튼 스피너 + `IgnorePointer`로 대체합니다.
+- **되돌릴 수 없는 중요 액션 (결제/송금)**: 오버레이 대신 전용 처리 화면으로 이동합니다. 파생 레포 생성 후 도메인별로 구현합니다.
 
 ---
 
 ## 스켈레톤 로딩 작성 규칙
 
-### 규칙 1: 실제 레이아웃과 동일한 구조를 쓴다
+### 규칙 1: 실제 레이아웃과 동일한 구조를 씁니다
 
-`SkeletonLoading`은 `Skeletonizer`를 래핑한다. `enabled: true`일 때 child 위젯 트리를 그대로 shimmer 처리하므로, **더미 데이터로 실제 레이아웃을 렌더링**하면 된다. 별도의 스켈레톤 위젯을 만들지 않는다.
+`SkeletonLoading`은 `Skeletonizer`를 래핑합니다. `enabled: true`일 때 child 위젯 트리를 그대로 shimmer 처리하므로, **더미 데이터로 실제 레이아웃을 렌더링**하면 됩니다. 별도의 스켈레톤 위젯을 만들지 않습니다.
 
 ```dart
 // 좋은 예 — 실제 레이아웃 재사용
@@ -56,11 +56,11 @@ else
 | 상세 화면 | 1개 |
 | 수평 스크롤 카드 | 3개 |
 
-화면을 가득 채우는 개수를 선택한다. 빈 공간이 보이면 어색하다.
+화면을 가득 채우는 개수를 선택합니다. 빈 공간이 보이면 어색합니다.
 
 ### 규칙 3: 뼈대 형태 자동 매칭
 
-`Skeletonizer`는 위젯 타입을 보고 자동으로 shimmer 형태를 결정한다.
+`Skeletonizer`는 위젯 타입을 보고 자동으로 shimmer 형태를 결정합니다.
 
 | 원본 위젯 | Skeleton 형태 |
 |-----------|--------------|
@@ -70,7 +70,7 @@ else
 | `Icon` | 원형 |
 | `Container`, `SizedBox` | 사각형 |
 
-더미 데이터는 빈 문자열보다 실제 데이터와 비슷한 길이를 쓴다. 글자 길이가 shimmer 너비를 결정하기 때문이다.
+더미 데이터는 빈 문자열보다 실제 데이터와 비슷한 길이를 씁니다. 글자 길이가 shimmer 너비를 결정하기 때문입니다.
 
 ```dart
 // 좋은 예 — 실제 데이터와 비슷한 더미
@@ -82,7 +82,7 @@ Expense(title: '', amount: 0)  // shimmer가 너무 좁아짐
 
 ### 규칙 4: Bone 위젯으로 미세 조정
 
-자동 매칭으로 부족할 때는 `Bone` 위젯으로 shimmer 형태를 직접 지정한다.
+자동 매칭으로 부족할 때는 `Bone` 위젯으로 shimmer 형태를 직접 지정합니다.
 
 ```dart
 // Bone.text — 텍스트 shimmer, width는 글자 수 기준 (em)
@@ -102,7 +102,7 @@ Bone(width: 120, height: 16, borderRadius: BorderRadius.circular(4))
 
 ## 화면 개발 시 로딩 체크리스트
 
-화면을 개발할 때 아래 순서로 확인한다.
+화면을 개발할 때 아래 순서로 확인합니다.
 
 ```
 1. 데이터 로딩이 있는가?
@@ -131,7 +131,7 @@ Bone(width: 120, height: 16, borderRadius: BorderRadius.circular(4))
 
 ### 전형적인 데이터 목록 화면
 
-스켈레톤 → 에러 → 빈 화면 → 데이터 + 새로고침 순서로 분기한다.
+스켈레톤 → 에러 → 빈 화면 → 데이터 + 새로고침 순서로 분기합니다.
 
 ```dart
 class ExpenseListScreen extends ConsumerWidget {
@@ -185,7 +185,7 @@ class ExpenseListScreen extends ConsumerWidget {
 
 ### 폼 제출 패턴
 
-`IgnorePointer`로 폼 전체를 비활성화하고, 버튼에 `isLoading`을 전달한다.
+`IgnorePointer`로 폼 전체를 비활성화하고, 버튼에 `isLoading`을 전달합니다.
 
 ```dart
 class ExpenseFormScreen extends ConsumerWidget {
@@ -230,7 +230,7 @@ class ExpenseFormScreen extends ConsumerWidget {
 
 ### 무한 스크롤 하단 로딩
 
-`PaginationController`가 페이지를 관리하고, 리스트 마지막 아이템으로 스피너를 추가한다.
+`PaginationController`가 페이지를 관리하고, 리스트 마지막 아이템으로 스피너를 추가합니다.
 
 ```dart
 Widget _buildList(ExpenseListState state, ExpenseListViewModel vm) {
@@ -281,10 +281,10 @@ Widget _buildList(ExpenseListState state, ExpenseListViewModel vm) {
    - 완료 후 앱이 첫 라우트로 직접 이동
 ```
 
-현재 템플릿은 **pre-runApp 방식**이다 (`lib/main.dart`의 `SplashController.run()` await).
+현재 템플릿은 **pre-runApp 방식**입니다 (`lib/main.dart`의 `SplashController.run()` await).
 네이티브 스플래시 동안 BootStep이 실행되므로 Flutter 레벨에서 별도 스플래시 화면이
-필요 없다. 커스텀 로고 애니메이션이 필요한 앱은 이 플로우 대신 별도 splash 라우트를
-구성해 커스텀할 수 있다.
+필요하지 않습니다. 커스텀 로고 애니메이션이 필요한 앱은 이 플로우 대신 별도 splash 라우트를
+구성해 커스터마이징할 수 있습니다.
 
 ### 네이티브 스플래시 이미지 가이드
 
@@ -296,7 +296,7 @@ Widget _buildList(ExpenseListState state, ExpenseListViewModel vm) {
 | Android 12+ | 아이콘이 원형으로 마스킹됨 — 로고를 원 안에 배치 |
 | iOS | 배경색 + 이미지로 구성 (배경 전체 색 권장) |
 
-Android 12+는 adaptive icon 규칙을 따른다. 아이콘 주변 여백을 충분히 두어 원형 마스킹 후에도 로고가 잘리지 않게 한다.
+Android 12+는 adaptive icon 규칙을 따릅니다. 아이콘 주변 여백을 충분히 두어 원형 마스킹 후에도 로고가 잘리지 않게 합니다.
 
 ### 생성 명령
 

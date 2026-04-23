@@ -52,13 +52,13 @@ bundle ID는 **역방향 도메인 형식**: `com.<your-org>.<slug>`. 영문 소
 
 `rename-app.sh`가 단계 10에서 `lib/`와 `test/` 안의 모든 `package:app_template/...` 임포트를 새 앱 이름으로 자동 치환합니다. `flutter analyze`가 바로 그린.
 
-> 📜 **이전 버전(보강 전)에서는** 사용자가 직접 `find lib test -name "*.dart" -exec sed -i '' "s|package:app_template/|package:<new>/|g" {} +`를 돌려야 했습니다. 이제 불필요.
+> 📜 **이전 버전(보강 전)에서는** 사용자가 직접 `find lib test -name "*.dart" -exec sed -i '' "s|package:app_template/|package:<new>/|g" {} +`를 돌려야 했습니다. 이제 불필요합니다.
 
 ---
 
 ## 3. 팔레트 커스터마이징 (단계 2)
 
-`lib/core/theme/gymlog_palette.dart`를 새로 작성:
+`lib/core/theme/gymlog_palette.dart`를 새로 작성합니다:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -71,9 +71,9 @@ class GymLogPalette extends AppPalette {
 }
 ```
 
-이게 끝입니다. **seed 한 줄로 전체 ColorScheme(라이트/다크 모두) 자동 생성**. Material 3가 알아서 처리.
+이게 끝입니다. **seed 한 줄로 전체 ColorScheme(라이트/다크 모두) 자동 생성**됩니다. Material 3가 알아서 처리합니다.
 
-`lib/main.dart`에서 등록:
+`lib/main.dart`에서 등록합니다:
 
 ```dart
 // 변경 전
@@ -89,7 +89,7 @@ AppPaletteRegistry.install(GymLogPalette());
 
 ## 4. `AppConfig.init()` 편집 (단계 3)
 
-`lib/main.dart`의 `AppConfig.init(...)` 인자를 짐로그에 맞게:
+`lib/main.dart`의 `AppConfig.init(...)` 인자를 짐로그에 맞게 수정합니다:
 
 ```dart
 AppConfig.init(
@@ -105,12 +105,12 @@ AppConfig.init(
 
 ### 🚨 출시 전 필수: 이용약관/개인정보 URL 발급
 
-`example.com` 그대로 두면 **앱 스토어 심사 거부** 가능. 출시 전에 호스팅 결정:
+`example.com` 그대로 두면 **앱 스토어 심사 거부** 가능성이 있습니다. 출시 전에 호스팅을 결정하십시오:
 - 가장 빠름: Notion 공개 페이지
 - 무료: GitHub Pages (Jekyll)
 - 자체: Vercel/Netlify에 정적 HTML
 
-호스팅 후 URL을 `privacyUrl`/`termsUrl`에 주입.
+호스팅 후 URL을 `privacyUrl`/`termsUrl`에 주입합니다.
 
 상세: [`lib/core/config/README.md`](../../lib/core/config/README.md).
 
@@ -124,7 +124,7 @@ cp recipes/local-only-tracker.yaml app_kits.yaml
 
 ### ⚠️ 함정 2: recipe가 rename-app.sh 결과를 덮어씀
 
-recipe 파일에는 `app.name: My Tracker` 같은 placeholder가 들어있습니다. 복사 시 짐로그 이름이 사라집니다. **다시 수정**:
+recipe 파일에는 `app.name: My Tracker` 같은 placeholder가 들어있습니다. 복사 시 짐로그 이름이 사라집니다. **다시 수정**합니다:
 
 ```yaml
 # app_kits.yaml
@@ -162,7 +162,7 @@ await AppKits.install([
 ]);
 ```
 
-> 💡 **NavTab은 `screen`이 아니라 `builder`** (`GoRouterWidgetBuilder`)입니다. 실수하기 쉬운 부분.
+> 💡 **NavTab은 `screen`이 아니라 `builder`** (`GoRouterWidgetBuilder`)입니다. 실수하기 쉬운 부분입니다.
 
 ### 검증
 
@@ -202,7 +202,7 @@ Status: OK
 flutter run  # DSN 없으면 DebugCrashService + DebugAnalyticsService 폴백
 ```
 
-출시 단계에서는 Sentry/PostHog DSN을 발급받고 `--dart-define`로 주입:
+출시 단계에서는 Sentry/PostHog DSN을 발급받고 `--dart-define`로 주입합니다:
 
 ```bash
 flutter run \
@@ -216,7 +216,7 @@ flutter run \
 
 ## 7. 키스토어 + Play Console (단계 6~7)
 
-도그푸딩 단계에서는 **건너뜁니다**. debug 서명으로 시뮬레이터/실기기 테스트 가능.
+도그푸딩 단계에서는 **건너뜁니다**. debug 서명으로 시뮬레이터/실기기 테스트가 가능합니다.
 
 실제 출시 전:
 
@@ -235,9 +235,9 @@ flutter run \
 
 ## 8. FCM (단계 8) — 짐로그는 스킵
 
-짐로그는 백엔드가 없고 알림도 안 쓰니 FCM 불필요. `notifications_kit` 자체를 install 안 함.
+짐로그는 백엔드가 없고 알림도 사용하지 않으니 FCM이 불필요합니다. `notifications_kit` 자체를 install하지 않습니다.
 
-알림이 필요한 앱이라면 [`docs/integrations/fcm.md`](../integrations/fcm.md).
+알림이 필요한 앱이라면 [`docs/integrations/fcm.md`](../integrations/fcm.md)를 참고하십시오.
 
 ---
 
@@ -309,7 +309,7 @@ dart run build_runner build --delete-conflicting-outputs
 
 ### 9.3 화면 작성
 
-각 화면은 `ConsumerWidget`로 만들고, DB는 `databaseProvider`로 접근:
+각 화면은 `ConsumerWidget`로 만들고, DB는 `databaseProvider`로 접근합니다:
 
 ```dart
 final _appDbProvider =
@@ -332,11 +332,11 @@ class TodayScreen extends ConsumerWidget {
 }
 ```
 
-> 💡 **공통 위젯 활용**: `EmptyView(title:, subtitle:)`, `PrimaryButton`, `AppTextField`, `AppDialog.confirm` 등이 이미 들어있어 디자인 일관성 자동. [`lib/core/widgets/README.md`](../../lib/core/widgets/README.md) 참조.
+> 💡 **공통 위젯 활용**: `EmptyView(title:, subtitle:)`, `PrimaryButton`, `AppTextField`, `AppDialog.confirm` 등이 이미 들어있어 디자인 일관성이 자동으로 유지됩니다. [`lib/core/widgets/README.md`](../../lib/core/widgets/README.md) 참조.
 
 ### 9.4 ReviewTrigger 시그널 — 어디에?
 
-핵심: **사용자가 "성공"을 느끼는 직후**에만 signal. 짐로그에서는 "세트 추가 성공" 직후가 자연스러움:
+핵심: **사용자가 "성공"을 느끼는 직후**에만 signal을 호출합니다. 짐로그에서는 "세트 추가 성공" 직후가 자연스럽습니다:
 
 ```dart
 Future<void> _addSet(...) async {
@@ -346,7 +346,7 @@ Future<void> _addSet(...) async {
 }
 ```
 
-**금지** — 다음 위치에선 signal 호출하지 마세요:
+**금지** — 다음 위치에서는 signal을 호출하지 마십시오:
 - 앱 시작 직후 (사용자 정서 중립)
 - 에러/실패 직후 (1점 폭격 위험)
 - 동일 화면에서 매번
@@ -357,7 +357,7 @@ Future<void> _addSet(...) async {
 
 ## 10. 권한 매트릭스 검증 (단계 10)
 
-[README의 권한 매트릭스](../../README.md#kit별-필요-권한-매트릭스)를 보고 활성 kit별로 추가 권한이 필요한지 확인.
+[README의 권한 매트릭스](../../README.md#kit별-필요-권한-매트릭스)를 보고 활성 kit별로 추가 권한이 필요한지 확인합니다.
 
 짐로그의 활성 kit:
 - `local_db_kit` → 권한 X
@@ -365,9 +365,9 @@ Future<void> _addSet(...) async {
 - `charts_kit` → 권한 X (UI only)
 - `observability_kit` → INTERNET (자동)
 
-→ **짐로그는 추가 권한 선언 불필요**. AndroidManifest.xml/Info.plist 그대로 OK.
+→ **짐로그는 추가 권한 선언이 불필요합니다**. AndroidManifest.xml/Info.plist 그대로 OK.
 
-> 💡 **광고를 추가한다면** `ads_kit` 활성 + Info.plist의 `NSUserTrackingUsageDescription` 텍스트를 짐로그 톤에 맞게 수정 (현재 템플릿 기본값 그대로 두면 ATT 다이얼로그가 어색해 보일 수 있음).
+> 💡 **광고를 추가한다면** `ads_kit` 활성 + Info.plist의 `NSUserTrackingUsageDescription` 텍스트를 짐로그 톤에 맞게 수정하십시오 (현재 템플릿 기본값 그대로 두면 ATT 다이얼로그가 어색해 보일 수 있습니다).
 
 ---
 
@@ -380,13 +380,13 @@ dart run tool/configure_app.dart   # Status: OK
 flutter run                        # 시뮬레이터/실기기에서 직접 사용해보기
 ```
 
-이 4개가 모두 그린이면 OK.
+이 4개가 모두 그린이면 OK입니다.
 
 ---
 
 ## 12. 배포 (단계 12)
 
-도그푸딩 단계에서는 진행 X. 출시 시:
+도그푸딩 단계에서는 진행하지 않습니다. 출시 시:
 
 ```bash
 git tag v1.0.0
@@ -423,7 +423,7 @@ GitHub Actions의 `release-android.yml`이 자동으로:
 
 ## 다음 단계 (짐로그 출시 전 본격 작업)
 
-이 가이드는 12단계 walkthrough까지. 실제 출시 전 추가:
+이 가이드는 12단계 walkthrough까지입니다. 실제 출시 전 추가 작업:
 
 1. **앱 아이콘/스플래시** — `assets/icon/` 교체 후 `./scripts/regenerate-assets.sh`
 2. **이용약관/개인정보 URL 호스팅** — Notion/GitHub Pages 등
@@ -432,7 +432,7 @@ GitHub Actions의 `release-android.yml`이 자동으로:
 5. **Sentry/PostHog 프로젝트 발급** + `--dart-define` 주입
 6. **앱 스크린샷 + Play Console 메타데이터** (스토어 등록)
 
-대략 1~2일 추가 작업.
+대략 1~2일 추가 작업이 필요합니다.
 
 ---
 

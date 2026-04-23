@@ -1,6 +1,6 @@
 # 분석 도구 통합
 
-`DebugAnalyticsService` → PostHog / Mixpanel / Firebase Analytics 등으로 교체.
+`DebugAnalyticsService` → PostHog / Mixpanel / Firebase Analytics 등으로 교체합니다.
 
 ## 선택 가이드
 
@@ -55,7 +55,7 @@ class PostHogAnalyticsService implements AnalyticsService {
 
 ### 3) 설정
 
-`android/app/src/main/AndroidManifest.xml`, `ios/Runner/Info.plist`에 `POSTHOG_API_KEY`, `POSTHOG_HOST` 추가.
+`android/app/src/main/AndroidManifest.xml`, `ios/Runner/Info.plist`에 `POSTHOG_API_KEY`, `POSTHOG_HOST` 추가합니다.
 
 ### 4) Provider 교체
 
@@ -124,5 +124,5 @@ class FirebaseAnalyticsService implements AnalyticsService {
 
 ## 주의
 
-- PII(이메일, 전화번호 등) 이벤트 속성에 담지 않는다. 해시 처리 또는 유저 ID만.
-- GDPR/개인정보보호법 대상 앱은 동의 획득 전 추적 금지. `reset()`과 opt-out UI 필요.
+- PII(이메일, 전화번호 등)는 이벤트 속성에 담지 않습니다. 해시 처리 또는 유저 ID만 사용합니다.
+- GDPR/개인정보보호법 대상 앱은 동의 획득 전 추적을 금지합니다. `reset()`과 opt-out UI가 필요합니다.

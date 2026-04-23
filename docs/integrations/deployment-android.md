@@ -1,11 +1,11 @@
 # Android 배포 (파생 레포 체크리스트)
 
-이 템플릿은 Android 배포 인프라(서명·Fastlane·GHA 워크플로·Sentry mapping 업로드)를 이미 갖추고 있다. 파생 레포에서는 아래 절차만 수행하면 즉시 Play Internal 배포 가능.
+이 템플릿은 Android 배포 인프라(서명·Fastlane·GHA 워크플로·Sentry mapping 업로드)를 이미 갖추고 있습니다. 파생 레포에서는 아래 절차만 수행하면 즉시 Play Internal 배포가 가능합니다.
 
 ## 준비 (한 번만)
 
 1. **Google Play Developer 계정**: https://play.google.com/console 가입 ($25 일회성)
-2. **Play Console에 앱 생성**: Create App → 이름 입력 → Package name은 이 레포 `android/app/build.gradle.kts`의 `applicationId`와 동일해야 함
+2. **Play Console에 앱 생성**: Create App → 이름 입력 → Package name은 이 레포 `android/app/build.gradle.kts`의 `applicationId`와 동일해야 합니다
 3. **Service Account JSON 발급**:
    - Play Console → Settings → API access → Create Service Account
    - Google Cloud Console에서 JSON key 다운로드 (`play-store-credentials.json`)
@@ -73,27 +73,27 @@ bundle exec fastlane android beta
 ```bash
 ./scripts/batch-backup-keystores.sh /Volumes/NAS/keystores
 ```
-→ `~/Documents/keystores-pending/`의 모든 앱 키스토어를 암호화 zip으로 묶어 지정 위치로 이전.
+→ `~/Documents/keystores-pending/`의 모든 앱 키스토어를 암호화 zip으로 묶어 지정 위치로 이전합니다.
 
 ## 트러블슈팅
 
 ### `keystore not found` in CI
-→ `ANDROID_KEYSTORE_BASE64` Secret이 비어있거나 잘못됨. `upload-secrets-to-github.sh` 재실행.
+→ `ANDROID_KEYSTORE_BASE64` Secret이 비어있거나 잘못되어 있습니다. `upload-secrets-to-github.sh` 재실행이 필요합니다.
 
 ### Play Upload 실패: `APK signature does not match`
-→ 이전에 업로드한 키와 다른 키로 서명. Play App Signing 활성화되어 있다면 upload key 재발급 가능.
+→ 이전에 업로드한 키와 다른 키로 서명된 경우입니다. Play App Signing이 활성화되어 있다면 upload key 재발급이 가능합니다.
 
 ### R8 runtime crash: `NoClassDefFoundError`
-→ 새 의존성이 R8에 의해 제거됨. `android/app/proguard-rules.pro`에 `-keep class ...` 규칙 추가.
+→ 새 의존성이 R8에 의해 제거된 경우입니다. `android/app/proguard-rules.pro`에 `-keep class ...` 규칙을 추가합니다.
 
 ### mapping.txt 업로드 안 됨
-→ `SENTRY_AUTH_TOKEN` Secret 미설정. 경고만 출력되고 빌드 자체는 통과.
+→ `SENTRY_AUTH_TOKEN` Secret이 미설정된 경우입니다. 경고만 출력되고 빌드 자체는 통과됩니다.
 
 ### Sentry 대시보드의 Dart 스택트레이스가 `aA`, `bC` 같이 난독화돼 보임
-→ Dart symbols(`build/symbols/`)가 Sentry에 업로드되지 않은 상태. 원인 체크:
-1. `SENTRY_AUTH_TOKEN`에 `project:releases`, `project:write` 권한 포함됐는지
+→ Dart symbols(`build/symbols/`)가 Sentry에 업로드되지 않은 상태입니다. 원인을 확인합니다:
+1. `SENTRY_AUTH_TOKEN`에 `project:releases`, `project:write` 권한이 포함됐는지
 2. `upload_sentry_mapping` lane이 실행됐는지 (GHA 로그 확인)
-3. Sentry 프로젝트의 Debug Files 페이지(`Settings → Debug Files`)에 심볼 올라왔는지
+3. Sentry 프로젝트의 Debug Files 페이지(`Settings → Debug Files`)에 심볼이 올라왔는지
 
 수동 재업로드:
 ```bash

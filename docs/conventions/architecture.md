@@ -4,8 +4,8 @@
 
 ## FeatureKit 아키텍처
 
-앱의 선택적 기능(네트워크/인증/DB/알림/차트 등)은 모두 **FeatureKit**으로 캡슐화된다.
-`main.dart`의 `AppKits.install([...])`로 필요한 kit만 조립한다. 상세: [kits.md](./kits.md).
+앱의 선택적 기능(네트워크/인증/DB/알림/차트 등)은 모두 **FeatureKit**으로 캡슐화됩니다.
+`main.dart`의 `AppKits.install([...])`로 필요한 kit만 조립합니다. 상세: [kits.md](./kits.md).
 
 ```dart
 // sumtally류 로컬 앱
@@ -76,9 +76,9 @@ class ExpenseListState {
 }
 ```
 
-- 상태는 **불변(immutable)**
-- `copyWith`로만 새 상태 생성
-- 에러는 **에러 코드** 저장 → 화면에서 `S.of(context)`로 번역
+- 상태는 **불변(immutable)**입니다
+- `copyWith`로만 새 상태를 생성합니다
+- 에러는 **에러 코드**로 저장하고, 화면에서 `S.of(context)`로 번역합니다
 
 ### Provider 정의
 
@@ -101,7 +101,7 @@ final expenseListProvider = StateNotifierProvider.autoDispose<
 
 ## 모듈 의존 방향
 
-FeatureKit 리팩터 이후 구조는 **3층**:
+FeatureKit 리팩터 이후 구조는 **3층**입니다:
 - `lib/core/` — 모든 앱이 항상 쓰는 기반 (9개 모듈)
 - `lib/kits/` — 선택 가능한 FeatureKit (12개)
 - `lib/common/` — 점진 이관 중인 잔여 모듈 (`providers.dart`, `router/`, `splash/`)
@@ -160,18 +160,18 @@ graph TD
   features --> p_providers
 ```
 
-> 다이어그램은 주요 경계만 표시한 **샘플**이다. 특히 `features`는 그림에 그려진 몇 개 외에도 **`core/*` 전체**(theme/config/storage/cache 등)에 직접 접근할 수 있다 — MVVM UI/VM은 core 모듈을 자유롭게 사용한다.
+> 다이어그램은 주요 경계만 표시한 **샘플**입니다. 특히 `features`는 그림에 그려진 몇 개 외에도 **`core/*` 전체**(theme/config/storage/cache 등)에 직접 접근할 수 있습니다 — MVVM UI/VM은 core 모듈을 자유롭게 사용합니다.
 >
-> `BootStep` 계약은 현재 `common/splash/boot_step.dart`에 있어 `core/kits` 및 모든 kit이 이 파일을 import 한다. 이관 예정(→ `core/kits`)이며, 그때까지는 common이 "뿌리에 가까운 의존 대상"으로 유지된다.
+> `BootStep` 계약은 현재 `common/splash/boot_step.dart`에 있어 `core/kits` 및 모든 kit이 이 파일을 import합니다. 이관 예정(→ `core/kits`)이며, 그때까지는 common이 "뿌리에 가까운 의존 대상"으로 유지됩니다.
 
 ### 규칙
 
-1. **core는 kits/features를 모른다** (단방향) — `common/splash/boot_step.dart`는 이관 예정인 예외로, 위 노트 참조.
-2. **kits는 features를 모른다** (단방향)
-3. **kits끼리는 `requires` 선언으로만 의존** (예: auth_kit → backend_api_kit)
-4. **common/**은 리팩터 잔여물 — 점진적으로 core/kits로 이관
-5. **순환 의존 금지.** 불가피 시 Provider 타입 명시 선언으로 지연 해결 (예: `apiClientProvider` ↔ `authServiceProvider`)
-6. **common → features 의존 예외**: `common/router/app_router.dart`는 기본 features 2개(`home`, `settings`)를 참조한다. 템플릿이 기본 제공하는 스텁을 라우터가 알아야 하기 때문. 파생 레포 생성 후 해당 import를 앱별 features로 교체/제거 가능.
+1. **core는 kits/features를 모릅니다** (단방향) — `common/splash/boot_step.dart`는 이관 예정인 예외로, 위 노트 참조.
+2. **kits는 features를 모릅니다** (단방향)
+3. **kits끼리는 `requires` 선언으로만 의존합니다** (예: auth_kit → backend_api_kit)
+4. **common/**은 리팩터 잔여물 — 점진적으로 core/kits로 이관합니다
+5. **순환 의존 금지.** 불가피 시 Provider 타입 명시 선언으로 지연 해결합니다 (예: `apiClientProvider` ↔ `authServiceProvider`)
+6. **common → features 의존 예외**: `common/router/app_router.dart`는 기본 features 2개(`home`, `settings`)를 참조합니다. 템플릿이 기본 제공하는 스텁을 라우터가 알아야 하기 때문입니다. 파생 레포 생성 후 해당 import를 앱별 features로 교체/제거할 수 있습니다.
 
 ---
 
@@ -184,9 +184,9 @@ API 호출 → DioException → ErrorInterceptor → ApiException
          → 401 → AuthInterceptor → 자동 refresh → 재시도
 ```
 
-- `ApiException`은 **에러 코드 기반** (한국어 메시지 미포함)
-- 화면에서 에러 코드 → `S.of(context)`로 사용자 메시지 변환
-- 서버가 `{data: null, error: {code, message}}` 반환 시 서버 메시지 우선 표시
+- `ApiException`은 **에러 코드 기반**입니다 (한국어 메시지 미포함)
+- 화면에서 에러 코드 → `S.of(context)`로 사용자 메시지를 변환합니다
+- 서버가 `{data: null, error: {code, message}}` 반환 시 서버 메시지를 우선 표시합니다
 
 ### 화면별 에러 표시
 
@@ -255,7 +255,7 @@ API 호출 중 401 → AuthInterceptor
 
 `lib/core/review/review_trigger.dart`
 
-`in_app_review` 패키지 위에 **호출 정책**을 더한 얇은 wrapper. 호출자는 긍정적 액션 직후 `signal()`만 부르면 된다. 조건 미충족 시 다이얼로그는 호출되지 않는다.
+`in_app_review` 패키지 위에 **호출 정책**을 더한 얇은 wrapper입니다. 호출자는 긍정적 액션 직후 `signal()`만 부르면 됩니다. 조건 미충족 시 다이얼로그는 호출되지 않습니다.
 
 ### 기본 정책 (모두 충족해야 다이얼로그 노출)
 
@@ -277,7 +277,7 @@ await ref.read(reviewTriggerProvider).openStoreListing();
 
 ### 파생 레포 커스터마이징
 
-생성자 인자만 바꾸면 정책 변경 완료. 클래스 수정 불필요.
+생성자 인자만 바꾸면 정책 변경이 완료됩니다. 클래스 수정은 필요하지 않습니다.
 
 ```dart
 ReviewTrigger(
@@ -288,13 +288,13 @@ ReviewTrigger(
 )
 ```
 
-RemoteConfig 연동 시 파라미터를 원격 값으로 주입하면 A/B 테스트도 가능.
+RemoteConfig 연동 시 파라미터를 원격 값으로 주입하면 A/B 테스트도 가능합니다.
 
 ### 안티패턴
 
-- 앱 시작 시점 `signal()` — 사용자 정서가 중립이라 효과 없음
-- 에러/실패 직후 `signal()` — 1점 폭격 위험
-- 동일 화면에서 매번 `signal()` — 반복 노이즈
+- 앱 시작 시점 `signal()` — 사용자 정서가 중립이라 효과가 없습니다
+- 에러/실패 직후 `signal()` — 1점 폭격 위험이 있습니다
+- 동일 화면에서 매번 `signal()` — 반복 노이즈가 발생합니다
 
 ### 시스템 다이얼로그 vs 스토어 페이지
 

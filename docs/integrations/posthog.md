@@ -1,6 +1,6 @@
 # PostHog 통합
 
-`observability_kit`을 통해 템플릿에 기본 내장되어 있다. 파생 레포 생성 후 Project API Key만 주입하면 화면 조회/커스텀 이벤트가 자동으로 PostHog 대시보드로 전송된다.
+`observability_kit`을 통해 템플릿에 기본 내장되어 있습니다. 파생 레포 생성 후 Project API Key만 주입하면 화면 조회/커스텀 이벤트가 자동으로 PostHog 대시보드로 전송됩니다.
 
 ## 구조
 
@@ -36,7 +36,7 @@ flutter run \
 
 ### 3) 검증
 
-앱 실행 후 몇 화면 이동 → 1~2분 내 PostHog 대시보드 **Activity** 탭에 이벤트 출현.
+앱 실행 후 몇 화면 이동하면 1~2분 내 PostHog 대시보드 **Activity** 탭에 이벤트가 출현합니다.
 
 ## 자동으로 추적되는 것
 
@@ -46,7 +46,7 @@ flutter run \
 
 ## 수동 이벤트 추적
 
-비즈니스 액션은 ViewModel/서비스에서 명시적으로:
+비즈니스 액션은 ViewModel/서비스에서 명시적으로 기록합니다:
 
 ```dart
 ref.read(analyticsProvider).trackEvent(
@@ -57,7 +57,7 @@ ref.read(analyticsProvider).trackEvent(
 
 ## 로그인/로그아웃 자동 연동
 
-`lib/app.dart`의 `authStreamProvider` 리스너가 자동 호출:
+`lib/app.dart`의 `authStreamProvider` 리스너가 자동으로 호출합니다:
 - 로그인 시: `analytics.identify(userId, traits: {'email': ..., 'role': ...})`
 - 로그아웃 시: `analytics.reset()` — 이전 유저 연결 해제
 
@@ -74,20 +74,20 @@ screen name:
 
 ## 화면 이름 커스터마이징
 
-기본은 `route.settings.name` (GoRoute의 `path`). 더 의미 있는 이름 쓰려면 `AnalyticsNavigatorObserver`를 확장해 `GoRouterState.name` (GoRoute의 `name` 파라미터)을 사용하도록 수정.
+기본은 `route.settings.name` (GoRoute의 `path`)입니다. 더 의미 있는 이름을 쓰려면 `AnalyticsNavigatorObserver`를 확장해 `GoRouterState.name` (GoRoute의 `name` 파라미터)을 사용하도록 수정합니다.
 
 ## PII 주의
 
-- 이메일/전화번호 같은 PII는 event properties에 담지 말 것 — `identify(userId, traits)`의 traits에만
+- 이메일/전화번호 같은 PII는 event properties에 담지 않습니다 — `identify(userId, traits)`의 traits에만 포함합니다
 - GDPR/개인정보보호법 대상 앱은 **동의 획득 전 추적 금지**:
   - 동의 안 한 유저: `analyticsProvider.overrideWithValue(DebugAnalyticsService())`로 런타임 교체
   - 또는 Opt-out UI: `PostHog().disable()` 호출
 
 ## 한도 관리
 
-PostHog 무료 100만 이벤트/월 — DAU 1만까지는 여유. 폭주 방지:
+PostHog 무료 100만 이벤트/월 — DAU 1만까지는 여유가 있습니다. 폭주 방지:
 
-- **Session Replay 무료는 5천 세션/월** — DAU 200명 × 30일이면 한도 초과 → Session Replay 기능 꺼두기:
+- **Session Replay 무료는 5천 세션/월** — DAU 200명 × 30일이면 한도 초과 → Session Replay 기능을 꺼두는 것을 권장합니다:
   ```dart
   final config = PostHogConfig(key)
     ..host = host
@@ -101,12 +101,12 @@ PostHog 무료 100만 이벤트/월 — DAU 1만까지는 여유. 폭주 방지:
 - EU Cloud: `https://eu.i.posthog.com`
 - Self-hosted: 본인 호스트 URL
 
-가입 시 선택한 region과 일치해야 한다. 틀리면 이벤트 사라짐.
+가입 시 선택한 region과 일치해야 합니다. 틀리면 이벤트가 사라집니다.
 
 ## Key가 없을 때
 
-`ObservabilityEnv.isPostHogEnabled`가 false면 `DebugAnalyticsService`로 폴백 + PostHog SDK 초기화 스킵. 콘솔에 `[Analytics]` 로그만 출력.
+`ObservabilityEnv.isPostHogEnabled`가 false면 `DebugAnalyticsService`로 폴백되고 PostHog SDK 초기화가 스킵됩니다. 콘솔에 `[Analytics]` 로그만 출력됩니다.
 
 ## 옵트아웃 (kit 제거)
 
-PostHog 불필요 시: `app_kits.yaml`과 `lib/main.dart`에서 `observability_kit` 제거. 자세한 방법은 `sentry.md` 참고.
+PostHog 불필요 시: `app_kits.yaml`과 `lib/main.dart`에서 `observability_kit` 제거합니다. 자세한 방법은 `sentry.md` 참고.

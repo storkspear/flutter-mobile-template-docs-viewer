@@ -18,7 +18,7 @@ dart pub global activate flutterfire_cli
 flutterfire configure --project=<firebase-project-id>
 ```
 
-생성된 `lib/firebase_options.dart`는 **파생 레포에만 커밋** (템플릿에는 금지).
+생성된 `lib/firebase_options.dart`는 **파생 레포에만 커밋**합니다 (템플릿에는 금지).
 
 ## 3) 구현체 작성
 
@@ -109,7 +109,7 @@ final notificationServiceProvider = Provider<NotificationService>(
 
 ## 5) 백엔드 등록 흐름 (핵심)
 
-`DeviceRegistration`이 이미 구현됨 (`lib/kits/notifications_kit/device_registration.dart`). 로그인 성공 후 다음을 호출한다:
+`DeviceRegistration`이 이미 구현되어 있습니다 (`lib/kits/notifications_kit/device_registration.dart`). 로그인 성공 후 다음을 호출합니다:
 
 ```dart
 // 예: splash나 home 초기화에서
@@ -127,8 +127,8 @@ notif.onTokenRefresh.listen((newToken) {
 });
 ```
 
-- 로그아웃 시: `device.unregister(deviceId)` 호출.
-- 백엔드는 `POST /api/apps/{appSlug}/devices`로 동일 platform이면 토큰 업데이트 (upsert).
+- 로그아웃 시: `device.unregister(deviceId)` 호출합니다.
+- 백엔드는 `POST /api/apps/{appSlug}/devices`로 동일 platform이면 토큰 업데이트(upsert)합니다.
 
 ## 6) iOS APNs
 
@@ -138,6 +138,6 @@ notif.onTokenRefresh.listen((newToken) {
 
 ## 7) 검증
 
-- 디버그 빌드에서 `getToken()` 값 로그로 확인
+- 디버그 빌드에서 `getToken()` 값을 로그로 확인합니다
 - Firebase Console에서 해당 토큰으로 테스트 메시지 전송 → 수신 확인
-- 백엔드 `/devices` 조회 시 토큰 저장되어 있는지 확인
+- 백엔드 `/devices` 조회 시 토큰이 저장되어 있는지 확인합니다

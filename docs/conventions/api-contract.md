@@ -6,7 +6,7 @@
 
 ## 응답 래퍼
 
-모든 응답은 `{data, error}` 구조입니다. 둘은 **상호 배타적**.
+모든 응답은 `{data, error}` 구조입니다. 둘은 **상호 배타적**입니다.
 
 ### 성공
 
@@ -106,8 +106,8 @@ final request = SearchRequestBuilder()
     .build();
 ```
 
-- null 값은 **자동 무시** (조건에 추가되지 않음)
-- 빈 문자열/빈 리스트도 자동 무시
+- null 값은 **자동 무시**됩니다 (조건에 추가되지 않습니다)
+- 빈 문자열/빈 리스트도 자동으로 무시됩니다
 
 ### 조건 연산자
 
@@ -129,7 +129,7 @@ final request = SearchRequestBuilder()
 
 ## ApiException
 
-네트워크 요청이 실패하면 `ApiException`이 throw된다. `DioException`은 인터셉터에서 `ApiException`으로 변환되어 호출자에게 전달된다.
+네트워크 요청이 실패하면 `ApiException`이 throw됩니다. `DioException`은 인터셉터에서 `ApiException`으로 변환되어 호출자에게 전달됩니다.
 
 ```dart
 class ApiException implements Exception {
@@ -175,7 +175,7 @@ try {
 
 ## safeErrorCode / safeErrorMessage
 
-UI에 에러를 노출할 때 raw exception의 내부 경로나 stack trace가 노출되지 않도록 `safeErrorCode` / `safeErrorMessage`를 사용한다.
+UI에 에러를 노출할 때 raw exception의 내부 경로나 stack trace가 노출되지 않도록 `safeErrorCode` / `safeErrorMessage`를 사용합니다.
 
 ```dart
 // api_exception.dart에서 import
@@ -185,8 +185,8 @@ String safeErrorCode(Object e, {String fallbackCode = 'UNKNOWN_ERROR'})
 String? safeErrorMessage(Object e)
 ```
 
-- `ApiException`이면 서버가 제공한 `code` / `message` 반환
-- 아니면 `fallbackCode` / `null` 반환 → 호출자가 로컬라이즈 메시지 사용
+- `ApiException`이면 서버가 제공한 `code` / `message`를 반환합니다
+- 아니면 `fallbackCode` / `null`을 반환합니다 → 호출자가 로컬라이즈 메시지를 사용합니다
 
 **사용 패턴:**
 
@@ -205,7 +205,7 @@ String? safeErrorMessage(Object e)
 
 ## 에러 코드
 
-백엔드 `ErrorCode` enum과 1:1 매핑. `error_code.dart`에 정의.
+백엔드 `ErrorCode` enum과 1:1 매핑됩니다. `error_code.dart`에 정의되어 있습니다.
 
 | 코드 | HTTP | 의미 |
 |------|------|------|
@@ -224,7 +224,7 @@ String? safeErrorMessage(Object e)
 | `PUSH_DELIVERY_FAILED` | 502 | 푸시 발송 실패 (외부 서비스) |
 | `SOCIAL_AUTH_FAILED` | 401 | 소셜 로그인 실패 (Apple/Google 토큰 검증) |
 
-> `AuthInterceptor`는 응답 코드와 무관하게 **HTTP 401 전체**에 대해 1회 `/auth/refresh`를 시도한다. 성공하면 원 요청 재실행, 실패하면 원래의 401을 그대로 전파해 호출자가 `signOut()` 여부를 결정한다.
+> `AuthInterceptor`는 응답 코드와 무관하게 **HTTP 401 전체**에 대해 1회 `/auth/refresh`를 시도합니다. 성공하면 원 요청을 재실행하고, 실패하면 원래의 401을 그대로 전파해 호출자가 `signOut()` 여부를 결정합니다.
 
 ---
 
@@ -246,11 +246,11 @@ String? safeErrorMessage(Object e)
 | `/refresh` | POST | `authService.refreshToken()` (자동) |
 | `/withdraw` | POST | `authService.withdraw()` |
 
-> 이메일 인증 / 비밀번호 리셋 / 비밀번호 변경 엔드포인트는 상수만 선언되어 있고 `AuthService` 메서드는 미구현. 파생 레포에서 필요 시 추가한다.
+> 이메일 인증 / 비밀번호 리셋 / 비밀번호 변경 엔드포인트는 상수만 선언되어 있고 `AuthService` 메서드는 미구현 상태입니다. 파생 레포에서 필요 시 추가합니다.
 
 ### `postRaw()` — 인증 우회 호출
 
-일반 `post()`는 `AuthInterceptor`가 자동으로 `Authorization: Bearer` 헤더를 붙인다. 로그인/회원가입처럼 토큰이 **없는 상태**에서 호출해야 하는 엔드포인트는 `postRaw()`를 사용한다.
+일반 `post()`는 `AuthInterceptor`가 자동으로 `Authorization: Bearer` 헤더를 붙입니다. 로그인/회원가입처럼 토큰이 **없는 상태**에서 호출해야 하는 엔드포인트는 `postRaw()`를 사용합니다.
 
 ```dart
 // AuthInterceptor를 우회하는 직접 경로 호출
@@ -261,9 +261,9 @@ final response = await apiClient.postRaw<AuthTokens>(
 );
 ```
 
-- 경로는 `/api/apps/{appSlug}/...` 형태로 **전체 경로**를 직접 전달
-- `options.extra['skipAuth'] = true`를 `AuthInterceptor`가 감지해 헤더 주입을 건너뜀
-- 인증 후 사용하는 일반 API는 항상 `post()` 사용
+- 경로는 `/api/apps/{appSlug}/...` 형태로 **전체 경로**를 직접 전달합니다
+- `options.extra['skipAuth'] = true`를 `AuthInterceptor`가 감지해 헤더 주입을 건너뜁니다
+- 인증 후 사용하는 일반 API는 항상 `post()`를 사용합니다
 
 ### 인증 응답
 
@@ -276,7 +276,7 @@ final response = await apiClient.postRaw<AuthTokens>(
 }
 ```
 
-Flutter에서 자동 처리:
+Flutter에서 자동 처리됩니다:
 1. `TokenStorage`에 저장
 2. JWT payload 파싱 → `CurrentUser`
 3. `AuthState.authenticated` 방출 → GoRouter 리다이렉트
@@ -298,5 +298,5 @@ Flutter에서 자동 처리:
 
 - 필드명: **camelCase**
 - 날짜: **ISO 8601 UTC** (`"2026-04-14T10:30:00Z"`)
-- null 필드: **응답에 포함하지 않음** (Jackson `non_null` 설정)
-- 빈 배열: **빈 배열 `[]`로 반환** (null 아님)
+- null 필드: **응답에 포함하지 않습니다** (Jackson `non_null` 설정)
+- 빈 배열: **빈 배열 `[]`로 반환합니다** (null 아님)

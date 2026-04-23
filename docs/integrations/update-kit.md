@@ -1,8 +1,8 @@
 # UpdateKit
 
-강제 업데이트 감지 및 차단 화면을 제공하는 Kit. 스플래시에서 업데이트 여부를 확인하고, 강제 업데이트가 필요하면 앱 전체를 `ForceUpdateDialog`로 덮어씌운다.
+강제 업데이트 감지 및 차단 화면을 제공하는 Kit입니다. 스플래시에서 업데이트 여부를 확인하고, 강제 업데이트가 필요하면 앱 전체를 `ForceUpdateDialog`로 덮어씌웁니다.
 
-`redirectPriority: 1` — 모든 Kit 중 가장 먼저 실행된다. 강제 업데이트 상태에서는 인증/온보딩 흐름 진입 전에 차단된다.
+`redirectPriority: 1` — 모든 Kit 중 가장 먼저 실행됩니다. 강제 업데이트 상태에서는 인증/온보딩 흐름 진입 전에 차단됩니다.
 
 ---
 
@@ -22,13 +22,13 @@ AppUpdateService.check()
                           → 스토어 이동 버튼만 노출
 ```
 
-업데이트 확인 자체가 실패(네트워크 오류, Remote Config 미응답 등)하면 **에러를 삼키고 정상 진행**한다. 실패는 non-fatal로 Sentry에 리포트된다. 확인 실패가 앱 실행을 막지 않도록 설계된 것.
+업데이트 확인 자체가 실패(네트워크 오류, Remote Config 미응답 등)하면 **에러를 삼키고 정상 진행**합니다. 실패는 non-fatal로 Sentry에 리포트됩니다. 확인 실패가 앱 실행을 막지 않도록 설계되어 있습니다.
 
 ---
 
 ## 기본값 (템플릿)
 
-`NoUpdateAppUpdateService` — 항상 `null`을 반환. 업데이트 체크 없이 앱이 정상 실행된다.
+`NoUpdateAppUpdateService` — 항상 `null`을 반환합니다. 업데이트 체크 없이 앱이 정상 실행됩니다.
 
 ```dart
 await AppKits.install([
@@ -42,7 +42,7 @@ await AppKits.install([
 
 ### 1. `AppUpdateService` 구현
 
-Firebase Remote Config, 자체 API 등 어떤 방식으로도 구현 가능하다.
+Firebase Remote Config, 자체 API 등 어떤 방식으로도 구현할 수 있습니다.
 
 **Firebase Remote Config 예시:**
 
@@ -132,8 +132,8 @@ await AppKits.install([
 ## ForceUpdateDialog
 
 - `PopScope(canPop: false)` — 뒤로가기/제스처로 닫기 불가
-- 플랫폼에 따라 `iosStoreUrl` 또는 `androidStoreUrl`로 이동
-- 스토어 URL이 null이면 버튼이 아무 동작도 하지 않음 → 반드시 URL 세팅 필요
+- 플랫폼에 따라 `iosStoreUrl` 또는 `androidStoreUrl`로 이동합니다
+- 스토어 URL이 null이면 버튼이 아무 동작도 하지 않습니다 → 반드시 URL 세팅이 필요합니다
 
 ---
 

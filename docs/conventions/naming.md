@@ -47,7 +47,7 @@
 
 ## 디렉토리 구조
 
-FeatureKit 아키텍처 이후 3층 구조:
+FeatureKit 아키텍처 이후 3층 구조입니다:
 
 ```
 lib/
@@ -77,12 +77,12 @@ lib/
 
 ### 규칙
 
-- **core는 kits/features를 모른다** (단방향)
-- **kits는 features를 모른다** (단방향)
-- **kits끼리는 `requires` 선언으로만 의존** (예: auth_kit → backend_api_kit)
-- **features → core/kits** 자유롭게 import
+- **core는 kits/features를 모릅니다** (단방향)
+- **kits는 features를 모릅니다** (단방향)
+- **kits끼리는 `requires` 선언으로만 의존합니다** (예: auth_kit → backend_api_kit)
+- **features → core/kits** 자유롭게 import합니다
 - **features 간 직접 import 최소화** (라우터를 통한 느슨한 연결)
-- **common은 리팩터 잔여물** — 점진적으로 core/kits로 이관 중. 현재 `common/router/app_router.dart`는 기본 features(home/settings) 참조를 허용(템플릿이 기본 제공하는 스텁이므로). 파생 레포 생성 후 해당 import를 대체/제거 가능.
+- **common은 리팩터 잔여물**입니다 — 점진적으로 core/kits로 이관 중입니다. 현재 `common/router/app_router.dart`는 기본 features(home/settings) 참조를 허용합니다(템플릿이 기본 제공하는 스텁이므로). 파생 레포 생성 후 해당 import를 대체/제거할 수 있습니다.
 
 ---
 

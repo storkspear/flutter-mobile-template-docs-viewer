@@ -26,13 +26,14 @@
     {
       "name": "컨벤션",
       "files": [
-        { "path": "conventions/README.md",      "title": "Overview",     "desc": "컨벤션 전체 개요" },
-        { "path": "conventions/architecture.md", "title": "Architecture", "desc": "폴더 구조 및 레이어 설계" },
-        { "path": "conventions/kits.md",         "title": "Kits",         "desc": "Kit 패턴 및 사용 규칙" },
-        { "path": "conventions/api-contract.md",   "title": "API Contract",   "desc": "API 응답 계약 규칙" },
-        { "path": "conventions/error-handling.md", "title": "Error Handling", "desc": "에러 인터셉터 흐름 · ApiException · 401 자동 갱신" },
-        { "path": "conventions/loading.md",      "title": "Loading UX",   "desc": "로딩 상태 UX 패턴" },
-        { "path": "conventions/naming.md",       "title": "Naming",       "desc": "네이밍 규칙" }
+        { "path": "conventions/README.md",        "title": "Overview",       "desc": "컨벤션 전체 개요" },
+        { "path": "conventions/architecture.md",  "title": "Architecture",   "desc": "폴더 구조 및 레이어 설계" },
+        { "path": "conventions/kits.md",          "title": "Kits",           "desc": "Kit 패턴 및 사용 규칙" },
+        { "path": "conventions/api-contract.md",  "title": "API Contract",   "desc": "API 응답 계약 규칙" },
+        { "path": "conventions/error-handling.md","title": "Error Handling", "desc": "에러 인터셉터 흐름 · ApiException · 401 자동 갱신" },
+        { "path": "conventions/loading.md",       "title": "Loading UX",     "desc": "로딩 상태 UX 패턴" },
+        { "path": "conventions/naming.md",        "title": "Naming",         "desc": "네이밍 규칙" },
+        { "path": "conventions/testing.md",       "title": "Testing",        "desc": "테스트 전략 · AppKits.resetForTest · Provider override · 헬퍼" }
       ]
     },
     {
