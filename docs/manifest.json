@@ -23,13 +23,6 @@
       ]
     },
     {
-      "name": "튜토리얼",
-      "files": [
-        { "path": "tutorials/build-gymlog.md",              "title": "짐로그 앱 만들기", "desc": "12단계 walkthrough — 처음부터 앱 완성까지" },
-        { "path": "tutorials/dogfood-2026-04-19-gymlog.md", "title": "Dogfood 기록",    "desc": "짐로그 도그푸딩 실전 기록" }
-      ]
-    },
-    {
       "name": "컨벤션",
       "files": [
         { "path": "conventions/README.md",      "title": "Overview",     "desc": "컨벤션 전체 개요" },
@@ -38,6 +31,13 @@
         { "path": "conventions/api-contract.md", "title": "API Contract", "desc": "API 응답 계약 규칙" },
         { "path": "conventions/loading.md",      "title": "Loading UX",   "desc": "로딩 상태 UX 패턴" },
         { "path": "conventions/naming.md",       "title": "Naming",       "desc": "네이밍 규칙" }
+      ]
+    },
+    {
+      "name": "튜토리얼",
+      "files": [
+        { "path": "tutorials/build-gymlog.md",              "title": "짐로그 앱 만들기", "desc": "12단계 walkthrough — 처음부터 앱 완성까지" },
+        { "path": "tutorials/dogfood-2026-04-19-gymlog.md", "title": "Dogfood 기록",    "desc": "짐로그 도그푸딩 실전 기록" }
       ]
     }
   ]
