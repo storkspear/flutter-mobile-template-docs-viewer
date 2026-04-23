@@ -668,6 +668,7 @@ body.sidebar-collapsed .sidebar-open-btn { display: flex; }
     color: var(--primary);
     border: 1px solid var(--border);
     box-shadow: 0 4px 16px rgba(255,107,157,.22);
+    padding: 0;
   }
   .sidebar-open-btn:hover {
     background: var(--primary);
