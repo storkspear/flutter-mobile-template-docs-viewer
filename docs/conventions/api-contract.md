@@ -127,6 +127,82 @@ final request = SearchRequestBuilder()
 
 ---
 
+## ApiException
+
+네트워크 요청이 실패하면 `ApiException`이 throw된다. `DioException`은 인터셉터에서 `ApiException`으로 변환되어 호출자에게 전달된다.
+
+```dart
+class ApiException implements Exception {
+  final String code;      // 백엔드 ErrorCode 또는 NETWORK_ERROR/TIMEOUT/UNKNOWN_ERROR
+  final String message;   // 사람이 읽을 수 있는 메시지
+  final int? statusCode;  // HTTP 상태 코드 (네트워크 에러는 null)
+  final Map<String, dynamic>? details; // 검증 에러 상세 필드
+}
+```
+
+### 팩토리 생성자
+
+| 생성자 | code | 사용 시점 |
+|--------|------|----------|
+| `ApiException.fromApiError(error)` | 서버 제공 code | 서버가 `{error: {...}}` 반환 시 |
+| `ApiException.network()` | `NETWORK_ERROR` | 연결 실패, DNS 오류 |
+| `ApiException.timeout()` | `TIMEOUT` | 연결/수신 타임아웃 |
+| `ApiException.unknown()` | `UNKNOWN_ERROR` | 예측 불가 예외 |
+
+### 편의 getter
+
+```dart
+exception.isTokenExpired    // code == 'TOKEN_EXPIRED'
+exception.isInvalidToken    // code == 'INVALID_TOKEN'
+exception.isUnauthorized    // code == 'UNAUTHORIZED' || statusCode == 401
+exception.isValidationError // code == 'VALIDATION_ERROR'
+```
+
+### ViewModel에서 에러 처리
+
+```dart
+try {
+  final response = await apiClient.get('/expenses', fromData: Expense.fromJson);
+  state = ExpenseState.loaded(response.data!);
+} on ApiException catch (e) {
+  state = ExpenseState.error(e.code);   // code로 분기
+} catch (e) {
+  state = ExpenseState.error('UNKNOWN_ERROR');
+}
+```
+
+---
+
+## safeErrorCode / safeErrorMessage
+
+UI에 에러를 노출할 때 raw exception의 내부 경로나 stack trace가 노출되지 않도록 `safeErrorCode` / `safeErrorMessage`를 사용한다.
+
+```dart
+// api_exception.dart에서 import
+import 'package:flutter_mobile_template/kits/backend_api_kit/api_exception.dart';
+
+String safeErrorCode(Object e, {String fallbackCode = 'UNKNOWN_ERROR'})
+String? safeErrorMessage(Object e)
+```
+
+- `ApiException`이면 서버가 제공한 `code` / `message` 반환
+- 아니면 `fallbackCode` / `null` 반환 → 호출자가 로컬라이즈 메시지 사용
+
+**사용 패턴:**
+
+```dart
+} catch (e) {
+  final code = safeErrorCode(e);           // 'VALIDATION_ERROR', 'NETWORK_ERROR' 등
+  final msg = safeErrorMessage(e);         // 서버 메시지 (있으면), 없으면 null
+
+  // null이면 code 기반으로 로컬라이즈
+  final displayMsg = msg ?? S.of(context).errorUnknown;
+  state = state.copyWith(errorMessage: displayMsg);
+}
+```
+
+---
+
 ## 에러 코드
 
 백엔드 `ErrorCode` enum과 1:1 매핑. `error_code.dart`에 정의.
@@ -171,6 +247,23 @@ final request = SearchRequestBuilder()
 | `/withdraw` | POST | `authService.withdraw()` |
 
 > 이메일 인증 / 비밀번호 리셋 / 비밀번호 변경 엔드포인트는 상수만 선언되어 있고 `AuthService` 메서드는 미구현. 파생 레포에서 필요 시 추가한다.
+
+### `postRaw()` — 인증 우회 호출
+
+일반 `post()`는 `AuthInterceptor`가 자동으로 `Authorization: Bearer` 헤더를 붙인다. 로그인/회원가입처럼 토큰이 **없는 상태**에서 호출해야 하는 엔드포인트는 `postRaw()`를 사용한다.
+
+```dart
+// AuthInterceptor를 우회하는 직접 경로 호출
+final response = await apiClient.postRaw<AuthTokens>(
+  '/api/apps/$appSlug/auth/email/signin',
+  data: {'email': email, 'password': password},
+  fromData: AuthTokens.fromJson,
+);
+```
+
+- 경로는 `/api/apps/{appSlug}/...` 형태로 **전체 경로**를 직접 전달
+- `options.extra['skipAuth'] = true`를 `AuthInterceptor`가 감지해 헤더 주입을 건너뜀
+- 인증 후 사용하는 일반 API는 항상 `post()` 사용
 
 ### 인증 응답
 
