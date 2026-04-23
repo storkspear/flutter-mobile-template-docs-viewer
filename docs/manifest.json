@@ -7,7 +7,7 @@
     {
       "name": "시작하기",
       "files": [
-        { "path": "README.md", "title": "시작하기", "desc": "템플릿 개요 · 사용 흐름 · 문서 읽는 순서" }
+        { "path": "README.md", "title": "Overview", "desc": "템플릿 개요 · 사용 흐름 · 문서 읽는 순서" }
       ]
     },
     {
