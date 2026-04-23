@@ -248,3 +248,57 @@ API 호출 중 401 → AuthInterceptor
 - 인증 상태 변경 → `AuthStateNotifier` → GoRouter `refreshListenable` → 자동 리다이렉트
 - auth 엔드포인트는 `postRaw` (skipAuth 플래그) 사용 → AuthInterceptor 건너뜀
 - withdraw는 인증 필요 → 일반 `post` 사용
+
+---
+
+## 인앱 리뷰 — ReviewTrigger
+
+`lib/core/review/review_trigger.dart`
+
+`in_app_review` 패키지 위에 **호출 정책**을 더한 얇은 wrapper. 호출자는 긍정적 액션 직후 `signal()`만 부르면 된다. 조건 미충족 시 다이얼로그는 호출되지 않는다.
+
+### 기본 정책 (모두 충족해야 다이얼로그 노출)
+
+| 조건 | 기본값 | 생성자 파라미터 |
+|------|--------|----------------|
+| `signal()` 누적 호출 | 5회 이상 | `signalThreshold` |
+| 마지막 표시 후 경과 | 60일 이상 | `cooldown` |
+| 연간 표시 횟수 | 3회 이하 | `yearlyMax` |
+
+### 사용법
+
+```dart
+// 긍정적 액션 직후 — 조건 충족 시 자동으로 시스템 다이얼로그
+await ref.read(reviewTriggerProvider).signal('purchase_completed');
+
+// 사용자가 "리뷰 남기기"를 명시적으로 누른 경우 — 정책 무관, 스토어 페이지 이동
+await ref.read(reviewTriggerProvider).openStoreListing();
+```
+
+### 파생 레포 커스터마이징
+
+생성자 인자만 바꾸면 정책 변경 완료. 클래스 수정 불필요.
+
+```dart
+ReviewTrigger(
+  prefs: prefsStorage,
+  signalThreshold: 3,
+  cooldown: const Duration(days: 30),
+  yearlyMax: 4,
+)
+```
+
+RemoteConfig 연동 시 파라미터를 원격 값으로 주입하면 A/B 테스트도 가능.
+
+### 안티패턴
+
+- 앱 시작 시점 `signal()` — 사용자 정서가 중립이라 효과 없음
+- 에러/실패 직후 `signal()` — 1점 폭격 위험
+- 동일 화면에서 매번 `signal()` — 반복 노이즈
+
+### 시스템 다이얼로그 vs 스토어 페이지
+
+| 방식 | 트리거 | 특징 |
+|------|--------|------|
+| `signal()` / `requestNow()` | 앱 내 시스템 다이얼로그 | Apple/Google 호출 횟수 제한 있음 |
+| `openStoreListing()` | 스토어 페이지 이동 | 횟수 제한 없음, 사용자 명시 액션 시 사용 |
