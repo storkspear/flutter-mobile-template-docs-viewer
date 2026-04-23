@@ -1,0 +1,44 @@
+{
+  "brand": {
+    "name": "flutter-mobile-template",
+    "sub": "Architecture Docs"
+  },
+  "groups": [
+    {
+      "name": "시작하기",
+      "files": [
+        { "path": "philosophy.md", "title": "Philosophy", "desc": "설계 철학 — 앱 공장 전략, 결정의 이유" }
+      ]
+    },
+    {
+      "name": "컨벤션",
+      "files": [
+        { "path": "conventions/README.md",      "title": "Overview",      "desc": "컨벤션 전체 개요" },
+        { "path": "conventions/architecture.md", "title": "Architecture",  "desc": "폴더 구조 및 레이어 설계" },
+        { "path": "conventions/kits.md",         "title": "Kits",          "desc": "Kit 패턴 및 사용 규칙" },
+        { "path": "conventions/api-contract.md", "title": "API Contract",  "desc": "API 응답 계약 규칙" },
+        { "path": "conventions/loading.md",      "title": "Loading UX",    "desc": "로딩 상태 UX 패턴" },
+        { "path": "conventions/naming.md",       "title": "Naming",        "desc": "네이밍 규칙" }
+      ]
+    },
+    {
+      "name": "통합 가이드",
+      "files": [
+        { "path": "integrations/README.md",             "title": "Overview",          "desc": "통합 가이드 전체 개요" },
+        { "path": "integrations/sentry.md",             "title": "Sentry",            "desc": "크래시 리포팅 설정" },
+        { "path": "integrations/posthog.md",            "title": "PostHog",           "desc": "사용자 행동 분석 설정" },
+        { "path": "integrations/analytics.md",          "title": "Analytics",         "desc": "이벤트 트래킹 가이드" },
+        { "path": "integrations/fcm.md",                "title": "FCM",               "desc": "푸시 알림 설정" },
+        { "path": "integrations/deployment-android.md", "title": "Android 배포",      "desc": "Fastlane + GitHub Actions 배포" },
+        { "path": "integrations/security.md",           "title": "Security",          "desc": "보안 설정 가이드" }
+      ]
+    },
+    {
+      "name": "튜토리얼",
+      "files": [
+        { "path": "tutorials/build-gymlog.md",              "title": "짐로그 앱 만들기",  "desc": "12단계 walkthrough — 처음부터 앱 완성까지" },
+        { "path": "tutorials/dogfood-2026-04-19-gymlog.md", "title": "Dogfood 기록",     "desc": "짐로그 도그푸딩 실전 기록" }
+      ]
+    }
+  ]
+}
