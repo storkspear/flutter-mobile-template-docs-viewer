@@ -223,10 +223,30 @@ function typewriter(el, text, speed = 32) {
   tick();
 }
 
+function scrollActiveNavIntoView() {
+  const activeItem = document.querySelector('.nav-item.active');
+  const sidebar = document.querySelector('.sidebar');
+  if (!activeItem || !sidebar) return;
+
+  const itemTop = activeItem.offsetTop;
+  const itemBottom = itemTop + activeItem.offsetHeight;
+  const viewTop = sidebar.scrollTop;
+  const viewBottom = viewTop + sidebar.clientHeight;
+  const margin = 40;
+
+  if (itemTop >= viewTop + margin && itemBottom <= viewBottom - margin) return;
+
+  sidebar.scrollTo({
+    top: itemTop - sidebar.clientHeight / 2 + activeItem.offsetHeight / 2,
+    behavior: 'smooth',
+  });
+}
+
 async function loadDoc(docPath) {
   document.querySelectorAll('.nav-item').forEach(el => {
     el.classList.toggle('active', el.dataset.doc === docPath);
   });
+  scrollActiveNavIntoView();
   if (isMobile()) closeMobileSidebar();
 
   const meta = META[docPath] || { title: docPath.split('/').pop().replace('.md', ''), desc: '' };
