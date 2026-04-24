@@ -1,67 +1,112 @@
-# flutter-mobile-template 문서
+# flutter-mobile-template — Docs
 
-이 문서들은 `flutter-mobile-template`을 기반으로 파생 레포를 만들고 운영하는 개발자를 위한 가이드입니다.
+이 폴더의 문서는 `flutter-mobile-template` 을 기반으로 **파생 레포를 만들고 운영하는 개발자** 를 위한 가이드예요. 폴더 구조는 독자의 여정에 맞게 정리되어 있고, 각 문서는 단일 목적에 집중합니다.
 
----
-
-## 이 템플릿이 하는 일
-
-솔로 인디 개발자가 여러 앱을 빠른 주기로 출시할 때, 매번 반복되는 인프라 코드(네트워크, 인증, 테마, 캐시, 관측성, 배포 파이프라인)를 미리 만들어 둔 뼈대입니다.
-
-새 앱 아이디어가 생기면 이 레포를 **Use this template**으로 복사한 파생 레포에서 도메인 코드만 추가하면 됩니다. 포크(fork)가 아니라 히스토리를 분리한 별도 레포가 생성됩니다.
+> **짝이 되는 백엔드 템플릿**: 이 프론트엔드 템플릿은 [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 과 쌍으로 작동해요. 백엔드 API 계약 · 에러 코드 · JWT 구조가 서로 1:1 대응되며, 같은 솔로 인디 개발자가 "앱 공장 전략" 으로 두 레포를 함께 운영하는 것을 전제로 합니다.
 
 ---
 
-## 문서 읽는 순서
+## 시작하기
 
-처음 이 템플릿을 받았다면 아래 순서를 권장합니다.
+처음 이 레포를 만났다면 **여정 문서부터** 읽어주세요. 어디서부터 시작할지, 다음은 뭘 읽을지가 단계별로 안내돼요.
 
-1. **Philosophy** (`integrations/philosophy.md`) — 왜 이런 구조인지 설계 배경을 이해합니다
-2. **Architecture** (`conventions/architecture.md`) — 레이어 구조(core/kits/features)와 MVVM 패턴을 파악합니다
-3. **Kits** (`conventions/kits.md`) — FeatureKit 조립 방법과 AppKit 계약을 확인합니다
-4. **짐로그 튜토리얼** (`tutorials/build-gymlog.md`) — 실제 앱 생성 과정을 전체 흐름으로 따라갑니다
+- [Developer Journey — 전체 읽기 순서](./journey/README.md)
 
-그 다음에는 필요한 영역만 골라서 읽으면 됩니다.
+그다음부터는 필요한 영역만 골라서 들어가면 됩니다.
 
 ---
 
-## 문서 구성
+## 철학 & 설계 결정 (journey/philosophy/)
 
-### 통합 가이드
+이 템플릿이 **왜 이런 구조가 되었는지** 를 담은 ADR (Architecture Decision Record) 카드 모음이에요. 추상적인 이론이 아니라, 솔로 인디 개발자가 여러 앱을 찍어낼 때 마주치는 구체적인 고통에 대한 답변으로 만들어졌어요.
 
-파생 레포에서 실제 서비스를 연결할 때 참고합니다.
+- [Philosophy — ADR 전체 인덱스](./philosophy/README.md)
+- 테마별 ADR 카드 (레포 구조 / 상태관리 / 네트워크 / 저장소 / UI·UX / 운영)
 
-| 문서 | 내용 |
-|------|------|
-| `integrations/philosophy.md` | 설계 철학 — 앱 공장 전략, 각 결정의 이유 |
-| `integrations/update-kit.md` | 강제 업데이트 감지 · ForceUpdateDialog · AppUpdateService |
-| `integrations/sentry.md` | 크래시 리포팅 설정 (DSN 주입, Spike Protection, 심볼 업로드) |
-| `integrations/posthog.md` | 사용자 행동 분석 (API Key 주입, 자동 화면 추적) |
-| `integrations/analytics.md` | AnalyticsService 커스텀 구현 가이드 |
-| `integrations/fcm.md` | 푸시 알림 설정 (FCM, 디바이스 등록) |
-| `integrations/deployment-android.md` | Fastlane + GitHub Actions Android 배포 |
-| `integrations/security.md` | 보안 정책 요약 (난독화, SSL 핀닝, SecureStorage) |
+## 개발 여정 (journey/)
 
-### 컨벤션
+파생 레포 개발자가 시간 순서로 따라가는 문서들이에요.
 
-코드를 작성할 때 지켜야 할 규약입니다.
+- [Architecture](./journey/architecture.md) — 모듈 구조 한눈 요약
+- [Onboarding](./journey/onboarding.md) — 파생 레포 최초 셋업
+- [Build First App](./journey/build-first-app.md) — 첫 앱 완성 walkthrough
+- [Deployment](./journey/deployment.md) — 파생 레포 첫 운영 배포
+- [Dogfood FAQ](./journey/dogfood-faq.md) — 자주 묻는 질문
+- [Dogfood Pitfalls](./journey/dogfood-pitfalls.md) — 자주 막히는 함정 모음
 
-| 문서 | 내용 |
-|------|------|
-| `conventions/architecture.md` | MVVM 패턴, 모듈 의존 방향, 인증/캐시/에러 전략 |
-| `conventions/kits.md` | Kit 작성법, AppKit 계약, app_kits.yaml 동기화 |
-| `conventions/api-contract.md` | API 응답 규격, ApiException, SearchRequestBuilder |
-| `conventions/error-handling.md` | 인터셉터 흐름, 401 자동 갱신, ViewModel 에러 처리 |
-| `conventions/loading.md` | 로딩 UX 패턴 (skeleton, pull-to-refresh, 버튼 스피너) |
-| `conventions/naming.md` | 파일/클래스/변수/Provider 네이밍 규칙 |
-| `conventions/testing.md` | 테스트 전략, AppKits.resetForTest, Provider override, 헬퍼 |
+## 아키텍처 (architecture/) — 시스템 구조
 
-### 튜토리얼
+구조 레퍼런스 문서예요. "어떻게 생겼는지" 빠르게 파악하고 싶을 때 참고합니다.
 
-| 문서 | 내용 |
-|------|------|
-| `tutorials/build-gymlog.md` | 처음부터 앱 완성까지 12단계 walkthrough |
-| `tutorials/dogfood-2026-04-19-gymlog.md` | 짐로그 도그푸딩 실전 기록 — 발견된 함정과 개선 사항 |
+- [Module Dependencies](./architecture/module-dependencies.md) — core / kits / common / features 의존 방향
+- [FeatureKit Contract](./architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세
+- [Boot Sequence](./architecture/boot-sequence.md) — 앱 시작 시 순서도
+
+## 컨벤션 (conventions/) — 코드 작성 규약
+
+- [Overview](./conventions/README.md)
+- [Naming](./conventions/naming.md) — 파일 · 클래스 · Provider 명명
+- [ViewModel + MVVM](./conventions/viewmodel-mvvm.md) — StateNotifier · ConsumerWidget 패턴
+- [Error Handling](./conventions/error-handling.md) — ApiException · safeErrorCode/Message · 인터셉터 순서
+- [Loading UX](./conventions/loading-ux.md) — 4가지 로딩 패턴
+- [i18n](./conventions/i18n.md) — ARB · gen_l10n 원칙
+- [Testing](./testing/testing-strategy.md) — resetForTest · Provider override · 지문 테스트
+
+## 기능 가이드 (features/) — 개별 Kit 상세
+
+각 FeatureKit 의 계약 · 의존 · 사용법을 담아요. Kit 을 활성화하기 전에 해당 문서부터 읽어주세요.
+
+- [Kit 목록 + 의존 관계도](./features/README.md)
+- [auth_kit](./features/auth-kit.md) — JWT · 소셜 로그인
+- [backend_api_kit](./features/backend-api-kit.md) — Dio · 3개 인터셉터
+- [observability_kit](./features/observability-kit.md) — Sentry · PostHog 번들
+- [notifications_kit](./features/notifications-kit.md) — 로컬 · 푸시
+- [local_db_kit](./features/local-db-kit.md) — Drift · 마이그레이션
+- [update_kit](./features/update-kit.md) — 강제 업데이트
+- [onboarding_kit](./features/onboarding-kit.md) — 다단계 위자드
+- [nav_shell_kit](./features/nav-shell-kit.md) — 하단 탭 셸
+- [charts_kit](./features/charts-kit.md) — fl_chart 래핑
+- [ads_kit](./features/ads-kit.md) — AdMob · UMP · ATT
+- [background_kit](./features/background-kit.md) — workmanager
+- [permissions_kit](./features/permissions-kit.md) — 런타임 권한
+- [device_info_kit](./features/device-info-kit.md) — 기기 정보
+
+## API 계약 (api-contract/) — spring-backend-template 과의 쌍
+
+백엔드 템플릿과 1:1 로 맞물리는 약속들입니다. 스키마가 어긋나면 양쪽이 동시에 안 돌아가요.
+
+- [Response Schema](./api-contract/response-schema.md) — `{data, error}` 구조
+- [Search Request](./api-contract/search-request.md) — SearchRequestBuilder 연산자
+- [Error Codes](./api-contract/error-codes.md) — ErrorCode enum 동기화
+- [Auth Flow](./api-contract/auth-flow.md) — JWT · appSlug 흐름
+
+## 인프라 / 운영 (infra/)
+
+- [Android Deployment](./infra/android-deployment.md) — Fastlane · GHA · Play Internal
+- [iOS Deployment](./infra/ios-deployment.md) — Fastlane · App Store Connect
+- [Security](./infra/security.md) — R8 난독화 · SSL 핀닝 · Keychain 정책
+- [CI/CD](./infra/ci-cd.md) — GitHub Actions 워크플로우
+- [Secrets Management](./infra/secrets-management.md) — .env · GHA Secrets 구분
+
+## 테스팅 (testing/)
+
+- [Testing Strategy](./testing/testing-strategy.md) — 계층별 테스트 전략
+- [Contract Testing](./testing/contract-testing.md) — Kit 계약 테스트
+
+## 참조 (reference/)
+
+- [Scripts](./reference/scripts.md) — `scripts/*.sh` 사용법
+- [Recipes](./reference/recipes.md) — 3가지 recipe (local-only / local-notifier / backend-auth)
+- [Glossary](./reference/glossary.md) — 용어 사전 (파생 레포 · Kit · Recipe 등)
+- [Migration from Template](./reference/migration-from-template.md) — cherry-pick 전파 규칙
+
+---
+
+## 문서 작성 규칙
+
+이 레포의 `docs/` 는 [`STYLE_GUIDE.md`](./STYLE_GUIDE.md) 의 컨벤션을 따라요. 새 문서를 추가하거나 기존 문서를 수정할 때는 해당 가이드를 먼저 확인해주세요.
+
+특히 **ADR 카드** 는 8섹션 구조가 엄격하게 정해져 있고, 어느 문서든 해요체 일관성과 상대경로 링크 규칙이 적용돼요.
 
 ---
 
@@ -71,7 +116,7 @@
 # 1. Use this template → 새 레포 생성 후 클론
 git clone git@github.com:<org>/<your-app>.git && cd <your-app>
 
-# 2. 앱 이름/번들 ID 변경
+# 2. 앱 이름 / 번들 ID 변경
 ./scripts/rename-app.sh <slug> com.<org>.<slug>
 
 # 3. 의존성 설치 + 구성 검증
@@ -82,4 +127,4 @@ dart run tool/configure_app.dart
 flutter run
 ```
 
-상세 절차는 `tutorials/build-gymlog.md`를 참고하세요.
+상세 단계는 [Build First App](./journey/build-first-app.md) 를 참고해주세요.
