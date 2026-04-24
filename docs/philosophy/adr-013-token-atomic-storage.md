@@ -282,7 +282,7 @@ access 삭제가 실패해도 refresh 삭제는 **반드시** 시도. 두 토큰
 - [`test/core/storage/token_storage_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/storage/token_storage_test.dart) — 원자성 · 복구 시나리오
 
 **관련 ADR**:
-- [ADR-010 · QueuedInterceptor 로 401 자동 갱신](./adr-010-queued-interceptor.md) — refresh 성공 시 `saveTokens` 호출
-- [ADR-012 · 앱별 독립 유저](./adr-012-per-app-user.md) — 앱별 Keychain 분리
-- [ADR-020 · 이중 난독화 + 보안 정책](./adr-020-security-hardening.md) — 토큰 저장이 보안 방어선의 일부
-- [ADR-008 · 부팅 단계 추상화](./adr-008-boot-step.md) — `AuthCheckStep` 에서 `repairIfPartial` 호출
+- [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](./adr-010-queued-interceptor.md) — refresh 성공 시 `saveTokens` 호출
+- [`ADR-012 · 앱별 독립 유저`](./adr-012-per-app-user.md) — 앱별 Keychain 분리
+- [`ADR-020 · 이중 난독화 + 보안 정책`](./adr-020-security-hardening.md) — 토큰 저장이 보안 방어선의 일부
+- [`ADR-008 · 부팅 단계 추상화`](./adr-008-boot-step.md) — `AuthCheckStep` 에서 `repairIfPartial` 호출

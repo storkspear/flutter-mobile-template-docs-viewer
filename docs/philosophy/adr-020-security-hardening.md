@@ -169,7 +169,7 @@ static const _storage = FlutterSecureStorage(
 - iOS: Keychain 의 AES-256 암호화. `first_unlock` 으로 백그라운드 접근 가능, `this_device` 로 iCloud 백업 제외.
 - Android 6.0+: EncryptedSharedPreferences (AES-256). Root 권한 없이는 추출 불가.
 
-상세는 [ADR-013](./adr-013-token-atomic-storage.md) 참조.
+상세는 [`ADR-013`](./adr-013-token-atomic-storage.md) 참조.
 
 ### 방어선 5 — SSL Pinning (opt-in)
 
@@ -309,6 +309,6 @@ Android keystore · Play store JSON key · Apple p12 등은 `.gitignore` + GitHu
 - [`scripts/upload-secrets-to-github.sh`](https://github.com/storkspear/flutter-mobile-template/blob/main/scripts/upload-secrets-to-github.sh) — Secrets 관리
 
 **관련 ADR**:
-- [ADR-013 · 토큰 저장 원자성](./adr-013-token-atomic-storage.md) — 방어선 4 의 상세
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — 엔터프라이즈 수준 거부의 근거
-- [ADR-010 · QueuedInterceptor](./adr-010-queued-interceptor.md) — JWT · 인증 토큰 흐름
+- [`ADR-013 · 토큰 저장 원자성`](./adr-013-token-atomic-storage.md) — 방어선 4 의 상세
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — 엔터프라이즈 수준 거부의 근거
+- [`ADR-010 · QueuedInterceptor`](./adr-010-queued-interceptor.md) — JWT · 인증 토큰 흐름

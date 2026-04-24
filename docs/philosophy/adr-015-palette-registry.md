@@ -244,6 +244,6 @@ Riverpod Provider 로 팔레트를 감싸볼까 고민했어요. 하지만 **팔
 - [`test/core/theme/app_palette_registry_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/theme/app_palette_registry_test.dart) — 등록 · 교체 · 중복 에러
 
 **관련 ADR**:
-- [ADR-002 · 3계층 모듈 구조](./adr-002-layered-modules.md) — 팔레트가 `core/theme/` 에 있는 이유
-- [ADR-001 · GitHub Template + cherry-pick](./adr-001-template-cherry-pick.md) — 파생 레포가 자체 팔레트 소유하는 맥락
-- [ADR-017 · 4가지 로딩 UX 패턴](./adr-017-loading-ux.md) — 디자인 시스템 전체의 일관성
+- [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — 팔레트가 `core/theme/` 에 있는 이유
+- [`ADR-001 · GitHub Template + cherry-pick`](./adr-001-template-cherry-pick.md) — 파생 레포가 자체 팔레트 소유하는 맥락
+- [`ADR-017 · 4가지 로딩 UX 패턴`](./adr-017-loading-ux.md) — 디자인 시스템 전체의 일관성

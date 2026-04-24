@@ -318,7 +318,7 @@ class ExpenseRepository {
 - [`test/core/cache/cached_repository_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/cache/cached_repository_test.dart) — 각 정책 · TTL · SWR 동작 검증
 
 **관련 ADR**:
-- [ADR-002 · 3계층 모듈 구조](./adr-002-layered-modules.md) — CacheStore 가 `core/` 에 있는 이유
-- [ADR-005 · Riverpod + MVVM](./adr-005-riverpod-mvvm.md) — Repository Provider 주입 패턴
-- [ADR-006 · 인터페이스 기반 서비스 교체](./adr-006-debug-fallback.md) — CacheStore 교체 가능성
-- [ADR-009 · 백엔드 응답 1:1 계약](./adr-009-backend-contract.md) — fetcher 의 `fromData` 콜백과 연결
+- [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — CacheStore 가 `core/` 에 있는 이유
+- [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — Repository Provider 주입 패턴
+- [`ADR-006 · 인터페이스 기반 서비스 교체`](./adr-006-debug-fallback.md) — CacheStore 교체 가능성
+- [`ADR-009 · 백엔드 응답 1:1 계약`](./adr-009-backend-contract.md) — fetcher 의 `fromData` 콜백과 연결

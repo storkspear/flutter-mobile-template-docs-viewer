@@ -268,7 +268,7 @@ Sentry 가 안 찍혀서 "Sentry SDK 버그?" 의심했는데 원인은 `--dart-
 - [`lib/kits/notifications_kit/fcm_notification_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/fcm_notification_service.dart) — FCM 구현
 
 **관련 ADR**:
-- [ADR-002 · 3계층 모듈 구조](./adr-002-layered-modules.md) — 인터페이스를 `core/` 에 두는 이유
-- [ADR-003 · FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) — Kit 이 `providerOverrides` 로 교체하는 메커니즘
-- [ADR-005 · Riverpod + MVVM](./adr-005-riverpod-mvvm.md) — Provider override 가 동작하는 DI 기반
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — "진입장벽 0" 이 솔로 운영에 가치 있는 이유
+- [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — 인터페이스를 `core/` 에 두는 이유
+- [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — Kit 이 `providerOverrides` 로 교체하는 메커니즘
+- [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — Provider override 가 동작하는 DI 기반
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — "진입장벽 0" 이 솔로 운영에 가치 있는 이유

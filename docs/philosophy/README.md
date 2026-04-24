@@ -212,21 +212,21 @@ ADR-004 (YAML ↔ Dart 수동 동기화 + CI 검증)
 
 ## 관련 문서
 
-- [Architecture 한눈 요약](../journey/architecture.md) — 실제 구조의 상세 레퍼런스
-- [FeatureKit Contract](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세
+- [`Architecture 한눈 요약`](../journey/architecture.md) — 실제 구조의 상세 레퍼런스
+- [`FeatureKit Contract`](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세
 - [Conventions](../conventions/) — 코딩 규약
-- [STYLE_GUIDE](../STYLE_GUIDE.md) — 문서 작성 스타일 가이드
+- [`STYLE_GUIDE`](../STYLE_GUIDE.md) — 문서 작성 스타일 가이드
 
 ---
 
 ## 📖 책 목차 — Journey 1단계
 
-[Developer Journey](../journey/README.md) 의 **1단계 — 이 레포가 뭐야?** 입니다.
+[`Developer Journey`](../journey/README.md) 의 **1단계 — 이 레포가 뭐야?** 입니다.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
 | ← 이전 | (없음, 첫 단계) | 레포 루트 `README.md` 의 빠른 시작이 선행 |
-| → 다음 | [Architecture 한눈 요약](../journey/architecture.md) | 같은 1단계, 모듈 구조 한눈 요약 |
+| → 다음 | [`Architecture 한눈 요약`](../journey/architecture.md) | 같은 1단계, 모듈 구조 한눈 요약 |
 
-**막혔을 때**: [도그푸딩 함정](../journey/dogfood-pitfalls.md) / [FAQ](../journey/dogfood-faq.md)  
+**막혔을 때**: [`도그푸딩 함정`](../journey/dogfood-pitfalls.md) / [`FAQ`](../journey/dogfood-faq.md)  
 **왜 이렇게?**: 이 문서가 "왜" 의 본진이에요. 더 깊은 인프라 결정은 [Infra](../infra/) 에 있어요.

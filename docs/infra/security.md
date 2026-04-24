@@ -1,6 +1,6 @@
 # Security
 
-**5중 방어선** — Android R8 난독화 · Dart 심볼 난독화 · Cleartext 차단 · Keychain 정책 · SSL pinning (opt-in). 근거는 [ADR-020](../philosophy/adr-020-security-hardening.md).
+**5중 방어선** — Android R8 난독화 · Dart 심볼 난독화 · Cleartext 차단 · Keychain 정책 · SSL pinning (opt-in). 근거는 [`ADR-020`](../philosophy/adr-020-security-hardening.md).
 
 ---
 
@@ -142,7 +142,7 @@ static const _storage = FlutterSecureStorage(
 | `first_unlock` | 첫 unlock 이후 백그라운드도 접근 가능 (FCM · workmanager 필요) |
 | `this_device` | iCloud Keychain 백업 제외 (기기 복제 시 토큰 따라가지 않음) |
 
-상세는 [ADR-013](../philosophy/adr-013-token-atomic-storage.md).
+상세는 [`ADR-013`](../philosophy/adr-013-token-atomic-storage.md).
 
 ---
 
@@ -223,7 +223,7 @@ bool showDebugPanel = kDebugMode;  // Release 에서 자동 false
 
 ## 관련 문서
 
-- [ADR-013 · 토큰 원자 저장](../philosophy/adr-013-token-atomic-storage.md)
-- [ADR-020 · 이중 난독화 + SSL 핀닝 + Keychain](../philosophy/adr-020-security-hardening.md)
+- [`ADR-013 · 토큰 원자 저장`](../philosophy/adr-013-token-atomic-storage.md)
+- [`ADR-020 · 이중 난독화 + SSL 핀닝 + Keychain`](../philosophy/adr-020-security-hardening.md)
 - [`secrets-management.md`](./secrets-management.md)
 - [OWASP Mobile Top 10](https://owasp.org/www-project-mobile-top-10/)

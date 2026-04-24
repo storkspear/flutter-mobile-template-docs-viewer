@@ -231,7 +231,7 @@ Riverpod 3.0 이 `Notifier` + `AsyncNotifier` 를 새 표준으로 밀고 있어
 - [`test/kits/auth_kit/ui/login_view_model_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/kits/auth_kit/ui/login_view_model_test.dart) — `ProviderContainer(overrides:)` 로 mock 주입
 
 **관련 ADR**:
-- [ADR-003 · FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) — Kit 의 `providerOverrides` 가 본 ADR 의 Provider 체인과 맞물림
-- [ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백](./adr-006-debug-fallback.md) — Debug 구현체 → 실제 구현체로 교체하는 override 패턴
-- [ADR-007 · Late Binding 으로 순환 의존 해결](./adr-007-late-binding.md) — `apiClient ↔ authService` 순환을 `ref.read` 콜백으로 해결
-- [ADR-011 · 인터셉터 체인 + ErrorInterceptor](./adr-011-interceptor-chain.md) — ViewModel 이 받는 `ApiException` 이 어디서 만들어지는지
+- [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — Kit 의 `providerOverrides` 가 본 ADR 의 Provider 체인과 맞물림
+- [`ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백`](./adr-006-debug-fallback.md) — Debug 구현체 → 실제 구현체로 교체하는 override 패턴
+- [`ADR-007 · Late Binding 으로 순환 의존 해결`](./adr-007-late-binding.md) — `apiClient ↔ authService` 순환을 `ref.read` 콜백으로 해결
+- [`ADR-011 · 인터셉터 체인 + ErrorInterceptor`](./adr-011-interceptor-chain.md) — ViewModel 이 받는 `ApiException` 이 어디서 만들어지는지

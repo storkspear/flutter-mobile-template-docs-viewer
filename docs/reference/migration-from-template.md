@@ -1,6 +1,6 @@
 # Migration from Template
 
-템플릿 원본의 개선을 파생 레포로 가져오는 **cherry-pick 워크플로우**. 근거는 [ADR-001 · GitHub Template + cherry-pick](../philosophy/adr-001-template-cherry-pick.md).
+템플릿 원본의 개선을 파생 레포로 가져오는 **cherry-pick 워크플로우**. 근거는 [`ADR-001 · GitHub Template + cherry-pick`](../philosophy/adr-001-template-cherry-pick.md).
 
 ---
 
@@ -156,6 +156,6 @@ git cherry-pick --abort
 
 ## 관련 문서
 
-- [ADR-001 · GitHub Template + cherry-pick](../philosophy/adr-001-template-cherry-pick.md)
+- [`ADR-001 · GitHub Template + cherry-pick`](../philosophy/adr-001-template-cherry-pick.md)
 - [Git rerere](https://git-scm.com/book/en/v2/Git-Tools-Rerere) — 반복 cherry-pick conflict 자동 해결
-- [Onboarding](../journey/onboarding.md) — 파생 레포 최초 셋업
+- [`Onboarding`](../journey/onboarding.md) — 파생 레포 최초 셋업

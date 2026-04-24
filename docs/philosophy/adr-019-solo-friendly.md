@@ -199,7 +199,7 @@ Auth 없는 로컬 앱은 `AuthKit` 불필요. 백엔드 없는 앱은 `BackendA
 
 ## 관련 사례 (Prior Art)
 
-- [spring-backend-template ADR-007 · 솔로 친화적 운영](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-007-solo-friendly-operations.md) — 짝이 되는 백엔드의 동일 철학
+- [`spring-backend-template ADR-007 · 솔로 친화적 운영`](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-007-solo-friendly-operations.md) — 짝이 되는 백엔드의 동일 철학
 - ["The Majestic Monolith" by DHH](https://m.signalvnoise.com/the-majestic-monolith/) — 모놀리스 옹호의 정석 글
 - ["Don't Let the Microservice Hype Fool You"](https://dropbox.tech/infrastructure/atlas--our-journey-from-a-python-monolith-to-a-managed-platform) — 대규모에서도 신중한 마이크로서비스
 - [Indie Hackers 인터뷰들](https://www.indiehackers.com/interviews) — 솔로 · 소규모 운영 실제 사례
@@ -210,12 +210,12 @@ Auth 없는 로컬 앱은 `AuthKit` 불필요. 백엔드 없는 앱은 `BackendA
 이 ADR 은 철학 · 기준이라 특정 코드 파일이 아닌 **다른 ADR 들의 구현** 을 참조해요.
 
 **이 원칙의 구체 적용 사례**:
-- [ADR-001 · GitHub Template + cherry-pick](./adr-001-template-cherry-pick.md) — 자동 전파 대신 수동 cherry-pick. 솔로가 제어 가능한 수준.
-- [ADR-002 · 3계층 모듈 구조](./adr-002-layered-modules.md) — Clean Architecture 4층을 거부, 3층으로 단순화.
-- [ADR-004 · YAML ↔ Dart 수동 동기화](./adr-004-manual-sync-ci-audit.md) — 코드 생성 파이프라인 거부, CI 검증으로 대체.
-- [ADR-005 · Riverpod + MVVM](./adr-005-riverpod-mvvm.md) — BLoC 의 복잡도 거부.
-- [ADR-006 · Debug 폴백](./adr-006-debug-fallback.md) — DSN 없이도 동작 → 솔로 온보딩 장벽 0.
+- [`ADR-001 · GitHub Template + cherry-pick`](./adr-001-template-cherry-pick.md) — 자동 전파 대신 수동 cherry-pick. 솔로가 제어 가능한 수준.
+- [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — Clean Architecture 4층을 거부, 3층으로 단순화.
+- [`ADR-004 · YAML ↔ Dart 수동 동기화`](./adr-004-manual-sync-ci-audit.md) — 코드 생성 파이프라인 거부, CI 검증으로 대체.
+- [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — BLoC 의 복잡도 거부.
+- [`ADR-006 · Debug 폴백`](./adr-006-debug-fallback.md) — DSN 없이도 동작 → 솔로 온보딩 장벽 0.
 
 **관련 ADR**:
-- [ADR-021 · Multi-Recipe 구성](./adr-021-multi-recipe.md) — "지금 필요한 것만" 의 구조화
+- [`ADR-021 · Multi-Recipe 구성`](./adr-021-multi-recipe.md) — "지금 필요한 것만" 의 구조화
 - 모든 ADR 은 암묵적으로 이 ADR 을 상위 기준으로 따름

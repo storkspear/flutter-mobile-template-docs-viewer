@@ -163,4 +163,4 @@ dart run test:test test/migration_fingerprint/ -u
 ## 관련 문서
 
 - [Drift 공식 문서](https://drift.simonbinder.eu/)
-- [Testing Conventions](../testing/testing-strategy.md) — 지문 테스트 상세
+- [`Testing Conventions`](../testing/testing-strategy.md) — 지문 테스트 상세

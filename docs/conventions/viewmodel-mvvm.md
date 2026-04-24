@@ -1,6 +1,6 @@
 # ViewModel + MVVM 패턴
 
-Screen 은 UI 만, ViewModel 은 로직만. 상태 관리는 `StateNotifier<TState>` + `ConsumerWidget` 조합 하나로 통일해요. 이 규약의 근거는 [ADR-005 · Riverpod + MVVM](../philosophy/adr-005-riverpod-mvvm.md) 참조.
+Screen 은 UI 만, ViewModel 은 로직만. 상태 관리는 `StateNotifier<TState>` + `ConsumerWidget` 조합 하나로 통일해요. 이 규약의 근거는 [`ADR-005 · Riverpod + MVVM`](../philosophy/adr-005-riverpod-mvvm.md) 참조.
 
 ---
 
@@ -112,8 +112,8 @@ class LoginViewModel extends StateNotifier<LoginState> {
 ### ViewModel 규칙
 
 - **`BuildContext` 받지 않기** — UI 에 의존 금지. `S.of(context)` 도 금지 (i18n 은 Screen 에서)
-- **`try/catch` 로 에러 처리** — `safeErrorCode` · `safeErrorMessage` 로 안전 추출 ([ADR-009](../philosophy/adr-009-backend-contract.md))
-- **외부 서비스는 `_ref.read`** — 상태 변경 시점에만 조회 ([ADR-007](../philosophy/adr-007-late-binding.md))
+- **`try/catch` 로 에러 처리** — `safeErrorCode` · `safeErrorMessage` 로 안전 추출 ([`ADR-009`](../philosophy/adr-009-backend-contract.md))
+- **외부 서비스는 `_ref.read`** — 상태 변경 시점에만 조회 ([`ADR-007`](../philosophy/adr-007-late-binding.md))
 - **`_ref.watch` 지양** — ViewModel 내부에서 watch 는 재생성 체인 복잡
 
 ---
@@ -353,5 +353,5 @@ class LoginScreen extends ConsumerWidget {
 
 - [`naming.md`](./naming.md) — ViewModel · State · Provider 네이밍
 - [`error-handling.md`](./error-handling.md) — ViewModel 의 `safeErrorCode` 사용
-- [ADR-005 · Riverpod + MVVM](../philosophy/adr-005-riverpod-mvvm.md) — 이 규약의 근거
-- [ADR-007 · Late Binding](../philosophy/adr-007-late-binding.md) — `ref.read` 사용의 근거
+- [`ADR-005 · Riverpod + MVVM`](../philosophy/adr-005-riverpod-mvvm.md) — 이 규약의 근거
+- [`ADR-007 · Late Binding`](../philosophy/adr-007-late-binding.md) — `ref.read` 사용의 근거

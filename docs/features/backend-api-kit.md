@@ -8,8 +8,8 @@
 
 - **Dio** 클라이언트 하나 (`ApiClient`) 로 모든 HTTP 요청
 - **3 인터셉터** 자동 설치: Auth (토큰) · Error (예외 변환) · Logging (debug 만)
-- **응답 스키마**: 백엔드 `{data, error}` 1:1 대응 ([ADR-009](../philosophy/adr-009-backend-contract.md))
-- **SSL pinning** opt-in (`--dart-define=SSL_PINS=...`) ([ADR-020](../philosophy/adr-020-security-hardening.md))
+- **응답 스키마**: 백엔드 `{data, error}` 1:1 대응 ([`ADR-009`](../philosophy/adr-009-backend-contract.md))
+- **SSL pinning** opt-in (`--dart-define=SSL_PINS=...`) ([`ADR-020`](../philosophy/adr-020-security-hardening.md))
 
 ---
 
@@ -46,7 +46,7 @@ AppConfig.init(
 | 항목 | 설명 |
 |------|------|
 | `ApiClient` | Dio 래퍼. `get` · `post` · `postRaw` · `delete` |
-| `AuthInterceptor` | Authorization 자동 첨부 + 401 refresh ([ADR-010](../philosophy/adr-010-queued-interceptor.md)) |
+| `AuthInterceptor` | Authorization 자동 첨부 + 401 refresh ([`ADR-010`](../philosophy/adr-010-queued-interceptor.md)) |
 | `ErrorInterceptor` | `DioException` → `ApiException` 변환 |
 | `LoggingInterceptor` | Debug 빌드 콘솔 로깅 |
 | `ApiResponse<T>` · `PageResponse<T>` | 응답 래퍼 |
@@ -192,7 +192,7 @@ class ExpenseListViewModel extends StateNotifier<ExpenseListState> {
 
 ## 관련 문서
 
-- [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
-- [ADR-010 · 401 자동 갱신](../philosophy/adr-010-queued-interceptor.md)
-- [ADR-011 · 인터셉터 체인](../philosophy/adr-011-interceptor-chain.md)
-- [Error Handling](../conventions/error-handling.md)
+- [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
+- [`ADR-010 · 401 자동 갱신`](../philosophy/adr-010-queued-interceptor.md)
+- [`ADR-011 · 인터셉터 체인`](../philosophy/adr-011-interceptor-chain.md)
+- [`Error Handling`](../conventions/error-handling.md)

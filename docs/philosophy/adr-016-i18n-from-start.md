@@ -284,6 +284,6 @@ ViewModel 은 `errorCode`, Screen 에서 `S.of(context)` 변환. 이 관용은 *
 - [`lib/kits/auth_kit/ui/login/login_screen.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/ui/login/login_screen.dart) — Screen 에서 번역
 
 **관련 ADR**:
-- [ADR-005 · Riverpod + MVVM](./adr-005-riverpod-mvvm.md) — ViewModel 이 i18n 의존 안 하는 원칙
-- [ADR-009 · 백엔드 응답 1:1 계약](./adr-009-backend-contract.md) — `ErrorCode` 를 i18n 키로 매핑
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — "처음부터 도입 vs 나중에" 의 솔로 환경 판단
+- [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — ViewModel 이 i18n 의존 안 하는 원칙
+- [`ADR-009 · 백엔드 응답 1:1 계약`](./adr-009-backend-contract.md) — `ErrorCode` 를 i18n 키로 매핑
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — "처음부터 도입 vs 나중에" 의 솔로 환경 판단

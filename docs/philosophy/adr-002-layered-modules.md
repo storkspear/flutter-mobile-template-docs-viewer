@@ -204,7 +204,7 @@ lib/features/
 - [`lib/common/router/app_router.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/router/app_router.dart) — Kit redirect 합성
 
 **관련 ADR**:
-- [ADR-001 · GitHub Template + cherry-pick](./adr-001-template-cherry-pick.md) — `features/` 를 스텁으로 유지하는 이유
-- [ADR-003 · FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) — `kits/` 가 선택 조립되는 원리
-- [ADR-006 · 인터페이스 기반 서비스 교체](./adr-006-debug-fallback.md) — `core/analytics/` 의 추상 + Debug 구조
-- [ADR-014 · 정책 기반 캐싱](./adr-014-cached-repository.md) — `core/cache/` 의 구현
+- [`ADR-001 · GitHub Template + cherry-pick`](./adr-001-template-cherry-pick.md) — `features/` 를 스텁으로 유지하는 이유
+- [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — `kits/` 가 선택 조립되는 원리
+- [`ADR-006 · 인터페이스 기반 서비스 교체`](./adr-006-debug-fallback.md) — `core/analytics/` 의 추상 + Debug 구조
+- [`ADR-014 · 정책 기반 캐싱`](./adr-014-cached-repository.md) — `core/cache/` 의 구현

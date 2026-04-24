@@ -313,6 +313,6 @@ Dio 의 onError 체인은 설치 역순이라 `Logging → Error → Auth`. Erro
 - [`test/kits/backend_api_kit/interceptors/`](https://github.com/storkspear/flutter-mobile-template/tree/main/test/kits/backend_api_kit/interceptors) — 각 인터셉터 단위 테스트
 
 **관련 ADR**:
-- [ADR-009 · 백엔드 응답 1:1 계약](./adr-009-backend-contract.md) — ErrorInterceptor 가 변환하는 `ApiException` 구조
-- [ADR-010 · QueuedInterceptor 로 401 자동 갱신](./adr-010-queued-interceptor.md) — AuthInterceptor 의 상세 동작
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — 파일 당 <100줄 원칙의 근거
+- [`ADR-009 · 백엔드 응답 1:1 계약`](./adr-009-backend-contract.md) — ErrorInterceptor 가 변환하는 `ApiException` 구조
+- [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](./adr-010-queued-interceptor.md) — AuthInterceptor 의 상세 동작
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — 파일 당 <100줄 원칙의 근거

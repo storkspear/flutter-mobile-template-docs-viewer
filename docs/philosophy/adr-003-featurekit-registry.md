@@ -209,8 +209,8 @@ UpdateKit(1) · AuthKit(10) · OnboardingKit(50) 처럼 숫자를 띄워두니, 
 - [`recipes/backend-auth-app.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/recipes/backend-auth-app.yaml)
 
 **관련 ADR**:
-- [ADR-002 · 3계층 모듈 구조](./adr-002-layered-modules.md) — core / kits / common / features 중 `kits/` 의 존재 이유
-- [ADR-004 · YAML ↔ Dart 수동 동기화 + CI 검증](./adr-004-manual-sync-ci-audit.md) — 두 곳 동기화의 위험을 기계가 잡음
-- [ADR-008 · 부팅 단계 추상화](./adr-008-boot-step.md) — Kit 이 기여하는 BootStep 이 어떻게 실행되는지
-- [ADR-018 · Kit 별 라우팅 우선순위](./adr-018-redirect-priority.md) — `redirectPriority` 사용법 상세
-- [ADR-021 · Multi-Recipe 구성](./adr-021-multi-recipe.md) — 3개 샘플 recipe 의 선택 기준
+- [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — core / kits / common / features 중 `kits/` 의 존재 이유
+- [`ADR-004 · YAML ↔ Dart 수동 동기화 + CI 검증`](./adr-004-manual-sync-ci-audit.md) — 두 곳 동기화의 위험을 기계가 잡음
+- [`ADR-008 · 부팅 단계 추상화`](./adr-008-boot-step.md) — Kit 이 기여하는 BootStep 이 어떻게 실행되는지
+- [`ADR-018 · Kit 별 라우팅 우선순위`](./adr-018-redirect-priority.md) — `redirectPriority` 사용법 상세
+- [`ADR-021 · Multi-Recipe 구성`](./adr-021-multi-recipe.md) — 3개 샘플 recipe 의 선택 기준

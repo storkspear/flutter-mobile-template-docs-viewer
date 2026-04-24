@@ -11,12 +11,12 @@
 | 파일 | 내용 | 관련 ADR |
 |------|------|----------|
 | [`naming.md`](./naming.md) | 파일 · 클래스 · 변수 · Provider 네이밍 | - |
-| [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) | `StateNotifier + ConsumerWidget` 패턴 | [ADR-005](../philosophy/adr-005-riverpod-mvvm.md) |
-| [`error-handling.md`](./error-handling.md) | `ApiException` · `safeErrorCode` · 인터셉터 흐름 | [ADR-009](../philosophy/adr-009-backend-contract.md) · [ADR-010](../philosophy/adr-010-queued-interceptor.md) · [ADR-011](../philosophy/adr-011-interceptor-chain.md) |
-| [`loading-ux.md`](./loading-ux.md) | 4가지 로딩 패턴 적용 | [ADR-017](../philosophy/adr-017-loading-ux.md) |
-| [`i18n.md`](./i18n.md) | ARB + gen_l10n 워크플로우 | [ADR-016](../philosophy/adr-016-i18n-from-start.md) |
+| [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) | `StateNotifier + ConsumerWidget` 패턴 | [`ADR-005`](../philosophy/adr-005-riverpod-mvvm.md) |
+| [`error-handling.md`](./error-handling.md) | `ApiException` · `safeErrorCode` · 인터셉터 흐름 | [`ADR-009`](../philosophy/adr-009-backend-contract.md) · [`ADR-010`](../philosophy/adr-010-queued-interceptor.md) · [`ADR-011`](../philosophy/adr-011-interceptor-chain.md) |
+| [`loading-ux.md`](./loading-ux.md) | 4가지 로딩 패턴 적용 | [`ADR-017`](../philosophy/adr-017-loading-ux.md) |
+| [`i18n.md`](./i18n.md) | ARB + gen_l10n 워크플로우 | [`ADR-016`](../philosophy/adr-016-i18n-from-start.md) |
 
-> **테스트 규약**은 별도 섹션. [Testing Strategy](../testing/testing-strategy.md) · [Contract Testing](../testing/contract-testing.md) 참조.
+> **테스트 규약**은 별도 섹션. [`Testing Strategy`](../testing/testing-strategy.md) · [`Contract Testing`](../testing/contract-testing.md) 참조.
 
 ---
 
@@ -37,8 +37,8 @@
 |---------|------|
 | `flutter analyze` | 정적 분석 (`analysis_options.yaml`) |
 | `flutter test` | 단위 · 위젯 · 통합 테스트 |
-| `flutter gen-l10n` | i18n 코드 생성 ([ADR-016](../philosophy/adr-016-i18n-from-start.md)) |
-| `dart run tool/configure_app.dart --audit` | Kit 조합 정합성 ([ADR-004](../philosophy/adr-004-manual-sync-ci-audit.md)) |
+| `flutter gen-l10n` | i18n 코드 생성 ([`ADR-016`](../philosophy/adr-016-i18n-from-start.md)) |
+| `dart run tool/configure_app.dart --audit` | Kit 조합 정합성 ([`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md)) |
 | `dart format --set-exit-if-changed .` | 포매팅 일관성 |
 
 커밋 전 위 명령이 모두 통과해야 해요. CI 에서 한 번 더 검증돼요.
@@ -60,12 +60,12 @@
 
 ## 문서 작성 스타일 (docs/ 하위 모든 마크다운)
 
-자세한 건 [STYLE_GUIDE](../STYLE_GUIDE.md) 참조. 핵심만.
+자세한 건 [`STYLE_GUIDE`](../STYLE_GUIDE.md) 참조. 핵심만.
 
 - **해요체** (`~예요`, `~해요`) 기본. 명령조 · 학술체 회피
 - **상대 경로 링크** — 내부 참조는 상대 경로, 소스 파일만 GitHub URL
 - **코드 블록 언어 태그 필수** (`dart`, `bash`, `yaml`, `json`)
-- **ADR 첫 언급** — `[ADR-005 · Riverpod + MVVM](../philosophy/adr-005-riverpod-mvvm.md)` 포맷
+- **ADR 첫 언급** — `[`ADR-005 · Riverpod + MVVM`](../philosophy/adr-005-riverpod-mvvm.md)` 포맷
 - **독자 레벨 Level 2** (실무 중급 Flutter 개발자) 를 기본으로 씀
 
 ---

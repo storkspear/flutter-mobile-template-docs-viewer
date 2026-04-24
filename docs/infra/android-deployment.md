@@ -193,4 +193,4 @@ Play Console 앱 패키지명과 Android `applicationId` 가 달라야. 새 앱 
 - [`security.md`](./security.md) — 난독화 · 심볼 업로드
 - [`ci-cd.md`](./ci-cd.md)
 - [`secrets-management.md`](./secrets-management.md)
-- [ADR-020 · 보안 방어선](../philosophy/adr-020-security-hardening.md)
+- [`ADR-020 · 보안 방어선`](../philosophy/adr-020-security-hardening.md)

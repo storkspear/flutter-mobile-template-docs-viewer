@@ -66,7 +66,7 @@ jobs:
 
 - **`dart format --set-exit-if-changed`** — 포매팅 강제
 - **`flutter analyze`** — 정적 분석 (analysis_options.yaml)
-- **`dart run tool/configure_app.dart --audit`** — Kit 조합 정합성 ([ADR-004](../philosophy/adr-004-manual-sync-ci-audit.md))
+- **`dart run tool/configure_app.dart --audit`** — Kit 조합 정합성 ([`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md))
 - **`flutter test --coverage`** — 커버리지 수집
 
 ---
@@ -186,4 +186,4 @@ CI 가 실패할 때 가장 빠른 디버깅은 로컬 재현.
 - [`android-deployment.md`](./android-deployment.md)
 - [`ios-deployment.md`](./ios-deployment.md)
 - [`secrets-management.md`](./secrets-management.md)
-- [ADR-004 · YAML ↔ Dart 동기화](../philosophy/adr-004-manual-sync-ci-audit.md)
+- [`ADR-004 · YAML ↔ Dart 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md)

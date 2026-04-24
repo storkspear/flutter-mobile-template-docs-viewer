@@ -121,4 +121,4 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
 
 - [`permissions-kit.md`](./permissions-kit.md) — 알림 권한 요청
 - [`background-kit.md`](./background-kit.md) — workmanager 와 함께 사용 시
-- [ADR-006 · Debug 폴백](../philosophy/adr-006-debug-fallback.md)
+- [`ADR-006 · Debug 폴백`](../philosophy/adr-006-debug-fallback.md)

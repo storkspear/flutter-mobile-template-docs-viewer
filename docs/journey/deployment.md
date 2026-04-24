@@ -26,7 +26,7 @@ GHA 자동 배포 → Play Internal · TestFlight
 
 ## §1 외부 서비스 자격증명 (1시간)
 
-자세한 건 [Journey §4](./README.md#4-발급은-어디서--외부-서비스-자격-증명-1--2시간). 체크만:
+자세한 건 [`Journey §4`](./README.md#4-발급은-어디서--외부-서비스-자격-증명-1--2시간). 체크만:
 
 ### Sentry (observability_kit)
 
@@ -46,7 +46,7 @@ GHA 자동 배포 → Play Internal · TestFlight
 
 ### Google Sign In / Apple Sign In (auth_kit 쓰면)
 
-- [ ] OAuth 2.0 Client ID · Bundle ID 설정 ([auth_kit](../features/auth-kit.md))
+- [ ] OAuth 2.0 Client ID · Bundle ID 설정 ([`auth_kit`](../features/auth-kit.md))
 
 ---
 
@@ -257,7 +257,7 @@ GHA 는 **Internal 에만** 자동 배포. 이후 단계:
 
 ## §8 트러블슈팅
 
-배포 관련 자주 막히는 증상은 [Android Deployment · 트러블슈팅](../infra/android-deployment.md#트러블슈팅) 에 정리돼 있어요. 그 외 일반 셋업 함정은 [Pitfalls](./dogfood-pitfalls.md) 참고.
+배포 관련 자주 막히는 증상은 [`Android Deployment · 트러블슈팅`](../infra/android-deployment.md#트러블슈팅) 에 정리돼 있어요. 그 외 일반 셋업 함정은 [`Pitfalls`](./dogfood-pitfalls.md) 참고.
 
 ---
 
@@ -265,15 +265,15 @@ GHA 는 **Internal 에만** 자동 배포. 이후 단계:
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [Build First App](./build-first-app.md) | 첫 기능 완성 (5단계) |
+| ← 이전 | [`Build First App`](./build-first-app.md) | 첫 기능 완성 (5단계) |
 | → 다음 | 도메인 확장 · 본인 앱 만들기 | 책은 여기까지. 이후는 자율 |
 
 ---
 
 ## 관련 문서
 
-- [Android Deployment](../infra/android-deployment.md) — Android 상세
-- [iOS Deployment](../infra/ios-deployment.md) — iOS 상세
-- [CI / CD](../infra/ci-cd.md) — 워크플로우 상세
-- [Secrets Management](../infra/secrets-management.md) — Secrets 관리
-- [Security](../infra/security.md) — 난독화 · 보안
+- [`Android Deployment`](../infra/android-deployment.md) — Android 상세
+- [`iOS Deployment`](../infra/ios-deployment.md) — iOS 상세
+- [`CI / CD`](../infra/ci-cd.md) — 워크플로우 상세
+- [`Secrets Management`](../infra/secrets-management.md) — Secrets 관리
+- [`Security`](../infra/security.md) — 난독화 · 보안

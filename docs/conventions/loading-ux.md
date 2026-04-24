@@ -1,6 +1,6 @@
 # Loading UX Conventions
 
-로딩 상황은 **4가지 패턴** 중 하나. 풀스크린 블로킹 스피너 금지. 규약 근거는 [ADR-017 · 4가지 로딩 UX 패턴](../philosophy/adr-017-loading-ux.md) 참조.
+로딩 상황은 **4가지 패턴** 중 하나. 풀스크린 블로킹 스피너 금지. 규약 근거는 [`ADR-017 · 4가지 로딩 UX 패턴`](../philosophy/adr-017-loading-ux.md) 참조.
 
 ---
 
@@ -303,4 +303,4 @@ Scaffold(
 
 - [`naming.md`](./naming.md) — Loading 관련 위젯 이름
 - [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) — `state.isLoading` 관리
-- [ADR-017 · 4가지 로딩 UX 패턴](../philosophy/adr-017-loading-ux.md) — 근거
+- [`ADR-017 · 4가지 로딩 UX 패턴`](../philosophy/adr-017-loading-ux.md) — 근거

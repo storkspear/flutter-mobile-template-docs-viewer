@@ -106,5 +106,5 @@ class BackendUpdateService implements AppUpdateService {
 
 ## 관련 문서
 
-- [ADR-018 · 라우팅 우선순위](../philosophy/adr-018-redirect-priority.md)
-- [ADR-006 · Debug 폴백](../philosophy/adr-006-debug-fallback.md)
+- [`ADR-018 · 라우팅 우선순위`](../philosophy/adr-018-redirect-priority.md)
+- [`ADR-006 · Debug 폴백`](../philosophy/adr-006-debug-fallback.md)

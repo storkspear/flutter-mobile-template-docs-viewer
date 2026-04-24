@@ -40,7 +40,7 @@
 | Provider | `Provider` (영문) | Riverpod DI 노드 |
 | 전역 DI | `lib/common/providers.dart` | 모든 전역 Provider 정의 |
 | autoDispose | — | 화면 이탈 시 자동 정리 |
-| Late Binding | — | `ref.read` 콜백으로 순환 의존 해결 ([ADR-007](../philosophy/adr-007-late-binding.md)) |
+| Late Binding | — | `ref.read` 콜백으로 순환 의존 해결 ([`ADR-007`](../philosophy/adr-007-late-binding.md)) |
 
 ---
 
@@ -80,7 +80,7 @@
 | AppPaletteRegistry | `AppPaletteRegistry` | 팔레트 등록 · 교체 |
 | 시드 색상 | `seed` | Material 3 `ColorScheme.fromSeed` |
 | 디자인 토큰 | — | spacing · typography · shadow 등 |
-| Skeleton | — | 로딩 UX 패턴 1 ([ADR-017](../philosophy/adr-017-loading-ux.md)) |
+| Skeleton | — | 로딩 UX 패턴 1 ([`ADR-017`](../philosophy/adr-017-loading-ux.md)) |
 | Pull-to-refresh | — | 로딩 UX 패턴 2 |
 | 버튼 스피너 | — | 로딩 UX 패턴 3 |
 | TopProgressBar | `TopProgressBar` | 로딩 UX 패턴 4 |
@@ -118,7 +118,7 @@
 |------|------|------|
 | 솔로 | — | 한 명의 개발자 |
 | 앱 공장 전략 | — | 한 사람이 여러 앱을 고 cadence 로 출시 |
-| 3가지 제약 | — | 운영 가능성 · 시간 희소성 · 복권 사기 모델 ([philosophy/README](../philosophy/README.md)) |
+| 3가지 제약 | — | 운영 가능성 · 시간 희소성 · 복권 사기 모델 ([`philosophy/README`](../philosophy/README.md)) |
 | 비목표 | — | 명시적으로 "안 하는 것" — HA 99.99% · 멀티 리전 등 |
 | 관리형 서비스 | — | Sentry · PostHog · Firebase 등 자체 운영 대신 |
 
@@ -154,5 +154,5 @@
 
 ## 관련 문서
 
-- [STYLE_GUIDE](../STYLE_GUIDE.md) — §4 용어집 규칙 원본
-- [Philosophy 인덱스](../philosophy/README.md) — 철학 · 제약 용어
+- [`STYLE_GUIDE`](../STYLE_GUIDE.md) — §4 용어집 규칙 원본
+- [`Philosophy 인덱스`](../philosophy/README.md) — 철학 · 제약 용어

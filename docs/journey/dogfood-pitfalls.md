@@ -2,7 +2,7 @@
 
 파생 레포 셋업 · 개발 · 배포 과정에서 **반복적으로 발생하는 함정** 과 해결법. 각 항목은 **증상 · 원인 · 해결** 3단계.
 
-> 여기 없으면 [FAQ](./dogfood-faq.md) 나 관련 ADR · 컨벤션 문서 검색.
+> 여기 없으면 [`FAQ`](./dogfood-faq.md) 나 관련 ADR · 컨벤션 문서 검색.
 
 ---
 
@@ -374,8 +374,8 @@ final client = ref.read(apiClientProvider);
 
 ## 추가 리소스
 
-- [FAQ](./dogfood-faq.md) — 자주 묻는 질문
+- [`FAQ`](./dogfood-faq.md) — 자주 묻는 질문
 - [Conventions](../conventions/) — 코딩 규약
-- [Features 인덱스](../features/README.md) — Kit 별 체크리스트
+- [`Features 인덱스`](../features/README.md) — Kit 별 체크리스트
 
 막혔는데 해결 안 되면 GitHub Issue 에 등록 — 같은 함정이 다음 파생 레포에선 이 문서에 추가되도록.

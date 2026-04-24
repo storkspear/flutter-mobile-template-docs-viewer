@@ -257,7 +257,7 @@ jobs:
 - [Cargo `Cargo.toml` vs `Cargo.lock`](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) — 선언 · 락 파일 이원 관리
 - [Gradle Version Catalog (`libs.versions.toml`)](https://docs.gradle.org/current/userguide/platforms.html) — TOML 선언 + Gradle 코드에서 참조
 - [Terraform `.tfvars` + HCL](https://developer.hashicorp.com/terraform/language/values/variables) — 변수 선언 vs 실제 리소스
-- [spring-backend-template 의 ADR-004 ArchUnit](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
+- [`spring-backend-template 의 ADR-004 ArchUnit`](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
 
 ## Code References
 
@@ -275,6 +275,6 @@ jobs:
 - [`recipes/backend-auth-app.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/recipes/backend-auth-app.yaml)
 
 **관련 ADR**:
-- [ADR-003 · FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) — 두 곳 선언이 필요한 원인
-- [ADR-021 · Multi-Recipe 구성](./adr-021-multi-recipe.md) — `app_kits.yaml` 포맷이 recipe 와 일치
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — 자동화보다 "수동 + 검증" 이 솔로에 적합한 이유
+- [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — 두 곳 선언이 필요한 원인
+- [`ADR-021 · Multi-Recipe 구성`](./adr-021-multi-recipe.md) — `app_kits.yaml` 포맷이 recipe 와 일치
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — 자동화보다 "수동 + 검증" 이 솔로에 적합한 이유

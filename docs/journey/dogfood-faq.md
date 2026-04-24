@@ -2,7 +2,7 @@
 
 파생 레포 개발자가 자주 묻는 질문.
 
-> 에러 증상 기반 트러블슈팅은 [Pitfalls](./dogfood-pitfalls.md) 참조.
+> 에러 증상 기반 트러블슈팅은 [`Pitfalls`](./dogfood-pitfalls.md) 참조.
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Q. 이 템플릿을 어떻게 복제하나요?
 
-**A.** `git clone` · `fork` 아니고 **GitHub "Use this template"** 버튼. 히스토리가 끊긴 독립 레포 생성. 근거: [ADR-001](../philosophy/adr-001-template-cherry-pick.md).
+**A.** `git clone` · `fork` 아니고 **GitHub "Use this template"** 버튼. 히스토리가 끊긴 독립 레포 생성. 근거: [`ADR-001`](../philosophy/adr-001-template-cherry-pick.md).
 
 ### Q. 왜 fork 안 하나요?
 
@@ -18,11 +18,11 @@
 
 ### Q. 템플릿 업데이트를 어떻게 가져오나요?
 
-**A.** 수동 cherry-pick. [Migration from Template](../reference/migration-from-template.md) 참조.
+**A.** 수동 cherry-pick. [`Migration from Template`](../reference/migration-from-template.md) 참조.
 
 ### Q. 왜 Kit 이 나눠져 있나요?
 
-**A.** 앱마다 필요 기능이 다름. 로컬 전용 앱에 Sentry SDK · Apple Sign In 플러그인이 박혀 있으면 바이너리 낭비 + 스토어 리뷰 문제. 근거: [ADR-003](../philosophy/adr-003-featurekit-registry.md).
+**A.** 앱마다 필요 기능이 다름. 로컬 전용 앱에 Sentry SDK · Apple Sign In 플러그인이 박혀 있으면 바이너리 낭비 + 스토어 리뷰 문제. 근거: [`ADR-003`](../philosophy/adr-003-featurekit-registry.md).
 
 ---
 
@@ -36,7 +36,7 @@
 - `common/` — 여러 Kit 조립 지점 (DI · 라우터 · 스플래시)
 - `features/` — 파생 레포 도메인 영역 (템플릿은 스텁)
 
-자세한 건 [ADR-002](../philosophy/adr-002-layered-modules.md).
+자세한 건 [`ADR-002`](../philosophy/adr-002-layered-modules.md).
 
 ### Q. 왜 `common/` 에 DI 가 있나요? Kit 이 Provider 를 기여하는 거 아닌가요?
 
@@ -52,11 +52,11 @@
 
 ### Q. 401 을 ViewModel 이 직접 처리해야 하나요?
 
-**A.** 아니요. `AuthInterceptor` 가 **자동으로** refresh + 재시도. ViewModel 은 `ApiException.isUnauthorized` 만 체크 → 진짜 인증 실패 (refresh 도 실패) 시 signOut. [ADR-010](../philosophy/adr-010-queued-interceptor.md).
+**A.** 아니요. `AuthInterceptor` 가 **자동으로** refresh + 재시도. ViewModel 은 `ApiException.isUnauthorized` 만 체크 → 진짜 인증 실패 (refresh 도 실패) 시 signOut. [`ADR-010`](../philosophy/adr-010-queued-interceptor.md).
 
 ### Q. 왜 서버 응답이 `{data, error}` 구조인가요?
 
-**A.** 성공 · 실패가 **상호 배타** 라 클라이언트가 간단히 분기 가능. [ADR-009](../philosophy/adr-009-backend-contract.md).
+**A.** 성공 · 실패가 **상호 배타** 라 클라이언트가 간단히 분기 가능. [`ADR-009`](../philosophy/adr-009-backend-contract.md).
 
 ### Q. `snake_case` JSON 도 지원하나요?
 
@@ -72,7 +72,7 @@
 
 ### Q. 같은 이메일로 여러 앱에 가입할 수 있나요?
 
-**A.** 네. **앱별 독립 유저 모델** 이라 각 앱의 `users` 테이블이 다름. 같은 이메일이라도 앱 A · B 는 별개 계정. [ADR-012](../philosophy/adr-012-per-app-user.md).
+**A.** 네. **앱별 독립 유저 모델** 이라 각 앱의 `users` 테이블이 다름. 같은 이메일이라도 앱 A · B 는 별개 계정. [`ADR-012`](../philosophy/adr-012-per-app-user.md).
 
 ### Q. 통합 계정 (한 번 가입하면 모든 앱 로그인) 가능한가요?
 
@@ -98,7 +98,7 @@
 3. `app_kits.yaml` · `main.dart` 활성화
 4. `configure_app.dart` 검증
 
-템플릿은 `update_kit` 같은 간단한 Kit 복사 추천. [FeatureKit Contract](../architecture/featurekit-contract.md).
+템플릿은 `update_kit` 같은 간단한 Kit 복사 추천. [`FeatureKit Contract`](../architecture/featurekit-contract.md).
 
 ### Q. Kit 은 꼭 AppKit 을 extends 해야 하나요?
 
@@ -114,7 +114,7 @@
 
 ### Q. Riverpod 2.x 의 `Notifier` · `AsyncNotifier` 는 왜 안 쓰나요?
 
-**A.** 현재 `StateNotifier` 가 안정적 · 생태계 풍부. `Notifier` 는 아직 마이그레이션 도구 · 레퍼런스 덜 성숙. 전환 비용이 이득 초과. [ADR-005 교훈 2](../philosophy/adr-005-riverpod-mvvm.md).
+**A.** 현재 `StateNotifier` 가 안정적 · 생태계 풍부. `Notifier` 는 아직 마이그레이션 도구 · 레퍼런스 덜 성숙. 전환 비용이 이득 초과. [`ADR-005 교훈 2`](../philosophy/adr-005-riverpod-mvvm.md).
 
 ### Q. BLoC 이나 GetX 로 바꿔도 되나요?
 
@@ -130,7 +130,7 @@
 
 ### Q. 앱 색상을 바꾸려면?
 
-**A.** `AppPalette` 를 extends 한 클래스 정의 + `seed` 색상만 지정. 나머지 Material 3 스키마 자동. [ADR-015](../philosophy/adr-015-palette-registry.md).
+**A.** `AppPalette` 를 extends 한 클래스 정의 + `seed` 색상만 지정. 나머지 Material 3 스키마 자동. [`ADR-015`](../philosophy/adr-015-palette-registry.md).
 
 ```dart
 class MyPalette extends AppPalette {
@@ -158,7 +158,7 @@ class MyPalette extends AppPalette {
 
 ### Q. 한국어만 쓸 건데 i18n 꼭 해야 해요?
 
-**A.** 네. 나중에 영어 · 일본어 등 추가하려면 비용이 기하급수적. 처음부터 하면 하루, 나중에 하면 1주. [ADR-016](../philosophy/adr-016-i18n-from-start.md).
+**A.** 네. 나중에 영어 · 일본어 등 추가하려면 비용이 기하급수적. 처음부터 하면 하루, 나중에 하면 1주. [`ADR-016`](../philosophy/adr-016-i18n-from-start.md).
 
 ### Q. ViewModel 에서 번역 문자열을 쓸 수 있나요?
 
@@ -174,7 +174,7 @@ class MyPalette extends AppPalette {
 
 ### Q. 모든 Kit 에 대해 계약 테스트를 써야 하나요?
 
-**A.** 네. `{kit_name}_contract_test.dart` 가 필수. [Contract Testing](../testing/contract-testing.md).
+**A.** 네. `{kit_name}_contract_test.dart` 가 필수. [`Contract Testing`](../testing/contract-testing.md).
 
 ### Q. ViewModel 테스트에 Kit 설치 필요한가요?
 
@@ -236,7 +236,7 @@ npx @sentry/cli upload-dif --org $ORG --project $PROJECT build/app/symbols
 
 ## 관련 문서
 
-- [Pitfalls](./dogfood-pitfalls.md) — 증상별 트러블슈팅
-- [Philosophy 인덱스](../philosophy/README.md) — 설계 결정 배경
-- [Conventions Overview](../conventions/README.md) — 코딩 규약
-- [Features 인덱스](../features/README.md) — Kit 상세
+- [`Pitfalls`](./dogfood-pitfalls.md) — 증상별 트러블슈팅
+- [`Philosophy 인덱스`](../philosophy/README.md) — 설계 결정 배경
+- [`Conventions Overview`](../conventions/README.md) — 코딩 규약
+- [`Features 인덱스`](../features/README.md) — Kit 상세

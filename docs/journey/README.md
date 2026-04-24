@@ -6,7 +6,7 @@
 
 각 단계 끝에는 다음 단계로 넘어가는 링크가 있어요. 책처럼 위에서 아래로 한 번 흐르듯 읽으면 자연스럽게 전체 그림이 잡혀요.
 
-> 💡 막히면: [도그푸딩 함정 모음](./dogfood-pitfalls.md) / [도그푸딩 FAQ](./dogfood-faq.md) 부터 검색해보세요.
+> 💡 막히면: [`도그푸딩 함정 모음`](./dogfood-pitfalls.md) / [`도그푸딩 FAQ`](./dogfood-faq.md) 부터 검색해보세요.
 
 ---
 
@@ -31,7 +31,7 @@
 
 읽을 문서:
 
-1. [Philosophy 인덱스](../philosophy/README.md) 의 **프롤로그 + 테마 1 의 ADR 두 개** 만 먼저 읽어주세요.
+1. [`Philosophy 인덱스`](../philosophy/README.md) 의 **프롤로그 + 테마 1 의 ADR 두 개** 만 먼저 읽어주세요.
    - 프롤로그 — "앱 공장 전략" 과 세 가지 제약 (운영 가능성 · 시간 희소성 · 복권 사기 모델)
    - ADR-001 · GitHub Template Repository 패턴 (왜 fork 가 아닌 template 인가)
    - ADR-002 · 3계층 모듈 구조 (core / kits / common / features)
@@ -67,9 +67,9 @@
 
 읽을 문서:
 
-1. [Philosophy 인덱스](../philosophy/README.md) 의 **ADR-003 · FeatureKit 동적 레지스트리** + **ADR-021 · Multi-Recipe 구성** 을 읽어주세요.
-2. [Features 인덱스](../features/README.md) 의 **§ Kit 의존 관계도** 로 의존성 체인 파악
-3. [Recipes](../reference/recipes.md) 에서 본인 앱에 맞는 **recipe** 고르기
+1. [`Philosophy 인덱스`](../philosophy/README.md) 의 **ADR-003 · FeatureKit 동적 레지스트리** + **ADR-021 · Multi-Recipe 구성** 을 읽어주세요.
+2. [`Features 인덱스`](../features/README.md) 의 **§ Kit 의존 관계도** 로 의존성 체인 파악
+3. [`Recipes`](../reference/recipes.md) 에서 본인 앱에 맞는 **recipe** 고르기
    - `local-only-tracker` — 완전 로컬 앱 (서버 없음)
    - `local-notifier-app` — 로컬 알림 중심 앱
    - `backend-auth-app` — 백엔드 연동 + 로그인 필요 앱
@@ -94,18 +94,18 @@ dart run tool/configure_app.dart   # 정합성 검증
 
 - **Google Sign In**: Google Cloud Console 에서 Client ID 발급
 - **Apple Sign In**: Apple Developer 에서 Bundle ID + Service ID 설정
-- 상세 절차는 [auth_kit](../features/auth-kit.md) 참고
+- 상세 절차는 [`auth_kit`](../features/auth-kit.md) 참고
 
 ### 4.2 관측성 (observability_kit 쓸 때)
 
-- **Sentry DSN**: [observability_kit](../features/observability-kit.md) → Sentry 프로젝트 생성 · DSN 복사 · 심볼 업로드 토큰 발급
+- **Sentry DSN**: [`observability_kit`](../features/observability-kit.md) → Sentry 프로젝트 생성 · DSN 복사 · 심볼 업로드 토큰 발급
 - **PostHog API Key**: 같은 문서의 PostHog 섹션
 
 ### 4.3 푸시 알림 (notifications_kit 쓸 때)
 
-- **Firebase 프로젝트**: [notifications_kit](../features/notifications-kit.md) → `google-services.json` 다운로드 · `GoogleService-Info.plist` 다운로드
+- **Firebase 프로젝트**: [`notifications_kit`](../features/notifications-kit.md) → `google-services.json` 다운로드 · `GoogleService-Info.plist` 다운로드
 
-각 발급 후 파생 레포의 `.env` 에 채워 넣거나, CI 배포 시엔 GitHub Actions Secrets 에 등록해요. 자세한 비밀 관리 규칙은 [Secrets Management](../infra/secrets-management.md) 를 참고해주세요.
+각 발급 후 파생 레포의 `.env` 에 채워 넣거나, CI 배포 시엔 GitHub Actions Secrets 에 등록해요. 자세한 비밀 관리 규칙은 [`Secrets Management`](../infra/secrets-management.md) 를 참고해주세요.
 
 ---
 
@@ -116,9 +116,9 @@ dart run tool/configure_app.dart   # 정합성 검증
 읽을 문서:
 
 - [`build-first-app.md`](./build-first-app.md) — 완성까지 가는 12단계 walkthrough
-- [ViewModel + MVVM](../conventions/viewmodel-mvvm.md) — `StateNotifier + ConsumerWidget` 패턴
-- [Error Handling](../conventions/error-handling.md) — ApiException 처리
-- [Loading UX](../conventions/loading-ux.md) — 로딩 UX 4가지 패턴
+- [`ViewModel + MVVM`](../conventions/viewmodel-mvvm.md) — `StateNotifier + ConsumerWidget` 패턴
+- [`Error Handling`](../conventions/error-handling.md) — ApiException 처리
+- [`Loading UX`](../conventions/loading-ux.md) — 로딩 UX 4가지 패턴
 
 구성 흐름:
 
@@ -138,9 +138,9 @@ dart run tool/configure_app.dart   # 정합성 검증
 
 읽을 문서:
 
-- [Android Deployment](../infra/android-deployment.md) — Android 키스토어 생성 · GHA Secrets 등록 · Fastlane
-- [iOS Deployment](../infra/ios-deployment.md) — iOS 인증서 · 프로비저닝 프로파일 · App Store Connect
-- [Security](../infra/security.md) — 난독화 · SSL 핀닝 · Keychain 정책
+- [`Android Deployment`](../infra/android-deployment.md) — Android 키스토어 생성 · GHA Secrets 등록 · Fastlane
+- [`iOS Deployment`](../infra/ios-deployment.md) — iOS 인증서 · 프로비저닝 프로파일 · App Store Connect
+- [`Security`](../infra/security.md) — 난독화 · SSL 핀닝 · Keychain 정책
 
 수행하는 일 (Android 기준):
 
@@ -160,7 +160,7 @@ dart run tool/configure_app.dart   # 정합성 검증
 읽을 문서:
 
 1. [`deployment.md`](./deployment.md) — 첫 Play Internal + TestFlight 배포 walkthrough
-2. [CI / CD](../infra/ci-cd.md) — GHA 워크플로우 동작 원리
+2. [`CI / CD`](../infra/ci-cd.md) — GHA 워크플로우 동작 원리
 
 핵심 흐름:
 
@@ -180,19 +180,19 @@ git push --tags
 
 | 궁금한 것 | 문서 | 한 줄 설명 |
 |---|---|---|
-| 왜 이렇게 설계? | [Philosophy 인덱스](../philosophy/README.md) | ADR 카드 전체 인덱스 |
+| 왜 이렇게 설계? | [`Philosophy 인덱스`](../philosophy/README.md) | ADR 카드 전체 인덱스 |
 | 모듈 구조 상세 | [`architecture.md`](./architecture.md) | core / kits / common / features 의존 그래프 |
-| AppKit 계약 전체 | [FeatureKit Contract](../architecture/featurekit-contract.md) | `AppKit` 인터페이스 명세 |
-| 부팅 시퀀스 | [Boot Sequence](../architecture/boot-sequence.md) | Sentry → AppConfig → Kits → Splash |
+| AppKit 계약 전체 | [`FeatureKit Contract`](../architecture/featurekit-contract.md) | `AppKit` 인터페이스 명세 |
+| 부팅 시퀀스 | [`Boot Sequence`](../architecture/boot-sequence.md) | Sentry → AppConfig → Kits → Splash |
 | 코딩 규약 | [Conventions](../conventions/) | 네이밍 · MVVM · 에러 · 로딩 · 테스트 |
 | Kit 개별 사용법 | [Features](../features/) | 13개 Kit 별 상세 문서 |
 | API 계약 (백엔드 쌍) | [API Contract](../api-contract/) | 응답 스키마 · 에러 코드 · JWT |
 | 배포 / CI/CD / 보안 | [Infra](../infra/) | Fastlane · GHA · 난독화 |
-| 테스트 전략 | [Testing Strategy](../testing/testing-strategy.md) | resetForTest · Provider override |
-| 스크립트 사용법 | [Scripts](../reference/scripts.md) | `scripts/*.sh` 전체 |
-| Recipe 선택 기준 | [Recipes](../reference/recipes.md) | local-only / notifier / backend-auth |
-| 용어 사전 | [Glossary](../reference/glossary.md) | 파생 레포 · Kit · BootStep 등 |
-| 템플릿 → 파생 동기화 | [Migration from Template](../reference/migration-from-template.md) | cherry-pick 전파 |
+| 테스트 전략 | [`Testing Strategy`](../testing/testing-strategy.md) | resetForTest · Provider override |
+| 스크립트 사용법 | [`Scripts`](../reference/scripts.md) | `scripts/*.sh` 전체 |
+| Recipe 선택 기준 | [`Recipes`](../reference/recipes.md) | local-only / notifier / backend-auth |
+| 용어 사전 | [`Glossary`](../reference/glossary.md) | 파생 레포 · Kit · BootStep 등 |
+| 템플릿 → 파생 동기화 | [`Migration from Template`](../reference/migration-from-template.md) | cherry-pick 전파 |
 
 ---
 

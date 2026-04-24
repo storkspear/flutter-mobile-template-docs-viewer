@@ -40,7 +40,7 @@ flutter doctor
 3. 새 레포 이름 · 소유자 · 공개 여부 선택
 4. 생성
 
-> ⚠️ fork 하지 않아요. "Use this template" 은 히스토리를 끊고 독립 레포를 만듦 ([ADR-001](../philosophy/adr-001-template-cherry-pick.md)).
+> ⚠️ fork 하지 않아요. "Use this template" 은 히스토리를 끊고 독립 레포를 만듦 ([`ADR-001`](../philosophy/adr-001-template-cherry-pick.md)).
 
 ### 2. 클론
 
@@ -65,7 +65,7 @@ git remote add template https://github.com/storkspear/flutter-mobile-template.gi
 git fetch template
 ```
 
-자세한 건 [Migration from Template](../reference/migration-from-template.md).
+자세한 건 [`Migration from Template`](../reference/migration-from-template.md).
 
 ---
 
@@ -99,7 +99,7 @@ git commit -m "chore: rename to <slug>"
 
 ## §4 Recipe 선택 (선택)
 
-앱 유형이 명확하면 [recipes/](../reference/recipes.md) 중 하나 복사:
+앱 유형이 명확하면 [`recipes/`](../reference/recipes.md) 중 하나 복사:
 
 ```bash
 # 로컬 전용 앱
@@ -197,12 +197,12 @@ flutter run
 
 로컬에서 앱이 뜨면 성공. 다음:
 
-1. **Kit 조립 이해**: [Journey 3단계 — Kit 조립](./README.md#3-kit-조립은-어떻게--앱-유형-결정-30분) → 본인 앱 유형 확정
-2. **외부 서비스 자격 증명**: Sentry · PostHog · Firebase · 소셜 로그인 ([4단계](./README.md#4-발급은-어디서--외부-서비스-자격-증명-1--2시간))
-3. **첫 기능 구현**: [Build First App](./build-first-app.md)
-4. **배포 준비**: [Deployment](./deployment.md)
+1. **Kit 조립 이해**: [`Journey 3단계 — Kit 조립`](./README.md#3-kit-조립은-어떻게--앱-유형-결정-30분) → 본인 앱 유형 확정
+2. **외부 서비스 자격 증명**: Sentry · PostHog · Firebase · 소셜 로그인 ([`4단계`](./README.md#4-발급은-어디서--외부-서비스-자격-증명-1--2시간))
+3. **첫 기능 구현**: [`Build First App`](./build-first-app.md)
+4. **배포 준비**: [`Deployment`](./deployment.md)
 
-막히면 [Pitfalls](./dogfood-pitfalls.md) 검색 먼저.
+막히면 [`Pitfalls`](./dogfood-pitfalls.md) 검색 먼저.
 
 ---
 
@@ -234,7 +234,7 @@ flutter doctor --android-licenses
 - `app_kits.yaml` 의 Kit 이 `lib/main.dart` 의 `AppKits.install([...])` 와 일치하는지 확인
 - `requires` 누락 확인 (예: `auth_kit` 쓰면 `backend_api_kit` 도 활성)
 
-더 많은 함정: [Pitfalls](./dogfood-pitfalls.md)
+더 많은 함정: [`Pitfalls`](./dogfood-pitfalls.md)
 
 ---
 
@@ -242,7 +242,7 @@ flutter doctor --android-licenses
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [Architecture 한눈 요약](./architecture.md) | 모듈 구조 한눈 (1단계) |
-| → 다음 | [Build First App](./build-first-app.md) | 첫 기능 구현 (5단계) |
+| ← 이전 | [`Architecture 한눈 요약`](./architecture.md) | 모듈 구조 한눈 (1단계) |
+| → 다음 | [`Build First App`](./build-first-app.md) | 첫 기능 구현 (5단계) |
 
-**막혔을 때**: [함정](./dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**막혔을 때**: [`함정`](./dogfood-pitfalls.md) / [`FAQ`](./dogfood-faq.md)

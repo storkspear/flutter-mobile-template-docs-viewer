@@ -2,7 +2,7 @@
 
 파생 레포를 만들고 **첫 도메인 기능** 을 하나 구현하는 전체 흐름. 예제: **아이템 목록 앱**. 약 2~3시간.
 
-> **가정**: [Onboarding](./onboarding.md) 를 마쳐서 시뮬레이터에 템플릿 홈이 떠 있는 상태. 앱 유형은 `backend-auth-app` recipe 선택.
+> **가정**: [`Onboarding`](./onboarding.md) 를 마쳐서 시뮬레이터에 템플릿 홈이 떠 있는 상태. 앱 유형은 `backend-auth-app` recipe 선택.
 
 ---
 
@@ -481,7 +481,7 @@ flutter run
 - 더 많은 화면 추가
 - 인증 후 자동 redirect · 토큰 refresh 확인
 - PostHog 이벤트 트래킹
-- 배포 ([Deployment](./deployment.md))
+- 배포 ([`Deployment`](./deployment.md))
 
 ---
 
@@ -489,7 +489,7 @@ flutter run
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [Onboarding](./onboarding.md) | 파생 레포 최초 셋업 (2단계) |
-| → 다음 | [Deployment](./deployment.md) | 배포 준비 · 첫 운영 배포 (6 · 7단계) |
+| ← 이전 | [`Onboarding`](./onboarding.md) | 파생 레포 최초 셋업 (2단계) |
+| → 다음 | [`Deployment`](./deployment.md) | 배포 준비 · 첫 운영 배포 (6 · 7단계) |
 
-**막혔을 때**: [함정](./dogfood-pitfalls.md) / [FAQ](./dogfood-faq.md)
+**막혔을 때**: [`함정`](./dogfood-pitfalls.md) / [`FAQ`](./dogfood-faq.md)

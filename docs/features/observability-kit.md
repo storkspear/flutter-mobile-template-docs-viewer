@@ -8,7 +8,7 @@
 
 - **Sentry**: 크래시 · 에러 리포트 · 트레이싱 · 심볼 복원
 - **PostHog**: 이벤트 분석 · 화면 추적 · 세션 리플레이
-- **Debug 폴백** ([ADR-006](../philosophy/adr-006-debug-fallback.md)): DSN 없으면 콘솔 출력만
+- **Debug 폴백** ([`ADR-006`](../philosophy/adr-006-debug-fallback.md)): DSN 없으면 콘솔 출력만
 - **자동 화면 추적**: `AnalyticsNavigatorObserver` 가 go_router 경로 감지
 
 ---
@@ -219,6 +219,6 @@ flutter run \
 
 ## 관련 문서
 
-- [ADR-006 · Debug 폴백](../philosophy/adr-006-debug-fallback.md)
-- [ADR-019 · 솔로 친화적 운영](../philosophy/adr-019-solo-friendly.md) — 관리형 서비스 선호
-- [ADR-020 · 보안 방어선](../philosophy/adr-020-security-hardening.md) — 심볼 업로드
+- [`ADR-006 · Debug 폴백`](../philosophy/adr-006-debug-fallback.md)
+- [`ADR-019 · 솔로 친화적 운영`](../philosophy/adr-019-solo-friendly.md) — 관리형 서비스 선호
+- [`ADR-020 · 보안 방어선`](../philosophy/adr-020-security-hardening.md) — 심볼 업로드

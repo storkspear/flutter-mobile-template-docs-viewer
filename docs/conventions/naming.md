@@ -66,7 +66,7 @@ Dart 관용은 `lowerCamelCase`. Provider 는 접미사로 종류 표시.
 
 ## 디렉토리 구조
 
-3계층 + features ([ADR-002](../philosophy/adr-002-layered-modules.md) 참조):
+3계층 + features ([`ADR-002`](../philosophy/adr-002-layered-modules.md) 참조):
 
 ```
 lib/
@@ -105,7 +105,7 @@ lib/
 **의존 방향** (ADR-002):
 - `features → common → kits → core`
 - `core/` 는 Flutter SDK + 외부 패키지만 import
-- `kits/` 간 직접 import **금지** — Provider 경유만 ([ADR-003](../philosophy/adr-003-featurekit-registry.md))
+- `kits/` 간 직접 import **금지** — Provider 경유만 ([`ADR-003`](../philosophy/adr-003-featurekit-registry.md))
 - `features/` 간 직접 import **최소화** — 라우터로 느슨한 연결
 
 ---
@@ -127,7 +127,7 @@ lib/
 
 ## JSON 필드명
 
-백엔드 응답과 **완전 동일** 하게 camelCase 사용. 자세한 건 [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md).
+백엔드 응답과 **완전 동일** 하게 camelCase 사용. 자세한 건 [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md).
 
 ```dart
 factory Expense.fromJson(Map<String, dynamic> json) => Expense(
@@ -169,4 +169,4 @@ MyAuthService.dart       → 접두사 My 불필요
 
 - [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) — ViewModel 구조 상세
 - [`i18n.md`](./i18n.md) — i18n 키 정의 워크플로우
-- [ADR-002](../philosophy/adr-002-layered-modules.md) — 의존 방향 근거
+- [`ADR-002`](../philosophy/adr-002-layered-modules.md) — 의존 방향 근거

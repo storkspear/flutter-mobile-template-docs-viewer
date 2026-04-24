@@ -1,6 +1,6 @@
 # Architecture — 한눈 요약
 
-파생 레포 개발자가 **10분 안에 전체 구조** 를 파악할 수 있게 쓴 개요. 깊이 들어가려면 [Architecture](../architecture/) · [ADR](../philosophy/README.md) 참조.
+파생 레포 개발자가 **10분 안에 전체 구조** 를 파악할 수 있게 쓴 개요. 깊이 들어가려면 [Architecture](../architecture/) · [`ADR`](../philosophy/README.md) 참조.
 
 ---
 
@@ -59,7 +59,7 @@
 
 ### `kits/` (선택 13개)
 
-앱마다 켜고 끄는 기능 단위. [Features 인덱스](../features/README.md) 상세.
+앱마다 켜고 끄는 기능 단위. [`Features 인덱스`](../features/README.md) 상세.
 
 - **인프라**: `backend_api_kit`, `observability_kit`, `local_db_kit`, `notifications_kit`, `background_kit`, `update_kit`, `permissions_kit`, `device_info_kit`
 - **UI · UX**: `nav_shell_kit`, `onboarding_kit`, `charts_kit`, `ads_kit`
@@ -120,7 +120,7 @@ ViewModel: state = state.copyWith(...)
 Screen: ref.watch 가 state 변화 감지 → 리빌드
 ```
 
-자세한 건 [ViewModel + MVVM](../conventions/viewmodel-mvvm.md).
+자세한 건 [`ViewModel + MVVM`](../conventions/viewmodel-mvvm.md).
 
 ---
 
@@ -145,9 +145,9 @@ ViewModel: try/catch 로 수신
 ```
 
 근거:
-- [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
-- [ADR-010 · 401 refresh](../philosophy/adr-010-queued-interceptor.md)
-- [ADR-011 · 인터셉터 체인](../philosophy/adr-011-interceptor-chain.md)
+- [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
+- [`ADR-010 · 401 refresh`](../philosophy/adr-010-queued-interceptor.md)
+- [`ADR-011 · 인터셉터 체인`](../philosophy/adr-011-interceptor-chain.md)
 
 ---
 
@@ -167,7 +167,7 @@ main()
   └─ runApp(UncontrolledProviderScope)
 ```
 
-자세한 건 [Boot Sequence](../architecture/boot-sequence.md).
+자세한 건 [`Boot Sequence`](../architecture/boot-sequence.md).
 
 ---
 
@@ -198,7 +198,7 @@ await AppKits.install([
 dart run tool/configure_app.dart
 ```
 
-이 3단계 동기화가 전체 템플릿의 핵심 관용이에요. 근거: [ADR-003](../philosophy/adr-003-featurekit-registry.md) · [ADR-004](../philosophy/adr-004-manual-sync-ci-audit.md).
+이 3단계 동기화가 전체 템플릿의 핵심 관용이에요. 근거: [`ADR-003`](../philosophy/adr-003-featurekit-registry.md) · [`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md).
 
 ---
 
@@ -227,19 +227,19 @@ dart run tool/configure_app.dart
 
 ## 다음으로 읽을 것
 
-- 더 깊은 모듈 구조: [Module Dependencies](../architecture/module-dependencies.md)
-- AppKit 계약 상세: [FeatureKit Contract](../architecture/featurekit-contract.md)
-- Kit 개별 문서: [Features 인덱스](../features/README.md)
-- 설계 결정 배경: [Philosophy 인덱스](../philosophy/README.md)
-- 코딩 규약: [Conventions Overview](../conventions/README.md)
+- 더 깊은 모듈 구조: [`Module Dependencies`](../architecture/module-dependencies.md)
+- AppKit 계약 상세: [`FeatureKit Contract`](../architecture/featurekit-contract.md)
+- Kit 개별 문서: [`Features 인덱스`](../features/README.md)
+- 설계 결정 배경: [`Philosophy 인덱스`](../philosophy/README.md)
+- 코딩 규약: [`Conventions Overview`](../conventions/README.md)
 
 ---
 
 ## 📖 책 목차 — Journey 1단계
 
-[Overview](./README.md) 의 **1단계** 후반부.
+[`Overview`](./README.md) 의 **1단계** 후반부.
 
 | 방향 | 문서 | 한 줄 |
 |---|---|---|
-| ← 이전 | [Philosophy 인덱스](../philosophy/README.md) | 철학 · 설계 결정 배경 |
-| → 다음 | [Onboarding](./onboarding.md) | 파생 레포 최초 셋업 (2단계) |
+| ← 이전 | [`Philosophy 인덱스`](../philosophy/README.md) | 철학 · 설계 결정 배경 |
+| → 다음 | [`Onboarding`](./onboarding.md) | 파생 레포 최초 셋업 (2단계) |

@@ -215,7 +215,7 @@ Status: OK
 Status: ISSUES FOUND
 ```
 
-자세한 건 [ADR-004](../philosophy/adr-004-manual-sync-ci-audit.md) · [Conventions Overview](../conventions/README.md).
+자세한 건 [`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md) · [`Conventions Overview`](../conventions/README.md).
 
 ---
 
@@ -245,5 +245,5 @@ fi
 ## 관련 문서
 
 - [`recipes.md`](./recipes.md) — Recipe 복사 → rename-app 흐름
-- [Android Deployment](../infra/android-deployment.md) — 배포에서 스크립트 활용
-- [Secrets Management](../infra/secrets-management.md)
+- [`Android Deployment`](../infra/android-deployment.md) — 배포에서 스크립트 활용
+- [`Secrets Management`](../infra/secrets-management.md)

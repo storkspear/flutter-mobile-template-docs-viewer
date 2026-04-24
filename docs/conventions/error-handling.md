@@ -1,6 +1,6 @@
 # Error Handling
 
-모든 에러는 **`ApiException` 으로 표준화** 되어 ViewModel 에 도달해요. ViewModel 은 `safeErrorCode` · `safeErrorMessage` 로 안전 추출. UI 는 code 기반으로 i18n 번역. 이 규약의 근거는 [ADR-009](../philosophy/adr-009-backend-contract.md) · [ADR-010](../philosophy/adr-010-queued-interceptor.md) · [ADR-011](../philosophy/adr-011-interceptor-chain.md) 참조.
+모든 에러는 **`ApiException` 으로 표준화** 되어 ViewModel 에 도달해요. ViewModel 은 `safeErrorCode` · `safeErrorMessage` 로 안전 추출. UI 는 code 기반으로 i18n 번역. 이 규약의 근거는 [`ADR-009`](../philosophy/adr-009-backend-contract.md) · [`ADR-010`](../philosophy/adr-010-queued-interceptor.md) · [`ADR-011`](../philosophy/adr-011-interceptor-chain.md) 참조.
 
 ---
 
@@ -110,7 +110,7 @@ Future<void> signInWithEmail(String email, String password) async {
 
 ## ErrorCode 상수
 
-서버 `ErrorCode` enum 과 **문자열 동일** 하게 관리. 자세한 건 [ADR-009](../philosophy/adr-009-backend-contract.md).
+서버 `ErrorCode` enum 과 **문자열 동일** 하게 관리. 자세한 건 [`ADR-009`](../philosophy/adr-009-backend-contract.md).
 
 ```dart
 // lib/kits/backend_api_kit/error_code.dart 발췌
@@ -138,7 +138,7 @@ switch 쓰지 않는 이유: Dart enum 이 아니라 static const String. switch
 
 ## Screen 에서 i18n 변환
 
-ViewModel 은 code 만, Screen 이 번역. [ADR-016 · i18n 처음부터](../philosophy/adr-016-i18n-from-start.md) 참조.
+ViewModel 은 code 만, Screen 이 번역. [`ADR-016 · i18n 처음부터`](../philosophy/adr-016-i18n-from-start.md) 참조.
 
 ```dart
 // Screen 의 helper
@@ -180,7 +180,7 @@ Text(state.errorCode != null ? _localizedError(context, state.errorCode!) : '')
 
 ## 401 자동 refresh (AuthInterceptor 의 동작)
 
-[ADR-010](../philosophy/adr-010-queued-interceptor.md) 참조.
+[`ADR-010`](../philosophy/adr-010-queued-interceptor.md) 참조.
 
 ```
 ApiClient.get('/users/me')
@@ -217,7 +217,7 @@ Future<void> loadProfile() async {
 
 ## 인터셉터 순서 (ApiClient 내부)
 
-[ADR-011](../philosophy/adr-011-interceptor-chain.md) 참조.
+[`ADR-011`](../philosophy/adr-011-interceptor-chain.md) 참조.
 
 ```dart
 // lib/kits/backend_api_kit/api_client.dart 발췌
@@ -318,6 +318,6 @@ switch (errorCode) {
 
 - [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) — ViewModel 의 try/catch 패턴
 - [`i18n.md`](./i18n.md) — 에러 메시지 키 관리
-- [ADR-009 · 백엔드 응답 1:1 계약](../philosophy/adr-009-backend-contract.md) — `ApiException` 계약 근거
-- [ADR-010 · QueuedInterceptor 로 401 자동 갱신](../philosophy/adr-010-queued-interceptor.md) — refresh 흐름
-- [ADR-011 · 3층 인터셉터 체인](../philosophy/adr-011-interceptor-chain.md) — 인터셉터 순서
+- [`ADR-009 · 백엔드 응답 1:1 계약`](../philosophy/adr-009-backend-contract.md) — `ApiException` 계약 근거
+- [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](../philosophy/adr-010-queued-interceptor.md) — refresh 흐름
+- [`ADR-011 · 3층 인터셉터 체인`](../philosophy/adr-011-interceptor-chain.md) — 인터셉터 순서

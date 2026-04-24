@@ -58,7 +58,7 @@ class ApiError {
 }
 ```
 
-상세: [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
+상세: [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
 
 ---
 
@@ -164,6 +164,6 @@ if (page.data!.hasNextPage) {
 
 ## 관련 문서
 
-- [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
+- [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
 - [`error-codes.md`](./error-codes.md)
 - [`search-request.md`](./search-request.md)

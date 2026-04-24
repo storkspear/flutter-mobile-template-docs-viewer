@@ -1,6 +1,6 @@
 # Testing Strategy
 
-4 레이어 테스트 전략 — **Unit · Kit 계약 · 조립 통합 · 마이그레이션 지문**. 각 레이어의 검증 대상이 다르고, 도구도 다름. 실행 규칙은 [Testing Conventions](../testing/testing-strategy.md) 참조.
+4 레이어 테스트 전략 — **Unit · Kit 계약 · 조립 통합 · 마이그레이션 지문**. 각 레이어의 검증 대상이 다르고, 도구도 다름. 실행 규칙은 [`Testing Conventions`](../testing/testing-strategy.md) 참조.
 
 ---
 
@@ -264,5 +264,5 @@ Codecov 에 커버리지 리포트 업로드 (선택).
 ## 관련 문서
 
 - [`contract-testing.md`](./contract-testing.md) — Kit 계약 테스트 상세
-- [Testing Conventions](../testing/testing-strategy.md) — 테스트 코드 규약
-- [ADR-003 · FeatureKit](../philosophy/adr-003-featurekit-registry.md)
+- [`Testing Conventions`](../testing/testing-strategy.md) — 테스트 코드 규약
+- [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)

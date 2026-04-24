@@ -129,5 +129,5 @@ final req = SearchRequest.builder()
 
 ## 관련 문서
 
-- [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
+- [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
 - [`response-schema.md`](./response-schema.md) — PageResponse 응답

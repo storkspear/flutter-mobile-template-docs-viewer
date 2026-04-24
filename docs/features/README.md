@@ -2,7 +2,7 @@
 
 13 개의 **FeatureKit** 이 `lib/kits/` 에 있어요. 각 Kit 은 **독립 플러그인** 으로, `app_kits.yaml` + `lib/main.dart` 에서 활성화를 선택해요. 이 문서는 전체 목록 · 의존 관계 · 활성화 방법의 한눈 인덱스예요.
 
-> **왜 선택 조립?** → [ADR-003 · FeatureKit 동적 레지스트리](../philosophy/adr-003-featurekit-registry.md)
+> **왜 선택 조립?** → [`ADR-003 · FeatureKit 동적 레지스트리`](../philosophy/adr-003-featurekit-registry.md)
 
 ---
 
@@ -51,7 +51,7 @@ device_info_kit (독립)
 **규칙**:
 - `auth_kit` 만 `backend_api_kit` 에 의존 (`requires: [BackendApiKit]`)
 - 나머지 12개는 독립 — 자유롭게 on/off
-- Kit 간 직접 import 금지 ([ADR-002](../philosophy/adr-002-layered-modules.md)) — Provider 경유만
+- Kit 간 직접 import 금지 ([`ADR-002`](../philosophy/adr-002-layered-modules.md)) — Provider 경유만
 
 의존성 위반 시 `configure_app.dart --audit` 가 CI 에서 차단:
 ```
@@ -89,13 +89,13 @@ await AppKits.install([
 dart run tool/configure_app.dart
 ```
 
-자세한 건 [ADR-004 · YAML ↔ Dart 수동 동기화](../philosophy/adr-004-manual-sync-ci-audit.md) 참조.
+자세한 건 [`ADR-004 · YAML ↔ Dart 수동 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md) 참조.
 
 ---
 
 ## 앱 유형별 권장 조합
 
-[ADR-021 · Multi-Recipe 구성](../philosophy/adr-021-multi-recipe.md) 의 3개 샘플:
+[`ADR-021 · Multi-Recipe 구성`](../philosophy/adr-021-multi-recipe.md) 의 3개 샘플:
 
 ### Local-only Tracker (`recipes/local-only-tracker.yaml`)
 
@@ -178,7 +178,7 @@ kits:
 
 ## 관련 문서
 
-- [ADR-003 · FeatureKit 동적 레지스트리](../philosophy/adr-003-featurekit-registry.md) — AppKit 계약
-- [ADR-004 · YAML ↔ Dart 동기화](../philosophy/adr-004-manual-sync-ci-audit.md) — `configure_app.dart`
-- [ADR-021 · Multi-Recipe](../philosophy/adr-021-multi-recipe.md) — 3개 샘플 조합
-- [FeatureKit Contract](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세
+- [`ADR-003 · FeatureKit 동적 레지스트리`](../philosophy/adr-003-featurekit-registry.md) — AppKit 계약
+- [`ADR-004 · YAML ↔ Dart 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md) — `configure_app.dart`
+- [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md) — 3개 샘플 조합
+- [`FeatureKit Contract`](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세

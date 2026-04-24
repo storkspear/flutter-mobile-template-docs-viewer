@@ -295,7 +295,7 @@ BootStep 이 실패해도 `crashService` 가 off 면 원인 모름. `[Splash] ru
 - [`lib/main.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/main.dart) — `SplashController(steps: AppKits.allBootSteps).run()`
 
 **관련 ADR**:
-- [ADR-003 · FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) — Kit 의 `bootSteps` 기여 메커니즘
-- [ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백](./adr-006-debug-fallback.md) — BootStep 이 `crashService?` 로 non-fatal 리포트
-- [ADR-017 · 4가지 로딩 UX 패턴](./adr-017-loading-ux.md) — 부팅 중 스플래시 UI 표현
-- [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — "앱 부팅 시 뭐가 실행되는지" 를 Kit 별로 모은 이점
+- [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — Kit 의 `bootSteps` 기여 메커니즘
+- [`ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백`](./adr-006-debug-fallback.md) — BootStep 이 `crashService?` 로 non-fatal 리포트
+- [`ADR-017 · 4가지 로딩 UX 패턴`](./adr-017-loading-ux.md) — 부팅 중 스플래시 UI 표현
+- [`ADR-019 · 솔로 친화적 운영`](./adr-019-solo-friendly.md) — "앱 부팅 시 뭐가 실행되는지" 를 Kit 별로 모은 이점

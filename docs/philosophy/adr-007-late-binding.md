@@ -239,6 +239,6 @@ class ApiClient {
 - [`lib/kits/auth_kit/auth_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_service.dart) — `refreshToken()` 메서드
 
 **관련 ADR**:
-- [ADR-005 · Riverpod + MVVM](./adr-005-riverpod-mvvm.md) — 본 ADR 이 기반하는 Provider 시스템
-- [ADR-010 · QueuedInterceptor 로 401 자동 갱신](./adr-010-queued-interceptor.md) — `onTokenRefresh` 가 실제로 호출되는 시점
-- [ADR-011 · 3층 인터셉터 체인](./adr-011-interceptor-chain.md) — AuthInterceptor 가 다른 인터셉터와 협력하는 방식
+- [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — 본 ADR 이 기반하는 Provider 시스템
+- [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](./adr-010-queued-interceptor.md) — `onTokenRefresh` 가 실제로 호출되는 시점
+- [`ADR-011 · 3층 인터셉터 체인`](./adr-011-interceptor-chain.md) — AuthInterceptor 가 다른 인터셉터와 협력하는 방식

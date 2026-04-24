@@ -129,6 +129,6 @@ String _localizedError(BuildContext context, String code) {
 
 ## 관련 문서
 
-- [ADR-009 · 백엔드 계약](../philosophy/adr-009-backend-contract.md)
-- [Error Handling](../conventions/error-handling.md)
+- [`ADR-009 · 백엔드 계약`](../philosophy/adr-009-backend-contract.md)
+- [`Error Handling`](../conventions/error-handling.md)
 - [`response-schema.md`](./response-schema.md)

@@ -1,6 +1,6 @@
 # FeatureKit Contract
 
-`AppKit` 추상 클래스 + `AppKits` 레지스트리의 **전체 명세**. 각 속성 · 메서드의 역할 · 호출 시점 · 주의점. 설계 근거는 [ADR-003](../philosophy/adr-003-featurekit-registry.md) 참조.
+`AppKit` 추상 클래스 + `AppKits` 레지스트리의 **전체 명세**. 각 속성 · 메서드의 역할 · 호출 시점 · 주의점. 설계 근거는 [`ADR-003`](../philosophy/adr-003-featurekit-registry.md) 참조.
 
 ---
 
@@ -47,7 +47,7 @@ abstract class AppKit {
 - **타입**: `int` (기본 100)
 - **규칙**: 낮을수록 먼저 실행
 - **권장**: `UpdateKit: 1`, `AuthKit: 10`, `OnboardingKit: 50`
-- 상세: [ADR-018](../philosophy/adr-018-redirect-priority.md)
+- 상세: [`ADR-018`](../philosophy/adr-018-redirect-priority.md)
 
 ### `providerOverrides` — Riverpod 기여
 
@@ -81,7 +81,7 @@ abstract class AppKit {
 - **타입**: `List<BootStep>`
 - **호출 시점**: `AppKits.allBootSteps` 수집 → `SplashController.run()`
 - **전제**: `AppKits.attachContainer` 호출 후에야 유의미한 값 반환 (container.read 접근)
-- 상세: [ADR-008](../philosophy/adr-008-boot-step.md)
+- 상세: [`ADR-008`](../philosophy/adr-008-boot-step.md)
 
 ### `buildRedirect` — 라우팅 규칙
 
@@ -89,7 +89,7 @@ abstract class AppKit {
 - **호출 시점**: 라우팅 평가 시 (refreshListenable 트리거)
 - **null 반환**: 개입 안 함 → 다음 Kit 의 rule 실행
 - **String 반환**: 해당 경로로 리다이렉트 (첫 non-null 이 최종)
-- 상세: [ADR-018](../philosophy/adr-018-redirect-priority.md)
+- 상세: [`ADR-018`](../philosophy/adr-018-redirect-priority.md)
 
 ### `refreshListenable` — 라우터 리빌드 트리거
 
@@ -221,8 +221,8 @@ class MyKit extends AppKit {
 
 ## 관련 문서
 
-- [ADR-003 · FeatureKit](../philosophy/adr-003-featurekit-registry.md) — 설계 근거
-- [ADR-008 · BootStep](../philosophy/adr-008-boot-step.md) — bootSteps 상세
-- [ADR-018 · redirectPriority](../philosophy/adr-018-redirect-priority.md)
+- [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md) — 설계 근거
+- [`ADR-008 · BootStep`](../philosophy/adr-008-boot-step.md) — bootSteps 상세
+- [`ADR-018 · redirectPriority`](../philosophy/adr-018-redirect-priority.md)
 - [`boot-sequence.md`](./boot-sequence.md) — 실제 부팅 흐름
-- [Features 인덱스](../features/README.md) — 13개 Kit 구현체
+- [`Features 인덱스`](../features/README.md) — 13개 Kit 구현체

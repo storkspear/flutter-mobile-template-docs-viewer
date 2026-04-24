@@ -7,10 +7,10 @@
 ## 개요
 
 - **인증 방식**: 이메일/비번 · Google Sign-In · Sign in with Apple
-- **토큰 저장**: `SecureStorage` + 원자적 ([ADR-013](../philosophy/adr-013-token-atomic-storage.md))
-- **401 자동 refresh**: `AuthInterceptor` 가 투명 처리 ([ADR-010](../philosophy/adr-010-queued-interceptor.md))
+- **토큰 저장**: `SecureStorage` + 원자적 ([`ADR-013`](../philosophy/adr-013-token-atomic-storage.md))
+- **401 자동 refresh**: `AuthInterceptor` 가 투명 처리 ([`ADR-010`](../philosophy/adr-010-queued-interceptor.md))
 - **부팅 시 토큰 검증**: `AuthCheckStep` BootStep
-- **라우팅 게이트**: `redirectPriority: 10` ([ADR-018](../philosophy/adr-018-redirect-priority.md))
+- **라우팅 게이트**: `redirectPriority: 10` ([`ADR-018`](../philosophy/adr-018-redirect-priority.md))
 - **제공 화면**: `/login`, `/forgot-password`, `/verify-email`
 
 ---
@@ -221,7 +221,7 @@ try {
 ### 백엔드
 
 - [ ] `spring-backend-template` 쌍 운영 전제
-- [ ] 유저 테이블이 `appSlug` 기반 격리 ([ADR-012](../philosophy/adr-012-per-app-user.md))
+- [ ] 유저 테이블이 `appSlug` 기반 격리 ([`ADR-012`](../philosophy/adr-012-per-app-user.md))
 - [ ] `/auth/login` · `/auth/signup` · `/auth/refresh` · `/auth/logout` · `/users/me` 엔드포인트 제공
 
 ---
@@ -240,7 +240,7 @@ try {
 ## 관련 문서
 
 - [`backend-api-kit.md`](./backend-api-kit.md) — 의존 Kit
-- [ADR-010 · 401 refresh](../philosophy/adr-010-queued-interceptor.md)
-- [ADR-012 · 앱별 독립 유저](../philosophy/adr-012-per-app-user.md)
-- [ADR-013 · 토큰 원자 저장](../philosophy/adr-013-token-atomic-storage.md)
-- [ADR-018 · 라우팅 우선순위](../philosophy/adr-018-redirect-priority.md)
+- [`ADR-010 · 401 refresh`](../philosophy/adr-010-queued-interceptor.md)
+- [`ADR-012 · 앱별 독립 유저`](../philosophy/adr-012-per-app-user.md)
+- [`ADR-013 · 토큰 원자 저장`](../philosophy/adr-013-token-atomic-storage.md)
+- [`ADR-018 · 라우팅 우선순위`](../philosophy/adr-018-redirect-priority.md)

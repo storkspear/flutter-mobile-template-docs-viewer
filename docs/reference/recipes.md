@@ -1,6 +1,6 @@
 # Recipes
 
-`recipes/` 에 제공되는 **3개 샘플 앱 구성**. 파생 레포가 복사 → `app_kits.yaml` 로 덮어쓰기. 상세 근거는 [ADR-021 · Multi-Recipe](../philosophy/adr-021-multi-recipe.md).
+`recipes/` 에 제공되는 **3개 샘플 앱 구성**. 파생 레포가 복사 → `app_kits.yaml` 로 덮어쓰기. 상세 근거는 [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md).
 
 ---
 
@@ -215,8 +215,8 @@ flutter run
 
 ## 관련 문서
 
-- [ADR-021 · Multi-Recipe](../philosophy/adr-021-multi-recipe.md)
-- [ADR-003 · FeatureKit](../philosophy/adr-003-featurekit-registry.md)
-- [ADR-004 · YAML ↔ Dart 동기화](../philosophy/adr-004-manual-sync-ci-audit.md)
-- [Features 인덱스](../features/README.md) — Kit 13개 상세
+- [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md)
+- [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)
+- [`ADR-004 · YAML ↔ Dart 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md)
+- [`Features 인덱스`](../features/README.md) — Kit 13개 상세
 - [`scripts.md`](./scripts.md) — `rename-app.sh`

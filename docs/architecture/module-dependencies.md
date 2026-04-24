@@ -1,6 +1,6 @@
 # Module Dependencies
 
-`lib/` 하위 모듈 간 **의존 방향 · 규칙 · 검증 메커니즘**. 근거는 [ADR-002 · 3계층 모듈 구조](../philosophy/adr-002-layered-modules.md) 참조.
+`lib/` 하위 모듈 간 **의존 방향 · 규칙 · 검증 메커니즘**. 근거는 [`ADR-002 · 3계층 모듈 구조`](../philosophy/adr-002-layered-modules.md) 참조.
 
 ---
 
@@ -48,18 +48,18 @@
 
 | 모듈 | 역할 |
 |------|------|
-| `analytics/` | AnalyticsService · CrashService 추상 + Debug ([ADR-006](../philosophy/adr-006-debug-fallback.md)) |
-| `cache/` | CacheStore · CachedRepository ([ADR-014](../philosophy/adr-014-cached-repository.md)) |
+| `analytics/` | AnalyticsService · CrashService 추상 + Debug ([`ADR-006`](../philosophy/adr-006-debug-fallback.md)) |
+| `cache/` | CacheStore · CachedRepository ([`ADR-014`](../philosophy/adr-014-cached-repository.md)) |
 | `config/` | AppConfig 싱글톤 |
-| `i18n/` | gen_l10n 결과물 ([ADR-016](../philosophy/adr-016-i18n-from-start.md)) |
-| `kits/` | AppKit 계약 · AppKits 레지스트리 ([ADR-003](../philosophy/adr-003-featurekit-registry.md)) |
+| `i18n/` | gen_l10n 결과물 ([`ADR-016`](../philosophy/adr-016-i18n-from-start.md)) |
+| `kits/` | AppKit 계약 · AppKits 레지스트리 ([`ADR-003`](../philosophy/adr-003-featurekit-registry.md)) |
 | `review/` | 인앱 리뷰 트리거 |
-| `storage/` | SecureStorage · PrefsStorage · TokenStorage ([ADR-013](../philosophy/adr-013-token-atomic-storage.md)) |
-| `theme/` | AppPalette · 디자인 토큰 ([ADR-015](../philosophy/adr-015-palette-registry.md)) |
+| `storage/` | SecureStorage · PrefsStorage · TokenStorage ([`ADR-013`](../philosophy/adr-013-token-atomic-storage.md)) |
+| `theme/` | AppPalette · 디자인 토큰 ([`ADR-015`](../philosophy/adr-015-palette-registry.md)) |
 | `utils/` | FormValidators · Debouncer 등 순수 헬퍼 |
 | `widgets/` | PrimaryButton · LoadingView · SkeletonLoading 등 13개 |
 
-### `kits/` — 선택 13개 ([Features 인덱스](../features/README.md))
+### `kits/` — 선택 13개 ([`Features 인덱스`](../features/README.md))
 
 ```
 auth_kit, backend_api_kit, observability_kit, notifications_kit,
@@ -71,9 +71,9 @@ charts_kit, ads_kit, background_kit, permissions_kit, device_info_kit
 
 | 파일 | 역할 |
 |------|------|
-| `providers.dart` | 전역 DI — 여러 Kit 의 Provider 를 한 곳 ([ADR-005](../philosophy/adr-005-riverpod-mvvm.md), [ADR-007](../philosophy/adr-007-late-binding.md)) |
-| `router/app_router.dart` | GoRouter 조립 + Kit redirect 합성 ([ADR-018](../philosophy/adr-018-redirect-priority.md)) |
-| `splash/boot_step.dart` | BootStep 인터페이스 ([ADR-008](../philosophy/adr-008-boot-step.md)) |
+| `providers.dart` | 전역 DI — 여러 Kit 의 Provider 를 한 곳 ([`ADR-005`](../philosophy/adr-005-riverpod-mvvm.md), [`ADR-007`](../philosophy/adr-007-late-binding.md)) |
+| `router/app_router.dart` | GoRouter 조립 + Kit redirect 합성 ([`ADR-018`](../philosophy/adr-018-redirect-priority.md)) |
+| `splash/boot_step.dart` | BootStep 인터페이스 ([`ADR-008`](../philosophy/adr-008-boot-step.md)) |
 | `splash/splash_controller.dart` | 부팅 단계 순차 실행 |
 
 ### `features/` — 파생 레포 도메인 영역
@@ -96,7 +96,7 @@ charts_kit, ads_kit, background_kit, permissions_kit, device_info_kit
 - ✅ `common/` → `kits/` · `core/`
 - ✅ `kits/` → `core/`
 - ✅ `kits/<A>` → `kits/<B>` 의 **Provider 참조** (ref.watch/read) — import 아님
-- ✅ `kits/<A>` → `kits/<B>` 의 **`requires: [B]`** 선언 ([ADR-003](../philosophy/adr-003-featurekit-registry.md))
+- ✅ `kits/<A>` → `kits/<B>` 의 **`requires: [B]`** 선언 ([`ADR-003`](../philosophy/adr-003-featurekit-registry.md))
 
 ---
 
@@ -116,7 +116,7 @@ charts_kit, ads_kit, background_kit, permissions_kit, device_info_kit
 dart run tool/configure_app.dart --audit
 ```
 
-불일치 시 exit 1 ([ADR-004](../philosophy/adr-004-manual-sync-ci-audit.md)).
+불일치 시 exit 1 ([`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md)).
 
 ### 정적 분석
 
@@ -138,7 +138,7 @@ dart run tool/configure_app.dart --audit
 
 ## 관련 문서
 
-- [ADR-002 · 3계층 모듈 구조](../philosophy/adr-002-layered-modules.md)
-- [ADR-003 · FeatureKit 동적 레지스트리](../philosophy/adr-003-featurekit-registry.md)
+- [`ADR-002 · 3계층 모듈 구조`](../philosophy/adr-002-layered-modules.md)
+- [`ADR-003 · FeatureKit 동적 레지스트리`](../philosophy/adr-003-featurekit-registry.md)
 - [`featurekit-contract.md`](./featurekit-contract.md) — AppKit 인터페이스 전체 명세
 - [`boot-sequence.md`](./boot-sequence.md) — 앱 시작 시 순서도

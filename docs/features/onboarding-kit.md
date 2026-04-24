@@ -86,4 +86,4 @@ class WelcomeStep implements OnboardingStep {
 
 ## 관련 문서
 
-- [ADR-018 · 라우팅 우선순위](../philosophy/adr-018-redirect-priority.md) — `redirectPriority: 50`
+- [`ADR-018 · 라우팅 우선순위`](../philosophy/adr-018-redirect-priority.md) — `redirectPriority: 50`

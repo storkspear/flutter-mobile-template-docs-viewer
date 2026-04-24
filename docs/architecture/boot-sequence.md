@@ -1,6 +1,6 @@
 # Boot Sequence
 
-앱 시작 시 실행되는 **전체 순서도**. `main()` → 첫 화면 표시까지. 근거는 [ADR-008 · 부팅 단계 추상화](../philosophy/adr-008-boot-step.md).
+앱 시작 시 실행되는 **전체 순서도**. `main()` → 첫 화면 표시까지. 근거는 [`ADR-008 · 부팅 단계 추상화`](../philosophy/adr-008-boot-step.md).
 
 ---
 
@@ -201,7 +201,7 @@ initialLocation `/splash` → refreshListenable 이 곧 초기 notify → `_comp
 
 ## 관련 문서
 
-- [ADR-008 · BootStep](../philosophy/adr-008-boot-step.md)
-- [ADR-003 · FeatureKit](../philosophy/adr-003-featurekit-registry.md)
+- [`ADR-008 · BootStep`](../philosophy/adr-008-boot-step.md)
+- [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)
 - [`featurekit-contract.md`](./featurekit-contract.md)
-- [observability_kit](../features/observability-kit.md) — Sentry 래핑 조건
+- [`observability_kit`](../features/observability-kit.md) — Sentry 래핑 조건

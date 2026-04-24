@@ -4,7 +4,7 @@
 
 > **이 문서의 위상**: `docs/` 안의 모든 문서가 참조하는 메타 문서. 새 문서 쓸 때 이 가이드를 따르고, 예외가 필요하면 "왜 이 경우에 예외인가" 를 본 문서에 추가.
 
-> **spring-backend-template 과의 관계**: 짝이 되는 백엔드 템플릿의 [STYLE_GUIDE](https://github.com/storkspear/spring-backend-template/blob/main/docs/STYLE_GUIDE.md) 와 정합성을 유지해요. 독자 레벨 분류 (Level 0~3), ADR 8섹션, 해요체, 상대경로 링크 규칙이 공통. Flutter 고유 사항 (Dart 코드 블록, AppKit 용어) 만 차이.
+> **spring-backend-template 과의 관계**: 짝이 되는 백엔드 템플릿의 [`STYLE_GUIDE`](https://github.com/storkspear/spring-backend-template/blob/main/docs/STYLE_GUIDE.md) 와 정합성을 유지해요. 독자 레벨 분류 (Level 0~3), ADR 8섹션, 해요체, 상대경로 링크 규칙이 공통. Flutter 고유 사항 (Dart 코드 블록, AppKit 용어) 만 차이.
 
 ---
 
@@ -38,8 +38,8 @@
 
 ### 샘플
 
-- Level 3 예시: [adr-003-featurekit-registry](./philosophy/adr-003-featurekit-registry.md) — Option 1/2/3 + 롤백 설계 + 미래 마이그레이션 경로
-- Level 3 예시 (결합도 트레이드오프): [adr-009-backend-contract](./philosophy/adr-009-backend-contract.md) — "팀 분리 시 재고 필요" 명시
+- Level 3 예시: [`adr-003-featurekit-registry`](./philosophy/adr-003-featurekit-registry.md) — Option 1/2/3 + 롤백 설계 + 미래 마이그레이션 경로
+- Level 3 예시 (결합도 트레이드오프): [`adr-009-backend-contract`](./philosophy/adr-009-backend-contract.md) — "팀 분리 시 재고 필요" 명시
 
 ---
 
@@ -200,8 +200,8 @@ abstract class AppKit {
 
 ### 내부 링크는 **상대 경로**
 
-- 같은 디렉토리: `[ADR-005](./adr-005-riverpod-mvvm.md)` ← ADR 파일에서 다른 ADR 참조
-- 상위 경로: `[testing](../../testing/testing-strategy.md)` ← `journey/philosophy/` 에서 `docs/testing/` 참조
+- 같은 디렉토리: `[`ADR-005`](./adr-005-riverpod-mvvm.md)` ← ADR 파일에서 다른 ADR 참조
+- 상위 경로: `[`testing`](../../testing/testing-strategy.md)` ← `journey/philosophy/` 에서 `docs/testing/` 참조
 - 절대 경로 · 전체 docs-viewer URL 금지 (레포 이름 바뀌면 깨짐)
 
 ### Code References 섹션의 외부 링크
