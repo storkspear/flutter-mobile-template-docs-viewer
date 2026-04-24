@@ -79,29 +79,27 @@
 
 | 이 질문이 궁금하다면 | 이 ADR 을 읽으세요 |
 |---|---|
-| "파생 레포끼리 공통 코드를 어떻게 동기화하지?" | ADR-001: GitHub Template + cherry-pick |
-| "`core/`, `kits/`, `common/`, `features/` 는 어떻게 다른가?" | ADR-002: 3계층 모듈 구조 |
-| "Kit 은 왜 런타임에 조립되는가?" | ADR-003: FeatureKit 동적 레지스트리 |
-| "왜 `app_kits.yaml` 과 `main.dart` 두 곳에 kit 선언?" | ADR-004: 수동 동기화 + CI 검증 |
-| "상태 관리는 왜 Riverpod + MVVM?" | ADR-005: Riverpod + StateNotifier |
-| "왜 서비스는 인터페이스 + Debug 구현체 패턴?" | ADR-006: 인터페이스 기반 서비스 교체 |
-| "ApiClient ↔ AuthService 순환 의존을 어떻게?" | ADR-007: Late Binding |
-| "스플래시 중 뭘 하는가?" | ADR-008: 부팅 단계 추상화 |
-| "백엔드 응답 스키마가 왜 이렇게?" | ADR-009: 1:1 계약 (spring-backend-template 과) |
-| "401 받으면 자동으로 refresh 되는 원리는?" | ADR-010: QueuedInterceptor |
-| "인터셉터가 3개인 이유는?" | ADR-011: 인터셉터 체인 (Auth / Error / Logging) |
-| "앱마다 유저 테이블이 따로인가?" | ADR-012: 앱별 독립 유저 + JWT appSlug |
-| "토큰은 어디에 저장?" | ADR-013: SecureStorage + 원자적 저장 |
-| "캐시 정책은 어떻게 선택?" | ADR-014: 정책 기반 캐싱 |
-| "테마 색상을 런타임에 바꿀 수 있나?" | ADR-015: Palette 레지스트리 |
-| "i18n 은 언제부터 해야 하나?" | ADR-016: 처음부터 (ARB + gen_l10n) |
-| "로딩 UI 는 어떻게 통일하나?" | ADR-017: 4가지 로딩 UX 패턴 |
-| "라우팅 게이트 우선순위는?" | ADR-018: Kit 별 redirectPriority |
-| "결정 내릴 때 어떤 기준으로 판단?" | ADR-019: 솔로 친화적 운영 |
-| "보안은 뭐부터 지켜야 하나?" | ADR-020: 이중 난독화 + SSL 핀닝 + Keychain |
-| "같은 템플릿으로 여러 유형의 앱을 만들 수 있나?" | ADR-021: Multi-Recipe 구성 |
-
-> ⚠️ ADR 카드는 **테마 단위로 순차 작성 중** 이에요. 아직 링크가 준비되지 않은 항목이 있을 수 있어요.
+| "파생 레포끼리 공통 코드를 어떻게 동기화하지?" | [ADR-001: GitHub Template + cherry-pick](./adr-001-template-cherry-pick.md) |
+| "`core/`, `kits/`, `common/`, `features/` 는 어떻게 다른가?" | [ADR-002: 3계층 모듈 구조](./adr-002-layered-modules.md) |
+| "Kit 은 왜 런타임에 조립되는가?" | [ADR-003: FeatureKit 동적 레지스트리](./adr-003-featurekit-registry.md) |
+| "왜 `app_kits.yaml` 과 `main.dart` 두 곳에 kit 선언?" | [ADR-004: 수동 동기화 + CI 검증](./adr-004-manual-sync-ci-audit.md) |
+| "상태 관리는 왜 Riverpod + MVVM?" | [ADR-005: Riverpod + StateNotifier](./adr-005-riverpod-mvvm.md) |
+| "왜 서비스는 인터페이스 + Debug 구현체 패턴?" | [ADR-006: 인터페이스 기반 서비스 교체](./adr-006-debug-fallback.md) |
+| "ApiClient ↔ AuthService 순환 의존을 어떻게?" | [ADR-007: Late Binding](./adr-007-late-binding.md) |
+| "스플래시 중 뭘 하는가?" | [ADR-008: 부팅 단계 추상화](./adr-008-boot-step.md) |
+| "백엔드 응답 스키마가 왜 이렇게?" | [ADR-009: 1:1 계약 (spring-backend-template 과)](./adr-009-backend-contract.md) |
+| "401 받으면 자동으로 refresh 되는 원리는?" | [ADR-010: QueuedInterceptor](./adr-010-queued-interceptor.md) |
+| "인터셉터가 3개인 이유는?" | [ADR-011: 인터셉터 체인 (Auth / Error / Logging)](./adr-011-interceptor-chain.md) |
+| "앱마다 유저 테이블이 따로인가?" | [ADR-012: 앱별 독립 유저 + JWT appSlug](./adr-012-per-app-user.md) |
+| "토큰은 어디에 저장?" | [ADR-013: SecureStorage + 원자적 저장](./adr-013-token-atomic-storage.md) |
+| "캐시 정책은 어떻게 선택?" | [ADR-014: 정책 기반 캐싱](./adr-014-cached-repository.md) |
+| "테마 색상을 런타임에 바꿀 수 있나?" | [ADR-015: Palette 레지스트리](./adr-015-palette-registry.md) |
+| "i18n 은 언제부터 해야 하나?" | [ADR-016: 처음부터 (ARB + gen_l10n)](./adr-016-i18n-from-start.md) |
+| "로딩 UI 는 어떻게 통일하나?" | [ADR-017: 4가지 로딩 UX 패턴](./adr-017-loading-ux.md) |
+| "라우팅 게이트 우선순위는?" | [ADR-018: Kit 별 redirectPriority](./adr-018-redirect-priority.md) |
+| "결정 내릴 때 어떤 기준으로 판단?" | [ADR-019: 솔로 친화적 운영](./adr-019-solo-friendly.md) |
+| "보안은 뭐부터 지켜야 하나?" | [ADR-020: 이중 난독화 + SSL 핀닝 + Keychain](./adr-020-security-hardening.md) |
+| "같은 템플릿으로 여러 유형의 앱을 만들 수 있나?" | [ADR-021: Multi-Recipe 구성](./adr-021-multi-recipe.md) |
 
 ### ADR 카드의 읽는 법
 
@@ -147,52 +145,52 @@ ADR-004 (YAML ↔ Dart 수동 동기화 + CI 검증)
   "configure_app.dart --audit 로 CI 에서 실수 차단"
 ```
 
-- ADR-001 · GitHub Template Repository 패턴 + cherry-pick 전파
-- ADR-002 · 3계층 모듈 구조 (core / kits / common / features)
-- ADR-003 · FeatureKit 동적 레지스트리 (AppKit 계약)
-- ADR-004 · `app_kits.yaml` ↔ `main.dart` 수동 동기화 + CI 검증
+- [ADR-001 · GitHub Template Repository 패턴 + cherry-pick 전파](./adr-001-template-cherry-pick.md)
+- [ADR-002 · 3계층 모듈 구조 (core / kits / common / features)](./adr-002-layered-modules.md)
+- [ADR-003 · FeatureKit 동적 레지스트리 (AppKit 계약)](./adr-003-featurekit-registry.md)
+- [ADR-004 · `app_kits.yaml` ↔ `main.dart` 수동 동기화 + CI 검증](./adr-004-manual-sync-ci-audit.md)
 
 ### 테마 2 — 상태 관리 & 아키텍처
 
 **이 테마가 답하는 물음**: "솔로 개발자가 감당 가능한 상태 관리와 DI 구조는 무엇인가?"
 
-- ADR-005 · Riverpod + MVVM (StateNotifier + ConsumerWidget)
-- ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백
-- ADR-007 · Late Binding 으로 순환 의존 해결
-- ADR-008 · 부팅 단계 추상화 (BootStep + SplashController)
+- [ADR-005 · Riverpod + MVVM (StateNotifier + ConsumerWidget)](./adr-005-riverpod-mvvm.md)
+- [ADR-006 · 인터페이스 기반 서비스 교체 + Debug 폴백](./adr-006-debug-fallback.md)
+- [ADR-007 · Late Binding 으로 순환 의존 해결](./adr-007-late-binding.md)
+- [ADR-008 · 부팅 단계 추상화 (BootStep + SplashController)](./adr-008-boot-step.md)
 
 ### 테마 3 — 네트워크 & 백엔드 계약
 
 **이 테마가 답하는 물음**: "spring-backend-template 과 어떻게 쌍을 이루며, HTTP 계층은 어떻게 추상화하는가?"
 
-- ADR-009 · 백엔드 응답 1:1 계약 (`{data, error}` + PageResponse)
-- ADR-010 · QueuedInterceptor 로 401 자동 갱신
-- ADR-011 · 3층 인터셉터 체인 (Auth / Error / Logging)
-- ADR-012 · 앱별 독립 유저 + JWT `appSlug` 클레임
+- [ADR-009 · 백엔드 응답 1:1 계약 (`{data, error}` + PageResponse)](./adr-009-backend-contract.md)
+- [ADR-010 · QueuedInterceptor 로 401 자동 갱신](./adr-010-queued-interceptor.md)
+- [ADR-011 · 3층 인터셉터 체인 (Auth / Error / Logging)](./adr-011-interceptor-chain.md)
+- [ADR-012 · 앱별 독립 유저 + JWT `appSlug` 클레임](./adr-012-per-app-user.md)
 
 ### 테마 4 — 데이터 & 저장소
 
 **이 테마가 답하는 물음**: "민감도가 다른 데이터를 어디에 어떻게 저장하는가?"
 
-- ADR-013 · 토큰 저장 원자성 + SecureStorage vs SharedPreferences
-- ADR-014 · 정책 기반 캐싱 (CachedRepository)
+- [ADR-013 · 토큰 저장 원자성 + SecureStorage vs SharedPreferences](./adr-013-token-atomic-storage.md)
+- [ADR-014 · 정책 기반 캐싱 (CachedRepository)](./adr-014-cached-repository.md)
 
 ### 테마 5 — UI & UX
 
 **이 테마가 답하는 물음**: "앱마다 다른 브랜딩과 UX 를 어떻게 변주 가능하게 만드는가?"
 
-- ADR-015 · 팔레트 런타임 교체 (AppPalette + Registry)
-- ADR-016 · i18n 처음부터 (ARB + gen_l10n)
-- ADR-017 · 4가지 로딩 UX 패턴
-- ADR-018 · Kit 별 라우팅 우선순위 (`redirectPriority`)
+- [ADR-015 · 팔레트 런타임 교체 (AppPalette + Registry)](./adr-015-palette-registry.md)
+- [ADR-016 · i18n 처음부터 (ARB + gen_l10n)](./adr-016-i18n-from-start.md)
+- [ADR-017 · 4가지 로딩 UX 패턴](./adr-017-loading-ux.md)
+- [ADR-018 · Kit 별 라우팅 우선순위 (`redirectPriority`)](./adr-018-redirect-priority.md)
 
 ### 테마 6 — 운영 & 배포
 
 **이 테마가 답하는 물음**: "개발 · 배포 · 보안을 솔로 한 사람이 굴리는 원칙은?"
 
-- ADR-019 · 솔로 친화적 운영 (Debug 폴백 · 관리형 서비스 선호)
-- ADR-020 · 이중 난독화 + SSL 핀닝 + Keychain 정책
-- ADR-021 · Multi-Recipe 구성 (local-only / local-notifier / backend-auth)
+- [ADR-019 · 솔로 친화적 운영 (Debug 폴백 · 관리형 서비스 선호)](./adr-019-solo-friendly.md)
+- [ADR-020 · 이중 난독화 + SSL 핀닝 + Keychain 정책](./adr-020-security-hardening.md)
+- [ADR-021 · Multi-Recipe 구성 (local-only / local-notifier / backend-auth)](./adr-021-multi-recipe.md)
 
 ---
 
