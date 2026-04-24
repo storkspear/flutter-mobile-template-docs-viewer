@@ -188,9 +188,15 @@ function interceptDocLinks(el, currentDocPath) {
   el.querySelectorAll('a[href]').forEach(a => {
     const href = a.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-    if (!href.endsWith('.md')) return;
+    // .md 뒤에 #anchor 가 붙어있어도 처리 (예: './error-handling.md#screen-에서-i18n-변환')
+    const mdIdx = href.indexOf('.md');
+    if (mdIdx === -1) return;
 
-    const raw = baseDir + href;
+    const mdPath = href.slice(0, mdIdx + 3);
+    const anchor = href.slice(mdIdx + 3);           // '#anchor' 또는 ''
+    const targetId = anchor ? anchor.slice(1) : null;
+
+    const raw = baseDir + mdPath;
     const parts = raw.split('/');
     const resolved = [];
     for (const p of parts) {
@@ -199,10 +205,22 @@ function interceptDocLinks(el, currentDocPath) {
     }
     const docPath = resolved.join('/');
 
-    a.setAttribute('href', '#' + docPath);
+    a.setAttribute('href', '#' + docPath + anchor);
     a.addEventListener('click', e => {
       e.preventDefault();
-      loadDoc(docPath);
+      const p = loadDoc(docPath);
+      // 로드 완료 후 anchor 로 스크롤
+      if (targetId && p && typeof p.then === 'function') {
+        p.then(() => {
+          const target = document.getElementById(targetId);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      } else if (targetId) {
+        setTimeout(() => {
+          const target = document.getElementById(targetId);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
     });
   });
 }
