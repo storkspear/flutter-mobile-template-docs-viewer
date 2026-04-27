@@ -158,10 +158,10 @@ analyzer:
 
 ## Code References
 
-- [`analysis_options.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/analysis_options.yaml) — 룰셋 include + disable 사유 (yaml 주석)
-- [`pubspec.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/pubspec.yaml) — `very_good_analysis` dev_dependency
-- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kits.dart) — 발견된 버그 수정 (line 53, 65 `await _rollback`)
-- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_client.dart) — 타입 캐스트 명시 (`as Map<String, dynamic>`)
+- [`analysis_options.yaml`](https://github.com/storkspear/template-flutter/blob/main/analysis_options.yaml) — 룰셋 include + disable 사유 (yaml 주석)
+- [`pubspec.yaml`](https://github.com/storkspear/template-flutter/blob/main/pubspec.yaml) — `very_good_analysis` dev_dependency
+- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart) — 발견된 버그 수정 (line 53, 65 `await _rollback`)
+- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_client.dart) — 타입 캐스트 명시 (`as Map<String, dynamic>`)
 
 **관련 ADR**:
 - [ADR-019 · 솔로 친화적 운영](./adr-019-solo-friendly.md) — "솔로 감당 가능" 기준의 상위 ADR. 이 ADR은 그 구체 사례.

@@ -293,20 +293,20 @@ Android keystore · Play store JSON key · Apple p12 등은 `.gitignore` + GitHu
 ## Code References
 
 **Android 난독화**
-- [`android/app/build.gradle.kts`](https://github.com/storkspear/flutter-mobile-template/blob/main/android/app/build.gradle.kts) — R8 활성화
-- [`android/app/proguard-rules.pro`](https://github.com/storkspear/flutter-mobile-template/blob/main/android/app/proguard-rules.pro) — keep 규칙
-- [`android/app/src/main/res/xml/network_security_config.xml`](https://github.com/storkspear/flutter-mobile-template/blob/main/android/app/src/main/res/xml/network_security_config.xml) — Cleartext 차단
+- [`android/app/build.gradle.kts`](https://github.com/storkspear/template-flutter/blob/main/android/app/build.gradle.kts) — R8 활성화
+- [`android/app/proguard-rules.pro`](https://github.com/storkspear/template-flutter/blob/main/android/app/proguard-rules.pro) — keep 규칙
+- [`android/app/src/main/res/xml/network_security_config.xml`](https://github.com/storkspear/template-flutter/blob/main/android/app/src/main/res/xml/network_security_config.xml) — Cleartext 차단
 
 **SSL Pinning**
-- [`lib/kits/backend_api_kit/ssl_pinning.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/ssl_pinning.dart)
-- [`lib/kits/backend_api_kit/ssl_pinning_env.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/ssl_pinning_env.dart)
+- [`lib/kits/backend_api_kit/ssl_pinning.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/ssl_pinning.dart)
+- [`lib/kits/backend_api_kit/ssl_pinning_env.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/ssl_pinning_env.dart)
 
 **토큰 저장 (ADR-013 상세)**
-- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/storage/secure_storage.dart)
+- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/secure_storage.dart)
 
 **CI · 배포**
-- [`.github/workflows/release-android.yml`](https://github.com/storkspear/flutter-mobile-template/blob/main/.github/workflows/release-android.yml) — 난독화 + 심볼 업로드
-- [`scripts/upload-secrets-to-github.sh`](https://github.com/storkspear/flutter-mobile-template/blob/main/scripts/upload-secrets-to-github.sh) — Secrets 관리
+- [`.github/workflows/release-android.yml`](https://github.com/storkspear/template-flutter/blob/main/.github/workflows/release-android.yml) — 난독화 + 심볼 업로드
+- [`scripts/upload-secrets-to-github.sh`](https://github.com/storkspear/template-flutter/blob/main/scripts/upload-secrets-to-github.sh) — Secrets 관리
 
 **관련 ADR**:
 - [`ADR-013 · 토큰 저장 원자성`](./adr-013-token-atomic-storage.md) — 방어선 4 의 상세

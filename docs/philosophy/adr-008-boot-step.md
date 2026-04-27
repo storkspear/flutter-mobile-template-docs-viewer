@@ -279,20 +279,20 @@ BootStep 이 실패해도 `crashService` 가 off 면 원인 모름. `[Splash] ru
 ## Code References
 
 **계약 + 실행기**
-- [`lib/common/splash/boot_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/splash/boot_step.dart) — 7줄 인터페이스
-- [`lib/common/splash/splash_controller.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/splash/splash_controller.dart) — 39줄 실행기
+- [`lib/common/splash/boot_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/boot_step.dart) — 7줄 인터페이스
+- [`lib/common/splash/splash_controller.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/splash_controller.dart) — 39줄 실행기
 
 **Kit 측 기여**
-- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kit.dart) — `bootSteps` getter 정의
-- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kits.dart) — `allBootSteps` 합성
+- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart) — `bootSteps` getter 정의
+- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart) — `allBootSteps` 합성
 
 **BootStep 구현 예시**
-- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_check_step.dart) — 토큰 유효성 확인
-- [`lib/kits/observability_kit/posthog_init_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/posthog_init_step.dart) — PostHog 초기화 (존재하는 경우)
-- [`lib/kits/update_kit/force_update_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/update_kit/force_update_step.dart) — 강제 업데이트 체크 (존재하는 경우)
+- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_check_step.dart) — 토큰 유효성 확인
+- [`lib/kits/observability_kit/posthog_init_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/posthog_init_step.dart) — PostHog 초기화 (존재하는 경우)
+- [`lib/kits/update_kit/force_update_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/update_kit/force_update_step.dart) — 강제 업데이트 체크 (존재하는 경우)
 
 **main.dart 통합**
-- [`lib/main.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/main.dart) — `SplashController(steps: AppKits.allBootSteps).run()`
+- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — `SplashController(steps: AppKits.allBootSteps).run()`
 
 **관련 ADR**:
 - [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — Kit 의 `bootSteps` 기여 메커니즘

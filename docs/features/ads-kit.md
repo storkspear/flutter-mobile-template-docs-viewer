@@ -74,7 +74,7 @@ Scaffold(
 
 ## Code References
 
-- [`lib/kits/ads_kit/ads_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/ads_kit/ads_kit.dart)
-- [`lib/kits/ads_kit/banner_ad_widget.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/ads_kit/banner_ad_widget.dart)
-- [`lib/kits/ads_kit/ump_consent_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/ads_kit/ump_consent_step.dart)
-- [`lib/kits/ads_kit/att_permission_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/ads_kit/att_permission_step.dart)
+- [`lib/kits/ads_kit/ads_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ads_kit.dart)
+- [`lib/kits/ads_kit/banner_ad_widget.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/banner_ad_widget.dart)
+- [`lib/kits/ads_kit/ump_consent_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ump_consent_step.dart)
+- [`lib/kits/ads_kit/att_permission_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/att_permission_step.dart)

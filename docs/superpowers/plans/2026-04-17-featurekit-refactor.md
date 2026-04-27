@@ -2,7 +2,7 @@
 
 ## Context
 
-사용자는 `/Users/twosun/workspace/flutter-mobile-template` 템플릿을 거의 완성했고, 샘플로 `testFlutterUseTemplateApp`을 만들었다. 그러나 기획·개발이 거의 끝난 두 실제 앱(**richandyoung**=rny, **sumtally**)을 이 템플릿으로 하나도 누락 없이 마이그레이션할 수 있는지 확인해야 한다. 더 나아가, 두 앱을 분석해서 "템플릿이 당연히 제공했어야 하는데 빠진 공통 기능"을 식별하고 템플릿을 보강한다.
+사용자는 `/Users/twosun/workspace/template-flutter` 템플릿을 거의 완성했고, 샘플로 `testFlutterUseTemplateApp`을 만들었다. 그러나 기획·개발이 거의 끝난 두 실제 앱(**richandyoung**=rny, **sumtally**)을 이 템플릿으로 하나도 누락 없이 마이그레이션할 수 있는지 확인해야 한다. 더 나아가, 두 앱을 분석해서 "템플릿이 당연히 제공했어야 하는데 빠진 공통 기능"을 식별하고 템플릿을 보강한다.
 
 결론부터: **현재 템플릿은 두 앱 모두를 누락 없이 담을 수 없다.** 구조적 전제 세 가지(백엔드 API 고정, 인증 필수, 로컬 DB 부재)가 두 앱과 충돌한다. 템플릿에 두 축(로컬 앱 모드 + DB 계층) 추가가 필수이며, 여러 공통 기능도 함께 올려야 실제 "재사용 가능한 템플릿"이 된다.
 
@@ -718,11 +718,11 @@ lib/common/kits/
 ## Critical Files (변경될 파일들)
 
 **Core 구조**:
-- `/Users/twosun/workspace/flutter-mobile-template/lib/common/config/app_config.dart` — AppMode 추가
-- `/Users/twosun/workspace/flutter-mobile-template/lib/common/providers.dart` — 모드별 분기, DB provider 추가
-- `/Users/twosun/workspace/flutter-mobile-template/lib/common/network/api_client.dart` — appScoped 플래그
-- `/Users/twosun/workspace/flutter-mobile-template/lib/common/router/app_router.dart` — 모드별 redirect
-- `/Users/twosun/workspace/flutter-mobile-template/lib/common/splash/splash_controller.dart` — 조건부 auth 단계
+- `/Users/twosun/workspace/template-flutter/lib/common/config/app_config.dart` — AppMode 추가
+- `/Users/twosun/workspace/template-flutter/lib/common/providers.dart` — 모드별 분기, DB provider 추가
+- `/Users/twosun/workspace/template-flutter/lib/common/network/api_client.dart` — appScoped 플래그
+- `/Users/twosun/workspace/template-flutter/lib/common/router/app_router.dart` — 모드별 redirect
+- `/Users/twosun/workspace/template-flutter/lib/common/splash/splash_controller.dart` — 조건부 auth 단계
 
 **신규**:
 - `lib/common/database/` (전체)
@@ -740,7 +740,7 @@ lib/common/kits/
 - `flutter_launcher_icons.yaml`
 
 **Pubspec**:
-- `/Users/twosun/workspace/flutter-mobile-template/pubspec.yaml` — drift, sqlite3_flutter_libs, path_provider, flutter_local_notifications, timezone, workmanager, firebase_core, firebase_remote_config, google_mobile_ads, permission_handler, package_info_plus, device_info_plus, fl_chart, flutter_launcher_icons, freezed, json_serializable, build_runner, drift_dev 추가
+- `/Users/twosun/workspace/template-flutter/pubspec.yaml` — drift, sqlite3_flutter_libs, path_provider, flutter_local_notifications, timezone, workmanager, firebase_core, firebase_remote_config, google_mobile_ads, permission_handler, package_info_plus, device_info_plus, fl_chart, flutter_launcher_icons, freezed, json_serializable, build_runner, drift_dev 추가
 
 **문서**:
 - `docs/conventions/architecture.md` — 모드 섹션 추가

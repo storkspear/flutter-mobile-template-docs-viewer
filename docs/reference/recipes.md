@@ -126,7 +126,7 @@ kits:
 
 ### 전제
 
-- [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 쌍 운영
+- [`template-spring`](https://github.com/storkspear/template-spring) 쌍 운영
 - 백엔드에 해당 앱 slug 등록 + 스키마 생성
 
 ### 대표 사례

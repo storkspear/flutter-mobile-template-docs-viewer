@@ -190,18 +190,18 @@ lib/features/
 ## Code References
 
 **디렉토리 구조**
-- [`lib/core/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/core) — 44 파일 기반 레이어
-- [`lib/kits/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/kits) — 13개 Kit · 65 파일
-- [`lib/common/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/common) — providers · router · splash
-- [`lib/features/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/features) — 파생 레포 영역 (스텁 `home/` + `settings/`)
+- [`lib/core/`](https://github.com/storkspear/template-flutter/tree/main/lib/core) — 44 파일 기반 레이어
+- [`lib/kits/`](https://github.com/storkspear/template-flutter/tree/main/lib/kits) — 13개 Kit · 65 파일
+- [`lib/common/`](https://github.com/storkspear/template-flutter/tree/main/lib/common) — providers · router · splash
+- [`lib/features/`](https://github.com/storkspear/template-flutter/tree/main/lib/features) — 파생 레포 영역 (스텁 `home/` + `settings/`)
 
 **AppKit 계약 (core 에 둠)**
-- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kit.dart) — core 에 위치한 이유: Kit 이 Kit 에 의존하지 않기 위해
-- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kits.dart)
+- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart) — core 에 위치한 이유: Kit 이 Kit 에 의존하지 않기 위해
+- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart)
 
 **Kit 조립 지점 (common)**
-- [`lib/common/providers.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/providers.dart) — 여러 Kit 의 Provider 를 하나로 묶음
-- [`lib/common/router/app_router.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/router/app_router.dart) — Kit redirect 합성
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — 여러 Kit 의 Provider 를 하나로 묶음
+- [`lib/common/router/app_router.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/router/app_router.dart) — Kit redirect 합성
 
 **관련 ADR**:
 - [`ADR-001 · GitHub Template + cherry-pick`](./adr-001-template-cherry-pick.md) — `features/` 를 스텁으로 유지하는 이유

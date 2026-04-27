@@ -74,9 +74,9 @@ NavShellKit(
 
 ## Code References
 
-- [`lib/kits/nav_shell_kit/nav_shell_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/nav_shell_kit/nav_shell_kit.dart)
-- [`lib/kits/nav_shell_kit/bottom_nav_shell.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/nav_shell_kit/bottom_nav_shell.dart)
-- [`lib/kits/nav_shell_kit/nav_tab.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/nav_shell_kit/nav_tab.dart)
+- [`lib/kits/nav_shell_kit/nav_shell_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/nav_shell_kit/nav_shell_kit.dart)
+- [`lib/kits/nav_shell_kit/bottom_nav_shell.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/nav_shell_kit/bottom_nav_shell.dart)
+- [`lib/kits/nav_shell_kit/nav_tab.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/nav_shell_kit/nav_tab.dart)
 
 ---
 

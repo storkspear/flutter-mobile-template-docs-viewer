@@ -8,8 +8,8 @@
 
 | 용어 | 표기 | 설명 |
 |------|------|------|
-| 템플릿 레포 | `flutter-mobile-template` | 본 레포. GitHub Template Repository |
-| 짝 백엔드 | `spring-backend-template` | 함께 쓰이는 백엔드 레포 |
+| 템플릿 레포 | `template-flutter` | 본 레포. GitHub Template Repository |
+| 짝 백엔드 | `template-spring` | 함께 쓰이는 백엔드 레포 |
 | 파생 레포 | 앱별 고유 이름 | 템플릿에서 "Use this template" 으로 만든 레포 |
 | fork | (금지) | "파생 레포" 로 대체 — Use Template 방식이라 fork 아님 |
 | cherry-pick 전파 | — | 템플릿 개선을 파생 레포로 수동 가져오기 |

@@ -269,17 +269,17 @@ access 삭제가 실패해도 refresh 삭제는 **반드시** 시도. 두 토큰
 ## Code References
 
 **토큰 저장**
-- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/storage/secure_storage.dart) — 24줄, iOS/Android 옵션 설정
-- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/storage/token_storage.dart) — 73줄, 원자 저장 + 복구
+- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/secure_storage.dart) — 24줄, iOS/Android 옵션 설정
+- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/token_storage.dart) — 73줄, 원자 저장 + 복구
 
 **일반 설정**
-- [`lib/core/storage/prefs_storage.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/storage/prefs_storage.dart) — SharedPreferences 래퍼
+- [`lib/core/storage/prefs_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/prefs_storage.dart) — SharedPreferences 래퍼
 
 **부팅 복구 호출**
-- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_check_step.dart) — `repairIfPartial` → `hasTokens` → `fetchCurrentUser`
+- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_check_step.dart) — `repairIfPartial` → `hasTokens` → `fetchCurrentUser`
 
 **테스트**
-- [`test/core/storage/token_storage_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/storage/token_storage_test.dart) — 원자성 · 복구 시나리오
+- [`test/core/storage/token_storage_test.dart`](https://github.com/storkspear/template-flutter/blob/main/test/core/storage/token_storage_test.dart) — 원자성 · 복구 시나리오
 
 **관련 ADR**:
 - [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](./adr-010-queued-interceptor.md) — refresh 성공 시 `saveTokens` 호출

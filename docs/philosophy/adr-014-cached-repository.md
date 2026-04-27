@@ -306,16 +306,16 @@ class ExpenseRepository {
 ## Code References
 
 **캐시 인프라**
-- [`lib/core/cache/cache_policy.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/cache/cache_policy.dart) — 5가지 enum
-- [`lib/core/cache/cache_store.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/cache/cache_store.dart) — 추상 인터페이스
-- [`lib/core/cache/memory_cache_store.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/cache/memory_cache_store.dart) — 기본 구현
-- [`lib/core/cache/cached_repository.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/cache/cached_repository.dart) — 151줄 정책 구현
+- [`lib/core/cache/cache_policy.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cache_policy.dart) — 5가지 enum
+- [`lib/core/cache/cache_store.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cache_store.dart) — 추상 인터페이스
+- [`lib/core/cache/memory_cache_store.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/memory_cache_store.dart) — 기본 구현
+- [`lib/core/cache/cached_repository.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cached_repository.dart) — 151줄 정책 구현
 
 **Provider 연결**
-- [`lib/common/providers.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/providers.dart) — `cacheStoreProvider` · `cachedRepositoryProvider`
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — `cacheStoreProvider` · `cachedRepositoryProvider`
 
 **테스트**
-- [`test/core/cache/cached_repository_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/cache/cached_repository_test.dart) — 각 정책 · TTL · SWR 동작 검증
+- [`test/core/cache/cached_repository_test.dart`](https://github.com/storkspear/template-flutter/blob/main/test/core/cache/cached_repository_test.dart) — 각 정책 · TTL · SWR 동작 검증
 
 **관련 ADR**:
 - [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — CacheStore 가 `core/` 에 있는 이유

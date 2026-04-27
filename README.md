@@ -1,11 +1,11 @@
-# flutter-mobile-template-docs-viewer
+# docs-template-flutter
 
-[`flutter-mobile-template`](https://github.com/storkspear/flutter-mobile-template) 의 `docs/` 를 **웹에서 보기 위한 static site** 입니다.
+[`template-flutter`](https://github.com/storkspear/template-flutter) 의 `docs/` 를 **웹에서 보기 위한 static site** 입니다.
 `docs/` 원본은 이 레포 안에 복사본으로 들어있고, SPA (index.html + assets/*) 가 마크다운을 런타임에 렌더링합니다.
 
 ## 🌐 라이브 URL
 
-**<https://storkspear.github.io/flutter-mobile-template-docs-viewer/>**
+**<https://storkspear.github.io/docs-template-flutter/>**
 
 > ⚠️ 로컬 폴더명은 오타(`viwer`)이지만 **리모트 및 URL 은 `viewer`** 입니다.
 
@@ -23,7 +23,7 @@
 └── docs/
     ├── manifest.json     # 사이드바 그룹 · 문서 순서 정의
     ├── README.md         # 책 목차 (사이드바 진입점)
-    └── **/*.md           # flutter-mobile-template 에서 복사된 문서
+    └── **/*.md           # template-flutter 에서 복사된 문서
 ```
 
 ## 로컬에서 실행
@@ -39,7 +39,7 @@ CORS 이슈 때문에 `file://` 로 직접 열면 `fetch('docs/...')` 가 실패
 
 ## 문서 수정 흐름
 
-1. **원본 수정**: `flutter-mobile-template/docs/` 에서 먼저 수정 후 push
+1. **원본 수정**: `template-flutter/docs/` 에서 먼저 수정 후 push
 2. **이 레포에 반영**: 해당 파일(들) 을 여기 `docs/` 로 복사 (수동 또는 스크립트)
 3. **manifest.json 업데이트** (새 파일 추가 / 순서 변경 시)
 4. commit & push → GitHub Actions 가 자동으로 GitHub Pages 배포
@@ -50,5 +50,5 @@ CORS 이슈 때문에 `file://` 로 직접 열면 `fetch('docs/...')` 가 실패
 
 ## 참고
 
-- 원본 레포: [`flutter-mobile-template`](https://github.com/storkspear/flutter-mobile-template)
-- 자매 뷰어: [`spring-backend-template-docs-viewer`](https://storkspear.github.io/spring-backend-template-docs-viewer/)
+- 원본 레포: [`template-flutter`](https://github.com/storkspear/template-flutter)
+- 자매 뷰어: [`docs-template-spring`](https://storkspear.github.io/docs-template-spring/)

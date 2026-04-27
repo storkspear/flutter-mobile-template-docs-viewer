@@ -98,9 +98,9 @@ class BackendUpdateService implements AppUpdateService {
 
 ## Code References
 
-- [`lib/kits/update_kit/update_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/update_kit/update_kit.dart)
-- [`lib/kits/update_kit/app_update_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/update_kit/app_update_service.dart)
-- [`lib/kits/update_kit/force_update_dialog.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/update_kit/force_update_dialog.dart)
+- [`lib/kits/update_kit/update_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/update_kit/update_kit.dart)
+- [`lib/kits/update_kit/app_update_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/update_kit/app_update_service.dart)
+- [`lib/kits/update_kit/force_update_dialog.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/update_kit/force_update_dialog.dart)
 
 ---
 

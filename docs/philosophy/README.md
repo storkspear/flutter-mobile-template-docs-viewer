@@ -1,6 +1,6 @@
 # Repository Philosophy — 책 안내
 
-이 문서는 `flutter-mobile-template` 이 **왜 현재의 구조를 가지게 되었는지** 설명하는 **ADR (Architecture Decision Record) 카드** 모음이에요.
+이 문서는 `template-flutter` 이 **왜 현재의 구조를 가지게 되었는지** 설명하는 **ADR (Architecture Decision Record) 카드** 모음이에요.
 
 각 결정은 추상적인 이론이 아니라 **솔로 인디 개발자가 여러 앱을 빠른 주기로 출시할 때 마주치는 구체적인 고통** 에 대한 답변으로 만들어졌어요. 이 문서를 읽고 나면 "왜 굳이 이렇게 복잡하게 만들었지?" 하는 의문이 풀리기를 바랍니다.
 
@@ -10,7 +10,7 @@
 
 ### 맥락: 앱 공장 전략
 
-이 레포지토리는 **"한 사람이 여러 앱을 고 cadence 로 찍어내는"** 작업 방식을 전제로 해요. 짝이 되는 [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 과 함께 쓰이며, 같은 개발자가 프론트와 백엔드를 동시에 운영하는 구조예요.
+이 레포지토리는 **"한 사람이 여러 앱을 고 cadence 로 찍어내는"** 작업 방식을 전제로 해요. 짝이 되는 [`template-spring`](https://github.com/storkspear/template-spring) 과 함께 쓰이며, 같은 개발자가 프론트와 백엔드를 동시에 운영하는 구조예요.
 
 이 한 문장이 단순해 보이지만, 실제로 펼쳐 보면 다음 세 가지 제약이 자동으로 따라붙어요.
 
@@ -87,7 +87,7 @@
 | "왜 서비스는 인터페이스 + Debug 구현체 패턴?" | [`ADR-006: 인터페이스 기반 서비스 교체`](./adr-006-debug-fallback.md) |
 | "ApiClient ↔ AuthService 순환 의존을 어떻게?" | [`ADR-007: Late Binding`](./adr-007-late-binding.md) |
 | "스플래시 중 뭘 하는가?" | [`ADR-008: 부팅 단계 추상화`](./adr-008-boot-step.md) |
-| "백엔드 응답 스키마가 왜 이렇게?" | [`ADR-009: 1:1 계약 (spring-backend-template 과)`](./adr-009-backend-contract.md) |
+| "백엔드 응답 스키마가 왜 이렇게?" | [`ADR-009: 1:1 계약 (template-spring 과)`](./adr-009-backend-contract.md) |
 | "401 받으면 자동으로 refresh 되는 원리는?" | [`ADR-010: QueuedInterceptor`](./adr-010-queued-interceptor.md) |
 | "인터셉터가 3개인 이유는?" | [`ADR-011: 인터셉터 체인 (Auth / Error / Logging)`](./adr-011-interceptor-chain.md) |
 | "앱마다 유저 테이블이 따로인가?" | [`ADR-012: 앱별 독립 유저 + JWT appSlug`](./adr-012-per-app-user.md) |
@@ -162,7 +162,7 @@ ADR-004 (YAML ↔ Dart 수동 동기화 + CI 검증)
 
 ### 테마 3 — 네트워크 & 백엔드 계약
 
-**이 테마가 답하는 물음**: "spring-backend-template 과 어떻게 쌍을 이루며, HTTP 계층은 어떻게 추상화하는가?"
+**이 테마가 답하는 물음**: "template-spring 과 어떻게 쌍을 이루며, HTTP 계층은 어떻게 추상화하는가?"
 
 - [`ADR-009 · 백엔드 응답 1:1 계약 ({data, error} + PageResponse)`](./adr-009-backend-contract.md)
 - [`ADR-010 · QueuedInterceptor 로 401 자동 갱신`](./adr-010-queued-interceptor.md)

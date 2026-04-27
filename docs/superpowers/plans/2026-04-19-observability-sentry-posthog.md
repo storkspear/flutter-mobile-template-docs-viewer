@@ -68,7 +68,7 @@
 
 - [ ] **Step 2: 의존성 설치**
 
-Run: `cd /Users/sch/devel/workspace/flutter-mobile-template && flutter pub get`
+Run: `cd /Users/sch/devel/workspace/template-flutter && flutter pub get`
 Expected: `Got dependencies!` 메시지, 에러 없음
 
 - [ ] **Step 3: .gitignore 확장**
@@ -125,7 +125,7 @@ POSTHOG_HOST=https://us.i.posthog.com
 - [ ] **Step 5: 커밋**
 
 ```bash
-cd /Users/sch/devel/workspace/flutter-mobile-template
+cd /Users/sch/devel/workspace/template-flutter
 git add pubspec.yaml pubspec.lock .gitignore .env.example
 git commit -m "chore(observability): add sentry_flutter + posthog_flutter deps and env template"
 ```
@@ -167,7 +167,7 @@ void main() {
 
 - [ ] **Step 2: 테스트 실행 — 실패 확인**
 
-Run: `cd /Users/sch/devel/workspace/flutter-mobile-template && flutter test test/core/config/observability_env_test.dart`
+Run: `cd /Users/sch/devel/workspace/template-flutter && flutter test test/core/config/observability_env_test.dart`
 Expected: FAIL — `observability_env.dart` 파일 없음 (Target of URI doesn't exist)
 
 - [ ] **Step 3: observability_env.dart 구현**
@@ -208,7 +208,7 @@ class ObservabilityEnv {
 
 - [ ] **Step 4: 테스트 실행 — 통과 확인**
 
-Run: `cd /Users/sch/devel/workspace/flutter-mobile-template && flutter test test/core/config/observability_env_test.dart`
+Run: `cd /Users/sch/devel/workspace/template-flutter && flutter test test/core/config/observability_env_test.dart`
 Expected: All tests PASS
 
 - [ ] **Step 5: 커밋**

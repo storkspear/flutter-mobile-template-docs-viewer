@@ -1,4 +1,4 @@
-# 📚 flutter-mobile-template — 책 목차 (Developer Journey)
+# 📚 template-flutter — 책 목차 (Developer Journey)
 
 이 문서는 `docs/` 안의 모든 문서를 **읽는 순서** 로 안내해요.
 

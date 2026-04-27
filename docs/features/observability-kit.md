@@ -209,11 +209,11 @@ flutter run \
 
 ## Code References
 
-- [`lib/kits/observability_kit/observability_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/observability_kit.dart)
-- [`lib/kits/observability_kit/sentry_crash_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/sentry_crash_service.dart)
-- [`lib/kits/observability_kit/posthog_analytics_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/posthog_analytics_service.dart)
-- [`lib/kits/observability_kit/analytics_navigator_observer.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/analytics_navigator_observer.dart)
-- [`lib/kits/observability_kit/observability_env.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/observability_env.dart)
+- [`lib/kits/observability_kit/observability_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/observability_kit.dart)
+- [`lib/kits/observability_kit/sentry_crash_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/sentry_crash_service.dart)
+- [`lib/kits/observability_kit/posthog_analytics_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/posthog_analytics_service.dart)
+- [`lib/kits/observability_kit/analytics_navigator_observer.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/analytics_navigator_observer.dart)
+- [`lib/kits/observability_kit/observability_env.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/observability_env.dart)
 
 ---
 

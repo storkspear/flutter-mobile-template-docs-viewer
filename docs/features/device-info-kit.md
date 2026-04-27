@@ -68,5 +68,5 @@ await ref.read(crashServiceProvider).addBreadcrumb('Device info', data: info.toM
 
 ## Code References
 
-- [`lib/kits/device_info_kit/device_info_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/device_info_kit/device_info_kit.dart)
-- [`lib/kits/device_info_kit/device_info_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/device_info_kit/device_info_service.dart)
+- [`lib/kits/device_info_kit/device_info_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/device_info_kit/device_info_kit.dart)
+- [`lib/kits/device_info_kit/device_info_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/device_info_kit/device_info_service.dart)

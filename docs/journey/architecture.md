@@ -217,7 +217,7 @@ dart run tool/configure_app.dart
 | i18n | flutter_localizations · intl (gen_l10n) |
 | 차트 | fl_chart |
 | 광고 | google_mobile_ads (선택) |
-| 백엔드 연동 | [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 짝 |
+| 백엔드 연동 | [`template-spring`](https://github.com/storkspear/template-spring) 짝 |
 
 최소 지원:
 - **Android**: API 23 (6.0) +

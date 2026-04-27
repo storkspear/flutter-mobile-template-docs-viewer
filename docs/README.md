@@ -1,8 +1,8 @@
-# flutter-mobile-template — Docs
+# template-flutter — Docs
 
-이 폴더의 문서는 `flutter-mobile-template` 을 기반으로 **파생 레포를 만들고 운영하는 개발자** 를 위한 가이드예요. 폴더 구조는 독자의 여정에 맞게 정리되어 있고, 각 문서는 단일 목적에 집중합니다.
+이 폴더의 문서는 `template-flutter` 을 기반으로 **파생 레포를 만들고 운영하는 개발자** 를 위한 가이드예요. 폴더 구조는 독자의 여정에 맞게 정리되어 있고, 각 문서는 단일 목적에 집중합니다.
 
-> **짝이 되는 백엔드 템플릿**: 이 프론트엔드 템플릿은 [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 과 쌍으로 작동해요. 백엔드 API 계약 · 에러 코드 · JWT 구조가 서로 1:1 대응되며, 같은 솔로 인디 개발자가 "앱 공장 전략" 으로 두 레포를 함께 운영하는 것을 전제로 합니다.
+> **짝이 되는 백엔드 템플릿**: 이 프론트엔드 템플릿은 [`template-spring`](https://github.com/storkspear/template-spring) 과 쌍으로 작동해요. 백엔드 API 계약 · 에러 코드 · JWT 구조가 서로 1:1 대응되며, 같은 솔로 인디 개발자가 "앱 공장 전략" 으로 두 레포를 함께 운영하는 것을 전제로 합니다.
 
 ---
 
@@ -71,7 +71,7 @@
 - [`permissions_kit`](./features/permissions-kit.md) — 런타임 권한
 - [`device_info_kit`](./features/device-info-kit.md) — 기기 정보
 
-## API 계약 (api-contract/) — spring-backend-template 과의 쌍
+## API 계약 (api-contract/) — template-spring 과의 쌍
 
 백엔드 템플릿과 1:1 로 맞물리는 약속들입니다. 스키마가 어긋나면 양쪽이 동시에 안 돌아가요.
 

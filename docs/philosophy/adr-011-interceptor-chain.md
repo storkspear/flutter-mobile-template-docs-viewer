@@ -299,18 +299,18 @@ Dio 의 onError 체인은 설치 역순이라 `Logging → Error → Auth`. Erro
 ## Code References
 
 **3개 인터셉터 구현**
-- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 73줄
-- [`lib/kits/backend_api_kit/interceptors/error_interceptor.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/interceptors/error_interceptor.dart) — 51줄
-- [`lib/kits/backend_api_kit/interceptors/logging_interceptor.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/interceptors/logging_interceptor.dart) — 30줄 내외
+- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 73줄
+- [`lib/kits/backend_api_kit/interceptors/error_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/error_interceptor.dart) — 51줄
+- [`lib/kits/backend_api_kit/interceptors/logging_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/logging_interceptor.dart) — 30줄 내외
 
 **조립 지점**
-- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_client.dart) — `_dio.interceptors.addAll([...])`
+- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_client.dart) — `_dio.interceptors.addAll([...])`
 
 **연결되는 에러 타입**
-- [`lib/kits/backend_api_kit/api_exception.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_exception.dart) — ErrorInterceptor 의 변환 대상
+- [`lib/kits/backend_api_kit/api_exception.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_exception.dart) — ErrorInterceptor 의 변환 대상
 
 **테스트**
-- [`test/kits/backend_api_kit/interceptors/`](https://github.com/storkspear/flutter-mobile-template/tree/main/test/kits/backend_api_kit/interceptors) — 각 인터셉터 단위 테스트
+- [`test/kits/backend_api_kit/interceptors/`](https://github.com/storkspear/template-flutter/tree/main/test/kits/backend_api_kit/interceptors) — 각 인터셉터 단위 테스트
 
 **관련 ADR**:
 - [`ADR-009 · 백엔드 응답 1:1 계약`](./adr-009-backend-contract.md) — ErrorInterceptor 가 변환하는 `ApiException` 구조

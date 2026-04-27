@@ -64,7 +64,7 @@ DonutGauge(
 
 ## Code References
 
-- [`lib/kits/charts_kit/charts_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/charts_kit/charts_kit.dart)
-- [`lib/kits/charts_kit/app_line_chart.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/charts_kit/app_line_chart.dart)
-- [`lib/kits/charts_kit/app_pie_chart.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/charts_kit/app_pie_chart.dart)
-- [`lib/kits/charts_kit/donut_gauge.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/charts_kit/donut_gauge.dart)
+- [`lib/kits/charts_kit/charts_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/charts_kit/charts_kit.dart)
+- [`lib/kits/charts_kit/app_line_chart.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/charts_kit/app_line_chart.dart)
+- [`lib/kits/charts_kit/app_pie_chart.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/charts_kit/app_pie_chart.dart)
+- [`lib/kits/charts_kit/donut_gauge.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/charts_kit/donut_gauge.dart)

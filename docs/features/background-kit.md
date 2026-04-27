@@ -82,5 +82,5 @@ void _syncCallback() {
 
 ## Code References
 
-- [`lib/kits/background_kit/background_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/background_kit/background_kit.dart)
-- [`lib/kits/background_kit/background_task_scheduler.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/background_kit/background_task_scheduler.dart)
+- [`lib/kits/background_kit/background_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_kit.dart)
+- [`lib/kits/background_kit/background_task_scheduler.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_task_scheduler.dart)

@@ -229,19 +229,19 @@ Riverpod Provider 로 팔레트를 감싸볼까 고민했어요. 하지만 **팔
 ## Code References
 
 **팔레트 인프라**
-- [`lib/core/theme/app_palette.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/theme/app_palette.dart) — 81줄 추상 + DefaultPalette
-- [`lib/core/theme/app_palette_registry.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/theme/app_palette_registry.dart) — 70줄 레지스트리
+- [`lib/core/theme/app_palette.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette.dart) — 81줄 추상 + DefaultPalette
+- [`lib/core/theme/app_palette_registry.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette_registry.dart) — 70줄 레지스트리
 
 **디자인 토큰 (팔레트 외 간격 · 타이포 등)**
-- [`lib/core/theme/app_spacing.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/theme/app_spacing.dart)
-- [`lib/core/theme/app_typography.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/theme/app_typography.dart)
+- [`lib/core/theme/app_spacing.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_spacing.dart)
+- [`lib/core/theme/app_typography.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_typography.dart)
 
 **통합 지점**
-- [`lib/app.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/app.dart) — MaterialApp 이 `ValueListenableBuilder` 로 구독
-- [`lib/main.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/main.dart) — `AppPaletteRegistry.install(DefaultPalette())` 호출
+- [`lib/app.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/app.dart) — MaterialApp 이 `ValueListenableBuilder` 로 구독
+- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — `AppPaletteRegistry.install(DefaultPalette())` 호출
 
 **테스트**
-- [`test/core/theme/app_palette_registry_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/core/theme/app_palette_registry_test.dart) — 등록 · 교체 · 중복 에러
+- [`test/core/theme/app_palette_registry_test.dart`](https://github.com/storkspear/template-flutter/blob/main/test/core/theme/app_palette_registry_test.dart) — 등록 · 교체 · 중복 에러
 
 **관련 ADR**:
 - [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — 팔레트가 `core/theme/` 에 있는 이유

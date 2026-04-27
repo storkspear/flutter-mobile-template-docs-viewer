@@ -1,12 +1,12 @@
-# flutter-mobile-template Docs Improvement Plan
+# template-flutter Docs Improvement Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** flutter-mobile-template-docs-viewer의 문서 수준을 spring-backend-template-docs-viewer 수준으로 끌어올린다.
+**Goal:** docs-template-flutter의 문서 수준을 docs-template-spring 수준으로 끌어올린다.
 
-**Architecture:** 기존 docs를 코드와 대조해 정확도를 높이고, Critical/High 우선순위 순으로 누락 문서를 신규 작성한다. 모든 변경은 flutter-mobile-template/docs/ 에 반영 후 flutter-mobile-template-docs-viewer/docs/ 로 동기화(rsync)한다.
+**Architecture:** 기존 docs를 코드와 대조해 정확도를 높이고, Critical/High 우선순위 순으로 누락 문서를 신규 작성한다. 모든 변경은 template-flutter/docs/ 에 반영 후 docs-template-flutter/docs/ 로 동기화(rsync)한다.
 
-**Tech Stack:** Markdown, flutter-mobile-template 코드베이스 (Dart/Flutter), docs-viewer manifest.json
+**Tech Stack:** Markdown, template-flutter 코드베이스 (Dart/Flutter), docs-viewer manifest.json
 
 ---
 
@@ -15,14 +15,14 @@
 - 각 Task 완료 후 사용자 확인 후 다음 Task 진행
 - 코드에 없는 내용은 추측으로 작성하지 않는다
 - 확인이 필요한 사항은 사용자에게 질문 후 진행
-- 모든 변경은 flutter-mobile-template 원본 레포에 먼저 작성 → docs-viewer로 rsync
+- 모든 변경은 template-flutter 원본 레포에 먼저 작성 → docs-viewer로 rsync
 
 ## 동기화 명령 (매 Task 완료 후 실행)
 
 ```bash
 rsync -av --exclude='superpowers/' \
-  /Users/twosun/workspace/flutter-mobile-template/docs/ \
-  /Users/twosun/workspace/flutter-mobile-template-docs-viwer/docs/
+  /Users/twosun/workspace/template-flutter/docs/ \
+  /Users/twosun/workspace/template-flutter-docs-viwer/docs/
 ```
 
 ---
@@ -193,12 +193,12 @@ rsync -av --exclude='superpowers/' \
 - 그룹 순서 최종 확인
 
 **파일:**
-- `flutter-mobile-template-docs-viwer/docs/manifest.json`
+- `template-flutter-docs-viwer/docs/manifest.json`
 
 - [ ] 전체 manifest 리뷰
 - [ ] 누락 항목 없는지 확인
 - [ ] 커밋: `docs: finalize manifest.json with all new documents`
-- [ ] flutter-mobile-template/docs 변경사항도 git push
+- [ ] template-flutter/docs 변경사항도 git push
 
 ---
 

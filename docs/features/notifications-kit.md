@@ -111,9 +111,9 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
 
 ## Code References
 
-- [`lib/kits/notifications_kit/notification_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/notification_service.dart) — 추상 + Debug
-- [`lib/kits/notifications_kit/scheduled_alert_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/scheduled_alert_service.dart)
-- [`lib/kits/notifications_kit/device_registration.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/device_registration.dart)
+- [`lib/kits/notifications_kit/notification_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/notifications_kit/notification_service.dart) — 추상 + Debug
+- [`lib/kits/notifications_kit/scheduled_alert_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/notifications_kit/scheduled_alert_service.dart)
+- [`lib/kits/notifications_kit/device_registration.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/notifications_kit/device_registration.dart)
 
 ---
 

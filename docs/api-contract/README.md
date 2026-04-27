@@ -1,6 +1,6 @@
 # API Contract
 
-`flutter-mobile-template` 과 짝 백엔드 [`spring-backend-template`](https://github.com/storkspear/spring-backend-template) 의 **1:1 계약** 정리. 응답 스키마 · 에러 코드 · 인증 흐름이 양쪽에서 **완전 동일** 해요.
+`template-flutter` 과 짝 백엔드 [`template-spring`](https://github.com/storkspear/template-spring) 의 **1:1 계약** 정리. 응답 스키마 · 에러 코드 · 인증 흐름이 양쪽에서 **완전 동일** 해요.
 
 > **왜 1:1?** 같은 개발자가 프론트와 백엔드를 함께 운영하는 앱 공장 전제. Mapper 층 제거. 근거는 [`ADR-009`](../philosophy/adr-009-backend-contract.md).
 
@@ -46,4 +46,4 @@
 
 - [`ADR-009 · 백엔드 응답 1:1 계약`](../philosophy/adr-009-backend-contract.md)
 - [`ADR-012 · 앱별 독립 유저 + JWT appSlug`](../philosophy/adr-012-per-app-user.md)
-- [짝 백엔드: spring-backend-template](https://github.com/storkspear/spring-backend-template)
+- [짝 백엔드: template-spring](https://github.com/storkspear/template-spring)

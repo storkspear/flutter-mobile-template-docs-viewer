@@ -78,9 +78,9 @@ class WelcomeStep implements OnboardingStep {
 
 ## Code References
 
-- [`lib/kits/onboarding_kit/onboarding_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/onboarding_kit/onboarding_kit.dart)
-- [`lib/kits/onboarding_kit/onboarding_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/onboarding_kit/onboarding_step.dart)
-- [`lib/kits/onboarding_kit/onboarding_scaffold.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/onboarding_kit/onboarding_scaffold.dart)
+- [`lib/kits/onboarding_kit/onboarding_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/onboarding_kit/onboarding_kit.dart)
+- [`lib/kits/onboarding_kit/onboarding_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/onboarding_kit/onboarding_step.dart)
+- [`lib/kits/onboarding_kit/onboarding_scaffold.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/onboarding_kit/onboarding_scaffold.dart)
 
 ---
 

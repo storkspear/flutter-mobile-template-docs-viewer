@@ -181,12 +181,12 @@ class ExpenseListViewModel extends StateNotifier<ExpenseListState> {
 
 ## Code References
 
-- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_client.dart)
-- [`lib/kits/backend_api_kit/api_response.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_response.dart)
-- [`lib/kits/backend_api_kit/api_exception.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_exception.dart)
-- [`lib/kits/backend_api_kit/error_code.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/error_code.dart)
-- [`lib/kits/backend_api_kit/interceptors/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/kits/backend_api_kit/interceptors) — 3개 인터셉터
-- [`lib/kits/backend_api_kit/search_request.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/search_request.dart)
+- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_client.dart)
+- [`lib/kits/backend_api_kit/api_response.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_response.dart)
+- [`lib/kits/backend_api_kit/api_exception.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_exception.dart)
+- [`lib/kits/backend_api_kit/error_code.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/error_code.dart)
+- [`lib/kits/backend_api_kit/interceptors/`](https://github.com/storkspear/template-flutter/tree/main/lib/kits/backend_api_kit/interceptors) — 3개 인터셉터
+- [`lib/kits/backend_api_kit/search_request.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/search_request.dart)
 
 ---
 

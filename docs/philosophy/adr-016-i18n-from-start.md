@@ -267,21 +267,21 @@ ViewModel 은 `errorCode`, Screen 에서 `S.of(context)` 변환. 이 관용은 *
 ## Code References
 
 **설정 파일**
-- [`l10n.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/l10n.yaml) — gen-l10n 설정
-- [`pubspec.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/pubspec.yaml) — `generate: true` 플래그
+- [`l10n.yaml`](https://github.com/storkspear/template-flutter/blob/main/l10n.yaml) — gen-l10n 설정
+- [`pubspec.yaml`](https://github.com/storkspear/template-flutter/blob/main/pubspec.yaml) — `generate: true` 플래그
 
 **ARB 파일**
-- [`lib/core/i18n/app_ko.arb`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/i18n/app_ko.arb) — 템플릿 언어
-- [`lib/core/i18n/app_en.arb`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/i18n/app_en.arb) — 영어 번역
+- [`lib/core/i18n/app_ko.arb`](https://github.com/storkspear/template-flutter/blob/main/lib/core/i18n/app_ko.arb) — 템플릿 언어
+- [`lib/core/i18n/app_en.arb`](https://github.com/storkspear/template-flutter/blob/main/lib/core/i18n/app_en.arb) — 영어 번역
 
 **자동 생성 (커밋 대상)**
-- [`lib/core/i18n/app_localizations.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/i18n/app_localizations.dart) — `S` 클래스
-- [`lib/core/i18n/app_localizations_ko.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/i18n/app_localizations_ko.dart)
-- [`lib/core/i18n/app_localizations_en.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/i18n/app_localizations_en.dart)
+- [`lib/core/i18n/app_localizations.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/i18n/app_localizations.dart) — `S` 클래스
+- [`lib/core/i18n/app_localizations_ko.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/i18n/app_localizations_ko.dart)
+- [`lib/core/i18n/app_localizations_en.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/i18n/app_localizations_en.dart)
 
 **사용 예시**
-- [`lib/common/router/app_router.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/router/app_router.dart) — `S.of(context).loading` 호출
-- [`lib/kits/auth_kit/ui/login/login_screen.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/ui/login/login_screen.dart) — Screen 에서 번역
+- [`lib/common/router/app_router.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/router/app_router.dart) — `S.of(context).loading` 호출
+- [`lib/kits/auth_kit/ui/login/login_screen.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/ui/login/login_screen.dart) — Screen 에서 번역
 
 **관련 ADR**:
 - [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — ViewModel 이 i18n 의존 안 하는 원칙

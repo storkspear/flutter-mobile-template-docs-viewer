@@ -113,7 +113,7 @@
 - ❌ BLoC · GetX 상태관리 (ADR-005)
 - ❌ OpenAPI codegen (ADR-009)
 - ❌ 서비스 로케이터 · 2번째 DI (ADR-005)
-- ❌ 마이크로서비스 (spring-backend-template ADR-001)
+- ❌ 마이크로서비스 (template-spring ADR-001)
 
 ### 관리형 서비스 선호
 
@@ -199,7 +199,7 @@ Auth 없는 로컬 앱은 `AuthKit` 불필요. 백엔드 없는 앱은 `BackendA
 
 ## 관련 사례 (Prior Art)
 
-- [`spring-backend-template ADR-007 · 솔로 친화적 운영`](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-007-solo-friendly-operations.md) — 짝이 되는 백엔드의 동일 철학
+- [`template-spring ADR-007 · 솔로 친화적 운영`](https://github.com/storkspear/template-spring/blob/main/docs/journey/philosophy/adr-007-solo-friendly-operations.md) — 짝이 되는 백엔드의 동일 철학
 - ["The Majestic Monolith" by DHH](https://m.signalvnoise.com/the-majestic-monolith/) — 모놀리스 옹호의 정석 글
 - ["Don't Let the Microservice Hype Fool You"](https://dropbox.tech/infrastructure/atlas--our-journey-from-a-python-monolith-to-a-managed-platform) — 대규모에서도 신중한 마이크로서비스
 - [Indie Hackers 인터뷰들](https://www.indiehackers.com/interviews) — 솔로 · 소규모 운영 실제 사례

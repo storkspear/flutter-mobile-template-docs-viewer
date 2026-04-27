@@ -251,21 +251,21 @@ Sentry 가 안 찍혀서 "Sentry SDK 버그?" 의심했는데 원인은 `--dart-
 ## Code References
 
 **추상 인터페이스 (core 레이어)**
-- [`lib/core/analytics/analytics_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/analytics/analytics_service.dart) — 추상 + Debug 구현
-- [`lib/core/analytics/crash_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/analytics/crash_service.dart) — 추상 + Debug 구현
+- [`lib/core/analytics/analytics_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/analytics/analytics_service.dart) — 추상 + Debug 구현
+- [`lib/core/analytics/crash_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/analytics/crash_service.dart) — 추상 + Debug 구현
 
 **기본 Provider**
-- [`lib/common/providers.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/providers.dart) — `analyticsProvider` · `crashServiceProvider` · `notificationServiceProvider` Debug 기본
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — `analyticsProvider` · `crashServiceProvider` · `notificationServiceProvider` Debug 기본
 
 **실제 구현체 (kits 레이어)**
-- [`lib/kits/observability_kit/sentry_crash_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/sentry_crash_service.dart)
-- [`lib/kits/observability_kit/posthog_analytics_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/posthog_analytics_service.dart)
-- [`lib/kits/observability_kit/observability_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/observability_kit.dart) — `providerOverrides` 로 교체
-- [`lib/kits/observability_kit/observability_env.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/observability_kit/observability_env.dart) — 환경 변수 감지
+- [`lib/kits/observability_kit/sentry_crash_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/sentry_crash_service.dart)
+- [`lib/kits/observability_kit/posthog_analytics_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/posthog_analytics_service.dart)
+- [`lib/kits/observability_kit/observability_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/observability_kit.dart) — `providerOverrides` 로 교체
+- [`lib/kits/observability_kit/observability_env.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/observability_env.dart) — 환경 변수 감지
 
 **notifications_kit 의 같은 패턴**
-- [`lib/kits/notifications_kit/notification_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/notification_service.dart) — 추상 + Debug
-- [`lib/kits/notifications_kit/fcm_notification_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/notifications_kit/fcm_notification_service.dart) — FCM 구현
+- [`lib/kits/notifications_kit/notification_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/notifications_kit/notification_service.dart) — 추상 + Debug
+- [`lib/kits/notifications_kit/fcm_notification_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/notifications_kit/fcm_notification_service.dart) — FCM 구현
 
 **관련 ADR**:
 - [`ADR-002 · 3계층 모듈 구조`](./adr-002-layered-modules.md) — 인터페이스를 `core/` 에 두는 이유

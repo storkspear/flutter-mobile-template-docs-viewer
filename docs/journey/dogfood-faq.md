@@ -60,7 +60,7 @@
 
 ### Q. `snake_case` JSON 도 지원하나요?
 
-**A.** 안 함. 백엔드 · 프론트 둘 다 **camelCase** 고정. 짝 `spring-backend-template` 이 Jackson 기본값 camelCase 로 직렬화.
+**A.** 안 함. 백엔드 · 프론트 둘 다 **camelCase** 고정. 짝 `template-spring` 이 Jackson 기본값 camelCase 로 직렬화.
 
 ### Q. GraphQL · tRPC 로 바꾸고 싶어요.
 
@@ -222,7 +222,7 @@ npx @sentry/cli upload-dif --org $ORG --project $PROJECT build/app/symbols
 
 ### Q. Flutter 말고 React Native · Swift · Kotlin 으로 바꿔도 되나요?
 
-**A.** 템플릿이 Flutter 전제. 다른 프레임워크는 별도 템플릿 필요. 짝 `spring-backend-template` 은 유지 가능.
+**A.** 템플릿이 Flutter 전제. 다른 프레임워크는 별도 템플릿 필요. 짝 `template-spring` 은 유지 가능.
 
 ### Q. 웹 · 데스크톱 지원?
 

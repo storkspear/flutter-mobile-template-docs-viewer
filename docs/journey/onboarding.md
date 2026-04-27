@@ -35,7 +35,7 @@ flutter doctor
 
 ### 1. GitHub 에서 "Use this template"
 
-1. [`flutter-mobile-template`](https://github.com/storkspear/flutter-mobile-template) 접속
+1. [`template-flutter`](https://github.com/storkspear/template-flutter) 접속
 2. 우측 상단 **"Use this template"** → "Create a new repository"
 3. 새 레포 이름 · 소유자 · 공개 여부 선택
 4. 생성
@@ -61,7 +61,7 @@ commit-msg · pre-commit · pre-push 훅이 자동 적용돼요.
 ### 4. 템플릿 remote 등록 (선택, cherry-pick 전파용)
 
 ```bash
-git remote add template https://github.com/storkspear/flutter-mobile-template.git
+git remote add template https://github.com/storkspear/template-flutter.git
 git fetch template
 ```
 

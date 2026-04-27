@@ -257,22 +257,22 @@ jobs:
 - [Cargo `Cargo.toml` vs `Cargo.lock`](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) — 선언 · 락 파일 이원 관리
 - [Gradle Version Catalog (`libs.versions.toml`)](https://docs.gradle.org/current/userguide/platforms.html) — TOML 선언 + Gradle 코드에서 참조
 - [Terraform `.tfvars` + HCL](https://developer.hashicorp.com/terraform/language/values/variables) — 변수 선언 vs 실제 리소스
-- [`spring-backend-template 의 ADR-004 ArchUnit`](https://github.com/storkspear/spring-backend-template/blob/main/docs/journey/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
+- [`template-spring 의 ADR-004 ArchUnit`](https://github.com/storkspear/template-spring/blob/main/docs/journey/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
 
 ## Code References
 
 **검증 도구**
-- [`tool/configure_app.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/tool/configure_app.dart) — 233줄 단일 Dart 스크립트
-- [`.github/workflows/ci.yml`](https://github.com/storkspear/flutter-mobile-template/blob/main/.github/workflows/ci.yml) — `--audit` 호출 지점
+- [`tool/configure_app.dart`](https://github.com/storkspear/template-flutter/blob/main/tool/configure_app.dart) — 233줄 단일 Dart 스크립트
+- [`.github/workflows/ci.yml`](https://github.com/storkspear/template-flutter/blob/main/.github/workflows/ci.yml) — `--audit` 호출 지점
 
 **선언 파일**
-- [`app_kits.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/app_kits.yaml) — 루트의 활성 Kit 선언
-- [`lib/main.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/main.dart) — `AppKits.install([...])` 생성자 호출
+- [`app_kits.yaml`](https://github.com/storkspear/template-flutter/blob/main/app_kits.yaml) — 루트의 활성 Kit 선언
+- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — `AppKits.install([...])` 생성자 호출
 - Kit 별 `kit_manifest.yaml` — 각 Kit 폴더 (예: `lib/kits/auth_kit/kit_manifest.yaml`)
 
 **Recipe 샘플**
-- [`recipes/local-only-tracker.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/recipes/local-only-tracker.yaml)
-- [`recipes/backend-auth-app.yaml`](https://github.com/storkspear/flutter-mobile-template/blob/main/recipes/backend-auth-app.yaml)
+- [`recipes/local-only-tracker.yaml`](https://github.com/storkspear/template-flutter/blob/main/recipes/local-only-tracker.yaml)
+- [`recipes/backend-auth-app.yaml`](https://github.com/storkspear/template-flutter/blob/main/recipes/backend-auth-app.yaml)
 
 **관련 ADR**:
 - [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — 두 곳 선언이 필요한 원인

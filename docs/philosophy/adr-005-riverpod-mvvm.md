@@ -219,16 +219,16 @@ Riverpod 3.0 이 `Notifier` + `AsyncNotifier` 를 새 표준으로 밀고 있어
 ## Code References
 
 **전역 DI**
-- [`lib/common/providers.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/providers.dart) — 105줄, 모든 전역 Provider 정의
-- [`lib/main.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/main.dart) — `ProviderContainer` 생성 + `UncontrolledProviderScope` 주입
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — 105줄, 모든 전역 Provider 정의
+- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — `ProviderContainer` 생성 + `UncontrolledProviderScope` 주입
 
 **ViewModel 파일럿**
-- [`lib/kits/auth_kit/ui/login/login_view_model.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/ui/login/login_view_model.dart) — 본 ADR 의 샘플. 109줄
-- [`lib/kits/auth_kit/ui/password_reset/password_reset_view_model.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/ui/password_reset/password_reset_view_model.dart)
-- [`lib/kits/auth_kit/ui/verify_email/verify_email_view_model.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/ui/verify_email/verify_email_view_model.dart)
+- [`lib/kits/auth_kit/ui/login/login_view_model.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/ui/login/login_view_model.dart) — 본 ADR 의 샘플. 109줄
+- [`lib/kits/auth_kit/ui/password_reset/password_reset_view_model.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/ui/password_reset/password_reset_view_model.dart)
+- [`lib/kits/auth_kit/ui/verify_email/verify_email_view_model.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/ui/verify_email/verify_email_view_model.dart)
 
 **테스트 패턴**
-- [`test/kits/auth_kit/ui/login_view_model_test.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/test/kits/auth_kit/ui/login_view_model_test.dart) — `ProviderContainer(overrides:)` 로 mock 주입
+- [`test/kits/auth_kit/ui/login_view_model_test.dart`](https://github.com/storkspear/template-flutter/blob/main/test/kits/auth_kit/ui/login_view_model_test.dart) — `ProviderContainer(overrides:)` 로 mock 주입
 
 **관련 ADR**:
 - [`ADR-003 · FeatureKit 동적 레지스트리`](./adr-003-featurekit-registry.md) — Kit 의 `providerOverrides` 가 본 ADR 의 Provider 체인과 맞물림

@@ -154,9 +154,9 @@ dart run test:test test/migration_fingerprint/ -u
 
 ## Code References
 
-- [`lib/kits/local_db_kit/local_db_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/local_db_kit/local_db_kit.dart)
-- [`lib/kits/local_db_kit/db_migration_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/local_db_kit/db_migration_step.dart)
-- [`lib/kits/local_db_kit/lazy_native_database.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/local_db_kit/lazy_native_database.dart)
+- [`lib/kits/local_db_kit/local_db_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/local_db_kit.dart)
+- [`lib/kits/local_db_kit/db_migration_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/db_migration_step.dart)
+- [`lib/kits/local_db_kit/lazy_native_database.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/lazy_native_database.dart)
 
 ---
 

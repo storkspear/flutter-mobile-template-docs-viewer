@@ -231,12 +231,12 @@ class ApiClient {
 ## Code References
 
 **순환 해결 지점**
-- [`lib/common/providers.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/common/providers.dart) — `apiClientProvider` 와 `authServiceProvider` 정의
-- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/api_client.dart) — `onTokenRefresh` 생성자 파라미터
-- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 401 수신 시 `onTokenRefresh()` 호출
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — `apiClientProvider` 와 `authServiceProvider` 정의
+- [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_client.dart) — `onTokenRefresh` 생성자 파라미터
+- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 401 수신 시 `onTokenRefresh()` 호출
 
 **AuthService 의 refresh 구현**
-- [`lib/kits/auth_kit/auth_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_service.dart) — `refreshToken()` 메서드
+- [`lib/kits/auth_kit/auth_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_service.dart) — `refreshToken()` 메서드
 
 **관련 ADR**:
 - [`ADR-005 · Riverpod + MVVM`](./adr-005-riverpod-mvvm.md) — 본 ADR 이 기반하는 Provider 시스템

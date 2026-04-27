@@ -220,7 +220,7 @@ try {
 
 ### 백엔드
 
-- [ ] `spring-backend-template` 쌍 운영 전제
+- [ ] `template-spring` 쌍 운영 전제
 - [ ] 유저 테이블이 `appSlug` 기반 격리 ([`ADR-012`](../philosophy/adr-012-per-app-user.md))
 - [ ] `/auth/login` · `/auth/signup` · `/auth/refresh` · `/auth/logout` · `/users/me` 엔드포인트 제공
 
@@ -228,12 +228,12 @@ try {
 
 ## Code References
 
-- [`lib/kits/auth_kit/auth_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_kit.dart) — `AppKit` 구현
-- [`lib/kits/auth_kit/auth_service.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_service.dart)
-- [`lib/kits/auth_kit/auth_state.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_state.dart)
-- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/auth_kit/auth_check_step.dart)
-- [`lib/kits/auth_kit/ui/`](https://github.com/storkspear/flutter-mobile-template/tree/main/lib/kits/auth_kit/ui) — 3개 화면 + ViewModel
-- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/storage/token_storage.dart) — 원자 저장
+- [`lib/kits/auth_kit/auth_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_kit.dart) — `AppKit` 구현
+- [`lib/kits/auth_kit/auth_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_service.dart)
+- [`lib/kits/auth_kit/auth_state.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_state.dart)
+- [`lib/kits/auth_kit/auth_check_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/auth_check_step.dart)
+- [`lib/kits/auth_kit/ui/`](https://github.com/storkspear/template-flutter/tree/main/lib/kits/auth_kit/ui) — 3개 화면 + ViewModel
+- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/token_storage.dart) — 원자 저장
 
 ---
 

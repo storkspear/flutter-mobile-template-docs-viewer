@@ -1,10 +1,10 @@
 # Documentation Style Guide
 
-이 문서는 **flutter-mobile-template `docs/` 를 어떻게 쓸 것인가** 의 규칙을 모아요. 추상 원칙이 아니라 **`journey/philosophy/` 의 파일럿 ADR (003 · 005 · 009) 에서 귀납적으로 추출된 규칙** 이에요. 각 규칙마다 구체 샘플 링크가 있어야 하며, 샘플 없는 규칙은 근거가 약해요.
+이 문서는 **template-flutter `docs/` 를 어떻게 쓸 것인가** 의 규칙을 모아요. 추상 원칙이 아니라 **`journey/philosophy/` 의 파일럿 ADR (003 · 005 · 009) 에서 귀납적으로 추출된 규칙** 이에요. 각 규칙마다 구체 샘플 링크가 있어야 하며, 샘플 없는 규칙은 근거가 약해요.
 
 > **이 문서의 위상**: `docs/` 안의 모든 문서가 참조하는 메타 문서. 새 문서 쓸 때 이 가이드를 따르고, 예외가 필요하면 "왜 이 경우에 예외인가" 를 본 문서에 추가.
 
-> **spring-backend-template 과의 관계**: 짝이 되는 백엔드 템플릿의 [`STYLE_GUIDE`](https://github.com/storkspear/spring-backend-template/blob/main/docs/STYLE_GUIDE.md) 와 정합성을 유지해요. 독자 레벨 분류 (Level 0~3), ADR 8섹션, 해요체, 상대경로 링크 규칙이 공통. Flutter 고유 사항 (Dart 코드 블록, AppKit 용어) 만 차이.
+> **template-spring 과의 관계**: 짝이 되는 백엔드 템플릿의 [`STYLE_GUIDE`](https://github.com/storkspear/template-spring/blob/main/docs/STYLE_GUIDE.md) 와 정합성을 유지해요. 독자 레벨 분류 (Level 0~3), ADR 8섹션, 해요체, 상대경로 링크 규칙이 공통. Flutter 고유 사항 (Dart 코드 블록, AppKit 용어) 만 차이.
 
 ---
 
@@ -72,7 +72,7 @@
 ### 선택 섹션
 
 - `### 설계 선택 포인트` — 결정 안에 하위 결정이 여러 개일 때 (`결정` 섹션 내부 서브섹션)
-- `## 비목표` — 명시적 거절이 중요할 때 (spring-backend-template 의 adr-007 스타일)
+- `## 비목표` — 명시적 거절이 중요할 때 (template-spring 의 adr-007 스타일)
 
 ### 샘플
 
@@ -129,9 +129,9 @@
 
 | 용어 | 표기 | 설명 |
 |---|---|---|
-| 템플릿 레포 | `flutter-mobile-template` | 본 레포 (GitHub Template Repository) |
+| 템플릿 레포 | `template-flutter` | 본 레포 (GitHub Template Repository) |
 | 파생 레포 | (앱 slug 이름) | 템플릿에서 "Use this template" 으로 분기된 레포 |
-| 짝 백엔드 템플릿 | `spring-backend-template` | 함께 쓰이는 백엔드 레포 |
+| 짝 백엔드 템플릿 | `template-spring` | 함께 쓰이는 백엔드 레포 |
 | Kit / AppKit | `AppKit`, `auth_kit`, `backend_api_kit` 등 | 기능 단위 플러그인. `AppKit` 추상 클래스 계약 |
 | Kit 조립 | — | `app_kits.yaml` + `lib/main.dart` 에 Kit 선언해서 활성화 |
 | Recipe | `recipes/*.yaml` | 3가지 샘플 앱 유형 (local-only / local-notifier / backend-auth) |
@@ -209,7 +209,7 @@ abstract class AppKit {
 Code References 는 파일 위치를 **GitHub 절대 URL** 로 적어요 (뷰어에서 소스를 바로 열 수 있도록).
 
 ```markdown
-- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/core/kits/app_kit.dart)
+- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart)
 ```
 
 내부 문서 참조에는 상대경로 유지. Code References 만 절대 URL 예외.

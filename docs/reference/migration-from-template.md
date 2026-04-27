@@ -17,14 +17,14 @@
 ```bash
 cd /path/to/your-derived-repo
 
-git remote add template https://github.com/storkspear/flutter-mobile-template.git
+git remote add template https://github.com/storkspear/template-flutter.git
 git fetch template
 
 git remote -v
 # origin    git@github.com:your-org/your-app.git (fetch)
 # origin    git@github.com:your-org/your-app.git (push)
-# template  https://github.com/storkspear/flutter-mobile-template.git (fetch)
-# template  https://github.com/storkspear/flutter-mobile-template.git (push)
+# template  https://github.com/storkspear/template-flutter.git (fetch)
+# template  https://github.com/storkspear/template-flutter.git (push)
 ```
 
 ---

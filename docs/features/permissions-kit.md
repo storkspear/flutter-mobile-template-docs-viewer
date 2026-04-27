@@ -72,5 +72,5 @@ final results = await ref.read(permissionHelperProvider).requestMultiple([
 
 ## Code References
 
-- [`lib/kits/permissions_kit/permissions_kit.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/permissions_kit/permissions_kit.dart)
-- [`lib/kits/permissions_kit/permission_helper.dart`](https://github.com/storkspear/flutter-mobile-template/blob/main/lib/kits/permissions_kit/permission_helper.dart)
+- [`lib/kits/permissions_kit/permissions_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/permissions_kit/permissions_kit.dart)
+- [`lib/kits/permissions_kit/permission_helper.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/permissions_kit/permission_helper.dart)
