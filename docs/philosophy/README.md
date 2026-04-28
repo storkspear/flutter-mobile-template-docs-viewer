@@ -101,6 +101,7 @@
 | "보안은 뭐부터 지켜야 하나?" | [`ADR-020: 이중 난독화 + SSL 핀닝 + Keychain`](./adr-020-security-hardening.md) |
 | "같은 템플릿으로 여러 유형의 앱을 만들 수 있나?" | [`ADR-021: Multi-Recipe 구성`](./adr-021-multi-recipe.md) |
 | "정적 분석 룰셋은 어디까지 엄격하게?" | [`ADR-022: very_good_analysis + 큐레이션`](./adr-022-very-good-analysis.md) |
+| "폰트도 앱별로 교체 가능한가?" | [`ADR-023: Typeface 레지스트리`](./adr-023-typeface-registry.md) |
 
 ### ADR 카드의 읽는 법
 
@@ -184,6 +185,7 @@ ADR-004 (YAML ↔ Dart 수동 동기화 + CI 검증)
 - [`ADR-016 · i18n 처음부터 (ARB + gen_l10n)`](./adr-016-i18n-from-start.md)
 - [`ADR-017 · 4가지 로딩 UX 패턴`](./adr-017-loading-ux.md)
 - [`ADR-018 · Kit 별 라우팅 우선순위 (redirectPriority)`](./adr-018-redirect-priority.md)
+- [`ADR-023 · 폰트 런타임 교체 (AppTypeface + Registry)`](./adr-023-typeface-registry.md)
 
 ### 테마 6 — 운영 & 배포
 

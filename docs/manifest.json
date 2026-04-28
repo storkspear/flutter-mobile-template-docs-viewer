@@ -176,6 +176,11 @@
           "path": "philosophy/adr-018-redirect-priority.md",
           "title": "Redirect_Priority",
           "desc": "ADR-018: redirectPriority + 안정 정렬 + 첫 non-null"
+        },
+        {
+          "path": "philosophy/adr-023-typeface-registry.md",
+          "title": "Typeface_Registry",
+          "desc": "ADR-023: 폰트 런타임 교체 (AppTypeface + Registry)"
         }
       ]
     },

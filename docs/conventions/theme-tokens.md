@@ -120,8 +120,75 @@ Widget build(BuildContext context) {
 
 ---
 
+## 타이포 (폰트) 교체
+
+폰트 패밀리는 `AppTypeface` + `AppTypefaceRegistry` 로 앱별 분기해요 ([`ADR-023`](../philosophy/adr-023-typeface-registry.md)). 템플릿 기본은 시스템 폰트 (iOS=SF Pro, Android=Roboto) 라 자산 부담 0 으로 출발.
+
+파생 레포가 자체 폰트로 교체하려면:
+
+1. **자산 추가**: `assets/fonts/` 디렉토리에 ttf 파일 배치 (예: `Pretendard-Regular.ttf` 외 4 weight).
+2. **`pubspec.yaml`** 의 `flutter:` 섹션에 폰트 등록.
+   ```yaml
+   flutter:
+     fonts:
+       - family: Pretendard
+         fonts:
+           - asset: assets/fonts/Pretendard-Regular.ttf
+             weight: 400
+           - asset: assets/fonts/Pretendard-Medium.ttf
+             weight: 500
+           - asset: assets/fonts/Pretendard-Bold.ttf
+             weight: 700
+           - asset: assets/fonts/Pretendard-Black.ttf
+             weight: 900
+   ```
+3. **`MyAppTypeface`** 정의 (`lib/theme/my_app_typeface.dart`).
+   ```dart
+   class MyAppTypeface extends AppTypeface {
+     @override String get id => 'pretendard';
+     @override String get name => 'Pretendard';
+     @override String? get fontFamily => 'Pretendard';
+     @override List<String> get fontFamilyFallback =>
+         const ['Apple SD Gothic Neo', 'Noto Sans CJK KR'];
+   }
+   ```
+4. **`main.dart`** 에서 install — `DefaultTypeface` 대신 `MyAppTypeface`.
+   ```dart
+   AppTypefaceRegistry.install(MyAppTypeface());
+   ```
+
+사이즈 / weight 스케일을 바꾸려면 `buildTextTheme()` 을 override. 단 산업 표준 (Material 3 / Apple HIG) 에서 사이즈 스케일은 회사 통일이 일반적이라 변경 신중.
+
+### 한국어 무료 폰트 후보 (모두 SIL OFL 1.1)
+
+| 폰트 | 4 weight 합 | Variable | 비고 |
+|---|---|---|---|
+| SUIT | ~680 KB | 1.5 MB (9 weight) | 최경량 |
+| Pretendard | ~1.5 MB | 6.5 MB (9 weight) | Inter 기반, 한국 인디 표준 |
+| Spoqa Han Sans Neo | ~1.8 MB | 미지원 | 클래식 |
+| Noto Sans KR | ~19.7 MB | △ (CJK) | 글리프 완전, subsetting 필요 |
+
+자세한 비교 / 출처는 [`ADR-023`](../philosophy/adr-023-typeface-registry.md) §Prior Art.
+
+---
+
+## 이번에 안 한 것 (의도)
+
+다음은 의도적으로 도입하지 않았어요. 솔로 친화 (ADR-019) + 산업 표준 데이터에 따라.
+
+- **`AppDimens` / 간격·radius·buttonHeight 추상화** — 산업 표준은 이런 구조 토큰을 회사 전체 통일. 앱별 분기 빈도 ★ 거의 없음. 변경 거의 없으므로 cherry-pick 부담 극히 적음. 진짜 필요해지면 그때 ADR 로 추가.
+- **컴포넌트 사이즈 변형 (`size: sm/md/lg`)** — Carbon/Polaris 패턴이지만 12 개 위젯 시그니처 변경 = cherry-pick 안전성 ↓. 실증 후 재고.
+- **Variable Font 도입** — Flutter 모바일 채택률 25~35%, 본 레포 미검증. Static 4 weight 가 실무 안전망.
+- **Storybook (Widgetbook)** — 위젯 12 개 규모에 카탈로그 인프라 과함.
+- **Dark/Light별 폰트 분기** — brightness 와 폰트는 무관.
+- **다국어 폰트 자동 분기 (KR vs EN)** — 한국어 폰트가 라틴 글리프 보유.
+
+---
+
 ## 관련
 
 - [`ADR-015 · 팔레트 런타임 교체`](../philosophy/adr-015-palette-registry.md) — 팔레트 분리 / 런타임 교체의 근거
+- [`ADR-023 · 폰트 런타임 교체`](../philosophy/adr-023-typeface-registry.md) — 타이페이스 분리 / 런타임 교체의 근거
 - [`ADR-002 · 3계층 모듈 구조`](../philosophy/adr-002-layered-modules.md) — 토큰이 `core/theme/` 에 있는 이유
+- [`ADR-019 · 솔로 친화적 운영`](../philosophy/adr-019-solo-friendly.md) — 토큰 추상화 한계선의 상위 기준
 - [`Loading UX`](./loading-ux.md) — 로딩 상태 위젯이 따라야 할 별도 규약
