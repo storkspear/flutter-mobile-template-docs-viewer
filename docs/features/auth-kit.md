@@ -6,7 +6,7 @@
 
 ## 개요
 
-- **인증 방식**: 이메일/비번 · Google Sign-In · Sign in with Apple · Kakao SDK · Naver SDK
+- **인증 방식**: 이메일/비번 · Google Sign-In · Sign in with Apple · Kakao (`kakao_flutter_sdk_user`) · Naver (`flutter_naver_login`)
 - **토큰 저장**: `SecureStorage` + 원자적 ([`ADR-013`](../philosophy/adr-013-token-atomic-storage.md))
 - **401 자동 refresh**: `AuthInterceptor` 가 투명 처리 ([`ADR-010`](../philosophy/adr-010-queued-interceptor.md))
 - **부팅 시 토큰 검증**: `AuthCheckStep` BootStep
