@@ -105,11 +105,36 @@ AppConfig.init(
 );
 ```
 
-환경 변수로 baseUrl 스위칭 (선택):
+환경 변수로 baseUrl + environment 스위칭 (template 기본 패턴 — `lib/main.dart` 에 적용돼 있어요):
 
 ```dart
-baseUrl: String.fromEnvironment('BASE_URL', defaultValue: 'http://localhost:8080'),
+baseUrl: const String.fromEnvironment(
+  'BASE_URL',
+  defaultValue: 'http://localhost:8080',
+),
+environment: Environment.values.byName(
+  const String.fromEnvironment('APP_ENV', defaultValue: 'dev'),
+),
 ```
+
+빌드 시 주입:
+
+```bash
+# dev (기본)
+flutter run
+
+# staging
+flutter run \
+  --dart-define=BASE_URL=https://staging.api.myapp.com \
+  --dart-define=APP_ENV=staging
+
+# prod release
+flutter build apk --release \
+  --dart-define=BASE_URL=https://api.myapp.com \
+  --dart-define=APP_ENV=prod
+```
+
+`.env.example` 의 `BASE_URL` / `APP_ENV` 라인 참고. release 빌드는 AppConfig 가드가 default(localhost / `Environment.dev`) 를 자동 차단해요.
 
 ---
 

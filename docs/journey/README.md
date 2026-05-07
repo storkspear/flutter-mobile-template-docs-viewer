@@ -33,7 +33,7 @@
 
 1. [`Philosophy 인덱스`](../philosophy/README.md) 의 **프롤로그 + 테마 1 의 ADR 두 개** 만 먼저 읽어주세요.
    - 프롤로그 — "앱 공장 전략" 과 세 가지 제약 (운영 가능성 · 시간 희소성 · 복권 사기 모델)
-   - ADR-001 · GitHub Template Repository 패턴 (왜 fork 가 아닌 template 인가)
+   - ADR-001 · GitHub Template Repository 패턴 (히스토리가 끊긴 독립 레포 생성 방식)
    - ADR-002 · 3계층 모듈 구조 (core / kits / common / features)
 
 2. [`architecture.md`](./architecture.md) 의 **§ 모듈 구조 한눈 요약** 한 섹션만 읽어주세요. FeatureKit 아키텍처의 큰 그림이 있어요.

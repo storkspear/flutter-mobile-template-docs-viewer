@@ -1,6 +1,6 @@
 # Deployment — 첫 운영 배포
 
-앱이 로컬에서 잘 돌아가면 스토어에 올릴 차례. Android **Play Internal** + iOS **TestFlight** 배포까지. 약 2~3시간 (최초 1회 · 이후엔 태그 push 만).
+앱이 로컬에서 잘 돌아가면 스토어에 올릴 차례. Android **Play Internal** (GHA 자동 — `release-android.yml`) + iOS **TestFlight** (현재는 fastlane 수동 또는 Xcode Archive — iOS GHA 워크플로우는 미구현). 약 2~3시간 (최초 1회 · 이후엔 Android 만 태그 push 만).
 
 ---
 
@@ -19,7 +19,9 @@ GitHub Secrets 등록
   ↓
 git tag v1.0.0 && git push --tags
   ↓
-GHA 자동 배포 → Play Internal · TestFlight
+GHA 자동 배포 → Play Internal      (release-android.yml)
+  ↓
+iOS TestFlight 수동 배포            (fastlane beta 또는 Xcode Archive)
 ```
 
 ---
@@ -102,6 +104,8 @@ Play Console → 내부 테스트 → 테스터 → 이메일 추가 (본인 포
 
 ### 2. Fastlane match 설정 (권장)
 
+> ⚠️ 템플릿은 iOS fastlane 을 사전 셋업하지 않아요. `ios/fastlane/`, `ios/Gemfile` 모두 미존재. 아래는 첫 셋업 절차예요.
+
 ```bash
 cd ios
 bundle init
@@ -126,12 +130,14 @@ App Store Connect → Users and Access → Keys → `+`
 
 ### 5. 최초 TestFlight 업로드
 
+§3.2 의 Fastlane 셋업을 마쳤다면:
+
 ```bash
 cd ios
 bundle exec fastlane beta
 ```
 
-혹은 Xcode 에서 Product → Archive → Distribute.
+또는 Xcode 에서 Product → Archive → Distribute.
 
 ### 6. TestFlight 내부 테스터 등록
 

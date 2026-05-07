@@ -19,7 +19,7 @@
 
 **해결**:
 ```bash
-flutter --version          # 3.32.8+ 확인
+flutter --version          # 3.41.8+ 확인
 rm pubspec.lock
 flutter clean
 flutter pub get
@@ -73,9 +73,9 @@ flutter doctor --android-licenses
 
 **원인**: 스크립트가 모든 파일을 치환 못 함 (dart 코드 · 생성 파일 등).
 
-**해결**:
+**해결** (macOS 기준 — Linux 는 `sed -i` 로):
 ```bash
-# 수동으로 일괄 치환
+# 수동으로 일괄 치환 (macOS BSD sed)
 grep -rl 'package:template' lib/ test/ | xargs sed -i '' 's|package:template|package:my_app|g'
 
 # 또는
@@ -184,7 +184,7 @@ flutter gen-l10n
 
 **증상**: 스낵바 · 다이얼로그를 ViewModel 에서 띄우고 싶음.
 
-**원인**: 디자인 위반. ViewModel 은 UI 에 의존 안 함.
+**원인**: 디자인 위반. ViewModel 은 UI 에 의존하지 않아요.
 
 **해결**: State 에 플래그를 세팅하고 Screen 이 반응.
 
@@ -224,10 +224,7 @@ MigrationStrategy get migration => MigrationStrategy(
 );
 ```
 
-지문 갱신:
-```bash
-dart run test:test test/migration_fingerprint/ -u
-```
+> ⚠️ 템플릿엔 Drift schema fingerprint 테스트가 없어요. 파생 레포에서 `local_db_kit` 활성화 후 직접 추가합니다 (자세한 절차는 `local_db_kit` Feature 문서 참조).
 
 ---
 
@@ -235,7 +232,7 @@ dart run test:test test/migration_fingerprint/ -u
 
 **증상**: 첫 새로고침은 되지만 그 이후 안 됨.
 
-**원인**: `onRefresh` 콜백이 `Future` 를 반환 안 함.
+**원인**: `onRefresh` 콜백이 `Future` 를 반환하지 않아요.
 
 **해결**:
 ```dart
@@ -316,7 +313,7 @@ cat fastlane_error.log
 
 **증상**: 프로덕션 크래시 원인 추적 불가.
 
-**원인**: `--obfuscate` 는 했는데 심볼 업로드 안 함.
+**원인**: `--obfuscate` 는 했는데 심볼 업로드를 안 해요.
 
 **해결**:
 ```bash
@@ -324,6 +321,42 @@ cat fastlane_error.log
 - run: flutter build appbundle --obfuscate --split-debug-info=build/app/symbols
 - run: npx @sentry/cli upload-dif --org $ORG --project $PROJECT build/app/symbols
 ```
+
+---
+
+### ❌ release 빌드 시 `AppConfig.init() release 빌드 검증 실패` StateError
+
+**증상**: `flutter build apk --release` 또는 스토어 빌드 직후 앱이 즉시 죽음. 로그에 다음 메시지:
+```
+StateError: AppConfig.init() release 빌드 검증 실패:
+  - baseUrl: "http://localhost:8080" — localhost 는 release 출시 금지
+  - environment: Environment.dev — release 빌드는 staging/prod 로 호출하세요
+```
+
+**원인**: 파생 레포가 `lib/main.dart` 의 `AppConfig.init` 인자를 자기 앱 값으로 바꾸지 않고 release 빌드를 한 거예요. `AppConfig` 가 `kReleaseMode` 에서 다음 5가지 dummy 패턴을 자동 검출해요 (근거: `lib/core/config/app_config.dart` 의 `collectReleaseValidationIssues`):
+
+1. `baseUrl` 에 `localhost` 또는 `127.0.0.1` 포함
+2. `supportEmail` 이 `@example.com` 으로 끝남
+3. `privacyUrl` 에 `example.com` 포함
+4. `termsUrl` 에 `example.com` 포함 (null 인 경우 검사 생략)
+5. `environment == Environment.dev` (release 는 staging/prod 만 허용)
+
+→ 의도: privacy URL 404 로 App Store 리뷰 거부 / Sentry · PostHog 이벤트가 'dev' 라벨로 박혀 운영 알람 노이즈 혼재 같은 사고를 컴파일 직후에 차단해요.
+
+**해결**: `lib/main.dart` 의 `AppConfig.init` 인자를 자기 앱 값으로 모두 교체:
+```dart
+AppConfig.init(
+  appSlug: 'myapp',
+  baseUrl: 'https://api.myapp.com',           // ← 실제 운영 URL
+  environment: Environment.prod,                // ← release 는 prod
+  supportEmail: 'support@myapp.com',           // ← 실제 메일
+  privacyUrl: 'https://myapp.com/privacy',     // ← 실제 페이지
+  termsUrl: 'https://myapp.com/terms',
+  appVersion: pkgInfo.version,
+);
+```
+
+dev/profile 빌드는 가드를 통과시키므로 로컬 개발에는 영향 없어요.
 
 ---
 
@@ -369,6 +402,10 @@ final client = ApiClient(...);  // ← 금지
 ```dart
 final client = ref.read(apiClientProvider);
 ```
+
+**예외 — `kit_manifest.requires` 에 선언한 의존**: 동일 kit 내부 결합도가 높은 의존(예: `auth_kit → backend_api_kit` 의 `ApiException` · `ApiClient`)은 manifest 의 `requires` 에 적은 뒤 직접 import 가 허용돼요. 단 **manifest 에 선언 안 한 cross-import 는 금지** — 도구가 잡는 의존성과 코드 실제 의존성이 mismatch 되면 다른 recipe 로 출발한 파생 레포가 컴파일 실패해요.
+
+**실제 사례**: `auth_kit/ui/login/login_screen.dart` 가 `observability_kit/dogfooding_panel.dart` 를 `kDebugMode` 가드 안에서 직접 import 한 적이 있었어요. `auth_kit/kit_manifest.yaml` 의 `requires` 에는 `backend_api_kit` 만 있어서, `backend-auth-app` recipe (observability_kit 미포함) 로 출발하면 컴파일 실패. 디버그 도구는 한 화면(home)에서만 노출하는 게 안전해요.
 
 ---
 

@@ -10,11 +10,7 @@
 
 ### Q. 이 템플릿을 어떻게 복제하나요?
 
-**A.** `git clone` · `fork` 아니고 **GitHub "Use this template"** 버튼. 히스토리가 끊긴 독립 레포 생성. 근거: [`ADR-001`](../philosophy/adr-001-template-cherry-pick.md).
-
-### Q. 왜 fork 안 하나요?
-
-**A.** fork 는 부모 네트워크 레포로 영원히 표시돼요 (GitHub 검색 · 브랜딩). 독립 레포가 필요하고, **공통 코드 자동 merge** 는 도메인 코드와 충돌 시 오히려 위험.
+**A.** GitHub 의 **"Use this template"** 버튼을 사용해주세요. 히스토리가 끊긴 독립 레포가 생성돼요. 근거: [`ADR-001`](../philosophy/adr-001-template-cherry-pick.md).
 
 ### Q. 템플릿 업데이트를 어떻게 가져오나요?
 
@@ -32,7 +28,7 @@
 
 **A.**
 - `core/` — 모든 앱 필수 기반 (테마 · 저장소 · 위젯)
-- `kits/` — 선택 13개 (인증 · 알림 · 차트 등)
+- `kits/` — 선택 14개 (인증 · 알림 · 차트 · 결제 등)
 - `common/` — 여러 Kit 조립 지점 (DI · 라우터 · 스플래시)
 - `features/` — 파생 레포 도메인 영역 (템플릿은 스텁)
 
@@ -44,7 +40,7 @@
 
 ### Q. ViewModel 이 다른 ViewModel 을 쓸 수 있나요?
 
-**A.** 권장 안 함. ViewModel 은 **Screen-local 상태**. 공유 상태는 Service (Kit 레벨) 로 올려서 두 ViewModel 이 같은 Service 참조.
+**A.** 권장하지 않아요. ViewModel 은 **Screen-local 상태**예요. 공유 상태는 Service (Kit 레벨) 로 올려서 두 ViewModel 이 같은 Service 를 참조하게 해주세요.
 
 ---
 
@@ -60,11 +56,11 @@
 
 ### Q. `snake_case` JSON 도 지원하나요?
 
-**A.** 안 함. 백엔드 · 프론트 둘 다 **camelCase** 고정. 짝 `template-spring` 이 Jackson 기본값 camelCase 로 직렬화.
+**A.** 지원하지 않아요. 백엔드 · 프론트 둘 다 **camelCase** 로 고정돼 있어요. 짝 `template-spring` 이 Jackson 기본값 camelCase 로 직렬화해요.
 
 ### Q. GraphQL · tRPC 로 바꾸고 싶어요.
 
-**A.** 가능하지만 템플릿이 지원 안 함. 파생 레포에서 자체 통합 필요. 단 이 경우 `backend_api_kit` 대신 새 Kit 을 만들고, 에러 처리 · 인터셉터 패턴을 자체 설계해야 해요.
+**A.** 가능하지만 템플릿이 지원하지 않아요. 파생 레포에서 자체 통합이 필요해요. 이 경우 `backend_api_kit` 대신 새 Kit 을 만들고, 에러 처리 · 인터셉터 패턴을 자체 설계해야 해요.
 
 ---
 
@@ -146,7 +142,7 @@ class MyPalette extends AppPalette {
 
 ### Q. 폰트를 바꾸려면?
 
-**A.** `AppTypography` 커스터마이징. `Theme.of(context).textTheme` 에 폰트 반영.
+**A.** **폰트 패밀리 교체**는 `AppTypeface` 를 extends 한 클래스를 만든 뒤 `AppTypefaceRegistry.install(MyTypeface())` 로 등록해주세요. `pubspec.yaml` 의 `fonts:` + `assets/fonts/` 자산 등록도 필요해요. **텍스트 스타일 토큰**(headline/body/caption 등)은 `AppTypography` 에서 다루고, `Theme.of(context).textTheme` 에 반영돼요.
 
 ### Q. 스플래시 화면을 커스텀하려면?
 
@@ -190,7 +186,7 @@ class MyPalette extends AppPalette {
 
 ### Q. Android · iOS 동시 배포 가능한가요?
 
-**A.** 네. `git tag v1.0.0 && git push --tags` → GHA 가 양쪽 워크플로우 동시 실행. 단 GHA 의 `macos-latest` 는 비용 높음.
+**A.** 현재는 Android 만 GHA 자동 배포(`release-android.yml` — `git tag v*` 트리거). iOS 워크플로우는 미구현이라 fastlane 수동 또는 Xcode Archive 로 TestFlight 업로드해요. 향후 iOS 워크플로우가 추가되면 동시 배포가 됩니다 (단 GHA 의 `macos-latest` 는 비용이 높아 트리거 정책 설계 필요).
 
 ### Q. Play Console 에 최초 업로드는 수동이에요?
 

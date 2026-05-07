@@ -1,6 +1,6 @@
 # Architecture — 한눈 요약
 
-파생 레포 개발자가 **10분 안에 전체 구조** 를 파악할 수 있게 쓴 개요. 깊이 들어가려면 [`Architecture`](../architecture/) · [`ADR`](../philosophy/README.md) 참조.
+파생 레포 개발자가 **10분 안에 전체 구조** 를 파악할 수 있게 쓴 개요. 깊이 들어가려면 [`Module Dependencies`](../architecture/module-dependencies.md) · [`FeatureKit Contract`](../architecture/featurekit-contract.md) · [`ADR`](../philosophy/README.md) 참조.
 
 ---
 
@@ -19,7 +19,7 @@
 ┌────▼────┐         ┌────▼────┐         ┌────▼────┐
 │features/│         │ common/ │         │  kits/  │
 │         │────────▶│         │────────▶│         │
-│ 도메인    │         │ DI · 라우터 │      │ 13개 기능 │
+│ 도메인    │         │ DI · 라우터 │      │ 14개 기능 │
 │ (파생)    │         │ · 스플래시 │       │ (선택 조립)│
 └────┬────┘         └────┬────┘         └────┬────┘
      │                   │                   │
@@ -42,14 +42,14 @@
 
 ### `core/` (항상 사용)
 
-모든 앱이 **무조건** 쓰는 기반. 44개 파일, 10개 모듈.
+모든 앱이 **무조건** 쓰는 기반. 46개 파일, 10개 모듈.
 
 | 모듈 | 핵심 자산 |
 |------|----------|
 | `theme/` | AppPalette · 디자인 토큰 |
 | `storage/` | SecureStorage · SharedPreferences · TokenStorage |
 | `cache/` | CacheStore · CachedRepository (5 정책) |
-| `widgets/` | PrimaryButton · AppTextField · LoadingView 등 13개 |
+| `widgets/` | PrimaryButton · AppTextField · LoadingView 등 12개 |
 | `i18n/` | gen_l10n 결과 (S 클래스) |
 | `analytics/` | AnalyticsService · CrashService 추상 + Debug |
 | `config/` | AppConfig 싱글톤 |
@@ -57,13 +57,13 @@
 | `utils/` | FormValidators · Debouncer |
 | `review/` | 인앱 리뷰 트리거 |
 
-### `kits/` (선택 13개)
+### `kits/` (선택 14개)
 
 앱마다 켜고 끄는 기능 단위. [`Features 인덱스`](../features/README.md) 상세.
 
 - **인프라**: `backend_api_kit`, `observability_kit`, `local_db_kit`, `notifications_kit`, `background_kit`, `update_kit`, `permissions_kit`, `device_info_kit`
 - **UI · UX**: `nav_shell_kit`, `onboarding_kit`, `charts_kit`, `ads_kit`
-- **도메인**: `auth_kit` (JWT · 소셜 로그인)
+- **도메인**: `auth_kit` (JWT · 소셜 로그인), `payment_kit` (결제 골격 — 파생 레포에서 SDK 추가)
 
 ### `common/` (조립 지점)
 
@@ -155,16 +155,20 @@ ViewModel: try/catch 로 수신
 
 ```
 main()
-  ├─ Sentry 래핑 (DSN 주입 시)
   ├─ Flutter 바인딩 초기화
-  ├─ AppPaletteRegistry 설치
-  ├─ AppConfig 초기화
-  ├─ PrefsStorage 초기화
-  ├─ AppKits.install([...])  ← Kit 등록 + onInit
-  ├─ ProviderContainer 생성
-  ├─ AppKits.attachContainer(container)
-  ├─ SplashController.run()  ← 모든 Kit 의 BootStep 순차 실행
-  └─ runApp(UncontrolledProviderScope)
+  ├─ AppPaletteRegistry.install
+  ├─ AppTypefaceRegistry.install
+  ├─ AppConfig.init
+  ├─ Sentry 래핑 (DSN 주입 시) ── _bootstrap 을 runZonedGuarded 로 wrap
+  │
+  └─ _bootstrap()
+     ├─ PrefsStorage.init
+     ├─ AppKits.install([...])      ← Kit 등록 + onInit
+     ├─ ProviderContainer 생성
+     ├─ AppKits.attachContainer(container)
+     ├─ CrashService.init             ← Sentry/Debug 폴백 결정
+     ├─ SplashController.run()        ← 모든 Kit 의 BootStep 순차 실행
+     └─ runApp(UncontrolledProviderScope)
 ```
 
 자세한 건 [`Boot Sequence`](../architecture/boot-sequence.md).
@@ -206,7 +210,7 @@ dart run tool/configure_app.dart
 
 | 영역 | 기술 |
 |------|------|
-| 프레임워크 | Flutter 3.32.8+ · Dart 3.8.1+ |
+| 프레임워크 | Flutter 3.41.8 (`.fvmrc` 핀, FVM 권장) · Dart `^3.8.1` (`pubspec.yaml`) |
 | 상태관리 | flutter_riverpod 2.6+ (StateNotifier) |
 | 라우팅 | go_router 14.8+ |
 | HTTP | dio 5.7+ |

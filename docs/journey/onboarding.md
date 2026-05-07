@@ -8,8 +8,8 @@
 
 ### 필수
 
-- [ ] **Flutter SDK** 3.32.8 이상 — [fvm](https://fvm.app/) 으로 버전 관리 권장
-- [ ] **Dart SDK** 3.8.1+ (Flutter 에 번들)
+- [ ] **Flutter SDK** `3.41.8` (`.fvmrc` 핀) — [fvm](https://fvm.app/) 으로 버전 관리 권장
+- [ ] **Dart SDK** — Flutter 에 번들된 Dart 사용 (`pubspec.yaml` constraint: `^3.8.1`)
 - [ ] **Git** 2.30+
 - [ ] **Xcode** (iOS 빌드용) — macOS 전용. App Store 에서 설치
 - [ ] **Android Studio** 또는 Android SDK Command-Line Tools
@@ -40,7 +40,7 @@ flutter doctor
 3. 새 레포 이름 · 소유자 · 공개 여부 선택
 4. 생성
 
-> ⚠️ fork 하지 않아요. "Use this template" 은 히스토리를 끊고 독립 레포를 만듦 ([`ADR-001`](../philosophy/adr-001-template-cherry-pick.md)).
+> ⚠️ "Use this template" 은 히스토리가 끊긴 **독립 레포** 를 만들어요 (기존 레포에서 분기하는 방식이 아니에요). 자세한 배경은 [`ADR-001`](../philosophy/adr-001-template-cherry-pick.md).
 
 ### 2. 클론
 
@@ -188,6 +188,25 @@ flutter run
 ```
 
 처음 실행이면 빌드에 1~2분. 이후엔 hot reload.
+
+### 백엔드 없이 시연 (선택)
+
+template-spring 백엔드를 아직 안 띄웠으면 `AUTH_DEV_MOCK` 으로 인증 흐름까지 keyless 시연이 가능해요.
+
+```bash
+flutter run --dart-define=AUTH_DEV_MOCK=true
+```
+
+동작:
+
+- 부팅 시 `BackendReachability.probe()` 가 `baseUrl/actuator/health` 핑 → connection refused
+- `DevOfflineAuthInterceptor` 가 `/auth/*` 호출 가로채서 fake JWT 응답 반환
+- 구글 / 애플 로그인 버튼은 SDK 모달 우회 → 즉시 fake credential 으로 로그인 완료
+- 로그인 후 `/home` 진입까지 백엔드 · OAuth 키 없이 시연 가능
+
+자세한 메커니즘은 [`auth_kit/README.md` Dev Mock 섹션](https://github.com/storkspear/template-flutter/blob/main/lib/kits/auth_kit/README.md#dev-mock-백엔드-없이-시연) 참고 (`docs/` 외부의 Kit README 직접 링크라 GitHub URL 사용).
+
+> ⚠️ **운영 빌드 절대 금지**: release 에서 `AUTH_DEV_MOCK=true` 박으면 모든 인증이 fake JWT 로 처리돼요. `.env.example` 의 `AUTH_DEV_MOCK=false` 가 운영 기본값.
 
 ### 확인 포인트
 
