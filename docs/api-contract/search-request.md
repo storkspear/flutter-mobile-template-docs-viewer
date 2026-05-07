@@ -6,52 +6,55 @@
 
 ## 기본 포맷
 
+`conditions` 는 **`<field>_<op>` 키를 가진 Map**. `page` 는 nested 객체. `direction` 은 대문자.
+
 ```json
 {
-  "conditions": [
-    { "field": "categoryId", "operator": "eq", "value": 5 },
-    { "field": "amount", "operator": "gte", "value": 10000 }
-  ],
+  "conditions": {
+    "categoryId_eq": 5,
+    "amount_gte": 10000,
+    "title_like": "커피"
+  },
+  "page": { "page": 0, "size": 20 },
   "sort": [
-    { "field": "expenseDate", "direction": "desc" }
-  ],
-  "page": 0,
-  "size": 20
+    { "field": "expenseDate", "direction": "DESC" }
+  ]
 }
 ```
 
 ---
 
-## 연산자
+## 연산자 (key suffix)
 
-| operator | 의미 | 값 타입 |
-|----------|------|---------|
-| `eq` | equal | scalar |
-| `ne` | not equal | scalar |
-| `gt` | greater than | number/date |
-| `gte` | greater or equal | number/date |
-| `lt` | less than | number/date |
-| `lte` | less or equal | number/date |
-| `like` | SQL LIKE (SQL `%` 와일드카드) | string |
-| `in` | IN list | array |
-| `notIn` | NOT IN | array |
-| `isNull` | IS NULL | (값 없음) |
-| `isNotNull` | IS NOT NULL | (값 없음) |
-| `between` | BETWEEN A AND B | `[a, b]` 배열 |
+| 빌더 메서드 | key suffix | 의미 | 값 타입 |
+|-----|-----|------|---------|
+| `eq` | `_eq` | equal | scalar |
+| `notEq` | `_not` | not equal | scalar |
+| `gt` | `_gt` | greater than | number/date |
+| `gte` | `_gte` | greater or equal | number/date |
+| `lt` | `_lt` | less than | number/date |
+| `lte` | `_lte` | less or equal | number/date |
+| `like` | `_like` | SQL LIKE (SQL `%` 와일드카드) | string |
+| `isIn` | `_in` | IN list | array |
+| `notIn` | `_notIn` | NOT IN | array |
+| `isNull` | `_isNull` | IS NULL | (true 고정) |
+| `isNotNull` | `_isNotNull` | IS NOT NULL | (true 고정) |
+
+> `between` 은 별도 메서드 없이 `gte` + `lte` 두 번 호출로 표현.
 
 ---
 
 ## SearchRequestBuilder (Dart)
 
 ```dart
-final request = SearchRequest.builder()
+final request = SearchRequestBuilder()
   .eq('userId', currentUserId)
   .gte('expenseDate', startDate)
   .lte('expenseDate', endDate)
-  .like('title', '%커피%')
-  .inList('status', ['active', 'pending'])
-  .sortBy('expenseDate', descending: true)
-  .page(0, size: 20)
+  .like('title', '커피')                      // %는 백엔드가 자동 감싸지 않음 — 필요 시 호출자가 직접 추가
+  .isIn('status', ['active', 'pending'])      // ← inList 아님
+  .sortBy('expenseDate', SortDirection.desc)  // ← positional, descending: 인자 없음
+  .page(0, 20)                                // ← positional (page, [size = 20])
   .build();
 
 final response = await api.post<PageResponse<Expense>>(
@@ -68,34 +71,34 @@ final response = await api.post<PageResponse<Expense>>(
 ### 기본 조회
 
 ```dart
-final req = SearchRequest.builder()
+final req = SearchRequestBuilder()
   .eq('categoryId', 5)
   .build();
 ```
 
-### 기간 필터 + 정렬
+### 기간 필터 + 정렬 (between 대용)
 
 ```dart
-final req = SearchRequest.builder()
+final req = SearchRequestBuilder()
   .gte('expenseDate', DateTime(2026, 4, 1))
   .lte('expenseDate', DateTime(2026, 4, 30))
-  .sortBy('expenseDate', descending: true)
+  .sortBy('expenseDate', SortDirection.desc)
   .build();
 ```
 
 ### LIKE 검색 (부분 일치)
 
 ```dart
-final req = SearchRequest.builder()
-  .like('title', '%$query%')  // SQL 와일드카드
+final req = SearchRequestBuilder()
+  .like('title', query)  // % 와일드카드는 백엔드가 자동 감싸지 않음 — 필요 시 호출자가 추가
   .build();
 ```
 
 ### 여러 값 (IN)
 
 ```dart
-final req = SearchRequest.builder()
-  .inList('categoryId', [1, 2, 3])
+final req = SearchRequestBuilder()
+  .isIn('categoryId', [1, 2, 3])  // ← inList 아님
   .build();
 ```
 

@@ -46,6 +46,36 @@
 > - `ATH_002` = refresh token 만료 → 더 이상 갱신 불가, signOut 필요
 > Flutter 측 `ApiException.isAccessTokenExpired` 와 `isRefreshTokenExpired` getter 가 분리된 이유예요.
 
+### 유저 도메인 — `USR_*` (UserError)
+
+유저 엔티티 조회·등록 관련.
+
+| Code | HTTP | Dart 상수 | 설명 |
+|------|------|---------|------|
+| `USR_001` | 404 | `ErrorCode.userNotFound` | 유저 미존재. `details.id` 권장 |
+| `USR_002` | 409 | `ErrorCode.emailAlreadyExists` | 이미 사용 중인 이메일로 가입 시도 — signup 화면 분기에 사용 |
+
+### 스토리지 도메인 — `STG_*` (StorageError)
+
+S3/Cloud Storage 어댑터 호출 관련. 파생 레포가 첨부파일/이미지 업로드를 다룰 때 분기.
+
+| Code | HTTP | Dart 상수 | 설명 |
+|------|------|---------|------|
+| `STG_001` | 404 | `ErrorCode.bucketNotFound` | 버킷 미존재 |
+| `STG_002` | 404 | `ErrorCode.objectNotFound` | 객체 미존재 |
+| `STG_003` | 500 | `ErrorCode.uploadFailed` | 업로드 실패 |
+| `STG_004` | 500 | `ErrorCode.downloadFailed` | 다운로드 실패 |
+| `STG_005` | 413 | `ErrorCode.quotaExceeded` | 용량 쿼터 초과 |
+| `STG_006` | 413 | `ErrorCode.sizeLimitExceeded` | 단일 파일 크기 초과 |
+| `STG_007` | 400 | `ErrorCode.invalidObjectKey` | 잘못된 키 (경로/문자) |
+| `STG_008` | 500 | `ErrorCode.signedUrlGenerationFailed` | presigned URL 생성 실패 |
+| `STG_009` | 503 | `ErrorCode.adapterUnavailable` | 어댑터 일시 장애 |
+| `STG_010` | 500 | `ErrorCode.deleteFailed` | 삭제 실패 |
+
+### 결제 도메인 — `BIL_*` (BillingError)
+
+> Phase 1 에서 Spring 측 `BillingError` 추가 시 동기화. 현재 Flutter `error_code.dart` 에 정의 비어 있음.
+
 ### 클라이언트 로컬
 
 백엔드가 내려준 코드가 아닌, Flutter 측이 자체 생성하는 코드. `ApiException` factory 가 발행해요.
@@ -90,6 +120,22 @@ class ErrorCode {
   static const socialAuthFailed = 'ATH_004';
   static const emailNotVerified = 'ATH_005';
   static const emailDeliveryFailed = 'ATH_006';
+
+  // 유저 (USR_*)
+  static const userNotFound = 'USR_001';
+  static const emailAlreadyExists = 'USR_002';
+
+  // 스토리지 (STG_*) — 10개
+  static const bucketNotFound = 'STG_001';
+  static const objectNotFound = 'STG_002';
+  static const uploadFailed = 'STG_003';
+  static const downloadFailed = 'STG_004';
+  static const quotaExceeded = 'STG_005';
+  static const sizeLimitExceeded = 'STG_006';
+  static const invalidObjectKey = 'STG_007';
+  static const signedUrlGenerationFailed = 'STG_008';
+  static const adapterUnavailable = 'STG_009';
+  static const deleteFailed = 'STG_010';
 }
 ```
 

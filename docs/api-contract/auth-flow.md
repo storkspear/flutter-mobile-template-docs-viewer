@@ -256,8 +256,9 @@ Apple 사용자가 "Hide My Email" 을 선택하면 첫 로그인 후 identity t
 | `resendEmailVerification` | `POST /api/apps/{slug}/auth/resend-verification` | 인증 메일 재발송 (인증 필요, 204) |
 | `requestPasswordReset` | `POST /api/apps/{slug}/auth/password-reset/request` | 재설정 메일 발송 (204) |
 | `confirmPasswordReset` | `POST /api/apps/{slug}/auth/password-reset/confirm` | 토큰으로 재설정 (204) |
-| `changePassword` | `PATCH /api/apps/{slug}/auth/password` | 비밀번호 변경 (인증 필요, 204) |
 | `withdraw` | `POST /api/apps/{slug}/auth/withdraw` | 회원 탈퇴 (인증 필요, 204) |
+
+> 백엔드 `PATCH /api/apps/{slug}/auth/password` (인증 비번 변경) 는 contract에 있지만 `AuthService` 메서드는 미구현 (파생 레포에서 필요 시 직접 호출).
 
 > 경로 단일 진실의 출처: 백엔드 `common-web/ApiEndpoints.java` 의 `Auth.*` 상수. Flutter 쪽 경로 상수도 1:1 일치 권장.
 
@@ -270,4 +271,4 @@ Apple 사용자가 "Hide My Email" 을 선택하면 첫 로그인 후 identity t
 - [`ADR-013 · 토큰 원자 저장`](../philosophy/adr-013-token-atomic-storage.md)
 - [`template-spring ADR-017 · OAuth 2.0 통합`](https://github.com/storkspear/template-spring/blob/main/docs/philosophy/adr-017-oauth-integration.md) — 백엔드 OAuth 처리 정책 + provider 별 검증 방식
 - [`auth_kit`](../features/auth-kit.md) — 클라이언트 Auth Kit 사용
-- [`error-codes.md`](./error-codes.md) — 관련 ErrorCode (`SOCIAL_AUTH_FAILED` 포함)
+- [`error-codes.md`](./error-codes.md) — 관련 ErrorCode (`socialAuthFailed` / `ATH_004` 포함)
