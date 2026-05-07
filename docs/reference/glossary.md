@@ -103,7 +103,7 @@
 
 | 용어 | 표기 | 설명 |
 |------|------|------|
-| Recipe | `recipes/*.yaml` | 3개 앱 샘플 구성 |
+| Recipe | `recipes/*.yaml` | 4개 앱 샘플 구성 |
 | 난독화 | Dart obfuscate · Android R8 | 리버스 엔지니어링 방어 |
 | SSL pinning | opt-in | MITM 방어 |
 | Keychain · EncryptedSharedPreferences | 네이티브 | 하드웨어 지원 암호화 |

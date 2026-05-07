@@ -52,11 +52,15 @@ void main() {
 
     // 5. bootSteps (container 필요)
     test('contributes AuthCheckStep after container attached', () async {
+      SharedPreferences.setMockInitialValues({});
+      final prefs = PrefsStorage();
+      await prefs.init();
+
       final kit = AuthKit();
       await AppKits.install([BackendApiKit(), kit]);
       final container = ProviderContainer(overrides: [
         ...AppKits.allProviderOverrides,
-        prefsStorageProvider.overrideWithValue(FakePrefsStorage()),
+        prefsStorageProvider.overrideWithValue(prefs),
         secureStorageProvider.overrideWithValue(FakeSecureStorage()),
       ]);
       AppKits.attachContainer(container);
@@ -202,6 +206,5 @@ flutter test test/kits/**/_contract_test.dart
 ## 관련 문서
 
 - [`testing-strategy.md`](./testing-strategy.md) — 4 레이어 개요
-- [`Testing Conventions`](../testing/testing-strategy.md) — 테스트 규약
 - [`FeatureKit Contract`](../architecture/featurekit-contract.md) — 검증 대상 속성들
 - [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)

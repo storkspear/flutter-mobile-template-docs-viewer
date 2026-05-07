@@ -1,6 +1,6 @@
 # Testing Strategy
 
-4 레이어 테스트 전략 — **Unit · Kit 계약 · 조립 통합 · 마이그레이션 지문**. 각 레이어의 검증 대상이 다르고, 도구도 다름. 실행 규칙은 [`Testing Conventions`](../testing/testing-strategy.md) 참조.
+4 레이어 테스트 전략 — **Unit · Kit 계약 · 조립 통합 · 마이그레이션 지문**. 각 레이어의 검증 대상이 다르고, 도구도 다름. Kit 계약 테스트의 상세 패턴은 [`contract-testing.md`](./contract-testing.md) 참조.
 
 ---
 
@@ -164,9 +164,14 @@ void main() {
       ObservabilityKit(),
     ]);
 
+    // PrefsStorage 는 SharedPreferences mock 으로 init.
+    SharedPreferences.setMockInitialValues({});
+    final prefs = PrefsStorage();
+    await prefs.init();
+
     final container = ProviderContainer(overrides: [
       ...AppKits.allProviderOverrides,
-      prefsStorageProvider.overrideWithValue(FakePrefsStorage()),
+      prefsStorageProvider.overrideWithValue(prefs),
       secureStorageProvider.overrideWithValue(FakeSecureStorage()),
     ]);
     AppKits.attachContainer(container);
@@ -206,11 +211,16 @@ void main() {
 ### 스키마 변경 시
 
 ```bash
-# 1. 의도한 변경인지 확인
-# 2. schemaVersion 올림 + onUpgrade 작성
-# 3. 지문 갱신
-dart run test:test test/migration_fingerprint/ -u
-# 4. 갱신된 지문도 커밋
+# 1. 의도한 변경인지 확인 — fingerprint 테스트가 실패해야 정상 (스키마 hash 가 바뀜)
+flutter test test/migration_fingerprint/
+
+# 2. schemaVersion 올림 + onUpgrade 작성 (lib/database/app_database.dart)
+
+# 3. 지문 snapshot 갱신 — 테스트 코드의 expected hash 를 새 값으로 교체
+#    (drift_dev schema dump 로 자동 추출 가능)
+dart run drift_dev schema dump lib/database/app_database.dart drift_schemas/
+
+# 4. 갱신된 지문 + 마이그레이션 코드 함께 커밋
 ```
 
 ---
@@ -220,9 +230,9 @@ dart run test:test test/migration_fingerprint/ -u
 | 레이어 | 목표 커버리지 |
 |------|------------|
 | Service · ViewModel | 80%+ |
-| Kit 계약 | 100% (각 Kit 별 contract test) |
-| 조립 통합 | 1개 유효 (smoke test 수준) |
-| 마이그레이션 지문 | 전 스키마 버전 |
+| Kit 계약 | 핵심 Kit (현재 `auth_kit` · `backend_api_kit` · `payment_kit`) 우선. 메타가 단순한 Kit 은 통합 테스트로 흡수 |
+| 조립 통합 | 1개 유효 (smoke test 수준 — `test/integration/main_assembly_test.dart`) |
+| 마이그레이션 지문 | 전 스키마 버전 (Drift 사용 시) |
 | Widget (golden) | 주요 화면만 (선택) |
 
 ```bash
@@ -237,10 +247,16 @@ flutter test --coverage
 
 `test/helpers/` 에 공용:
 
-- `FakeSecureStorage` — Map 기반 SecureStorage
-- `FakePrefsStorage` — 메모리 SharedPreferences
-- `MockDioAdapter` — Dio 응답 조작
-- `TestJwt.generate(...)` — 테스트용 JWT
+- `FakeSecureStorage` — Map 기반 SecureStorage (`fake_secure_storage.dart`)
+- `MockDioAdapter` — Dio 응답 조작 (`mock_dio_adapter.dart`)
+- `TestJwt.generate(...)` — 테스트용 JWT (`test_jwt.dart`)
+
+`PrefsStorage` 는 별도 fake 없이 표준 패턴으로:
+```dart
+SharedPreferences.setMockInitialValues({});
+final prefs = PrefsStorage();
+await prefs.init();
+```
 
 모든 테스트가 이걸 재사용 → 일관성.
 
@@ -264,5 +280,5 @@ Codecov 에 커버리지 리포트 업로드 (선택).
 ## 관련 문서
 
 - [`contract-testing.md`](./contract-testing.md) — Kit 계약 테스트 상세
-- [`Testing Conventions`](../testing/testing-strategy.md) — 테스트 코드 규약
+- [`conventions/architecture.md`](../conventions/architecture.md) — MVVM · 의존 방향 (테스트 대상 패턴 출처)
 - [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)

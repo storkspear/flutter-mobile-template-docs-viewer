@@ -215,7 +215,7 @@ kits:
 await AppKits.install([
   BackendApiKit(),
   AuthKit(),
-  NotificationsKit(),
+  NotificationsKit(service: LocalScheduledAlertService()),
   DeviceInfoKit(),
   UpdateKit(service: NoUpdateAppUpdateService()),
   ObservabilityKit(),        // ← 추가
@@ -257,7 +257,7 @@ flutter run
 
 ### 새 Recipe 추가?
 
-3개로 제한 권장 (drift 관리 부담). 필요 시 **파생 레포 에서만** 유지 — 템플릿에 반영하지 않음.
+4개로 제한 권장 (drift 관리 부담). 필요 시 **파생 레포 에서만** 유지 — 템플릿에 반영하지 않음.
 
 ---
 
@@ -266,5 +266,5 @@ flutter run
 - [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md)
 - [`ADR-003 · FeatureKit`](../philosophy/adr-003-featurekit-registry.md)
 - [`ADR-004 · YAML ↔ Dart 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md)
-- [`Features 인덱스`](../features/README.md) — Kit 13개 상세
+- [`Features 인덱스`](../features/README.md) — Kit 14개 상세
 - [`scripts.md`](./scripts.md) — `rename-app.sh`
