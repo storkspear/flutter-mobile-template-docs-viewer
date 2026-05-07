@@ -52,7 +52,7 @@
 
 핵심 흐름은 다음과 같아요.
 
-1. `§1 사전 설치 체크리스트` — Flutter SDK (3.32.8+) · FVM · Xcode · Android Studio 확인
+1. `§1 사전 설치 체크리스트` — Flutter SDK (3.41.8+) · FVM · Xcode · Android Studio 확인
 2. `§2 파생 레포 생성` — `Use this template` 으로 본인 레포 만들기
 3. `§3 앱 정체성 설정` — `rename-app.sh` 로 슬러그 · 번들 ID · 패키지명 일괄 치환
 4. `§4 첫 기동` — `flutter pub get` → `dart run tool/configure_app.dart` → `flutter run`
@@ -63,7 +63,7 @@
 
 ## 3. Kit 조립은 어떻게? — 앱 유형 결정 (30분)
 
-이 템플릿은 **13개의 FeatureKit** 을 선택적으로 조립하는 구조예요. 본인 앱이 어떤 유형인지에 따라 활성화하는 Kit 조합이 달라져요.
+이 템플릿은 **14개의 FeatureKit** 을 선택적으로 조립하는 구조예요. 본인 앱이 어떤 유형인지에 따라 활성화하는 Kit 조합이 달라져요.
 
 읽을 문서:
 
@@ -184,10 +184,10 @@ git push --tags
 | 모듈 구조 상세 | [`architecture.md`](./architecture.md) | core / kits / common / features 의존 그래프 |
 | AppKit 계약 전체 | [`FeatureKit Contract`](../architecture/featurekit-contract.md) | `AppKit` 인터페이스 명세 |
 | 부팅 시퀀스 | [`Boot Sequence`](../architecture/boot-sequence.md) | Sentry → AppConfig → Kits → Splash |
-| 코딩 규약 | [`Conventions`](../conventions/) | 네이밍 · MVVM · 에러 · 로딩 · 테스트 |
-| Kit 개별 사용법 | [`Features`](../features/) | 13개 Kit 별 상세 문서 |
-| API 계약 (백엔드 쌍) | [`API Contract`](../api-contract/) | 응답 스키마 · 에러 코드 · JWT |
-| 배포 / CI/CD / 보안 | [`Infra`](../infra/) | Fastlane · GHA · 난독화 |
+| 코딩 규약 | [`Conventions`](../conventions/README.md) | 네이밍 · MVVM · 에러 · 로딩 · 테스트 |
+| Kit 개별 사용법 | [`Features`](../features/README.md) | 14개 Kit 별 상세 문서 |
+| API 계약 (백엔드 쌍) | [`API Contract`](../api-contract/README.md) | 응답 스키마 · 에러 코드 · JWT |
+| 배포 / CI/CD / 보안 | [`Android Deployment`](../infra/android-deployment.md) | Fastlane · GHA · 난독화 (Infra 폴더 진입점) |
 | 테스트 전략 | [`Testing Strategy`](../testing/testing-strategy.md) | resetForTest · Provider override |
 | 스크립트 사용법 | [`Scripts`](../reference/scripts.md) | `scripts/*.sh` 전체 |
 | Recipe 선택 기준 | [`Recipes`](../reference/recipes.md) | local-only / notifier / backend-auth |

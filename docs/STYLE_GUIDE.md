@@ -1,6 +1,6 @@
 # Documentation Style Guide
 
-이 문서는 **template-flutter `docs/` 를 어떻게 쓸 것인가** 의 규칙을 모아요. 추상 원칙이 아니라 **`journey/philosophy/` 의 파일럿 ADR (003 · 005 · 009) 에서 귀납적으로 추출된 규칙** 이에요. 각 규칙마다 구체 샘플 링크가 있어야 하며, 샘플 없는 규칙은 근거가 약해요.
+이 문서는 **template-flutter `docs/` 를 어떻게 쓸 것인가** 의 규칙을 모아요. 추상 원칙이 아니라 **`philosophy/` 의 파일럿 ADR (003 · 005 · 009) 에서 귀납적으로 추출된 규칙** 이에요. 각 규칙마다 구체 샘플 링크가 있어야 하며, 샘플 없는 규칙은 근거가 약해요.
 
 > **이 문서의 위상**: `docs/` 안의 모든 문서가 참조하는 메타 문서. 새 문서 쓸 때 이 가이드를 따르고, 예외가 필요하면 "왜 이 경우에 예외인가" 를 본 문서에 추가.
 
@@ -17,7 +17,7 @@
 | **Level 0** | 처음 모바일 앱을 만드는 사람 | Dart 입문, Flutter 미경험 | "프로젝트 소개", "첫 앱 실행" (아직 미작성) |
 | **Level 1** | 주니어 Flutter 개발자 | Widget · setState 튜토리얼 수준 | `journey/onboarding.md`, `journey/build-first-app.md` |
 | **Level 2** | Flutter 실무 중급 | 2+년 현업, 앱 출시 경험 | `journey/architecture.md`, 대부분의 `conventions/*.md` |
-| **Level 3** | 시스템 설계 관심자 | 여러 플랫폼/스택 경험, 트레이드오프 사고 | `journey/philosophy/*.md` 전체 (ADR) |
+| **Level 3** | 시스템 설계 관심자 | 여러 플랫폼/스택 경험, 트레이드오프 사고 | `philosophy/*.md` 전체 (ADR) |
 
 ### 레벨별 톤 규칙
 
@@ -45,14 +45,14 @@
 
 ## 2. ADR 카드 표준 구조
 
-`journey/philosophy/` 의 ADR 은 아래 **8개 필수 섹션** + 선택 섹션으로 구성. 새 설계 결정을 ADR 로 기록할 때 그대로 따름.
+`philosophy/` 의 ADR 은 아래 **8개 필수 섹션** + 선택 섹션으로 구성돼요. 새 설계 결정을 ADR 로 기록할 때 그대로 따라요.
 
 ### 필수 섹션 순서 (h2)
 
 1. **결론부터** — 30초 안에 핵심 잡기. 4~7줄.
 2. **왜 이런 고민이 시작됐나?** — 문제 맥락. 마지막에 `> 이 결정이 답해야 했던 물음은 이거예요` 블록으로 물음 명확화.
 3. **고민했던 대안들** — 최소 2~3개. 각 대안은 `### Option N — 제목` 서브섹션. 채택안은 `★ (채택)` 표시.
-4. **결정** — 실제 채택된 구현. 구조도 / 코드 스니펫 / 하위 결정 포함.
+4. **결정** — 실제 채택된 구현. 구조도, 코드 스니펫, 하위 결정을 포함해요.
 5. **이 선택이 가져온 것** — `### 긍정적 결과`, `### 부정적 결과` 서브섹션 필수. 정직하게.
 6. **교훈** — 2~3개 정도. 각 교훈은 `### 교훈 N — 제목` 서브섹션 + 구체 일화 + `**교훈**:` 한 줄 요약.
 7. **관련 사례 (Prior Art)** — 업계 레퍼런스 4~5개 외부 링크.
@@ -68,7 +68,7 @@
 
 - **h1**: 짧은 식별자 — `Title_Case_Underscore` (예: `Template_Cherry`, `Late_Binding`). 사이드바 / 탭 제목이 길어지지 않도록 한 두 단어로.
 - **Status 줄**: h1 다음 한 줄 띄고. 날짜 · 현재 유효성 · 주요 구현 위치 한 줄 언급.
-- **ADR 번호 + 풀 제목**: 본문에 박지 않고 docs viewer manifest 의 desc 필드에 `ADR-NNN: 풀 제목` 형태로 사이드바 소제목으로 노출.
+- **ADR 번호 + 풀 제목**: 본문에 박지 않고 docs viewer manifest 의 desc 필드에 `ADR-NNN: 풀 제목` 형태로 사이드바 소제목으로 노출돼요.
 
 ### 선택 섹션
 
@@ -109,12 +109,12 @@
 ### 독자에게 직접 말 걸기 허용
 
 - "~해요" 보다 직접적인 톤 OK: "처음 보면 낯설어요", "3줄이면 완성이에요"
-- 감탄사 절제 — `ㅋㅋ`, 이모지 금지 (사용자 요청 시만 예외. 최상위 `README.md` 의 📚 정도만 관용).
+- 감탄사 절제 — `ㅋㅋ`, 이모지 금지 (사용자 요청 시만 예외. 책 진입점 — 최상위 `README.md` 와 `journey/README.md` — 의 📚 정도만 관용).
 
 ### 표현 강도
 
 - 단정적 표현 허용: "**절대** 금지", "**반드시** 따릅니다"
-- 단 근거가 없으면 쓰지 말 것. 모든 단정은 뒤에 "왜" 를 수반해야 함.
+- 단 근거가 없으면 쓰지 말아주세요. 모든 단정은 뒤에 "왜" 를 수반해야 해요.
 - 완곡 표현 (`~인 것 같습니다`, `~할 수도 있습니다`) 은 정말 불확실할 때만.
 
 ### 샘플
@@ -142,7 +142,7 @@
 | providers.dart | `lib/common/providers.dart` | 전역 DI 정의 중앙 파일 |
 | safeErrorCode / safeErrorMessage | — | UI 안전 에러 추출 함수 (ADR-009) |
 | 솔로 | 한 명의 개발자 | "솔로 감당 가능" 등 |
-| 도그푸딩 | `tools/dogfooding/` 유사 개념 (아직 없음) | 자체 템플릿을 자기 프로젝트에 적용하는 검증 |
+| 도그푸딩 | (전용 폴더 없음) | 자체 템플릿을 자기 프로젝트에 적용해 검증하는 행위 — 파생 레포에서의 실사용을 가리킴 |
 | cherry-pick 전파 | — | 템플릿 레포 개선 → 파생 레포로 전파 |
 | `appSlug` | 단일 문자열 claim | JWT 의 앱 식별자 (ADR-012) |
 
@@ -202,7 +202,7 @@ abstract class AppKit {
 ### 내부 링크는 **상대 경로**
 
 - 같은 디렉토리: `` [`ADR-005`](./adr-005-riverpod-mvvm.md) `` ← ADR 파일에서 다른 ADR 참조
-- 상위 경로: `` [`testing`](../../testing/testing-strategy.md) `` ← `journey/philosophy/` 에서 `docs/testing/` 참조
+- 상위 경로: `` [`testing`](../testing/testing-strategy.md) `` ← `philosophy/` 에서 `docs/testing/` 참조
 - 절대 경로 · 전체 docs-viewer URL 금지 (레포 이름 바뀌면 깨짐)
 
 ### 링크 텍스트는 백틱
@@ -283,7 +283,7 @@ Code References 마지막에 `**관련 ADR**:` 블록으로 수렴:
 
 | 규모 | 예시 | 1 세션 분량 |
 |---|---|---|
-| **대형 플래그십** | `journey/philosophy/README.md`, `journey/architecture.md`, `architecture/featurekit-contract.md` | **1 문서 엄격** |
+| **대형 플래그십** | `philosophy/README.md`, `journey/architecture.md`, `architecture/featurekit-contract.md` | **1 문서 엄격** |
 | **중형 여정** | `onboarding.md`, `build-first-app.md`, `deployment.md`, `infra/android-deployment.md` | 1 문서 기본 |
 | **소형 컨벤션** | `naming.md`, `i18n.md` 등 (100~300줄) | 관련 주제 **2개 쌍** |
 | **ADR 카드 1 개** | philosophy 테마별 쪼갠 단위 | 3~4 개까지 몰아 가능 (테마 단위) |
@@ -311,8 +311,8 @@ Code References 마지막에 `**관련 ADR**:` 블록으로 수렴:
 - [ ] 옛 섹션명 본문 참조 없음 (`grep -E 'Context|Consequences|Lessons Learned' docs/`)
 - [ ] 링크가 실제 파일에 도달 (내부 · 외부 모두)
 - [ ] Code References 의 파일 경로가 실존 (`ls` 확인)
-- [ ] 두 레포 (template + docs-viwer) 동기화 (`rsync`)
-- [ ] `docs-viwer/docs/manifest.json` 의 사이드바 엔트리 추가 (새 문서인 경우)
+- [ ] 두 레포 (`template-flutter` + `docs-template-flutter`) 동기화 (수동 복사 또는 `rsync` — 자동화 스크립트 없음)
+- [ ] `docs-template-flutter/docs/manifest.json` 의 사이드바 엔트리 추가 (새 문서인 경우)
 - [ ] 특정 앱 / 회사 / Bundle ID 노출 없음 (`grep -r 'gymlog\|sumtally\|com\.twosun' docs/`)
 - [ ] 커밋 메시지 Conventional Commits 포맷 + subject 72자 이하
 
@@ -324,7 +324,7 @@ Code References 마지막에 `**관련 ADR**:` 블록으로 수렴:
 
 이 가이드의 모든 규칙은 **구체 샘플에서 추출**. 추상 원칙을 먼저 쓰고 "이렇게 쓰자" 선언하지 않음.
 
-- 새 규칙 추가 시 `journey/philosophy/*.md` 또는 다른 완성 문서에서 근거 샘플 제시 필수
+- 새 규칙 추가 시 `philosophy/*.md` 또는 다른 완성 문서에서 근거 샘플 제시 필수
 - 샘플 없는 규칙은 "아이디어" 로만 보존 — 실제 문서 작성 시 검증되면 본문 이동
 
 ### 예외 발생 시 기록 → 패턴 식별 → 규칙 업데이트
@@ -347,6 +347,7 @@ Code References 마지막에 `**관련 ADR**:` 블록으로 수렴:
 
 | 날짜 | 변경 | 근거 |
 |---|---|---|
-| 2026-04-24 | 초기 작성 | `journey/philosophy/` 파일럿 3개 ADR (003 · 005 · 009) 에서 귀납 추출 |
+| 2026-04-24 | 초기 작성 | `philosophy/` 파일럿 3개 ADR (003 · 005 · 009) 에서 귀납 추출 |
+| 2026-05-07 | §1·§2·§3·§4·§6·§8 정정 | S1 감사 — `journey/philosophy/` 경로 오류 7곳 정정, `docs-viwer` → `docs-template-flutter` 표기 통일, `rsync` 자동화 미존재 명시, 도그푸딩 정의 정정, 음슴체 4건 해요체로 정리, 이모지 관용 범위에 `journey/README.md` 포함 |
 
 이후 업데이트 시 상기 표에 추가.

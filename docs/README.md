@@ -16,12 +16,12 @@
 
 ---
 
-## 철학 & 설계 결정 (journey/philosophy/)
+## 철학 & 설계 결정 (philosophy/)
 
 이 템플릿이 **왜 이런 구조가 되었는지** 를 담은 ADR (Architecture Decision Record) 카드 모음이에요. 추상적인 이론이 아니라, 솔로 인디 개발자가 여러 앱을 찍어낼 때 마주치는 구체적인 고통에 대한 답변으로 만들어졌어요.
 
 - [`Philosophy — ADR 전체 인덱스`](./philosophy/README.md)
-- 테마별 ADR 카드 (레포 구조 / 상태관리 / 네트워크 / 저장소 / UI·UX / 운영)
+- 테마별 ADR 카드 — 테마 1 (레포 구조) · 테마 2 (상태관리) · 테마 3 (네트워크) · 테마 4 (저장소) · 테마 5 (UI·UX) · 테마 6 (운영·배포)
 
 ## 개발 여정 (journey/)
 
@@ -45,12 +45,16 @@
 ## 컨벤션 (conventions/) — 코드 작성 규약
 
 - [`Overview`](./conventions/README.md)
+- [`Architecture`](./conventions/architecture.md) — MVVM · 모듈 의존 방향 · 에러 처리 한눈
 - [`Naming`](./conventions/naming.md) — 파일 · 클래스 · Provider 명명
 - [`ViewModel + MVVM`](./conventions/viewmodel-mvvm.md) — StateNotifier · ConsumerWidget 패턴
 - [`Error Handling`](./conventions/error-handling.md) — ApiException · safeErrorCode/Message · 인터셉터 순서
 - [`Loading UX`](./conventions/loading-ux.md) — 4가지 로딩 패턴
 - [`i18n`](./conventions/i18n.md) — ARB · gen_l10n 원칙
-- [`Testing`](./testing/testing-strategy.md) — resetForTest · Provider override · 지문 테스트
+- [`Theme Tokens`](./conventions/theme-tokens.md) — Spacing · Typography · Palette 디자인 토큰
+- [`Kits`](./conventions/kits.md) — FeatureKit 작성 · manifest · 의존 관계 룰
+- [`API Contract`](./conventions/api-contract.md) — 백엔드 응답 · 검색 · 에러 코드 계약
+- [`Figma Handoff`](./conventions/figma-handoff.md) — Figma 디자인 핸드오프
 
 ## 기능 가이드 (features/) — 개별 Kit 상세
 
@@ -59,6 +63,7 @@
 - [`Kit 목록 + 의존 관계도`](./features/README.md)
 - [`auth_kit`](./features/auth-kit.md) — JWT · 소셜 로그인
 - [`backend_api_kit`](./features/backend-api-kit.md) — Dio · 3개 인터셉터
+- [`payment_kit`](./features/payment-kit.md) — 결제 (Stripe 통합 골격, derived repo SDK 추가)
 - [`observability_kit`](./features/observability-kit.md) — Sentry · PostHog 번들
 - [`notifications_kit`](./features/notifications-kit.md) — 로컬 · 푸시
 - [`local_db_kit`](./features/local-db-kit.md) — Drift · 마이그레이션

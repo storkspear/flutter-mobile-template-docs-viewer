@@ -230,12 +230,12 @@
       ]
     },
     {
-      "name": "Features (Kit 13개)",
+      "name": "Features (Kit 14개)",
       "files": [
         {
           "path": "features/README.md",
           "title": "Overview",
-          "desc": "13개 Kit 인덱스 + 의존 관계도 + 활성화"
+          "desc": "14개 Kit 인덱스 + 의존 관계도 + 활성화"
         },
         {
           "path": "features/backend-api-kit.md",
@@ -301,6 +301,11 @@
           "path": "features/device-info-kit.md",
           "title": "device_info_kit",
           "desc": "앱 · 기기 정보"
+        },
+        {
+          "path": "features/payment-kit.md",
+          "title": "payment_kit",
+          "desc": "결제 골격 (파생 레포에서 Stripe 등 SDK 추가)"
         }
       ]
     },
