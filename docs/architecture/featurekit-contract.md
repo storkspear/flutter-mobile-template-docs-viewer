@@ -152,20 +152,25 @@ class AppKits {
 ## 호출 순서 (main.dart)
 
 ```
-1. AppPaletteRegistry.install(DefaultPalette())
-2. AppConfig.init(...)
-3. PrefsStorage init
-4. AppKits.install([BackendApiKit(), AuthKit(), ...])
+1. WidgetsFlutterBinding.ensureInitialized()
+2. AppPaletteRegistry.install(DefaultPalette())
+   AppTypefaceRegistry.install(DefaultTypeface())
+3. AppConfig.init(...)
+4. (조건부) SentryFlutter.init  — appRunner 로 _bootstrap 실행
+5. PrefsStorage().init()
+6. AppKits.install([BackendApiKit(), AuthKit(), ...])
    ├─ 중복 체크
+   ├─ requires 의존성 검증
    ├─ 각 Kit.onInit()
    └─ 실패 시 역순 rollback
-5. final container = ProviderContainer(overrides: [...AppKits.allProviderOverrides, ...])
-6. AppKits.attachContainer(container)
-7. SplashController(steps: AppKits.allBootSteps).run()
-8. runApp(UncontrolledProviderScope(container: container, child: App()))
+7. final container = ProviderContainer(overrides: [...AppKits.allProviderOverrides, ...])
+8. AppKits.attachContainer(container)
+9. container.read(crashServiceProvider).init()
+10. SplashController(steps: AppKits.allBootSteps).run()
+11. runApp(UncontrolledProviderScope(container: container, child: const App()))
 ```
 
-**순서 강제**: 5 ↔ 6 바뀌면 BootStep 에서 `container.read` 가 StateError.
+**순서 강제**: 7 ↔ 8 바뀌면 BootStep 에서 `container.read` 가 StateError.
 
 ---
 
@@ -214,8 +219,8 @@ class MyKit extends AppKit {
 
 ## Code References
 
-- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart) — 55줄 전체
-- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart) — 178줄 레지스트리
+- [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart) — 54줄 전체
+- [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart) — 184줄 레지스트리
 
 ---
 
@@ -225,4 +230,4 @@ class MyKit extends AppKit {
 - [`ADR-008 · BootStep`](../philosophy/adr-008-boot-step.md) — bootSteps 상세
 - [`ADR-018 · redirectPriority`](../philosophy/adr-018-redirect-priority.md)
 - [`boot-sequence.md`](./boot-sequence.md) — 실제 부팅 흐름
-- [`Features 인덱스`](../features/README.md) — 13개 Kit 구현체
+- [`Features 인덱스`](../features/README.md) — 14개 Kit 구현체

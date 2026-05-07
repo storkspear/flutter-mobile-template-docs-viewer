@@ -44,7 +44,7 @@
 
 ## 레이어별 역할
 
-### `core/` — 모든 앱 필수 기반 (44 파일)
+### `core/` — 모든 앱 필수 기반 (46 파일)
 
 | 모듈 | 역할 |
 |------|------|
@@ -57,14 +57,15 @@
 | `storage/` | SecureStorage · PrefsStorage · TokenStorage ([`ADR-013`](../philosophy/adr-013-token-atomic-storage.md)) |
 | `theme/` | AppPalette · 디자인 토큰 ([`ADR-015`](../philosophy/adr-015-palette-registry.md)) |
 | `utils/` | FormValidators · Debouncer 등 순수 헬퍼 |
-| `widgets/` | PrimaryButton · LoadingView · SkeletonLoading 등 13개 |
+| `widgets/` | PrimaryButton · LoadingView · SkeletonLoading 등 12개 |
 
-### `kits/` — 선택 13개 ([`Features 인덱스`](../features/README.md))
+### `kits/` — 선택 14개 ([`Features 인덱스`](../features/README.md))
 
 ```
 auth_kit, backend_api_kit, observability_kit, notifications_kit,
 local_db_kit, update_kit, onboarding_kit, nav_shell_kit,
-charts_kit, ads_kit, background_kit, permissions_kit, device_info_kit
+charts_kit, ads_kit, background_kit, permissions_kit, device_info_kit,
+payment_kit
 ```
 
 ### `common/` — 여러 Kit 조립 지점

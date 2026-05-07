@@ -38,6 +38,7 @@
                  │
                  ▼
 2. AppPaletteRegistry.install(DefaultPalette())
+   AppTypefaceRegistry.install(DefaultTypeface())
                  │
                  ▼
 3. AppConfig.init(
@@ -94,10 +95,10 @@
    │    │   │          └─ 실패 → authState.emit(unauthenticated)
    │    │   └─ false → authState.emit(unauthenticated)
    │    
-   ├─ ObservabilityKit 의 PostHogInitStep
+   ├─ ObservabilityKit 의 _PostHogInitStep
    │    └─ PostHog SDK 초기화 (POSTHOG_KEY 주입 시)
    │
-   ├─ UpdateKit 의 ForceUpdateCheckStep
+   ├─ UpdateKit 의 _ForceUpdateStep
    │    └─ service.isUpdateRequired() 확인 → AppUpdateNotifier 갱신
    │
    └─ (기타 활성 Kit 의 BootStep)
@@ -192,7 +193,7 @@ initialLocation `/splash` → refreshListenable 이 곧 초기 notify → `_comp
 
 ## 코드 참조
 
-- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — 전체 부팅 코드 (95줄)
+- [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — 전체 부팅 코드 (163줄)
 - [`lib/app.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/app.dart) — MaterialApp 구성
 - [`lib/common/splash/splash_controller.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/splash_controller.dart)
 - [`lib/core/kits/app_kits.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kits.dart) — install · attachContainer
