@@ -25,8 +25,11 @@ kits:
 // lib/main.dart
 await AppKits.install([
   AdsKit(
-    androidBannerUnitId: 'ca-app-pub-XXXX/YYYY',
-    iosBannerUnitId: 'ca-app-pub-XXXX/ZZZZ',
+    config: AdConfig(
+      androidBannerUnitId: 'ca-app-pub-XXXX/YYYY',
+      iosBannerUnitId: 'ca-app-pub-XXXX/ZZZZ',
+    ),
+    // 또는 개발용: AdsKit(config: AdConfig.testIds)
   ),
 ]);
 ```
@@ -63,7 +66,7 @@ Scaffold(
 
 - [ ] [AdMob Console](https://apps.admob.com/) 앱 등록
 - [ ] 광고 단위 생성 (배너 · 전면 · 리워드)
-- [ ] Unit ID 복사 → `AdsKit(androidBannerUnitId: ..., iosBannerUnitId: ...)`
+- [ ] Unit ID 복사 → `AdsKit(config: AdConfig(androidBannerUnitId: ..., iosBannerUnitId: ...))`
 - [ ] `android/app/src/main/AndroidManifest.xml` 의 `com.google.android.gms.ads.APPLICATION_ID` meta-data 업데이트
 - [ ] `ios/Runner/Info.plist` 의 `GADApplicationIdentifier` 업데이트
 - [ ] `NSUserTrackingUsageDescription` 문구 앱 성격에 맞게 다듬기
@@ -74,7 +77,8 @@ Scaffold(
 
 ## Code References
 
-- [`lib/kits/ads_kit/ads_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ads_kit.dart)
+- [`lib/kits/ads_kit/ads_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ads_kit.dart) — AppKit 구현 + 3개 BootStep
+- [`lib/kits/ads_kit/ad_config.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ad_config.dart) — `AdConfig` + `.testIds` 상수
 - [`lib/kits/ads_kit/banner_ad_widget.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/banner_ad_widget.dart)
 - [`lib/kits/ads_kit/ump_consent_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/ump_consent_step.dart)
 - [`lib/kits/ads_kit/att_permission_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/ads_kit/att_permission_step.dart)

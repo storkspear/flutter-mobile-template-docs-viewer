@@ -34,26 +34,40 @@ await AppKits.install([
 | 항목 | 설명 |
 |------|------|
 | `DeviceInfoKit` | `AppKit` 구현 |
-| `DeviceInfoService` | `getAppVersion` · `getDeviceInfo` |
-| `DeviceInfo` (DTO) | 통합 기기 정보 |
+| `DeviceInfoService` | `Future<AppAndDeviceInfo> load()` (단일 메서드) |
+| `AppAndDeviceInfo` (DTO) | 앱·기기 통합 정보 (appVersion / buildNumber / packageName / appName / platform / osVersion / deviceModel) |
+| `PlatformDeviceInfoService` | 기본 구현 (device_info_plus + package_info_plus) |
 
 ---
 
 ## 사용 예
 
 ```dart
-final info = await ref.read(deviceInfoServiceProvider).getDeviceInfo();
-print('앱 버전: ${info.appVersion}');   // "1.2.3+45"
-print('OS: ${info.os}');               // "iOS 17.1" / "Android 14"
-print('모델: ${info.model}');           // "iPhone 15 Pro" / "Pixel 8"
-print('디바이스 ID: ${info.deviceId}'); // 고유 식별자
+final info = await ref.read(deviceInfoServiceProvider).load();
+print('앱 버전: ${info.appVersion}');     // "1.2.3"
+print('빌드 번호: ${info.buildNumber}');   // "45"
+print('패키지: ${info.packageName}');     // "com.example.app"
+print('앱 이름: ${info.appName}');         // "MyApp"
+print('플랫폼: ${info.platform}');         // "ios" / "android"
+print('OS 버전: ${info.osVersion}');       // "17.4" / "14 API 34"
+print('디바이스 모델: ${info.deviceModel}'); // "iPhone 15 Pro" / "Pixel 8"
 ```
+
+> `AppAndDeviceInfo` 는 고유 식별자(IDFA/Android ID) 를 의도적으로 노출하지 않아요. 광고 식별자는 `ads_kit` 의 ATT 동의 흐름과 함께 처리.
 
 ### 크래시 리포트 첨부
 
 ```dart
-final info = await ref.read(deviceInfoServiceProvider).getDeviceInfo();
-await ref.read(crashServiceProvider).addBreadcrumb('Device info', data: info.toMap());
+final info = await ref.read(deviceInfoServiceProvider).load();
+await ref.read(crashServiceProvider).addBreadcrumb(
+  'Device info',
+  data: {
+    'appVersion': info.appVersion,
+    'platform': info.platform,
+    'osVersion': info.osVersion,
+    'deviceModel': info.deviceModel,
+  },
+);
 ```
 
 ---

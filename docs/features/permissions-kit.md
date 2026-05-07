@@ -34,30 +34,29 @@ await AppKits.install([
 
 | 항목 | 설명 |
 |------|------|
-| `PermissionsKit` | `AppKit` 구현 |
-| `PermissionHelper` | `request` · `check` · `openSettings` |
+| `PermissionsKit` | `AppKit` 구현 (Provider 노출 없음) |
+| `PermissionHelper` | **static** `ensure(BuildContext, Permission, {showOpenSettingsPrompt, openSettingsTitle, openSettingsMessage}) → Future<bool>` — 권한 요청 + 영구 거부 시 설정 앱 유도 다이얼로그 (`AppDialog.confirm` + `openAppSettings`) |
 
 ---
 
 ## 사용 예
 
 ```dart
-// 카메라 권한 요청
-final granted = await ref.read(permissionHelperProvider).request(
-  Permission.camera,
-  context: context,  // ← 다이얼로그 띄울 때
-);
+// 카메라 권한 요청 (한 줄로 거부·영구거부·설정유도까지 처리)
+final granted = await PermissionHelper.ensure(context, Permission.camera);
 if (granted) {
   // 카메라 기능 진행
 }
 
-// 여러 권한
-final results = await ref.read(permissionHelperProvider).requestMultiple([
-  Permission.camera,
-  Permission.microphone,
-  Permission.location,
-]);
+// 여러 권한은 순차 호출
+final cam = await PermissionHelper.ensure(context, Permission.camera);
+if (!cam) return;
+final mic = await PermissionHelper.ensure(context, Permission.microphone);
+if (!mic) return;
+final loc = await PermissionHelper.ensure(context, Permission.location);
 ```
+
+> static 메서드라 Provider 통한 주입 불필요. 영구 거부 다이얼로그를 끄고 싶으면 `showOpenSettingsPrompt: false`.
 
 ---
 

@@ -23,10 +23,25 @@ kits:
 
 ```dart
 // lib/main.dart
+import 'package:workmanager/workmanager.dart';
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    // task별 분기 처리
+    return Future.value(true);
+  });
+}
+
 await AppKits.install([
-  BackgroundKit(),
+  BackgroundKit(
+    scheduler: WorkmanagerTaskScheduler(),
+    callbackDispatcher: callbackDispatcher,
+  ),
 ]);
 ```
+
+> `callbackDispatcher` 는 **top-level 함수** + `@pragma('vm:entry-point')` 필수 (Dart AOT 가 트리쉐이킹하지 않도록).
 
 ---
 
@@ -43,31 +58,29 @@ await AppKits.install([
 ## 사용 예
 
 ```dart
-// 매일 오전 9시 동기화
-await ref.read(backgroundTaskSchedulerProvider).schedulePeriodic(
-  taskName: 'daily_sync',
-  frequency: Duration(days: 1),
-  initialDelay: _untilNext9am(),
-  callback: _syncCallback,
-  constraints: BackgroundConstraints(requiresWifi: true),
+// 주기 태스크 등록 (15분 이상)
+await ref.read(backgroundTaskSchedulerProvider).registerPeriodic(
+  uniqueName: 'daily_sync',
+  taskName: 'sync',          // callbackDispatcher 내부에서 분기 키
+  frequency: const Duration(days: 1),
+  payload: {'type': 'full'}, // 선택: 콜백에 inputData 로 전달
 );
 
-// 취소
+// 1회성 태스크 등록 (지연 가능)
+await ref.read(backgroundTaskSchedulerProvider).registerOneOff(
+  uniqueName: 'send_log',
+  taskName: 'log_upload',
+  initialDelay: const Duration(minutes: 5),
+);
+
+// 특정 태스크 취소
 await ref.read(backgroundTaskSchedulerProvider).cancel('daily_sync');
+
+// 모두 취소
+await ref.read(backgroundTaskSchedulerProvider).cancelAll();
 ```
 
-### 콜백 (top-level 함수 필수)
-
-```dart
-// lib/background_tasks.dart (top-level)
-@pragma('vm:entry-point')
-void _syncCallback() {
-  Workmanager().executeTask((task, inputData) async {
-    // 작업 수행
-    return Future.value(true);
-  });
-}
-```
+> 추가 제약 (네트워크 / 충전 / Wi-Fi 등) 은 `WorkmanagerTaskScheduler` 가 workmanager 의 옵션을 직접 노출하지 않아요. 필요 시 파생 레포에서 `Scheduler` 인터페이스 자체 구현체로 확장.
 
 ---
 
@@ -82,5 +95,6 @@ void _syncCallback() {
 
 ## Code References
 
-- [`lib/kits/background_kit/background_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_kit.dart)
-- [`lib/kits/background_kit/background_task_scheduler.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_task_scheduler.dart)
+- [`lib/kits/background_kit/background_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_kit.dart) — AppKit 구현
+- [`lib/kits/background_kit/background_task_scheduler.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/background_task_scheduler.dart) — 인터페이스 + `InMemoryBackgroundTaskScheduler` (테스트)
+- [`lib/kits/background_kit/workmanager_task_scheduler.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/background_kit/workmanager_task_scheduler.dart) — 실제 workmanager 구현

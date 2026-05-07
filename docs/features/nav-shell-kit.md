@@ -6,7 +6,7 @@
 
 ## 개요
 
-- **go_router ShellRoute** 사용 — 탭 전환 시 각 탭의 네비게이션 스택 유지
+- **go_router `StatefulShellRoute.indexedStack`** 사용 — 탭별 독립 네비게이션 스택 유지
 - **중앙 FAB** 옵션 — 주요 액션 (추가 · 녹음 등)
 - **아이콘 · 라벨** 커스터마이징
 - **탭 전환 애니메이션** — Material · Cupertino 자동 감지
@@ -25,9 +25,18 @@ kits:
 // lib/main.dart
 await AppKits.install([
   NavShellKit(tabs: [
-    NavTab(path: '/home', icon: Icons.home, label: 'Home'),
-    NavTab(path: '/stats', icon: Icons.bar_chart, label: 'Stats'),
-    NavTab(path: '/settings', icon: Icons.settings, label: 'Settings'),
+    NavTab(
+      path: '/home', icon: Icons.home, label: 'Home',
+      builder: (ctx, state) => const HomeScreen(),
+    ),
+    NavTab(
+      path: '/stats', icon: Icons.bar_chart, label: 'Stats',
+      builder: (ctx, state) => const StatsScreen(),
+    ),
+    NavTab(
+      path: '/settings', icon: Icons.settings, label: 'Settings',
+      builder: (ctx, state) => const SettingsScreen(),
+    ),
   ]),
 ]);
 ```
@@ -41,7 +50,7 @@ await AppKits.install([
 | `NavShellKit` | `AppKit` 구현. ShellRoute 기여 |
 | `NavTab` | 탭 정의 (path · icon · label) |
 | `BottomNavShell` | 실제 셸 위젯 |
-| (선택) `CentralFab` | 중앙 FAB 위젯 |
+| (선택) `NavShellCenterFab` | 중앙 FAB 위젯 (`icon` · `onPressed(BuildContext)` · `tooltip?`) |
 
 ---
 
@@ -50,11 +59,20 @@ await AppKits.install([
 ```dart
 NavShellKit(
   tabs: [
-    NavTab(path: '/home', icon: Icons.home, label: s.home),
-    NavTab(path: '/stats', icon: Icons.bar_chart, label: s.stats),
-    NavTab(path: '/settings', icon: Icons.settings, label: s.settings),
+    NavTab(
+      path: '/home', icon: Icons.home, label: s.home,
+      builder: (ctx, state) => const HomeScreen(),
+    ),
+    NavTab(
+      path: '/stats', icon: Icons.bar_chart, label: s.stats,
+      builder: (ctx, state) => const StatsScreen(),
+    ),
+    NavTab(
+      path: '/settings', icon: Icons.settings, label: s.settings,
+      builder: (ctx, state) => const SettingsScreen(),
+    ),
   ],
-  fab: CentralFab(
+  centerFab: NavShellCenterFab(
     icon: Icons.add,
     onPressed: (context) => context.push('/expense/new'),
   ),
