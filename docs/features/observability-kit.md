@@ -194,7 +194,7 @@ await analytics.trackEvent('search', properties: {
 
 - [ ] [PostHog](https://posthog.com) 프로젝트 생성
 - [ ] API Key (Project API Key) 복사 → `.env` + GitHub Secrets (`POSTHOG_KEY`)
-- [ ] Host 확인 (EU 는 `eu.posthog.com`, US 는 `app.posthog.com`)
+- [ ] Host 확인 (US default 는 `https://us.i.posthog.com`, EU 는 `https://eu.i.posthog.com`)
 - [ ] 분석 대시보드에 첫 이벤트 들어오는지 확인
 
 ### 로컬 테스트

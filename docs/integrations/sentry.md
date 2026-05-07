@@ -122,7 +122,7 @@ ElevatedButton(
 - [ ] `.env` 에 `SENTRY_DSN=` 라인 추가 (gitignore 확인)
 - [ ] GHA Secrets 에 `SENTRY_DSN` 등록 (`scripts/upload-secrets-to-github.sh` 활용 가능)
 - [ ] 릴리스 빌드 1회 실행 후 Issues 탭에 테스트 크래시 1건 도착 확인
-- [ ] release 환경 (`AppConfig.instance.environment = AppEnvironment.prod`) 으로 빌드한 후 prod 환경 필터에서 보이는지 확인
+- [ ] release 환경 (`AppConfig.instance.environment = Environment.prod`) 으로 빌드한 후 prod 환경 필터에서 보이는지 확인
 
 ---
 

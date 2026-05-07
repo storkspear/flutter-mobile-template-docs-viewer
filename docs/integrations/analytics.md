@@ -41,9 +41,9 @@
 ```dart
 // lib/core/analytics/analytics_service.dart (인터페이스 일부)
 abstract class AnalyticsService {
-  Future<void> identify(String userId, {Map<String, dynamic>? props});
-  Future<void> track(String event, {Map<String, dynamic>? properties});
-  Future<void> screen(String name);
+  Future<void> trackScreen(String name, {Map<String, dynamic>? properties});
+  Future<void> trackEvent(String eventName, {Map<String, dynamic>? properties});
+  Future<void> identify(String userId, {Map<String, dynamic>? traits});
   Future<void> reset();
 }
 ```
@@ -51,7 +51,7 @@ abstract class AnalyticsService {
 다른 도구를 쓰려면:
 
 1. `MyToolAnalyticsService implements AnalyticsService` 작성
-2. `lib/main.dart` 또는 ObservabilityKit 안에서 `analyticsServiceProvider` override
+2. `lib/main.dart` 또는 ObservabilityKit 안에서 `analyticsProvider` override
 3. (선택) `AnalyticsNavigatorObserver` 도 새 구현체와 호환 확인 — 인터페이스 그대로면 자동 작동
 
 ---
@@ -66,12 +66,12 @@ class FanOutAnalyticsService implements AnalyticsService {
   final List<AnalyticsService> _delegates;
 
   @override
-  Future<void> track(String event, {Map<String, dynamic>? properties}) async {
+  Future<void> trackEvent(String eventName, {Map<String, dynamic>? properties}) async {
     for (final d in _delegates) {
-      await d.track(event, properties: properties);
+      await d.trackEvent(eventName, properties: properties);
     }
   }
-  // ... 나머지 메서드도 동일하게 fan-out
+  // ... trackScreen / identify / reset 도 동일 패턴으로 fan-out
 }
 ```
 

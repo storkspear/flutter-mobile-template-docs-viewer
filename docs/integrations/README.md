@@ -14,6 +14,8 @@
 | [`sentry.md`](./sentry.md) | Sentry — 크래시 / 에러 추적 | `observability_kit` |
 | [`posthog.md`](./posthog.md) | PostHog — 사용자 행동 분석 | `observability_kit` |
 | [`fcm.md`](./fcm.md) | Firebase Cloud Messaging — 푸시 알림 | `notifications_kit` + `backend_api_kit` |
+| [`google-apple-auth.md`](./google-apple-auth.md) | Google Cloud + Apple Developer — 소셜 로그인 키 발급 | `auth_kit` |
+| [`kakao-naver-auth.md`](./kakao-naver-auth.md) | Kakao + Naver Developers — 한국 시장 소셜 로그인 | `auth_kit` |
 | [`analytics.md`](./analytics.md) | 분석 도구 선택 비교 | `observability_kit` |
 | [`deployment-android.md`](./deployment-android.md) | Google Play Console + GHA 배포 파이프라인 | (인프라) |
 | [`security.md`](./security.md) | R8 / SSL pinning / 토큰 관리 보안 정책 요약 | `backend_api_kit` |

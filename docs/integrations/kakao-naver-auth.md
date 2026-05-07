@@ -9,7 +9,7 @@
 
 ## 0. 본 템플릿의 위치
 
-기본적으로 4개 social provider 지원: `email · google · apple · kakao · naver`. 한국 외 시장이면 카카오/네이버는 비활성 권장 (앱 사이즈 ~3MB 절약).
+기본적으로 이메일 + 4개 소셜 provider (총 5개) 지원: `email · google · apple · kakao · naver`. 한국 외 시장이면 카카오/네이버는 비활성 권장 (앱 사이즈 ~3MB 절약).
 
 > 사이즈 영향: kakao_flutter_sdk + flutter_naver_login 의 native 라이브러리만 ~3MB. pubspec 에 선언만 해도 APK 에 포함되므로, **사용 안 하는 시장의 앱은 pubspec 에서도 제거 권장** ([features/README.md tree-shaking 주의](../features/README.md)).
 
@@ -221,7 +221,7 @@ AuthService._handleAuthResponse → 토큰 저장 + authenticated 상태
 | Android: "카카오 SDK가 초기화되지 않았습니다" | `KakaoSdk.init` 호출 누락 또는 native key 미주입 | main.dart 에서 `KakaoSdk.init` 호출 + dart-define 확인 |
 | Android: "key hash mismatch" | 콘솔에 등록한 키 해시와 빌드 keystore 해시 불일치 | release/debug 각각 해시 추출 → 콘솔에 추가 |
 | iOS: 카카오톡 앱으로 redirect 안 됨 | `LSApplicationQueriesSchemes` 누락 | Info.plist 에 `kakaokompassauth` 추가 |
-| Naver: 이메일 없음 → `ATH_004 SOCIAL_AUTH_FAILED` (`reason=email_required`) | 사용자가 이메일 동의 거부 | 콘솔에서 이메일을 **필수** 동의로 설정 + 화면에 안내 메시지 |
+| Naver: 이메일 없음 → `socialAuthFailed (ATH_004)` (`details.reason = "email_required"`) | 사용자가 이메일 동의 거부 | 콘솔에서 이메일을 **필수** 동의로 설정 + 화면에 안내 메시지 |
 | Apple "Hide My Email" 처리됨 → 카카오/네이버에서도 비슷한 정책? | 카카오/네이버는 hide email 정책 없음 — 동의 거부만 가능 | 콘솔에서 필수 설정 + 사용자 안내 |
 
 ---

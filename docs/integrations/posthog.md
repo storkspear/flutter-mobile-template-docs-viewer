@@ -47,7 +47,7 @@ PostHog **Activity → Live events** 에서 `$screen` 이벤트 1분 내 도착 
 ### 3-2. 커스텀 이벤트
 
 ```dart
-ref.read(analyticsServiceProvider).track(
+ref.read(analyticsProvider).trackEvent(
   'button_pressed',
   properties: {'button_id': 'subscribe_premium'},
 );
@@ -66,7 +66,7 @@ ref.read(analyticsServiceProvider).track(
 | 이벤트가 안 옴 | API Key 미주입 (Debug 폴백) | 콘솔에서 `[DebugAnalyticsService]` 로그면 키 안 들어간 것 |
 | EU 사용자 데이터인데 US 리전에 도착 | `POSTHOG_HOST` 미설정 | `POSTHOG_HOST=https://eu.i.posthog.com` 추가 |
 | 화면 전환 자동 추적 안 됨 | NavigatorObserver 미연결 | `lib/common/router/app_router.dart` 의 `observers:` 리스트 확인 |
-| 사용자 식별 안 됨 | `identify(userId)` 호출 안 함 | 로그인 직후 `analyticsServiceProvider` 의 `identify(...)` 호출 |
+| 사용자 식별 안 됨 | `identify(userId)` 호출 안 함 | 로그인 직후 `analyticsProvider` 의 `identify(...)` 호출 |
 
 ---
 
