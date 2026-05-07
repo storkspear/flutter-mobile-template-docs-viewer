@@ -1,6 +1,6 @@
 # Token_Atomic_Storage
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `lib/core/storage/token_storage.dart` (73줄) 가 `saveTokens` 원자 저장 + `repairIfPartial` 복구 담당. iOS Keychain: `first_unlock_this_device`, Android: EncryptedSharedPreferences.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `lib/core/storage/token_storage.dart` (72줄) 가 `saveTokens` 원자 저장 + `repairIfPartial` 복구 담당. iOS Keychain: `first_unlock_this_device`, Android: EncryptedSharedPreferences.
 
 ## 결론부터
 
@@ -269,8 +269,8 @@ access 삭제가 실패해도 refresh 삭제는 **반드시** 시도. 두 토큰
 ## Code References
 
 **토큰 저장**
-- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/secure_storage.dart) — 24줄, iOS/Android 옵션 설정
-- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/token_storage.dart) — 73줄, 원자 저장 + 복구
+- [`lib/core/storage/secure_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/secure_storage.dart) — 30줄, iOS/Android 옵션 설정
+- [`lib/core/storage/token_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/token_storage.dart) — 72줄, 원자 저장 + 복구
 
 **일반 설정**
 - [`lib/core/storage/prefs_storage.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/storage/prefs_storage.dart) — SharedPreferences 래퍼

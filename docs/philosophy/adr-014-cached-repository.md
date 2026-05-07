@@ -1,6 +1,6 @@
 # Cached_Repository
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `lib/core/cache/cached_repository.dart` (151줄) 가 5가지 정책 지원. 기본 저장소는 `MemoryCacheStore` — fork 후 `DriftCacheStore` 등으로 교체 가능.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `lib/core/cache/cached_repository.dart` (150줄) 가 5가지 정책 지원. 기본 저장소는 `MemoryCacheStore` — 파생 레포에서 `DriftCacheStore` 등으로 교체 가능.
 
 ## 결론부터
 
@@ -62,7 +62,7 @@ Repository 가 모든 응답을 Drift 에 저장. 조회 시 Drift 에서.
 - **힘 A 만족**: 정책을 파라미터로 선택. 화면마다 다른 정책.
 - **힘 B 만족**: Repository 호출 1회. 정책 분기는 CachedRepository 내부.
 - **힘 C 만족**: `invalidate` · `invalidateByPrefix` 로 CUD 후 일괄 삭제.
-- **힘 D 만족**: `CacheStore` 인터페이스 → fork 후 `DriftCacheStore` · `HiveCacheStore` 등 교체.
+- **힘 D 만족**: `CacheStore` 인터페이스 → 파생 레포에서 `DriftCacheStore` · `HiveCacheStore` 등 교체.
 
 ## 결정
 
@@ -309,7 +309,7 @@ class ExpenseRepository {
 - [`lib/core/cache/cache_policy.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cache_policy.dart) — 5가지 enum
 - [`lib/core/cache/cache_store.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cache_store.dart) — 추상 인터페이스
 - [`lib/core/cache/memory_cache_store.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/memory_cache_store.dart) — 기본 구현
-- [`lib/core/cache/cached_repository.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cached_repository.dart) — 151줄 정책 구현
+- [`lib/core/cache/cached_repository.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/cache/cached_repository.dart) — 150줄 정책 구현
 
 **Provider 연결**
 - [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — `cacheStoreProvider` · `cachedRepositoryProvider`

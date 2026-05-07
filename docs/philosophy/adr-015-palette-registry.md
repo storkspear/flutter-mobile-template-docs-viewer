@@ -1,6 +1,6 @@
 # Palette_Registry
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `lib/core/theme/app_palette.dart` (81줄, 추상 + DefaultPalette) + `app_palette_registry.dart` (70줄, 중앙 레지스트리 + ValueNotifier). Material 3 `ColorScheme.fromSeed` 기반.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `lib/core/theme/app_palette.dart` (88줄, 추상 + DefaultPalette) + `app_palette_registry.dart` (68줄, 중앙 레지스트리 + ValueNotifier). Material 3 `ColorScheme.fromSeed` 기반.
 
 ## 결론부터
 
@@ -230,8 +230,8 @@ Riverpod Provider 로 팔레트를 감싸볼까 고민했어요. 하지만 **팔
 ## Code References
 
 **팔레트 인프라**
-- [`lib/core/theme/app_palette.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette.dart) — 81줄 추상 + DefaultPalette
-- [`lib/core/theme/app_palette_registry.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette_registry.dart) — 70줄 레지스트리
+- [`lib/core/theme/app_palette.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette.dart) — 88줄 추상 + DefaultPalette
+- [`lib/core/theme/app_palette_registry.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_palette_registry.dart) — 68줄 레지스트리
 
 **디자인 토큰 (팔레트 외 간격 · 타이포 등)**
 - [`lib/core/theme/app_spacing.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/theme/app_spacing.dart)

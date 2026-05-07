@@ -4,7 +4,7 @@
 
 ## 결론부터
 
-기본 `flutter_lints` (9 룰) → `very_good_analysis` (100+ 룰) 로 정적 분석 룰셋을 강화하고, 솔로 앱 컨텍스트에 과한 16개 룰은 의식적으로 disable 했어요. 도입 직후 1,367개 위반이 떴고 그중 633개는 `dart fix --apply` 로 자동 수정. 정리 과정에서 **진짜 버그 1건** (`AppKits.install` 의 `_rollback` await 누락) 발견. 최종 0 이슈로 마무리.
+기본 `flutter_lints` (9 룰) → `very_good_analysis` (100+ 룰) 로 정적 분석 룰셋을 강화하고, 솔로 앱 컨텍스트에 과한 20개 룰은 의식적으로 disable 했어요. 도입 직후 1,367개 위반이 떴고 그중 633개는 `dart fix --apply` 로 자동 수정. 정리 과정에서 **진짜 버그 1건** (`AppKits.install` 의 `_rollback` await 누락) 발견. 최종 0 이슈로 마무리.
 
 ## 왜 이런 고민이 시작됐나?
 
@@ -58,7 +58,7 @@
 
 ### Option 4 (채택) — very_good_analysis + 컨텍스트 기반 disable
 
-100+ 룰 베이스라인 + 솔로 앱에 과한 16개 룰 의식적 disable + 사유 yaml 주석에 명시.
+100+ 룰 베이스라인 + 솔로 앱에 과한 20개 룰 의식적 disable + 사유 yaml 주석에 명시.
 
 - **장점 1**: VGV 큐레이션을 베이스로 활용 (커뮤니티 표준).
 - **장점 2**: disable 결정 + 사유를 `analysis_options.yaml` 에 박아둠 → 미래의 본인이 "왜 이 룰 꺼져있지?" 답을 찾을 수 있음.
@@ -84,7 +84,7 @@ linter:
     public_member_api_docs: false   # 라이브러리용 — 앱 코드 dartdoc 강제 불필요
     cascade_invocations: false      # `.foo().bar()` vs `..foo()..bar()` 취향
     avoid_returning_this: false     # fluent builder 비추 (취향)
-    # ... (총 15개)
+    # ... (총 19개)
     lines_longer_than_80_chars: false  # Flutter Material API에 비현실적
 
 analyzer:
@@ -126,7 +126,7 @@ analyzer:
 ### 부정
 
 - **diff 폭발 1회** — 142 파일 변경 (대부분 `dart fix --apply` 자동, import 정렬/생성자 위치 등). 머지 부담은 1회성.
-- **disable 결정의 주관성** — 16개 룰 disable 사유가 본인 판단. 미래에 "다시 켜볼까?" 재검토 여지 있음 (예: 팀 합류 시 `public_member_api_docs` 재고).
+- **disable 결정의 주관성** — 20개 룰 disable 사유가 본인 판단. 미래에 "다시 켜볼까?" 재검토 여지 있음 (예: 팀 합류 시 `public_member_api_docs` 재고).
 - **신규 파생 레포 학습 곡선 ↑ 약간** — 100+ 룰 위반 시 메시지 해석 필요. 다만 큐레이션 덕분에 진짜 가치 룰만 fire.
 
 ## 교훈
