@@ -1,10 +1,10 @@
 # Riverpod_MVVM
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `flutter_riverpod ^2.6.1` 사용, `lib/common/providers.dart` (105줄) 중앙 DI, ViewModel 3개 (`login` / `password_reset` / `verify_email`) 파일럿.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `flutter_riverpod ^2.6.1` 사용, `lib/common/providers.dart` (129줄) 중앙 DI, ViewModel 3개 (`login` / `password_reset` / `verify_email`) 파일럿.
 
 ## 결론부터
 
-상태 관리는 **`StateNotifier` + `ConsumerWidget` + `Provider.autoDispose`** 조합 하나로 통일해요. Screen 은 UI 만, ViewModel 은 로직만, `state` 는 **불변 데이터 클래스 + `copyWith`** 로 다뤄요. 전역 DI 는 `lib/common/providers.dart` 에 모아두고 Kit 이 필요 시 `providerOverrides` 로 교체 (ADR-003). 이 한 벌의 규약이 **13개 Kit + 파생 레포 N 개** 전부에서 똑같이 돌아가게 하는 게 목표예요.
+상태 관리는 **`StateNotifier` + `ConsumerWidget` + `Provider.autoDispose`** 조합 하나로 통일해요. Screen 은 UI 만, ViewModel 은 로직만, `state` 는 **불변 데이터 클래스 + `copyWith`** 로 다뤄요. 전역 DI 는 `lib/common/providers.dart` 에 모아두고 Kit 이 필요 시 `providerOverrides` 로 교체 (ADR-003). 이 한 벌의 규약이 **14개 Kit + 파생 레포 N 개** 전부에서 똑같이 돌아가게 하는 게 목표예요.
 
 ## 왜 이런 고민이 시작됐나?
 
@@ -185,7 +185,7 @@ ViewModel 의 `state.errorCode` 는 서버 `ErrorCode` enum 문자열 또는 로
 
 - **Riverpod 학습 곡선**: `Provider` / `StateProvider` / `StateNotifierProvider` / `FutureProvider` / `StreamProvider` / `NotifierProvider` (2.0 이후) 등 종류가 많아요. "뭘 언제 써야?" 의 결정 피로. 템플릿은 `StateNotifierProvider` 를 기본으로 못박아 이 피로를 줄여요.
 - **`StateNotifier` 는 Riverpod 2.x 에서 legacy 로 향함**: Riverpod 3.0 은 `Notifier` 를 밀고 있어요. 현재는 `StateNotifier` 가 안정적 · 생태계 풍부하지만, 미래에 마이그레이션 비용 발생 가능. 교훈 2 참조.
-- **글로벌 provider 파일 (`providers.dart`) 이 비대해질 위험**: 현재 105줄. 30개 넘으면 쪼개야 해요. 아직은 유지.
+- **글로벌 provider 파일 (`providers.dart`) 이 비대해질 위험**: 현재 129줄. 30개 넘으면 쪼개야 해요. 아직은 유지.
 - **`copyWith` 의 nullable 관용이 낯섬**: 처음 보는 개발자가 "왜 `this.errorMessage` 폴백이 없지?" 하고 의아해함 — README 에 명시 필요.
 
 ## 교훈
@@ -219,7 +219,7 @@ Riverpod 3.0 이 `Notifier` + `AsyncNotifier` 를 새 표준으로 밀고 있어
 ## Code References
 
 **전역 DI**
-- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — 105줄, 모든 전역 Provider 정의
+- [`lib/common/providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/providers.dart) — 129줄, 모든 전역 Provider 정의
 - [`lib/main.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/main.dart) — `ProviderContainer` 생성 + `UncontrolledProviderScope` 주입
 
 **ViewModel 파일럿**

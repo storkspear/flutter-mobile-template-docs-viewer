@@ -194,8 +194,10 @@ Debug 환경이면 콘솔 print, 프로덕션 환경이면 Sentry 전송. ViewMo
 **포인트 2 — `FlutterError.onError` 는 체인 호출**  
 `DebugCrashService.init()` 이 `FlutterError.onError` 를 덮어쓰면 **먼저 등록된 Sentry 핸들러가 사라져요**. 그래서 `previous?.call(details)` 로 체인 호출. 순서는 Sentry 가 먼저 init 되고 Debug 가 뒤에 래핑되는 구조.
 
-**포인트 3 — 인터페이스는 `core/`, 구현체는 `kits/`**  
-추상 `AnalyticsService` 는 `core/analytics/` 에, 실제 `PostHogAnalyticsService` 는 `kits/observability_kit/` 에 분리. ADR-002 의 의존 방향 규칙 준수 — core 가 특정 SDK 에 의존하지 않음.
+**포인트 3 — 인터페이스 위치 — 보통 `core/`, 단일 Kit 내부 인터페이스는 Kit 폴더 허용**  
+**여러 Kit · ViewModel 이 공유하는 인터페이스** 는 `core/` 에 둬요. `AnalyticsService` · `CrashService` 는 모든 Kit 에서 호출되니 `core/analytics/` 에 두고, 실제 `PostHogAnalyticsService` 는 `kits/observability_kit/` 에 분리해서 ADR-002 의 의존 방향 규칙 (kits → core) 을 지켜요.
+
+반면 **단일 Kit 내부에서만 쓰이는 인터페이스** (예: `NotificationService` — `notifications_kit` 외에는 호출자가 없음) 는 해당 Kit 폴더 (`lib/kits/notifications_kit/notification_service.dart`) 에 정의해요. core 에 두면 오히려 "필요 없는 추상이 core 에 노출" 되는 셈이라 실용성을 우선해요. 의존 방향은 여전히 단방향 (`features → common → kits → core`) 으로 유지돼요.
 
 **포인트 4 — `Debug*` 네이밍 관용**  
 `NoopAnalyticsService` · `FakeAnalyticsService` 대신 `DebugAnalyticsService` 로 명명. 이유는 **개발 중엔 print 로 가시성을 제공** 하니까 완전 no-op 이 아님. "디버그 빌드용 구현" 이라는 의도를 이름에 담음.

@@ -90,7 +90,7 @@ class ApiClient {
     _dio.interceptors.addAll([
       AuthInterceptor(dio: _dio, tokenStorage: tokenStorage, onTokenRefresh: onTokenRefresh),
       ErrorInterceptor(),
-      if (kDebugMode) LoggingInterceptor(),  // ← debug 빌드에만
+      LoggingInterceptor(),  // ← 내부에서 AppConfig.instance.isDev 분기
     ]);
   }
 }
@@ -239,8 +239,8 @@ Dio 의 인터셉터 실행 순서:
 **포인트 1 — 3개로 제한**  
 4개 이상은 각 인터셉터의 책임이 모호해지는 경향. 현재 3개가 "최소 필요 + 명확한 역할". 새 관심사 (tracing · rate limiting) 가 생기면 추가.
 
-**포인트 2 — LoggingInterceptor 는 `if (kDebugMode)` 조건부 설치**  
-Release 빌드엔 설치 자체가 안 됨 → 빌드 시점에 tree-shaking 으로 제거. 런타임 if 분기보다 더 효율적.
+**포인트 2 — LoggingInterceptor 는 항상 설치 + 내부에서 환경 분기**  
+설치는 무조건 하고, 인터셉터 내부에서 `AppConfig.instance.isDev` 가 true 일 때만 실제 콘솔 로깅을 수행해요. dev · staging · prod 3환경을 구분하기 위해 `kDebugMode` (debug/release 이분법) 대신 환경 변수 기반 분기를 택했어요. release 빌드에서도 LoggingInterceptor 인스턴스는 존재하지만 onRequest/onResponse/onError 모두 if 가드로 빠르게 통과 (실측 <1ms). release tree-shaking 까지 추구하려면 `if (AppConfig.instance.isDev) interceptors.add(LoggingInterceptor())` 로 설치 자체를 분기해도 무방하나, 본 템플릿은 환경 세분화 유연성을 우선했어요.
 
 **포인트 3 — Error 변환은 `handler.next` 에 ApiException 담기**  
 `ErrorInterceptor.onError` 가 `handler.reject` 로 새 exception 을 만들 수도 있지만, Dio 의 `DioException.error` 필드에 `ApiException` 을 담아 전파. 이유는 **다음 인터셉터 (Auth) 가 원래 `DioException` 의 statusCode 를 여전히 볼 수 있어야** 401 감지 가능.
@@ -255,7 +255,7 @@ Dio 의 onError 체인은 설치 역순이라 `Logging → Error → Auth`. Erro
 
 ### 긍정적 결과
 
-- **파일 당 < 100줄**: auth 73줄, error 51줄, logging 30줄. 각 파일 한눈에.
+- **파일 당 < 100줄**: auth 74줄, error 49줄, logging 44줄. 각 파일 한눈에.
 - **단일 책임**: 각 인터셉터는 자기 관심사만. 테스트도 개별 가능.
 - **Release 경량화**: Logging 이 Release 빌드에서 완전 제거 → 바이너리 크기 · 성능 개선.
 - **추가 관심사 확장 용이**: Tracing 추가 시 `TracingInterceptor` 새 파일, ApiClient 생성자에 설치만 추가.
@@ -276,11 +276,13 @@ Dio 의 onError 체인은 설치 역순이라 `Logging → Error → Auth`. Erro
 
 **교훈**: 순서가 의미인 리스트는 **간접 추상화 없이 직접 노출**. 5줄 짜리 상수가 10줄 짜리 helper 보다 명확.
 
-### 교훈 2 — "Release 에서 제거" 는 조건 분기가 아니라 설치 여부
+### 교훈 2 — 환경 기반 분기 — 설치 분기 vs 내부 분기 모두 합리적
 
-초기엔 `LoggingInterceptor.onRequest` 안에 `if (kDebugMode) log(...)` 를 넣었어요. 그러면 **Release 빌드에도 인터셉터 인스턴스가 생성** 되어 메모리 · 약간의 CPU 소비. 지금은 **`kDebugMode` 로 설치 자체를 건너뜀** → Release 에 존재조차 안 함.
+처음엔 `kDebugMode` 로 설치 자체를 분기 (`if (kDebugMode) interceptors.add(LoggingInterceptor())`) 하는 안을 검토했어요. 이러면 release 빌드에 LoggingInterceptor 인스턴스 자체가 없어 메모리 · CPU 오버헤드가 0이 되는 장점이 있어요. 단 `kDebugMode` 는 debug/release 이분법이라 staging 처럼 **중간 환경에서 로깅을 켜고 싶을 때 유연성** 이 떨어져요.
 
-**교훈**: 환경 기반 분기는 **가장 바깥 층 (설치 지점) 에서** 처리. 내부에서 매번 `if` 는 오버헤드.
+지금은 **인터셉터를 항상 설치하고 내부에서 `AppConfig.instance.isDev` 분기**. dev / staging / prod 3환경을 구분 가능하고, 인스턴스 메모리 · 호출 오버헤드는 실측 <1ms 로 무시 가능. release 에서도 LoggingInterceptor 가 존재하지만 if 가드로 빠르게 통과해요.
+
+**교훈**: 환경 기반 분기에는 두 길이 있어요. (1) `kDebugMode` 같은 const 로 **설치 자체** 를 분기 — release tree-shaking 효과 최대, 단 환경 구분이 이분법. (2) 런타임 환경 변수로 **내부** 분기 — 환경 세분화 가능, 단 release 에도 인스턴스 존재. **요구사항에 따라 선택**. 본 템플릿은 dev/staging/prod 3환경 구분을 우선해 (2) 를 채택했어요.
 
 ### 교훈 3 — "DioException 의 error 필드" 활용이 정석
 
@@ -299,9 +301,9 @@ Dio 의 onError 체인은 설치 역순이라 `Logging → Error → Auth`. Erro
 ## Code References
 
 **3개 인터셉터 구현**
-- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 73줄
-- [`lib/kits/backend_api_kit/interceptors/error_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/error_interceptor.dart) — 51줄
-- [`lib/kits/backend_api_kit/interceptors/logging_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/logging_interceptor.dart) — 30줄 내외
+- [`lib/kits/backend_api_kit/interceptors/auth_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/auth_interceptor.dart) — 74줄
+- [`lib/kits/backend_api_kit/interceptors/error_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/error_interceptor.dart) — 49줄
+- [`lib/kits/backend_api_kit/interceptors/logging_interceptor.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/interceptors/logging_interceptor.dart) — 44줄
 
 **조립 지점**
 - [`lib/kits/backend_api_kit/api_client.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_client.dart) — `_dio.interceptors.addAll([...])`

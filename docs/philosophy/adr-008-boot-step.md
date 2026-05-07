@@ -1,6 +1,6 @@
 # Boot_Step
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `lib/common/splash/boot_step.dart` (7줄 계약), `lib/common/splash/splash_controller.dart` (39줄) + 각 Kit 이 기여하는 BootStep (`AuthCheckStep` 등).
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `lib/common/splash/boot_step.dart` (6줄 계약), `lib/common/splash/splash_controller.dart` (36줄) + 각 Kit 이 기여하는 BootStep (`AuthCheckStep` 등).
 
 ## 결론부터
 
@@ -83,7 +83,7 @@ abstract class BootStep {
 
 ## 결정
 
-### BootStep 계약 (7줄)
+### BootStep 계약 (6줄)
 
 ```dart
 // lib/common/splash/boot_step.dart 전체
@@ -95,7 +95,7 @@ abstract class BootStep {
 
 최소주의 극단. 이름 하나 + 실행 하나. 파라미터 없음 — 필요한 의존성은 Kit 이 주입.
 
-### SplashController (39줄)
+### SplashController (36줄)
 
 ```dart
 // lib/common/splash/splash_controller.dart 발췌
@@ -252,7 +252,7 @@ runApp(UncontrolledProviderScope(container: container, child: const App()));
 
 ### 교훈 1 — 최소 인터페이스가 유지보수를 쉽게
 
-`BootStep` 을 7줄로 끝낸 게 정답이었어요. 초기엔 `Future<void> execute(BuildContext context, ProviderContainer container)` 같이 파라미터 늘리려 했는데, **Kit 이 container.read 로 알아서 가져가게** 하니 인터페이스가 변하지 않고도 모든 의존성 주입 가능. 4년 지나도 이 인터페이스는 안 바뀔 것 같아요.
+`BootStep` 을 6줄로 끝낸 게 정답이었어요. 초기엔 `Future<void> execute(BuildContext context, ProviderContainer container)` 같이 파라미터 늘리려 했는데, **Kit 이 container.read 로 알아서 가져가게** 하니 인터페이스가 변하지 않고도 모든 의존성 주입 가능. 4년 지나도 이 인터페이스는 안 바뀔 것 같아요.
 
 **교훈**: 인터페이스 설계 시 **"외부에서 필요할 것 같은 것" 보다 "구현체가 진짜 필요로 하는 최소"** 를 택하세요. 필요 시 구현체가 자기 해결.
 
@@ -279,8 +279,8 @@ BootStep 이 실패해도 `crashService` 가 off 면 원인 모름. `[Splash] ru
 ## Code References
 
 **계약 + 실행기**
-- [`lib/common/splash/boot_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/boot_step.dart) — 7줄 인터페이스
-- [`lib/common/splash/splash_controller.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/splash_controller.dart) — 39줄 실행기
+- [`lib/common/splash/boot_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/boot_step.dart) — 6줄 인터페이스
+- [`lib/common/splash/splash_controller.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/common/splash/splash_controller.dart) — 36줄 실행기
 
 **Kit 측 기여**
 - [`lib/core/kits/app_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/core/kits/app_kit.dart) — `bootSteps` getter 정의

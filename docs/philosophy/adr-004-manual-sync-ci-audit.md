@@ -1,6 +1,6 @@
 # Manual_Sync
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `tool/configure_app.dart` (233줄) 가 양쪽 파일을 검증. `--audit` 플래그로 CI 에서 실수 차단.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `tool/configure_app.dart` (270줄) 가 양쪽 파일을 검증. `--audit` 플래그로 CI 에서 실수 차단.
 
 ## 결론부터
 
@@ -222,7 +222,7 @@ jobs:
 - **CI 실수 차단**: "YAML 엔 auth_kit 추가했는데 main.dart 는 깜빡" 이 CI 에서 exit 1 로 잡힘.
 - **의존성 자동 검증**: `auth_kit` 넣고 `backend_api_kit` 빼먹으면 CI 에서 차단.
 - **Recipe 시스템 자연 통합** (ADR-021): `recipes/*.yaml` 가 `app_kits.yaml` 와 동일 포맷이라 복사만으로 적용.
-- **단일 Dart 스크립트**: `tool/configure_app.dart` 233줄. 이해 · 수정 쉬움.
+- **단일 Dart 스크립트**: `tool/configure_app.dart` 270줄. 이해 · 수정 쉬움.
 
 ### 부정적 결과
 
@@ -257,12 +257,12 @@ jobs:
 - [Cargo `Cargo.toml` vs `Cargo.lock`](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) — 선언 · 락 파일 이원 관리
 - [Gradle Version Catalog (`libs.versions.toml`)](https://docs.gradle.org/current/userguide/platforms.html) — TOML 선언 + Gradle 코드에서 참조
 - [Terraform `.tfvars` + HCL](https://developer.hashicorp.com/terraform/language/values/variables) — 변수 선언 vs 실제 리소스
-- [`template-spring 의 ADR-004 ArchUnit`](https://github.com/storkspear/template-spring/blob/main/docs/journey/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
+- [`template-spring 의 ADR-004 ArchUnit`](https://github.com/storkspear/template-spring/blob/main/docs/philosophy/adr-004-gradle-archunit.md) — 백엔드 템플릿의 "컨벤션을 기계가 강제" 철학 공유
 
 ## Code References
 
 **검증 도구**
-- [`tool/configure_app.dart`](https://github.com/storkspear/template-flutter/blob/main/tool/configure_app.dart) — 233줄 단일 Dart 스크립트
+- [`tool/configure_app.dart`](https://github.com/storkspear/template-flutter/blob/main/tool/configure_app.dart) — 270줄 단일 Dart 스크립트
 - [`.github/workflows/ci.yml`](https://github.com/storkspear/template-flutter/blob/main/.github/workflows/ci.yml) — `--audit` 호출 지점
 
 **선언 파일**

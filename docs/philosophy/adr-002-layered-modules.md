@@ -1,13 +1,20 @@
 # Layered_Modules
 
-**Status**: Accepted. 현재 유효. 2026-04-24 기준 `lib/` 하위 4개 최상위 폴더 (`core/` · `kits/` · `common/` · `features/`). `core/` 44 파일, `kits/` 13개 Kit 65 파일.
+**Status**: Accepted. 현재 유효. 2026-04-24 작성 / 2026-05-07 line 수 갱신. `lib/` 하위 4개 최상위 폴더 (`core/` · `kits/` · `common/` · `features/`). `core/` 46 파일, `kits/` 14개 Kit · 77 파일.
+
+> **2026-05-06 명확화**: 본문 곳곳에 "kit 간 직접 import 금지" 표현이 있지만, 실제 적용 룰은 다음과 같아요:
+> - `kit_manifest.requires` 에 **선언한 kit** 의 **type import** 는 허용 (`ApiException` · `ErrorCode` 같은 타입은 provider 로 접근 불가)
+> - 다른 kit 의 **인스턴스 접근** 은 provider 경유 (`ref.read(...)`)
+> - **미선언 kit cross-import 는 절대 금지** (recipe 채택 시 컴파일 실패)
+>
+> 본 ADR 의 결정 시점 컨텍스트는 그대로 보존하되, 현재 진실의 출처는 [`conventions/kits.md` §3](../conventions/kits.md#3-kit-의존-관계-규칙) 이에요.
 
 ## 결론부터
 
 `lib/` 하위를 **책임별로 4개 영역** 으로 쪼개요.
 
 - **`core/`** — 모든 앱이 **항상** 쓰는 기반 (테마 · 저장소 · i18n · 공통 위젯 · AppKit 계약)
-- **`kits/`** — **선택적** 기능 단위 (인증 · 네트워크 · 알림 · 관측성 등 13개)
+- **`kits/`** — **선택적** 기능 단위 (인증 · 네트워크 · 알림 · 관측성 · 결제 등 14개)
 - **`common/`** — 리팩터 잔여 · 어댑터 (providers · router · splash). 점진 이관 중
 - **`features/`** — **파생 레포의 도메인 화면** — 템플릿에는 스텁만
 
@@ -77,7 +84,7 @@ features  →  common  →  kits  →  core
 - `common/` 은 `core/` + `kits/` 에 의존. DI · 라우팅 · 스플래시처럼 **여러 Kit 을 조립** 하는 지점.
 - `features/` 는 모든 레이어에 의존 가능. 하지만 **템플릿 원본은 스텁만** (ADR-001).
 
-### core/ 구성 (모든 앱 필수 · 44 파일)
+### core/ 구성 (모든 앱 필수 · 46 파일)
 
 | 폴더 | 역할 |
 |------|------|
@@ -92,7 +99,7 @@ features  →  common  →  kits  →  core
 | `utils/` | `FormValidators` · `Debouncer` · `DateFormatter` 등 |
 | `widgets/` | `PrimaryButton` · `AppTextField` · `LoadingView` 등 (ADR-017) |
 
-### kits/ 구성 (선택 · 13개)
+### kits/ 구성 (선택 · 14개)
 
 각 Kit 폴더 구조:
 
@@ -105,7 +112,7 @@ lib/kits/<kit_name>/
 └── ui/                        # (UI 가 있는 Kit 만) screens + view_models
 ```
 
-13개 Kit: `auth_kit`, `backend_api_kit`, `observability_kit`, `notifications_kit`, `local_db_kit`, `update_kit`, `onboarding_kit`, `nav_shell_kit`, `charts_kit`, `ads_kit`, `background_kit`, `permissions_kit`, `device_info_kit`.
+14개 Kit: `auth_kit`, `backend_api_kit`, `observability_kit`, `notifications_kit`, `local_db_kit`, `update_kit`, `onboarding_kit`, `nav_shell_kit`, `charts_kit`, `ads_kit`, `background_kit`, `permissions_kit`, `device_info_kit`, `payment_kit`.
 
 ### common/ 구성 (리팩터 잔여)
 
@@ -190,8 +197,8 @@ lib/features/
 ## Code References
 
 **디렉토리 구조**
-- [`lib/core/`](https://github.com/storkspear/template-flutter/tree/main/lib/core) — 44 파일 기반 레이어
-- [`lib/kits/`](https://github.com/storkspear/template-flutter/tree/main/lib/kits) — 13개 Kit · 65 파일
+- [`lib/core/`](https://github.com/storkspear/template-flutter/tree/main/lib/core) — 46 파일 기반 레이어
+- [`lib/kits/`](https://github.com/storkspear/template-flutter/tree/main/lib/kits) — 14개 Kit · 77 파일
 - [`lib/common/`](https://github.com/storkspear/template-flutter/tree/main/lib/common) — providers · router · splash
 - [`lib/features/`](https://github.com/storkspear/template-flutter/tree/main/lib/features) — 파생 레포 영역 (스텁 `home/` + `settings/`)
 
