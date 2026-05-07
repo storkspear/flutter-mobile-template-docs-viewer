@@ -15,7 +15,7 @@ ErrorInterceptor → ApiException 으로 변환
   ↓
 AuthInterceptor → 401 이면 refresh 시도 (성공 시 재시도, 실패 시 원 에러)
   ↓
-LoggingInterceptor → debug 빌드만 콘솔 출력
+LoggingInterceptor → `AppConfig.isDev` (dev/staging) 만 콘솔 출력 (prod 무음)
   ↓
 ViewModel 의 try/catch 블록에서 수신
   ↓
@@ -241,13 +241,13 @@ Future<void> loadProfile() async {
 ```dart
 // lib/kits/backend_api_kit/api_client.dart 발췌
 _dio.interceptors.addAll([
-  AuthInterceptor(...),       // 1. 토큰 첨부 + 401 refresh
-  ErrorInterceptor(),         // 2. DioException → ApiException
-  if (kDebugMode) LoggingInterceptor(),  // 3. debug 만 로깅
+  AuthInterceptor(...),    // 1. 토큰 첨부 + 401 refresh
+  ErrorInterceptor(),      // 2. DioException → ApiException
+  LoggingInterceptor(),    // 3. 항상 설치 — 내부에서 AppConfig.isDev 분기 (dev/staging만 출력)
 ]);
 ```
 
-개발자가 직접 순서 바꾸면 안 돼요. 이 순서가 refresh · error 변환 흐름의 전제.
+개발자가 직접 순서 바꾸면 안 돼요. 이 순서가 refresh · error 변환 흐름의 전제. LoggingInterceptor 는 무조건 설치하되 환경 분기 (`AppConfig.isDev`) 가 내부에서 처리되므로 `kDebugMode` 가드 불필요.
 
 ---
 

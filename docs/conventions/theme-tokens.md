@@ -83,6 +83,10 @@ final color = lineColor ?? AppPaletteRegistry.current.seed;  // 브랜드 시드
 - [ ] 다크모드 분기를 직접 `Theme.of(context).brightness` 로 하기 전에, `Theme.of(context)` 게터가 자동 적응해주는 색이 있는지 먼저 확인.
 - [ ] 컴포넌트 크기 (`buttonHeight` , `iconSize*` , `avatarSize*`) 는 `AppSpacing` 의 정수 토큰 사용.
 
+### 예외 — 외부 브랜드 가이드라인 색
+
+**Google · Apple · Kakao · Naver 같은 외부 social provider 의 브랜드 색**은 가이드라인이 hex 값을 강제 (Google `#1F1F1F`, Kakao `#FEE500`, Naver `#03C75A` 등) — `Color(0xFF...)` 직접 사용 허용 (예: `lib/kits/auth_kit/ui/login/social_login_button.dart`). 이 경우는 brand identity 보존이 우선이라 theme tokens 추상화 제외.
+
 ---
 
 ## 흔한 실수

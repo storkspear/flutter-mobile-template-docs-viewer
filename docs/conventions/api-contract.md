@@ -59,19 +59,21 @@ URL: /api/apps/{appSlug}/...
 
 ```dart
 final request = SearchRequestBuilder()
-  ..conditionEq('category', 'food')
-  ..conditionGte('amount', 1000)
-  ..page(0, 20)
-  ..sortDesc('createdAt');
+  .eq('category', 'food')
+  .gte('amount', 1000)
+  .page(0, 20)
+  .sortBy('createdAt', SortDirection.desc)
+  .build();
 
+// path 는 base 만 — '/search' suffix 는 ApiClient 가 자동 prepend
 final result = await api.search<Expense>(
-  '/expenses/search',
-  request: request.build(),
+  '/expenses',
+  request: request,
   fromItem: Expense.fromJson,
 );
 ```
 
-10+ 연산자 (`_eq`, `_gte`, `_lte`, `_in`, `_like` 등). 상세 → [`search-request.md`](../api-contract/search-request.md).
+11개 연산자 (`_eq`, `_not`, `_gte`, `_lte`, `_gt`, `_lt`, `_like`, `_in`, `_notIn`, `_isNull`, `_isNotNull` — between 은 gte+lte 조합). 상세 → [`search-request.md`](../api-contract/search-request.md).
 
 ---
 
@@ -98,11 +100,15 @@ final created = await api.post<Expense>(
   fromData: Expense.fromJson,
 );
 
-// 검색
-final result = await api.search<Expense>(...);
+// 검색 (path 는 base — ApiClient 가 '/search' suffix 자동 추가)
+final result = await api.search<Expense>(
+  '/expenses',
+  request: searchRequest,
+  fromItem: Expense.fromJson,
+);
 ```
 
-`/api/apps/{appSlug}` prefix 는 `ApiClient` 가 자동 prepend. 상대 경로만 작성.
+`/api/apps/{appSlug}` prefix 는 `ApiClient` 가 자동 prepend. 상대 경로만 작성. 검색 호출 시 `'/search'` suffix 도 자동 — `'/expenses/search'` 처럼 직접 적으면 `'/expenses/search/search'` 로 중복 호출됨.
 
 ---
 

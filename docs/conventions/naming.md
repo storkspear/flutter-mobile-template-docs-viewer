@@ -42,7 +42,7 @@ PascalCase. 역할을 이름에서 바로 파악 가능하게.
 | 예외 | `{Domain}Exception` | `ApiException` |
 | 상수 모음 | `{Domain}` | `AppIcons` · `AppSpacing` · `ErrorCode` |
 | Kit 구현 | `{KitName}Kit` | `AuthKit` · `BackendApiKit` · `ObservabilityKit` |
-| BootStep 구현 | `{Domain}Step` | `AuthCheckStep` · `PostHogInitStep` |
+| BootStep 구현 | `{Domain}Step` (kit 외부 노출 시 public, kit 내부 전용은 `_{Domain}Step` private 허용) | `AuthCheckStep` · `_PostHogInitStep` · `_ForceUpdateStep` |
 
 ---
 
@@ -70,7 +70,7 @@ Dart 관용은 `lowerCamelCase`. Provider 는 접미사로 종류 표시.
 
 ```
 lib/
-├── core/             # 모든 앱 필수 기반 (44 파일)
+├── core/             # 모든 앱 필수 기반 (46 파일)
 │   ├── analytics/    # AnalyticsService · CrashService 추상 + Debug
 │   ├── cache/        # CacheStore · CachedRepository
 │   ├── config/       # AppConfig
@@ -80,9 +80,9 @@ lib/
 │   ├── storage/      # SecureStorage · PrefsStorage · TokenStorage
 │   ├── theme/        # AppPalette · 디자인 토큰
 │   ├── utils/        # 순수 헬퍼
-│   └── widgets/      # PrimaryButton · AppTextField 등 13개
+│   └── widgets/      # PrimaryButton · AppTextField 등 12개
 │
-├── kits/             # 선택 Kit 13개
+├── kits/             # 선택 Kit 14개
 │   └── {kit_name}/
 │       ├── {kit_name}.dart       # AppKit 구현 + export
 │       ├── kit_manifest.yaml     # 의존성 선언
@@ -105,7 +105,7 @@ lib/
 **의존 방향** (ADR-002):
 - `features → common → kits → core`
 - `core/` 는 Flutter SDK + 외부 패키지만 import
-- `kits/` 간 직접 import **금지** — Provider 경유만 ([`ADR-003`](../philosophy/adr-003-featurekit-registry.md))
+- `kits/` 간 의존: **type import** 는 `kit_manifest.requires` 선언 시 허용 (`ApiException` 같은 타입은 provider 접근 불가), **인스턴스 접근** 은 provider 경유. 미선언 cross-import 절대 금지. 상세 룰: [`conventions/kits.md` §3](./kits.md), [`ADR-003`](../philosophy/adr-003-featurekit-registry.md)
 - `features/` 간 직접 import **최소화** — 라우터로 느슨한 연결
 
 ---

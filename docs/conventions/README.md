@@ -10,12 +10,16 @@
 
 | 파일 | 내용 | 관련 ADR |
 |------|------|----------|
-| [`naming.md`](./naming.md) | 파일 · 클래스 · 변수 · Provider 네이밍 | - |
+| [`architecture.md`](./architecture.md) | MVVM 3계층 · 모듈 의존 방향 · 새 화면 step-by-step | [`ADR-002`](../philosophy/adr-002-layered-modules.md) · [`ADR-005`](../philosophy/adr-005-riverpod-mvvm.md) |
+| [`kits.md`](./kits.md) | FeatureKit 작성 · 동기화 3종 · 의존 규칙 · 제거 | [`ADR-003`](../philosophy/adr-003-featurekit-registry.md) · [`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md) |
+| [`api-contract.md`](./api-contract.md) | 백엔드 1:1 계약 한눈 요약 (response · error · auth · search) | [`ADR-009`](../philosophy/adr-009-backend-contract.md) · [`ADR-012`](../philosophy/adr-012-per-app-user.md) |
+| [`naming.md`](./naming.md) | 파일 · 클래스 · 변수 · Provider · i18n 키 네이밍 | - |
 | [`viewmodel-mvvm.md`](./viewmodel-mvvm.md) | `StateNotifier + ConsumerWidget` 패턴 | [`ADR-005`](../philosophy/adr-005-riverpod-mvvm.md) |
 | [`error-handling.md`](./error-handling.md) | `ApiException` · `safeErrorCode` · 인터셉터 흐름 | [`ADR-009`](../philosophy/adr-009-backend-contract.md) · [`ADR-010`](../philosophy/adr-010-queued-interceptor.md) · [`ADR-011`](../philosophy/adr-011-interceptor-chain.md) |
-| [`loading-ux.md`](./loading-ux.md) | 4가지 로딩 패턴 적용 | [`ADR-017`](../philosophy/adr-017-loading-ux.md) |
-| [`theme-tokens.md`](./theme-tokens.md) | 색·간격·타이포·아이콘 토큰 출처 규칙 | [`ADR-015`](../philosophy/adr-015-palette-registry.md) |
-| [`i18n.md`](./i18n.md) | ARB + gen_l10n 워크플로우 | [`ADR-016`](../philosophy/adr-016-i18n-from-start.md) |
+| [`figma-handoff.md`](./figma-handoff.md) | Figma 디자인 토큰 → AppPalette / AppTypeface 매핑 | [`ADR-015`](../philosophy/adr-015-palette-registry.md) · [`ADR-023`](../philosophy/adr-023-typeface-registry.md) |
+| [`loading-ux.md`](./loading-ux.md) | 4가지 로딩 패턴 적용 (Skeleton · Pull · 버튼 · TopBar) | [`ADR-017`](../philosophy/adr-017-loading-ux.md) |
+| [`i18n.md`](./i18n.md) | ARB + gen_l10n 워크플로우 · ViewModel은 code, Screen에서 번역 | [`ADR-016`](../philosophy/adr-016-i18n-from-start.md) |
+| [`theme-tokens.md`](./theme-tokens.md) | 색 · 간격 · 타이포 · 아이콘 토큰 출처 규칙 | [`ADR-015`](../philosophy/adr-015-palette-registry.md) · [`ADR-023`](../philosophy/adr-023-typeface-registry.md) |
 
 > **테스트 규약**은 별도 섹션. [`Testing Strategy`](../testing/testing-strategy.md) · [`Contract Testing`](../testing/contract-testing.md) 참조.
 
