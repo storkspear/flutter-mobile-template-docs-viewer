@@ -39,22 +39,16 @@ await AppKits.install([
 | 항목 | 설명 |
 |------|------|
 | `OnboardingKit` | `AppKit` 구현. `redirectPriority: 50` |
-| `OnboardingStep` | 추상. `name` · `build(context)` · `canSkip` |
+| `OnboardingStep` | 추상. `Widget build(BuildContext)` · `Future<bool> onNext(BuildContext)` (true 반환 시 다음 스텝으로) |
 | `OnboardingScaffold` | 공통 위자드 UI (페이지 전환 · 진행 바) |
-| `OnboardingCompleted` | SharedPreferences 플래그 |
+| 완료 플래그 | `SharedPreferences` 에 영속, `isComplete` ValueNotifier 로 노출 |
 
 ---
 
 ## 파생 레포에서 OnboardingStep 구현
 
 ```dart
-class WelcomeStep implements OnboardingStep {
-  @override
-  String get name => 'welcome';
-
-  @override
-  bool get canSkip => false;
-
+class WelcomeStep extends OnboardingStep {
   @override
   Widget build(BuildContext context) {
     return const Column(children: [
@@ -62,6 +56,11 @@ class WelcomeStep implements OnboardingStep {
       // ...
     ]);
   }
+
+  // 선택: 사용자가 "다음" 누를 때 검증/저장 로직.
+  // 기본 구현은 true (즉시 다음 스텝). false 반환 시 머무름.
+  @override
+  Future<bool> onNext(BuildContext context) async => true;
 }
 ```
 

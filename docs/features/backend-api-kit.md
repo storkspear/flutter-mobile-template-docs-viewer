@@ -7,7 +7,7 @@
 ## 개요
 
 - **Dio** 클라이언트 하나 (`ApiClient`) 로 모든 HTTP 요청
-- **3 인터셉터** 자동 설치: Auth (토큰) · Error (예외 변환) · Logging (debug 만)
+- **3 인터셉터** 자동 설치: Auth (토큰) · Error (예외 변환) · Logging (`AppConfig.isDev` — dev/staging 만)
 - **응답 스키마**: 백엔드 `{data, error}` 1:1 대응 ([`ADR-009`](../philosophy/adr-009-backend-contract.md))
 - **SSL pinning** opt-in (`--dart-define=SSL_PINS=...`) ([`ADR-020`](../philosophy/adr-020-security-hardening.md))
 
@@ -48,7 +48,7 @@ AppConfig.init(
 | `ApiClient` | Dio 래퍼. `get` · `post` · `put` · `patch` · `delete` · `postRaw` · `search` |
 | `AuthInterceptor` | Authorization 자동 첨부 + 401 refresh ([`ADR-010`](../philosophy/adr-010-queued-interceptor.md)) |
 | `ErrorInterceptor` | `DioException` → `ApiException` 변환 |
-| `LoggingInterceptor` | Debug 빌드 콘솔 로깅 |
+| `LoggingInterceptor` | `AppConfig.isDev` 분기로 dev/staging 콘솔 로깅 (prod 무음) |
 | `ApiResponse<T>` · `PageResponse<T>` | 응답 래퍼 |
 | `ApiException` | 표준 예외 + `safeErrorCode` · `safeErrorMessage` |
 | `ErrorCode` 상수 | 서버 enum 1:1 매핑 (Spring `CommonError` CMN_*, `AuthError` ATH_*) |

@@ -36,8 +36,9 @@ await AppKits.install([
 | 항목 | 설명 |
 |------|------|
 | `UpdateKit` | `AppKit` 구현. `redirectPriority: 1` |
-| `AppUpdateService` | 추상. `isUpdateRequired()` · `storeUrl()` |
-| `NoUpdateAppUpdateService` | 기본 구현. 항상 false |
+| `AppUpdateService` | 추상. `init()` · `check()` → `UpdateInfo?` (null 이면 업데이트 불필요) |
+| `UpdateInfo` | `isForce` · `minVersion` · `latestVersion` · `message?` · `iosStoreUrl?` · `androidStoreUrl?` |
+| `NoUpdateAppUpdateService` | 기본 구현. `check()` 가 항상 null (업데이트 없음) |
 | `ForceUpdateDialog` | `/force-update` 화면 UI |
 
 ---
@@ -49,19 +50,24 @@ await AppKits.install([
 ```dart
 class RemoteConfigUpdateService implements AppUpdateService {
   @override
-  Future<bool> isUpdateRequired() async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
-    await remoteConfig.fetchAndActivate();
-    final minVersion = remoteConfig.getString('min_app_version');
-    final currentVersion = AppConfig.instance.appVersion;
-    return _isOlderThan(currentVersion, minVersion);
+  Future<void> init() async {
+    await FirebaseRemoteConfig.instance.fetchAndActivate();
   }
 
   @override
-  String storeUrl() {
-    if (Platform.isIOS) return 'https://apps.apple.com/app/id1234567890';
-    if (Platform.isAndroid) return 'https://play.google.com/store/apps/details?id=com.example.app';
-    return '';
+  Future<UpdateInfo?> check() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    final minVersion = remoteConfig.getString('min_app_version');
+    final latestVersion = remoteConfig.getString('latest_app_version');
+    final currentVersion = AppConfig.instance.appVersion;
+    if (!_isOlderThan(currentVersion, minVersion)) return null;
+    return UpdateInfo(
+      isForce: true,
+      minVersion: minVersion,
+      latestVersion: latestVersion,
+      iosStoreUrl: 'https://apps.apple.com/app/id1234567890',
+      androidStoreUrl: 'https://play.google.com/store/apps/details?id=com.example.app',
+    );
   }
 }
 ```
@@ -74,13 +80,22 @@ class BackendUpdateService implements AppUpdateService {
   BackendUpdateService(this._api);
 
   @override
-  Future<bool> isUpdateRequired() async {
-    final res = await _api.get<MinVersion>('/config/min-version', fromData: MinVersion.fromJson);
-    final minVersion = res.data!.version;
-    return _isOlderThan(AppConfig.instance.appVersion, minVersion);
-  }
+  Future<void> init() async {}
 
-  // ...
+  @override
+  Future<UpdateInfo?> check() async {
+    final res = await _api.get<MinVersion>('/config/min-version', fromData: MinVersion.fromJson);
+    final info = res.data!;
+    if (!_isOlderThan(AppConfig.instance.appVersion, info.minVersion)) return null;
+    return UpdateInfo(
+      isForce: info.isForce,
+      minVersion: info.minVersion,
+      latestVersion: info.latestVersion,
+      message: info.message,
+      iosStoreUrl: info.iosStoreUrl,
+      androidStoreUrl: info.androidStoreUrl,
+    );
+  }
 }
 ```
 
@@ -92,7 +107,7 @@ class BackendUpdateService implements AppUpdateService {
 - [ ] 버전 비교 로직 구현 (semver 비교)
 - [ ] (선택) Firebase Remote Config 설정 or 자체 API 엔드포인트
 - [ ] `main.dart` 의 `UpdateKit(service: ...)` 를 실제 구현체로 교체
-- [ ] 테스트: `isUpdateRequired` 가 true 일 때 `/force-update` 리다이렉트 확인
+- [ ] 테스트: `check()` 가 `UpdateInfo(isForce: true, ...)` 반환 시 `/force-update` 리다이렉트 확인
 
 ---
 

@@ -50,7 +50,7 @@ flutter run \
 | `PostHogAnalyticsService` | `AnalyticsService` 구현체. `trackScreen` · `trackEvent` · `identify` |
 | `AnalyticsNavigatorObserver` | go_router 경로 변경 감지 → `trackScreen` 자동 호출 |
 | `ObservabilityEnv` | `isSentryEnabled` · `isPostHogEnabled` 환경 변수 감지 |
-| BootStep: `PostHogInitStep` | 앱 시작 시 PostHog 초기화 |
+| BootStep: `_PostHogInitStep` | 앱 시작 시 PostHog 초기화 (private 클래스, `bootSteps` 통해 노출) |
 
 ---
 
@@ -214,6 +214,7 @@ flutter run \
 - [`lib/kits/observability_kit/posthog_analytics_service.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/posthog_analytics_service.dart)
 - [`lib/kits/observability_kit/analytics_navigator_observer.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/analytics_navigator_observer.dart)
 - [`lib/kits/observability_kit/observability_env.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/observability_env.dart)
+- [`lib/kits/observability_kit/dogfooding_panel.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/observability_kit/dogfooding_panel.dart) — 개발자 도그푸딩 패널 (Sentry/PostHog 상태 점검)
 
 ---
 

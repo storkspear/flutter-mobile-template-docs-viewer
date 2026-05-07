@@ -51,7 +51,8 @@ await AppKits.install([
 | 항목 | 설명 |
 |------|------|
 | `AuthService` | 로그인 · 가입 · 로그아웃 · refresh · withdraw |
-| `AuthState` (enum: `unknown` · `authenticated` · `unauthenticated`) | 앱 인증 상태 |
+| `AuthStatus` (enum: `unknown` · `authenticated` · `unauthenticated`) | 앱 인증 상태 enum |
+| `AuthState` (클래스: `status` + `user`) | enum + `CurrentUser?` 묶음 |
 | `AuthStateNotifier` | 상태 브로드캐스트 (Stream) |
 | `CurrentUser` | 로그인된 유저 정보 |
 | `TokenStorage` | SecureStorage 기반 토큰 저장 (core 제공) |
@@ -163,6 +164,22 @@ AuthKit(
 ```
 
 > API endpoint (`/api/apps/{slug}/auth/email/signin` 등) 는 [`api_endpoints.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/backend_api_kit/api_endpoints.dart) 에서 관리. 백엔드와 1:1 일치 필요해서 일반적으로 변경하지 않아요.
+
+---
+
+## 시연 모드 (Dev Mock)
+
+백엔드 · OAuth SDK 키 없이 로그인 → home 흐름까지 keyless 시연하는 모드. 솔로 dev 가 새 derived repo 첫 `flutter run` 에서 가장 자주 쓸 옵션이에요.
+
+```bash
+flutter run --dart-define=AUTH_DEV_MOCK=true
+```
+
+활성 조건: dart-define 주입 + 백엔드 unreachable. 자동으로 `BackendReachability.probe()` 가 baseUrl 의 `/actuator/health` 핑 → 실패 시 `DevOfflineAuthInterceptor` 가 `/auth/*` 응답을 fake JWT 로 가로채요.
+
+> ⚠️ **운영 빌드 절대 금지** — release 에 `AUTH_DEV_MOCK=true` 박으면 모든 인증이 fake JWT.
+
+자세한 메커니즘 · 핵심 코드 위치 · 운영 빌드 안전장치는 [`auth_kit/README.md` Dev Mock 섹션](../../lib/kits/auth_kit/README.md#dev-mock-백엔드-없이-시연) 참고.
 
 ---
 

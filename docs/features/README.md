@@ -1,17 +1,18 @@
 # FeatureKit 가이드
 
-13 개의 **FeatureKit** 이 `lib/kits/` 에 있어요. 각 Kit 은 **독립 플러그인** 으로, `app_kits.yaml` + `lib/main.dart` 에서 활성화를 선택해요. 이 문서는 전체 목록 · 의존 관계 · 활성화 방법의 한눈 인덱스예요.
+14 개의 **FeatureKit** 이 `lib/kits/` 에 있어요. 각 Kit 은 **독립 플러그인** 으로, `app_kits.yaml` + `lib/main.dart` 에서 활성화를 선택해요. 이 문서는 전체 목록 · 의존 관계 · 활성화 방법의 한눈 인덱스예요.
 
 > **왜 선택 조립?** → [`ADR-003 · FeatureKit 동적 레지스트리`](../philosophy/adr-003-featurekit-registry.md)
 
 ---
 
-## Kit 목록 (13개)
+## Kit 목록 (14개)
 
 | Kit | 목적 | 의존 | 바이너리 크기 영향 |
 |-----|------|------|----------------|
 | [`backend_api_kit`](./backend-api-kit.md) | Dio HTTP 클라이언트 + 3 인터셉터 | 없음 | +1MB |
 | [`auth_kit`](./auth-kit.md) | JWT + 소셜 로그인 (Google · Apple) | `backend_api_kit` | +3MB |
+| [`payment_kit`](./payment-kit.md) | 결제 (Stripe 통합 골격, 의도적 SDK 미주입) | `backend_api_kit` | +0MB (template), derived 시 +SDK |
 | [`observability_kit`](./observability-kit.md) | Sentry 크래시 + PostHog 분석 | 없음 | +4MB |
 | [`notifications_kit`](./notifications-kit.md) | 로컬 알림 · 푸시 · 타임존 | 없음 | +2MB |
 | [`local_db_kit`](./local-db-kit.md) | Drift (SQLite ORM) + 마이그레이션 | 없음 | +3MB |
@@ -53,8 +54,8 @@
 
 ```
 backend_api_kit (독립)
-  ↑
-auth_kit
+  ↑   ↑
+auth_kit  payment_kit
 
 observability_kit (독립)
 notifications_kit (독립)
@@ -70,7 +71,7 @@ device_info_kit (독립)
 ```
 
 **규칙**:
-- `auth_kit` 만 `backend_api_kit` 에 의존 (`requires: [BackendApiKit]`)
+- `auth_kit` 와 `payment_kit` 가 `backend_api_kit` 에 의존 (`requires: [BackendApiKit]`)
 - 나머지 12개는 독립 — 자유롭게 on/off
 - Kit 간 직접 import 금지 ([`ADR-002`](../philosophy/adr-002-layered-modules.md)) — Provider 경유만
 
@@ -116,7 +117,7 @@ dart run tool/configure_app.dart
 
 ## 앱 유형별 권장 조합
 
-[`ADR-021 · Multi-Recipe 구성`](../philosophy/adr-021-multi-recipe.md) 의 3개 샘플:
+[`ADR-021 · Multi-Recipe 구성`](../philosophy/adr-021-multi-recipe.md) 의 4개 샘플:
 
 ### Local-only Tracker (`recipes/local-only-tracker.yaml`)
 
@@ -166,6 +167,23 @@ kits:
 
 **적합**: SNS · 협업 도구 · 대시보드
 
+### Social Auth (`recipes/social-auth-app.yaml`)
+
+백엔드 연동 + 소셜 로그인 (Google · Apple · Kakao · Naver) 풀세트.
+
+```yaml
+kits:
+  backend_api_kit: {}
+  auth_kit:
+    providers: [email, google, apple, kakao, naver]
+  observability_kit: {}
+  notifications_kit: {}
+  update_kit: {}
+  device_info_kit: {}
+```
+
+**적합**: 한국 시장 SNS · 커뮤니티 · 콘텐츠 앱
+
 ---
 
 ## Kit 문서 구조 (공통 템플릿)
@@ -201,5 +219,5 @@ kits:
 
 - [`ADR-003 · FeatureKit 동적 레지스트리`](../philosophy/adr-003-featurekit-registry.md) — AppKit 계약
 - [`ADR-004 · YAML ↔ Dart 동기화`](../philosophy/adr-004-manual-sync-ci-audit.md) — `configure_app.dart`
-- [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md) — 3개 샘플 조합
+- [`ADR-021 · Multi-Recipe`](../philosophy/adr-021-multi-recipe.md) — 4개 샘플 조합
 - [`FeatureKit Contract`](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세

@@ -27,10 +27,12 @@ kits:
 ```dart
 // lib/main.dart
 await AppKits.install([
-  LocalDbKit(database: AppDatabase()),
+  LocalDbKit(database: () => AppDatabase()),  // ← factory 함수 (lazy 초기화)
   // ...
 ]);
 ```
+
+> `database` 인자는 **인스턴스가 아닌 팩토리 함수** (`GeneratedDatabase Function()`). BootStep 에서 한 번만 호출해 캐싱.
 
 ---
 
@@ -146,7 +148,7 @@ dart run test:test test/migration_fingerprint/ -u
 - [ ] `pubspec.yaml` 에 `drift_dev` · `build_runner` dev_dependencies
 - [ ] `lib/database/app_database.dart` 작성 (DAO · 테이블)
 - [ ] `dart run build_runner build` 실행
-- [ ] `lib/main.dart` 에서 `LocalDbKit(database: AppDatabase())` 전달
+- [ ] `lib/main.dart` 에서 `LocalDbKit(database: () => AppDatabase())` 전달 (factory 함수)
 - [ ] 초기 실행 시 DB 파일 생성 확인 (Android: Documents, iOS: Application Support)
 - [ ] 테이블 변경 시: `schemaVersion` 올림 + `onUpgrade` 작성 + 지문 갱신
 
@@ -156,7 +158,8 @@ dart run test:test test/migration_fingerprint/ -u
 
 - [`lib/kits/local_db_kit/local_db_kit.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/local_db_kit.dart)
 - [`lib/kits/local_db_kit/db_migration_step.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/db_migration_step.dart)
-- [`lib/kits/local_db_kit/lazy_native_database.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/lazy_native_database.dart)
+- [`lib/kits/local_db_kit/db_paths.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/db_paths.dart) — `lazyNativeDatabase()` 헬퍼 정의
+- [`lib/kits/local_db_kit/db_providers.dart`](https://github.com/storkspear/template-flutter/blob/main/lib/kits/local_db_kit/db_providers.dart) — `databaseProvider` 정의
 
 ---
 
