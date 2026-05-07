@@ -72,18 +72,22 @@ unzip -p app/build/outputs/apk/release/app-release.apk classes.dex | dexdump - |
 flutter build appbundle \
   --release \
   --obfuscate \
-  --split-debug-info=build/app/symbols
+  --split-debug-info=build/symbols
 ```
 
-`build/app/symbols/` 에 난독화 매핑 생성.
+`build/symbols/` 에 난독화 매핑 생성 (repo root 기준).
 
 ### Sentry 업로드 (필수)
 
+GHA 에서는 `android/fastlane/Fastfile` 의 `upload_sentry_mapping` lane 을 호출:
+
 ```bash
-npx @sentry/cli upload-dif \
-  --org $SENTRY_ORG \
-  --project $SENTRY_PROJECT \
-  build/app/symbols
+cd android
+bundle exec fastlane android upload_sentry_mapping version:1.2.3
+# 내부적으로 sentry-cli 가
+#   1) ProGuard mapping (Kotlin/Java R8) — build/app/outputs/mapping/release/mapping.txt
+#   2) Dart split-debug-info — build/symbols
+# 둘 다 업로드 (release new → upload-proguard → upload-dif → finalize)
 ```
 
 업로드 안 하면 Sentry 대시보드의 스택 트레이스가 `a.b.c` 상태 → 디버깅 불가.

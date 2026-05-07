@@ -99,25 +99,29 @@ jobs:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
       - name: Write Play Store JSON
-        run: echo "$PLAY_STORE_JSON_KEY" > android/play-service-account.json
+        run: echo "$PLAY_STORE_JSON_KEY" > android/play-store-credentials.json
 
-      - name: Build AAB
-        run: |
-          flutter build appbundle \
-            --release \
-            --obfuscate \
-            --split-debug-info=build/app/symbols \
-            --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }} \
-            --dart-define=POSTHOG_KEY=${{ secrets.POSTHOG_KEY }}
+      - name: Run fastlane beta (build + Play Internal upload)
+        working-directory: android
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          POSTHOG_KEY: ${{ secrets.POSTHOG_KEY }}
+          POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
+        # Fastfile 의 build_release lane 이 ENV → --dart-define 으로 주입
+        # (--obfuscate + --split-debug-info=build/symbols 포함)
+        run: bundle exec fastlane android beta
 
-      - name: Fastlane beta
-        run: cd android && bundle exec fastlane beta
-
-      - name: Upload Sentry symbols
-        run: npx @sentry/cli upload-dif --org $SENTRY_ORG --project $SENTRY_PROJECT build/app/symbols
+      - name: Upload Sentry mapping
+        # ProGuard mapping (Kotlin/Java) + Dart split-debug-info 둘 다 업로드
+        working-directory: android
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        run: bundle exec fastlane android upload_sentry_mapping version:${{ steps.version.outputs.version }}
 
       - name: Cleanup
-        run: rm -f android/app/upload-keystore.jks android/play-service-account.json
+        run: rm -f android/app/upload-keystore.jks android/play-store-credentials.json
 ```
 
 ---
@@ -125,20 +129,39 @@ jobs:
 ## Fastlane 구성
 
 ```ruby
-# android/fastlane/Fastfile
+# android/fastlane/Fastfile (요약 — 실제 4 lane 구성)
 default_platform(:android)
 
 platform :android do
-  desc "Deploy to Play Internal"
+  # 1) AAB 빌드 + Dart 난독화 + 관측성 키 주입
+  lane :build_release do
+    sh "cd ../.. && flutter build appbundle --release " \
+       "--obfuscate --split-debug-info=build/symbols " \
+       "--dart-define=SENTRY_DSN=#{ENV['SENTRY_DSN'] || ''} " \
+       "--dart-define=POSTHOG_KEY=#{ENV['POSTHOG_KEY'] || ''}"
+  end
+
+  # 2) Play Internal 업로드 (build_release 호출 후)
   lane :beta do
+    build_release
     upload_to_play_store(
       track: 'internal',
       aab: '../build/app/outputs/bundle/release/app-release.aab',
-      json_key: 'play-service-account.json',
+      json_key: ENV['PLAY_STORE_JSON_KEY_PATH'] || 'play-store-credentials.json',
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true,
     )
+  end
+
+  # 3) Production 트랙 승격 (수동)
+  lane :deploy do
+    upload_to_play_store(track: 'production', track_promote_to: 'production', ...)
+  end
+
+  # 4) Sentry 심볼 업로드 (ProGuard mapping + Dart split-debug-info)
+  lane :upload_sentry_mapping do |options|
+    # sentry-cli 로 release new → upload-proguard → upload-dif → finalize
   end
 end
 ```

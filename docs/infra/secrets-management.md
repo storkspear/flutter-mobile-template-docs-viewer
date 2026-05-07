@@ -42,14 +42,19 @@ $EDITOR .env
 ### 내용
 
 ```bash
-# .env (커밋 금지)
+# .env (커밋 금지) — .env.example 참조
 SENTRY_DSN=https://xxx@sentry.io/yyy
 POSTHOG_KEY=phc_xxx
-POSTHOG_HOST=https://app.posthog.com
-GOOGLE_CLIENT_ID_ANDROID=...
-GOOGLE_CLIENT_ID_IOS=...
-SSL_PINS=sha256/AAA=,sha256/BBB=
+POSTHOG_HOST=https://us.i.posthog.com    # default 와 동일이면 생략 가능
+BASE_URL=https://api.example.com
+APP_ENV=dev
+SSL_PINS=sha256/AAA=,sha256/BBB=         # 옵션
+KAKAO_NATIVE_KEY=...                     # auth_kit + kakao 활성 시
+NAVER_CLIENT_ID=...                      # auth_kit + naver 활성 시
+NAVER_CLIENT_SECRET=...                  # 동일
 ```
+
+> Google OAuth (Google Sign-In) 의 Client ID 는 `google-services.json` / `GoogleService-Info.plist` 안에 포함되므로 별도 환경변수 불필요.
 
 ### 실행 시 주입
 
@@ -119,17 +124,28 @@ flutter build appbundle --dart-define=SENTRY_DSN=https://xxx
 ### 코드에서 접근
 
 ```dart
-// lib/kits/observability_kit/observability_env.dart
+// lib/kits/observability_kit/observability_env.dart (실제 코드)
 class ObservabilityEnv {
-  static const String sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
+  static const String sentryDsn = String.fromEnvironment('SENTRY_DSN');
+  static const String postHogKey = String.fromEnvironment('POSTHOG_KEY');
+  static const String postHogHost = String.fromEnvironment(
+    'POSTHOG_HOST',
+    defaultValue: 'https://us.i.posthog.com',  // ← default 가 의미 있는 경우만
+  );
   static bool get isSentryEnabled => sentryDsn.isNotEmpty;
+  static bool get isPostHogEnabled => postHogKey.isNotEmpty;
 }
 ```
 
 ### defaultValue 관용
 
 ```dart
-static const value = String.fromEnvironment('KEY', defaultValue: '');
+// default 없는 경우 — 미주입 시 빈 문자열 (Dart fromEnvironment 기본 동작)
+static const dsn = String.fromEnvironment('SENTRY_DSN');
+// → !dsn.isEmpty 로 활성 여부 판단
+
+// default 가 의미 있는 경우만 명시
+static const host = String.fromEnvironment('POSTHOG_HOST', defaultValue: 'https://us.i.posthog.com');
 ```
 
 주입 안 됐을 때 null 대신 empty string → null 체크 대신 `isEmpty` 확인.
@@ -156,7 +172,7 @@ ios/fastlane/app_store_connect_api_key.json
 *.jks
 *.keystore
 android/app/upload-keystore.jks
-android/play-service-account.json
+android/play-store-credentials.json
 android/key.properties
 
 # Firebase

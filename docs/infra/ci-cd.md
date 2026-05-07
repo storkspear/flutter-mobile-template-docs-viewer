@@ -32,7 +32,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.32.8'
+          flutter-version: '3.41.8'
           cache: true
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed lib/ test/
@@ -69,13 +69,13 @@ jobs:
 ### 핵심 검증
 
 - **`dart format --set-exit-if-changed lib/ test/`** — 포매팅 강제 (lib/test 한정)
+- **`dart run tool/configure_app.dart --audit`** — Kit 조합 정합성 ([`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md)). `app_kits.yaml` 의 미존재 kit · `kit_manifest.requires` 미충족 · `auth_kit.providers` 의 unknown 이름을 PR 머지 전에 차단해요.
 - **`flutter analyze`** — 정적 분석 ([`very_good_analysis`](https://pub.dev/packages/very_good_analysis) 룰셋 + 큐레이션, [`ADR-022`](../philosophy/adr-022-very-good-analysis.md))
 - **`flutter test`** — 단위 · 위젯 · 통합 · golden · fingerprint 테스트
 
-### CI에 없지만 로컬 권장
+### CI 게이트 아님 (로컬 권장)
 
-- **`dart run tool/configure_app.dart --audit`** — Kit 조합 정합성 ([`ADR-004`](../philosophy/adr-004-manual-sync-ci-audit.md)). 커밋 전 수동.
-- **`./scripts/coverage.sh`** — 커버리지 측정 + HTML 리포트 (CI 게이트 아님, 월 1회 권장).
+- **`./scripts/coverage.sh`** — 커버리지 측정 + HTML 리포트 (월 1회 권장).
 
 ---
 
@@ -110,22 +110,23 @@ jobs:
 ## Dependabot
 
 ```yaml
-# .github/dependabot.yml
+# .github/dependabot.yml (실제 설정 — pub + github-actions 두 ecosystem)
 version: 2
 updates:
   - package-ecosystem: pub
     directory: /
-    schedule: {interval: weekly}
+    schedule: {interval: weekly, day: monday}
     open-pull-requests-limit: 5
+    labels: [dependencies]
 
   - package-ecosystem: github-actions
     directory: /
-    schedule: {interval: weekly}
-
-  - package-ecosystem: gradle
-    directory: /android/app
-    schedule: {interval: weekly}
+    schedule: {interval: weekly, day: monday}
+    open-pull-requests-limit: 3
+    labels: [dependencies, ci]
 ```
+
+> Gradle 의존성 (`/android/app`) 은 현재 미포함 — Android native 라이브러리 교체 빈도가 낮아 수동 관리. 필요하면 `package-ecosystem: gradle` 블록 추가.
 
 주 1회 PR 자동 생성. 테스트 통과하면 머지 (major 버전은 주의).
 
