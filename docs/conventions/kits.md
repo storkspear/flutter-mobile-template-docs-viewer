@@ -1,8 +1,8 @@
 # Kits 컨벤션
 
-FeatureKit 작성·제거·동기화 가이드. 13개 기본 kit + 파생 레포에서 자체 kit 추가하는 워크플로우.
+FeatureKit 작성·제거·동기화 가이드. 14개 기본 kit + 파생 레포에서 자체 kit 추가하는 워크플로우.
 
-> 빠른 인덱스: [13개 kit 목록 + 의존 관계도](../features/README.md). 본 문서는 **kit 을 만드는 사람** 입장의 컨벤션이에요.
+> 빠른 인덱스: [14개 kit 목록 + 의존 관계도](../features/README.md). 본 문서는 **kit 을 만드는 사람** 입장의 컨벤션이에요.
 
 ---
 
@@ -83,7 +83,7 @@ Status: ISSUES FOUND
 
 ## 3. Kit 의존 관계 규칙
 
-기본 13개 kit 중 의존 관계가 있는 건 **1개뿐**:
+기본 14개 kit 중 의존 관계가 있는 건 **1개뿐**:
 
 ```
 backend_api_kit (독립)
@@ -93,13 +93,47 @@ auth_kit (requires: BackendApiKit)
 
 나머지 11개는 모두 독립.
 
-**규칙**:
-- ✅ Kit 이 다른 kit 의존 시 `requires: [BackendApiKit]` 명시
-- ✅ Provider 경유 접근만 허용 — 다른 kit 의 provider 를 `ref.read()` 로 사용
-- ❌ Kit 끼리 직접 import 금지 — `import 'package:app_template/kits/other_kit/...'` 같은 형태
-- 예외: `core/` 의 contract (인터페이스) import 는 항상 허용 (예: `core/storage/token_storage.dart`)
+### 3-1. 핵심 룰
 
-이 규칙이 깨지면 사이즈 영향, 의존 관계 캐스케이드, 테스트 격리 모두 문제 발생. 자세한 근거는 [`ADR-002 · Layered Modules`](../philosophy/adr-002-layered-modules.md).
+| 케이스 | 허용 여부 | 예시 |
+|---|---|---|
+| `kit_manifest.requires` 에 **선언한 kit** 의 **type import** | ✅ | `import '.../backend_api_kit/api_exception.dart'` 로 `ApiException` 사용 |
+| 다른 kit 의 **인스턴스 접근** | ❌ 직접 생성 금지<br>✅ provider 경유 | `ref.read(apiClientProvider)` (○) <br>`ApiClient(...)` 직접 생성 (✗) |
+| **미선언 kit** 의 cross-import (manifest `requires` 에 없는 kit) | ❌ **절대 금지** | `auth_kit` 이 manifest 선언 없이 `observability_kit/dogfooding_panel.dart` import → 그 recipe 에 observability 빠지면 컴파일 실패 |
+| `core/` import (인터페이스/공용 위젯) | ✅ 항상 허용 | `core/storage/token_storage.dart`, `core/widgets/...` |
+
+### 3-2. 왜 type import 는 허용하는가
+
+`ApiException`, `ErrorCode` 같은 **타입은 provider 로 접근할 방법이 없어요** — 클래스 이름 자체가 import 필요.
+
+```dart
+// ❌ 불가능 — 타입은 provider 가 못 줌
+final exception = ref.read(...);  // 무엇을 read?
+
+// ✅ 정답 — 타입 import 후 provider 로 인스턴스만 받음
+import 'package:app_template/kits/backend_api_kit/api_exception.dart';
+import 'package:app_template/kits/backend_api_kit/error_code.dart';
+
+try {
+  await ref.read(apiClientProvider).post(...);  // 인스턴스는 provider 경유
+} on ApiException catch (e) {                    // 타입은 직접 import
+  if (e.code == ErrorCode.unauthorized) { ... }
+}
+```
+
+이래야 `requires` 가 진실의 출처 — manifest 만 보면 누가 누구에게 의존하는지 명확하고, recipe 조합 시 빠진 kit 이 자동으로 install 단계에서 잡혀요.
+
+### 3-3. 미선언 cross-import 가 위험한 이유
+
+manifest `requires` 에 적지 않은 kit 을 import 하면 **다른 recipe 로 출발한 파생 레포에서 컴파일 실패**.
+
+실제 사례 (2026-05-06 fix 됨):
+- `auth_kit/ui/login/login_screen.dart` 가 `observability_kit/dogfooding_panel.dart` 를 `kDebugMode` 가드 안에서 직접 import
+- `auth_kit/kit_manifest.yaml` 의 `requires` 에는 `backend_api_kit` 만 — observability 없음
+- recipe `backend-auth-app.yaml` (observability 미포함) 로 출발한 파생 레포가 즉시 컴파일 실패
+- → 디버그 도구는 home_screen 한 곳만 노출 (login 에선 제거)
+
+이 규칙이 깨지면 사이즈 영향, 의존 관계 캐스케이드, 테스트 격리, recipe 호환성 모두 문제 발생. 자세한 근거는 [`ADR-002 · Layered Modules`](../philosophy/adr-002-layered-modules.md), [`ADR-003 · FeatureKit Registry`](../philosophy/adr-003-featurekit-registry.md).
 
 ---
 
@@ -364,7 +398,7 @@ CLAUDE.md §7 의 함정과 동일. 본 문서에서 강조:
 
 1. **`AppKits.install` 누락** — 새 kit 만들고 main.dart 에 안 끼우면 모든 라우트/provider 가 사라진 듯 보임
 2. **`AppKits.attachContainer` 호출 순서** — ProviderContainer 생성 직후 호출해야 bootStep 내부에서 `container.read` 가능
-3. **kit 간 직접 import** — `requires` 로만 의존성 명시, provider 경유 접근
+3. **미선언 kit cross-import** — manifest `requires` 에 없는 kit 의 import 는 다른 recipe 채택 시 컴파일 실패. 선언한 kit 의 type import 는 OK, 인스턴스는 provider 경유 (§3 참고)
 4. **`tool/configure_app.dart --audit`** 안 돌리고 커밋 — 의존성 누락이 런타임에야 발견됨
 5. **proguard-rules.pro 갱신 누락** — kit 추가 시 native 의존이 있으면 release 빌드에서 `NoClassDefFoundError`
 6. **i18n 누락** — kit UI 가 새 문자열 쓰면 ko/en ARB 양쪽에 추가 + `flutter gen-l10n`
@@ -373,7 +407,7 @@ CLAUDE.md §7 의 함정과 동일. 본 문서에서 강조:
 
 ## 9. 관련 문서
 
-- [`features/README.md`](../features/README.md) — 13개 kit 목록 + 의존 관계도 + 활성화 가이드
+- [`features/README.md`](../features/README.md) — 14개 kit 목록 + 의존 관계도 + 활성화 가이드
 - [`architecture/featurekit-contract.md`](../architecture/featurekit-contract.md) — AppKit 인터페이스 전체 명세
 - [`ADR-002 · Layered Modules`](../philosophy/adr-002-layered-modules.md) — 의존 방향
 - [`ADR-003 · FeatureKit Registry`](../philosophy/adr-003-featurekit-registry.md) — 동적 레지스트리 설계
