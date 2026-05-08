@@ -336,6 +336,21 @@
           "path": "api-contract/auth-flow.md",
           "title": "Auth Flow",
           "desc": "로그인 · refresh · 로그아웃 시퀀스"
+        },
+        {
+          "path": "api-contract/user-profile.md",
+          "title": "User Profile",
+          "desc": "/api/core/users/me GET / PATCH (글로벌 endpoint)"
+        },
+        {
+          "path": "api-contract/devices.md",
+          "title": "Devices",
+          "desc": "푸시 대상 기기 등록 / 해제 (FCM 토큰)"
+        },
+        {
+          "path": "api-contract/notification-preferences.md",
+          "title": "Notification Preferences",
+          "desc": "kind 별 push / email 채널 toggle (ADR-031)"
         }
       ]
     },
