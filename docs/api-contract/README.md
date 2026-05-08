@@ -8,12 +8,22 @@
 
 ## 문서 구성
 
+### 공통 계약
+
 | 파일 | 내용 |
 |------|------|
 | [`response-schema.md`](./response-schema.md) | `{data, error}` 래퍼 · `PageResponse<T>` |
 | [`search-request.md`](./search-request.md) | 검색 요청 DSL · 연산자 목록 |
 | [`error-codes.md`](./error-codes.md) | ErrorCode enum 매핑 (양쪽 동기화) |
-| [`auth-flow.md`](./auth-flow.md) | 로그인 · 갱신 · 로그아웃 시퀀스 |
+
+### 도메인별 계약
+
+| 파일 | 내용 |
+|------|------|
+| [`auth-flow.md`](./auth-flow.md) | 로그인 · 토큰 갱신 · 2FA TOTP · 소셜 인증 시퀀스 |
+| [`user-profile.md`](./user-profile.md) | `/api/core/users/me` GET / PATCH (글로벌 endpoint) |
+| [`devices.md`](./devices.md) | 푸시 대상 기기 등록 / 해제 (FCM 토큰) |
+| [`notification-preferences.md`](./notification-preferences.md) | kind 별 push / email 채널 toggle (ADR-031) |
 
 ---
 
