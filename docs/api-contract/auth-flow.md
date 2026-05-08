@@ -116,6 +116,68 @@ JWT 기반 인증 전체 시퀀스. 앱별 독립 유저 + `appSlug` 검증 ([`A
 
 `QueuedInterceptor` 덕분에 **동시에 401 이 터져도 refresh 는 1번만 실행**. 다른 요청은 큐에서 대기 → refresh 완료 후 순차 재시도. 상세는 [`ADR-010`](../philosophy/adr-010-queued-interceptor.md).
 
+### 응답 구조 비대칭 (signin vs refresh)
+
+| Endpoint | `data` 안 구조 | DTO (Spring) |
+|---|---|---|
+| `signin` / `signup` / 소셜 (`google` / `apple` / `kakao` / `naver`) / `2fa/login` | `{ user: {...}, tokens: { accessToken, refreshToken } }` | `AuthResponse` |
+| **`refresh`** | `{ accessToken, refreshToken }` (root 레벨, **`user` 없음**) | `AuthTokens` |
+
+**왜 다른가**: refresh 는 **토큰 회전만** 수행해요. user 정보 echo 는 불필요 (클라이언트가 이미 보유). signin/signup 은 **첫 인증** 이라 user 도 함께 내려와야 해요.
+
+**Flutter 측 처리**: `AuthService._handleAuthResponse()` 가 두 형태 모두 **관대하게 파싱**해요 (`tokens.accessToken` 우선, 없으면 root `accessToken` fallback). 그래서 호출 측은 동일 메서드로 두 응답을 처리 가능.
+
+---
+
+## 2FA TOTP 로그인 ([`auth_service.loginWith2faCode`](../../lib/kits/auth_kit/auth_service.dart))
+
+이메일/소셜 로그인이 **2FA enabled user** 인 경우 1단계 응답에 정식 access token 대신 `twoFactorToken` (임시 JWT, TTL 5분, type=`2fa_pending`) 이 내려와요. 클라이언트는 **6자리 TOTP 코드 (또는 backup code)** 를 받아 2단계 로그인을 수행해요.
+
+```
+클라이언트                                         백엔드
+   │                                                │
+   │ POST /api/apps/{slug}/auth/email/signin        │  ← 1단계
+   │ Body: { email, password, appSlug }             │
+   │─────────────────────────────────────────────▶  │
+   │                                                │
+   │                       2FA enabled 감지            │
+   │                       twoFactorToken 발급         │
+   │                                                │
+   │ 200 OK                                         │
+   │ {                                              │
+   │   "data": {                                    │
+   │     "twoFactorToken": "eyJ..." ,               │  ← 임시, 5분 TTL
+   │     "tokens": null                             │
+   │   },                                           │
+   │   "error": null                                │
+   │ }                                              │
+   │ ◀─────────────────────────────────────────────  │
+   │                                                │
+   │ UI: TOTP 코드 입력 화면 표시                       │
+   │                                                │
+   │ POST /api/apps/{slug}/auth/2fa/login           │  ← 2단계
+   │ Body: { twoFactorToken, code: "123456" }       │
+   │─────────────────────────────────────────────▶  │
+   │                                                │
+   │                       TOTP 검증 + 정식 토큰 발급    │
+   │                                                │
+   │ 200 OK                                         │
+   │ {                                              │
+   │   "data": {                                    │
+   │     "user": { ... },                           │
+   │     "tokens": { accessToken, refreshToken }    │
+   │   },                                           │
+   │   "error": null                                │
+   │ }                                              │
+   │ ◀─────────────────────────────────────────────  │
+   │                                                │
+   │ TokenStorage.saveTokens → /home                │
+```
+
+**짝 백엔드 DTO**: `TotpLoginRequest{ twoFactorToken, code }`. `code` 는 6자리 TOTP 또는 8자리 backup code 모두 허용 (백엔드가 자동 분기).
+
+**TOTP 등록 (Setup)**: `/2fa/setup` / `/2fa/verify-setup` / `/2fa/disable` endpoint 도 백엔드에 존재하나, **앱 내 TOTP 등록 화면 구현은 파생 레포 책임** (template 단계에선 1단계+2단계 로그인 흐름만 표준 제공).
+
 ---
 
 ## 로그아웃 (signOut)
@@ -252,6 +314,7 @@ Apple 사용자가 "Hide My Email" 을 선택하면 첫 로그인 후 identity t
 | `signInWithKakao` | `POST /api/apps/{slug}/auth/kakao` | Kakao access token 검증 |
 | `signInWithNaver` | `POST /api/apps/{slug}/auth/naver` | Naver access token 검증 |
 | `refreshToken` | `POST /api/apps/{slug}/auth/refresh` | 토큰 회전 (ADR-010) |
+| `loginWith2faCode` | `POST /api/apps/{slug}/auth/2fa/login` | 2FA 2단계 로그인 (TOTP/backup) |
 | `verifyEmail` | `POST /api/apps/{slug}/auth/verify-email` | 이메일 인증 토큰 검증 (204) |
 | `resendEmailVerification` | `POST /api/apps/{slug}/auth/resend-verification` | 인증 메일 재발송 (인증 필요, 204) |
 | `requestPasswordReset` | `POST /api/apps/{slug}/auth/password-reset/request` | 재설정 메일 발송 (204) |
