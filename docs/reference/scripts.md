@@ -1,6 +1,23 @@
 # Scripts
 
-`scripts/` 에 있는 bash 도구 + `tool/` 의 Dart 스크립트.
+루트의 `factory` 통합 dispatcher + `scripts/` 에 있는 bash 도구 + `tool/` 의 Dart 스크립트.
+
+---
+
+## factory (root)
+
+통합 명령어 dispatcher. `./factory install` 로 symlink 등록 후 어디서든 `<repo> <cmd>` 호출.
+
+| 명령 | 용도 | 실행 시점 |
+|------|------|---------|
+| `./factory install` | `~/.local/bin/<repo>` symlink 등록 | clone 직후 1회 |
+| `<repo> test` | 개발 준비 검증 (7 step) | 셋업 완료 후 / 수시 |
+| `<repo> test --no-backend` | template-spring 미실행 환경 | 백엔드 없이 점검 |
+| `<repo> test --skip-tests` | flutter test 생략 (빠른 점검) | 정적 분석만 확인 |
+| `<repo> test --with-build` | apk debug 빌드 포함 | 배포 직전 점검 |
+| `<repo> --help` | 명령 목록 + 사용법 | 항상 |
+
+env-verb dispatch — 첫 인자가 `local`/`prod`/`all` 이면 env, 아니면 default `local`. verb `test` 는 짝 백엔드 (`template-spring`) 와 동일 — 양쪽 운영 시 일관 명령어.
 
 ---
 
@@ -8,6 +25,8 @@
 
 | 파일 | 용도 | 실행 시점 |
 |------|------|---------|
+| `lib/common.sh` | 공용 헬퍼 (info/ok/warn/fail/section) | factory 및 다른 sh 가 source |
+| `readiness-check.sh` | 개발 준비 7 step 검증 | factory 의 first verb |
 | `setup.sh` | git hooks 활성화 | clone 직후 1회 |
 | `rename-app.sh` | 앱 이름 · Bundle ID 일괄 치환 | 파생 레포 생성 시 |
 | `regenerate-assets.sh` | 런처 아이콘 + 스플래시 재생성 | 아이콘 · 스플래시 변경 후 |
@@ -15,6 +34,57 @@
 | `generate-upload-keystore.sh` | Android 업로드 keystore 생성 | 첫 Android 배포 전 |
 | `batch-backup-keystores.sh` | 여러 앱 keystore 백업 | 정기 운영 |
 | `upload-secrets-to-github.sh` | keystore · 자격증명 GHA Secrets 업로드 | 첫 배포 전 · 키 갱신 시 |
+| `sync-docs.sh` | docs/ → docs-template-flutter mirror | docs 변경 push 시 (CI) |
+
+---
+
+## factory + test verb
+
+### factory
+
+env-verb 패턴 통합 dispatcher (~250 LOC bash).
+
+```bash
+# 첫 사용 (clone 직후)
+./factory install                       # ~/.local/bin/<repo> symlink 등록
+./factory install --symlink=mt          # 사용자 alias 로 등록 (긴 레포명 단축)
+
+# 이후 어디서든
+<repo> test                             # default = local
+<repo> local test                       # env 명시
+<repo> --help                           # 명령 목록
+```
+
+**메타 레포 가드**: `git remote get-url origin` 이 `*/template-flutter` 면 `install` 차단 — 메타 레포 자체에선 직접 `./factory <cmd>` 호출만 허용.
+
+### test verb (개발 준비 검증)
+
+7 step fail-fast 검증. 짝 백엔드 (`template-spring`) 의 `<repo> test` 와 동일 명령어 — 양쪽 운영 일관성.
+
+```bash
+<repo> test                             # default 동작
+<repo> test --no-backend                # template-spring 미실행 환경
+<repo> test --skip-tests                # flutter test 생략 (빠른 점검)
+<repo> test --with-build                # apk debug 빌드 추가 (~35s)
+<repo> test --verbose                   # 각 step 의 raw 출력
+```
+
+내부적으로 `scripts/readiness-check.sh` 호출. 직접 호출도 가능 (`bash scripts/readiness-check.sh`) 하지만 factory 경유 권장.
+
+| Step | 검증 |
+|---|---|
+| 1 | Flutter env (`flutter doctor`) |
+| 2 | Dependencies (`flutter pub get`) |
+| 3 | Config audit (`dart run tool/configure_app.dart --audit`) |
+| 4 | Code analysis (`flutter analyze`) |
+| 5 | Format check (`dart format --output=none --set-exit-if-changed lib/ test/`) |
+| 6 | Tests (`flutter test --reporter=compact`) — `--skip-tests` 로 생략 가능 |
+| 7 | Backend ping (`$BASE_URL/actuator/health`) — `--no-backend` 로 생략 가능 |
+| 8 | Build smoke (`flutter build apk --debug`) — `--with-build` 로 활성 |
+
+마지막 출력이 "🎉 개발할 준비가 완료되었습니다" 면 코딩 시작 가능.
+
+**환경변수**: `BASE_URL` (default: `http://localhost:8080`)
 
 ---
 

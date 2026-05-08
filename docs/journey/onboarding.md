@@ -143,6 +143,38 @@ Status: OK 확인.
 
 ---
 
+## §4.5 개발 준비 검증 (`<repo> test`)
+
+지금까지 단계가 잘 됐는지 한 번에 확인하는 통합 명령어를 제공해요. 짝 백엔드 (`template-spring`) 의 `<repo> test` 와 동일 verb 라 양쪽 운영 시 일관됩니다.
+
+```bash
+./factory install                    # 첫 1회 — symlink 등록
+<repo> test                          # 한 줄로 7 step 검증
+```
+
+검증 항목 (fail-fast):
+
+1. Flutter env (flutter doctor)
+2. Dependencies (flutter pub get)
+3. Config audit (configure_app.dart --audit)
+4. Code analysis (flutter analyze)
+5. Format check (dart format)
+6. Tests (flutter test)
+7. Backend ping (`$BASE_URL/actuator/health`)
+
+마지막 출력이 "🎉 개발할 준비가 완료되었습니다" 면 코딩 시작 가능.
+
+### 옵션
+
+| 플래그 | 동작 |
+|---|---|
+| `--no-backend` | template-spring 미실행 환경. Step 7 생략 |
+| `--skip-tests` | Step 6 생략 (빠른 사전 점검) |
+| `--with-build` | apk debug 빌드 추가 (~35s) |
+| `--verbose` | 각 step 의 raw 출력 표시 |
+
+---
+
 ## §5 첫 기동
 
 ### 의존성 설치
